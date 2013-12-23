@@ -1,0 +1,69 @@
+//
+//  APIDefines.h
+//  MovieTicket
+//
+//  Created by Phuong. Nguyen Minh on 12/7/12.
+//  Copyright (c) 2012 Phuong. Nguyen Minh. All rights reserved.
+//
+
+#ifndef MovieTicket_APIDefines_h
+#define MovieTicket_APIDefines_h
+
+#define API_LINK
+#define GOOGLE_API_LINK
+#define FACEBOOK_API_LINK
+
+
+#pragma mark
+#pragma mark server config
+#define ROOT_SERVER ([NSString stringWithFormat:@"%@%@",BASE_URL_SERVER,MSERVICE_API])
+#define IS_TEST 0//Khi build len app store nho xoa key nay
+#define MSERVICE_API @"mservice12?"
+#ifdef DEBUG
+    #define BASE_URL_SERVER @"http://mapp-dev.123phim.vn/"
+    #define MAPP_KEY @"MAPP_1@3Phim1@3"
+    #define ROOT_FBSERVICE @"http://mapp-dev.123phim.vn/fbservice/"
+    #define SERVER_SET_DEVICETOKEN @"http://mapp-dev.123phim.vn/auth?method=Device.save"
+#else
+    #define BASE_URL_SERVER @"https://mapp.123phim.vn/"
+    #define MAPP_KEY @"MAPP_1@3Phim_IOS_920"
+    #define ROOT_FBSERVICE @"https://mapp.123phim.vn/fbservice/"
+    #define SERVER_SET_DEVICETOKEN @"https://mapp.123phim.vn/auth?method=Device.save"
+#endif
+
+#pragma mark
+#pragma mark function city
+#define API_REQUEST_CITY_GET_LIST @"%@method=Location.getList"
+
+#pragma mark
+#pragma mark function user
+#define API_REQUEST_USER_POST_LOGIN @"%@method=User.checkLogin"
+#define API_REQUEST_USER_POST_UPDATE_RECEIVED_NOTIFICATION @"%@method=User.setNotification"
+#define API_REQUEST_USER_GET_FB_FRIEND_LIST @"%@friends/?facebook_id=%@&access_token=%@"
+#define API_REQUEST_USER_POST_LOCATION_TRACKING @"%@method=User.addLocationHistory"
+
+#pragma mark
+#pragma mark text
+#define API_REQUEST_TEXT_GET_WITH_VERSION @"%@method=Errorcode.getList&version=%@"
+
+#pragma mark
+#pragma mark log
+#define API_REQUEST_LOG_POST_WRITING @"%@method=Logs.write&%@"
+
+typedef enum
+{
+    ID_REQUEST_PLUS_OFFER = 0,
+    ID_REQUEST_REDEEM,
+    ID_REQUEST_ACCOUNT,
+    ID_REQUEST_OTHER
+}ENUM_ID_REQUEST_TYPE;
+
+///////////////////////////////////////////////////////////////////////////
+//////////////////////////       API LINKS       //////////////////////////
+///////////////////////////////////////////////////////////////////////////
+#pragma mark - API Links
+#define STRING_REQUEST_URL_POST_LOG                                 [NSString stringWithFormat:@"%@method=Logs.write&", ROOT_SERVER]
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+#endif

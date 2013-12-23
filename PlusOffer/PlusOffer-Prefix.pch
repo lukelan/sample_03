@@ -1,0 +1,33 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+//    #import <RestKit/RestKit.h>
+    #import "DefineConstant.h"
+    #import "APIDefines.h"
+    #import "SDImageView.h"
+    #import "GoogleConversionPing.h"
+    #import "Crittercism.h"
+    #import "CustomGAITrackedViewController.h"
+    #import "AppDelegate.h"
+
+#pragma mark import class category ultility
+#import "UIDevice+IdentifierAddition.h"
+#import "UIImage+Ultility.h"
+#import "UIViewController+CustomNavigation.h"
+#import "UIViewController+TabBarAnimation.h"
+#endif

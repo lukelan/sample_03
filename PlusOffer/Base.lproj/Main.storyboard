@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="goz-fO-FJR">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+    </dependencies>
+    <scenes>
+        <!--Plus Offer View Controller-->
+        <scene sceneID="ZXV-8B-xja">
+            <objects>
+                <viewController id="3IJ-jh-7sq" customClass="PlusOfferViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jby-n1-tS1"/>
+                        <viewControllerLayoutGuide type="bottom" id="5VB-mv-ADG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ae5-eZ-UDK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tNV-Wd-nbM">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Snp-kB-q8g">
+                            <rect key="frame" x="59" y="7" width="203" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Gần đây"/>
+                                <segment title="Ẩm thực"/>
+                                <segment title="Giải trí"/>
+                            </segments>
+                            <color key="tintColor" red="0.058823533356189728" green="0.67843139171600342" blue="0.40784317255020142" alpha="1" colorSpace="deviceRGB"/>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="List" id="8of-bD-IZ2">
+                            <connections>
+                                <action selector="listBtnTouchUpInside:" destination="3IJ-jh-7sq" id="fnU-dN-cOz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="ar9-GL-MX8" kind="push" identifier="DetailOffer" id="Bzc-Ny-twv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vwz-ln-Mi2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1167" y="572"/>
+        </scene>
+        <!--Offer Detail View Controller-->
+        <scene sceneID="Scl-Jd-MNb">
+            <objects>
+                <viewController id="ar9-GL-MX8" customClass="OfferDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JOY-BW-o4V"/>
+                        <viewControllerLayoutGuide type="bottom" id="iGA-a4-kbi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B43-zC-J6A">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QTU-l2-IWS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ydg-bc-hIq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1662" y="572"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="hF5-v7-gkg">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="goz-fO-FJR" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="WA4-KZ-CE1">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ckE-oX-mhy" kind="relationship" relationship="viewControllers" id="qm3-jC-fMG"/>
+                        <segue destination="aFK-Ge-6t3" kind="relationship" relationship="viewControllers" id="jHc-20-x4V"/>
+                        <segue destination="yDD-KR-3op" kind="relationship" relationship="viewControllers" id="pnT-Qr-gaN"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="odc-jr-QE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="65" y="1225"/>
+        </scene>
+        <!--Redeem View Controller - Redeem-->
+        <scene sceneID="PGd-dL-EDs">
+            <objects>
+                <viewController id="bhj-CW-caE" customClass="RedeemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kTb-wz-Oaq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Of7-bR-hCn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3fE-MT-2OS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Redeem" id="cIm-DS-lrE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDE-h0-0Lw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1167" y="1225"/>
+        </scene>
+        <!--Account View Controller - Account-->
+        <scene sceneID="NDN-aW-89o">
+            <objects>
+                <viewController id="xsC-z3-Ylc" customClass="AccountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bJ8-8U-Dgu"/>
+                        <viewControllerLayoutGuide type="bottom" id="8d8-Bw-qHw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J5K-M0-ynq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" id="hoe-O5-ndr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YR6-Mi-wyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1167" y="1903"/>
+        </scene>
+        <!--Navigation Controller - Plus Offers-->
+        <scene sceneID="3Ux-FJ-zNj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ckE-oX-mhy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Plus Offers" id="YLA-1o-ZZu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OiU-gB-Ivb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3IJ-jh-7sq" kind="relationship" relationship="rootViewController" id="S0n-nr-BoO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ThE-To-kNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="641" y="572"/>
+        </scene>
+        <!--Navigation Controller - Đổi Quà-->
+        <scene sceneID="LAa-c4-tYK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aFK-Ge-6t3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Đổi Quà" id="q7V-aZ-Ldp"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UtR-zn-hq6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bhj-CW-caE" kind="relationship" relationship="rootViewController" id="fru-cn-0ef"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nkD-k0-SjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="641" y="1225"/>
+        </scene>
+        <!--Navigation Controller - Tài Khoản-->
+        <scene sceneID="B8w-eh-Uk6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yDD-KR-3op" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Tài Khoản" id="RbK-v0-bOY"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Dn-Gy-ArW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xsC-z3-Ylc" kind="relationship" relationship="rootViewController" id="hv4-H1-od9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X6o-Uf-qaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="641" y="1903"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
