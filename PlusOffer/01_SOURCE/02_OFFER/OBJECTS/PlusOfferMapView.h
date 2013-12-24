@@ -19,4 +19,8 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (nonatomic, weak) id<PlusOfferMapViewDelegate> delegate;
+@property (nonatomic, weak) NSMutableArray *dataSource;
+@property (weak, nonatomic) IBOutlet UIView *infoView;
+
+-(void)reloadInterface;
 @end

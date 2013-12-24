@@ -29,6 +29,11 @@
 		18FBCF311867475E00C9E399 /* PlusOfferMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF301867475E00C9E399 /* PlusOfferMapView.xib */; };
 		18FBCF3318674CFD00C9E399 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCF3218674CFD00C9E399 /* MapKit.framework */; };
 		18FBCF3518674D0300C9E399 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCF3418674D0300C9E399 /* CoreLocation.framework */; };
+		18FBCF461869AF5600C9E399 /* OfferTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBCF431869AF5600C9E399 /* OfferTableCell.m */; };
+		18FBCF471869AF5600C9E399 /* OfferTableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBCF451869AF5600C9E399 /* OfferTableItem.m */; };
+		18FBCF4F1869F02500C9E399 /* map_offer.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF4C1869F02500C9E399 /* map_offer.png */; };
+		18FBCF501869F02500C9E399 /* offer_list_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF4D1869F02500C9E399 /* offer_list_1.png */; };
+		18FBCF511869F02500C9E399 /* offer_list_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF4E1869F02500C9E399 /* offer_list_2.png */; };
 		4FBBEB1218681F160040EA12 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEABD18681F160040EA12 /* UIDevice+IdentifierAddition.m */; };
 		4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEAC018681F160040EA12 /* BarCodeGenerator.mm */; };
 		4FBBEB1418681F160040EA12 /* qr_draw_png.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEAC318681F160040EA12 /* qr_draw_png.mm */; };
@@ -147,6 +152,13 @@
 		18FBCF301867475E00C9E399 /* PlusOfferMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlusOfferMapView.xib; sourceTree = "<group>"; };
 		18FBCF3218674CFD00C9E399 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		18FBCF3418674D0300C9E399 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		18FBCF421869AF5600C9E399 /* OfferTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableCell.h; sourceTree = "<group>"; };
+		18FBCF431869AF5600C9E399 /* OfferTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableCell.m; sourceTree = "<group>"; };
+		18FBCF441869AF5600C9E399 /* OfferTableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableItem.h; sourceTree = "<group>"; };
+		18FBCF451869AF5600C9E399 /* OfferTableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableItem.m; sourceTree = "<group>"; };
+		18FBCF4C1869F02500C9E399 /* map_offer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_offer.png; sourceTree = "<group>"; };
+		18FBCF4D1869F02500C9E399 /* offer_list_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_list_1.png; sourceTree = "<group>"; };
+		18FBCF4E1869F02500C9E399 /* offer_list_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_list_2.png; sourceTree = "<group>"; };
 		4FBBEAB918681F0A0040EA12 /* APIDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIDefines.h; sourceTree = "<group>"; };
 		4FBBEABA18681F0A0040EA12 /* DefineConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConstant.h; sourceTree = "<group>"; };
 		4FBBEABC18681F160040EA12 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
@@ -333,8 +345,8 @@
 			children = (
 				18FBCF0E1867443200C9E399 /* 01_SOURCE */,
 				18FBCF0D1867443200C9E399 /* 02_LIBS */,
-				18FBCF0C1867443200C9E399 /* 03_RESOURCES */,
 				18FBCEED18673C1900C9E399 /* Images.xcassets */,
+				18FBCF4B1869F02500C9E399 /* 03_RESOURCES */,
 				18FBCEDC18673C1900C9E399 /* Supporting Files */,
 			);
 			path = PlusOffer;
@@ -367,13 +379,6 @@
 				18FBCEFD18673C1900C9E399 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		18FBCF0C1867443200C9E399 /* 03_RESOURCES */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = 03_RESOURCES;
 			sourceTree = "<group>";
 		};
 		18FBCF0D1867443200C9E399 /* 02_LIBS */ = {
@@ -463,6 +468,10 @@
 		18FBCF29186746EB00C9E399 /* OBJECTS */ = {
 			isa = PBXGroup;
 			children = (
+				18FBCF421869AF5600C9E399 /* OfferTableCell.h */,
+				18FBCF431869AF5600C9E399 /* OfferTableCell.m */,
+				18FBCF441869AF5600C9E399 /* OfferTableItem.h */,
+				18FBCF451869AF5600C9E399 /* OfferTableItem.m */,
 				18FBCF2A1867471400C9E399 /* PlusOfferListView.h */,
 				18FBCF2B1867471400C9E399 /* PlusOfferListView.m */,
 				18FBCF2D1867472300C9E399 /* PlusOfferMapView.h */,
@@ -470,6 +479,16 @@
 				18FBCF301867475E00C9E399 /* PlusOfferMapView.xib */,
 			);
 			path = OBJECTS;
+			sourceTree = "<group>";
+		};
+		18FBCF4B1869F02500C9E399 /* 03_RESOURCES */ = {
+			isa = PBXGroup;
+			children = (
+				18FBCF4C1869F02500C9E399 /* map_offer.png */,
+				18FBCF4D1869F02500C9E399 /* offer_list_1.png */,
+				18FBCF4E1869F02500C9E399 /* offer_list_2.png */,
+			);
+			path = 03_RESOURCES;
 			sourceTree = "<group>";
 		};
 		4FBBEAB818681F0A0040EA12 /* 00_DEFINE */ = {
@@ -813,12 +832,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FBBEC05186849BF0040EA12 /* pull_arrow.png in Resources */,
+				18FBCF511869F02500C9E399 /* offer_list_2.png in Resources */,
 				18FBCF311867475E00C9E399 /* PlusOfferMapView.xib in Resources */,
 				4FBBEB1618681F160040EA12 /* dsym_upload.sh in Resources */,
 				18FBCF161867445B00C9E399 /* Main.storyboard in Resources */,
 				4FBBEC04186849BF0040EA12 /* loading.gif in Resources */,
 				18FBCEEE18673C1900C9E399 /* Images.xcassets in Resources */,
 				18FBCEE018673C1900C9E399 /* InfoPlist.strings in Resources */,
+				18FBCF501869F02500C9E399 /* offer_list_1.png in Resources */,
+				18FBCF4F1869F02500C9E399 /* map_offer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,6 +869,7 @@
 				18FBCF24186744FE00C9E399 /* AccountViewController.m in Sources */,
 				4FBBEB1918681F160040EA12 /* NSString+MD5Addition.m in Sources */,
 				4FBBEB5A18682E210040EA12 /* pngpread.c in Sources */,
+				18FBCF471869AF5600C9E399 /* OfferTableItem.m in Sources */,
 				4FBBEB5B18682E210040EA12 /* pngread.c in Sources */,
 				18FBCF131867443200C9E399 /* AppDelegate.m in Sources */,
 				4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */,
@@ -862,6 +885,7 @@
 				4FBBEB2018681F160040EA12 /* iCarousel.m in Sources */,
 				4FBBEB6218682E210040EA12 /* pngwrite.c in Sources */,
 				4FBBEB1A18681F160040EA12 /* NSString+SHA.m in Sources */,
+				18FBCF461869AF5600C9E399 /* OfferTableCell.m in Sources */,
 				4FBBEC1218684D2D0040EA12 /* NSString+trimSpecialCharacter.m in Sources */,
 				18FBCEE218673C1900C9E399 /* main.m in Sources */,
 				4FBBEC08186849BF0040EA12 /* PullRefreshTableViewController.m in Sources */,
@@ -1011,8 +1035,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/FacebookSDK/3.8,
-					"/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"${SRCROOT}/PlusOffer/02_LIBS/FacebookSDK/3.8",
+					"${SRCROOT}/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -1020,9 +1044,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/CrittercismSDK,
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/GoogleAnalytics,
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/GoogleConversionTrackingSDK,
+					"${SRCROOT}/PlusOffer/02_LIBS/CrittercismSDK",
+					"${SRCROOT}/PlusOffer/02_LIBS/GoogleAnalytics",
+					"${SRCROOT}/PlusOffer/02_LIBS/GoogleConversionTrackingSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1036,8 +1060,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/FacebookSDK/3.8,
-					"/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"${SRCROOT}/PlusOffer/02_LIBS/FacebookSDK/3.8",
+					"${SRCROOT}/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -1045,9 +1069,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/CrittercismSDK,
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/GoogleAnalytics,
-					/Users/pc/Desktop/PlusOffer/PlusOffer/02_LIBS/GoogleConversionTrackingSDK,
+					"${SRCROOT}/PlusOffer/02_LIBS/CrittercismSDK",
+					"${SRCROOT}/PlusOffer/02_LIBS/GoogleAnalytics",
+					"${SRCROOT}/PlusOffer/02_LIBS/GoogleConversionTrackingSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

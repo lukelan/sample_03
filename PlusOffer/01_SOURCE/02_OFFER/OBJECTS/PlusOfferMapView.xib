@@ -14,15 +14,12 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aiZ-EP-C8e">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <connections>
-                        <outlet property="delegate" destination="1" id="LWR-30-JDP"/>
-                    </connections>
                 </mapView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdb-cb-zj1">
                     <rect key="frame" x="0.0" y="321" width="320" height="134"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLv-YK-Wew">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="map_offer.png" translatesAutoresizingMaskIntoConstraints="NO" id="mLv-YK-Wew">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -33,8 +30,12 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="infoView" destination="mdb-cb-zj1" id="mcX-2Z-MCc"/>
                 <outlet property="mapView" destination="aiZ-EP-C8e" id="Zdv-Ql-fZh"/>
             </connections>
         </view>
     </objects>
+    <resources>
+        <image name="map_offer.png" width="640" height="295"/>
+    </resources>
 </document>

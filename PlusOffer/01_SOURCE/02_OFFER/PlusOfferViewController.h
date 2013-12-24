@@ -24,6 +24,7 @@ typedef enum
     // Mapview
     PlusOfferMapView *_mapView;
 }
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *viewTypeBtn;
 
 - (IBAction)listBtnTouchUpInside:(UIBarButtonItem *)sender;
 @end

@@ -18,81 +18,45 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.backgroundColor = [UIColor colorWithRed:228.0f/255.0f green:238.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
+        [self addSubview:_tableView];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+#pragma mark - UITableViewDataSource
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Drawing code
-}
-*/
-
-#pragma mark - iCarouselDataSource
-
-- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
-{
-    return 3; // for demo purpose
+    return self.dataSource.count;
 }
 
-- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)reusingView {
-    int widthView = PLUSOFFER_CELL_WIDTH;
-    int heightView = PLUSOFFER_CELL_HEIGHT;
-
-    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, widthView, heightView)];
-    
-    // image
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-    imageView.opaque = YES;
-    [view addSubview:imageView];
-    
-    return view;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [OfferTableCell tableView:tableView rowHeightForObject:nil];
 }
 
-#pragma mark - iCarouselDelegate
-
-- (CATransform3D)carousel:(iCarousel *)carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    transform = CATransform3DRotate(transform, M_PI / 8.0f, 0.0f, 1.0f, 0.0f);
-    return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
-}
-
-- (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
-{
-    //customize carousel display
-    switch (option)
-    {
-        case iCarouselOptionWrap:
-        {
-            return YES;
-        }
-        case iCarouselOptionSpacing:
-        {
-            //add a bit of spacing between the item views
-            return value;
-        }
-        case iCarouselOptionFadeMax:
-        {
-            if (carousel.type == iCarouselTypeCustom)
-            {
-                //set opacity based on distance from camera
-                return 0.0f;
-            }
-            return value;
-        }
-        default:
-        {
-            return value;
-        }
+    NSString *cellID = [[OfferTableCell class] description];
+    OfferTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[OfferTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
+    
+    [cell setObject:[self.dataSource objectAtIndex:indexPath.row]];
+    
+    return cell;
 }
 
--(void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    // deselecte row
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

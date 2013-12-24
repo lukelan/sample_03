@@ -16,6 +16,10 @@
     self = [[[NSBundle mainBundle] loadNibNamed:[self.class description] owner:self options:nil] objectAtIndex:0];
     if (self) {
         self.frame = frame;
+        
+        // setup map view
+        self.mapView.delegate = self;
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     }
     return self;
 }
@@ -28,5 +32,8 @@
     // Drawing code
 }
 */
-
+-(void)reloadInterface
+{
+    [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate];
+}
 @end

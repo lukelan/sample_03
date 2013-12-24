@@ -7,9 +7,10 @@
 //
 
 #import "PlusOfferViewController.h"
+#import "OfferTableItem.h"
 
 @interface PlusOfferViewController ()
-
+@property (nonatomic, retain) NSMutableArray *listOffers;
 @end
 
 @implementation PlusOfferViewController
@@ -27,9 +28,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self loadInterface:enumOfferInterfaceType_Map];
     viewName = PLUS_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
+    
+    // just for testing purpose
+    self.listOffers = [NSMutableArray array];
+    NSArray *images = @[@"offer_list_1.png", @"offer_list_2.png", @"offer_list_1.png"];
+    for (NSString *imageURL in images)
+    {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:imageURL, @"url", @"", @"discount", @"", @"distance", nil];
+        OfferTableItem *item = [[OfferTableItem alloc] initWithData:dic];
+        [self.listOffers addObject:item];
+    }
+    
+    [self loadInterface:enumOfferInterfaceType_List];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +62,8 @@
             
             if (_mapView) [_mapView removeFromSuperview];
             
+            [self.viewTypeBtn setTitle:@"Map"];
+            _listView.dataSource = self.listOffers;
             [self.view addSubview:_listView];
             
             break;
@@ -62,7 +76,10 @@
             
             if (_listView) [_listView removeFromSuperview];
             
+            [self.viewTypeBtn setTitle:@"List"];
+            _mapView.dataSource = self.listOffers;
             [self.view addSubview:_mapView];
+            [_mapView reloadInterface];
             
             break;
         }
@@ -75,12 +92,11 @@
 #pragma mark - Actions
 
 - (IBAction)listBtnTouchUpInside:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"List"]) {
-        [sender setTitle:@"Map"];
+    if ([sender.title isEqualToString:@"Map"]) {
+        
         [self loadInterface:enumOfferInterfaceType_Map];
     }
     else {
-        [sender setTitle:@"List"];
         [self loadInterface:enumOfferInterfaceType_List];
     }
 }

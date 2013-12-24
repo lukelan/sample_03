@@ -7,18 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iCarousel.h"
+#import "OfferTableCell.h"
 
 @protocol PlusOfferListViewDelegate <NSObject>
 
 
 @end
 
-@interface PlusOfferListView : UIView <iCarouselDataSource, iCarouselDelegate>
-{
-    iCarousel *_carousel;
-}
+@interface PlusOfferListView : UIView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) id<PlusOfferListViewDelegate> delegate;
+@property (nonatomic, weak) NSMutableArray *dataSource;
+
+@property (nonatomic, retain) UITableView *tableView;
 
 @end

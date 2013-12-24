@@ -30,13 +30,14 @@
                             </segments>
                             <color key="tintColor" red="0.058823533356189728" green="0.67843139171600342" blue="0.40784317255020142" alpha="1" colorSpace="deviceRGB"/>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="List" id="8of-bD-IZ2">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="8of-bD-IZ2">
                             <connections>
                                 <action selector="listBtnTouchUpInside:" destination="3IJ-jh-7sq" id="fnU-dN-cOz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="viewTypeBtn" destination="8of-bD-IZ2" id="tJp-2t-XLa"/>
                         <segue destination="ar9-GL-MX8" kind="push" identifier="DetailOffer" id="Bzc-Ny-twv"/>
                     </connections>
                 </viewController>
