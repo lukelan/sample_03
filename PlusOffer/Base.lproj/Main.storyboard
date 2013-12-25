@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="goz-fO-FJR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="goz-fO-FJR">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
@@ -9,10 +9,6 @@
         <scene sceneID="ZXV-8B-xja">
             <objects>
                 <viewController id="3IJ-jh-7sq" customClass="PlusOfferViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Jby-n1-tS1"/>
-                        <viewControllerLayoutGuide type="bottom" id="5VB-mv-ADG"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ae5-eZ-UDK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,10 +45,6 @@
         <scene sceneID="Scl-Jd-MNb">
             <objects>
                 <viewController id="ar9-GL-MX8" customClass="OfferDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JOY-BW-o4V"/>
-                        <viewControllerLayoutGuide type="bottom" id="iGA-a4-kbi"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B43-zC-J6A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -84,20 +76,80 @@
             </objects>
             <point key="canvasLocation" x="65" y="1225"/>
         </scene>
-        <!--Redeem View Controller - Redeem-->
+        <!--Redeem View Controller-->
         <scene sceneID="PGd-dL-EDs">
             <objects>
                 <viewController id="bhj-CW-caE" customClass="RedeemViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kTb-wz-Oaq"/>
-                        <viewControllerLayoutGuide type="bottom" id="Of7-bR-hCn"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3fE-MT-2OS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="9b7-Jh-w2j">
+                                <rect key="frame" x="0.0" y="20" width="320" height="112"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redeem_header.png" id="cNk-7v-HPW">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Arz-5r-gV0">
+                                        <rect key="frame" x="17" y="14" width="42" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Czs-Xi-Bac">
+                                        <rect key="frame" x="74" y="14" width="204" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tmC-oL-TWL">
+                                        <rect key="frame" x="74" y="35" width="204" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uzC-n5-ZhN">
+                                        <rect key="frame" x="262" y="14" width="46" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ohF-xo-pJs">
+                                        <rect key="frame" x="62" y="77" width="196" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Gần đây"/>
+                                            <segment title="Ẩm thực"/>
+                                            <segment title="Giải trí"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.027450982481241226" green="0.64313727617263794" blue="0.40392160415649414" alpha="1" colorSpace="deviceRGB"/>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9dh-Np-gNt">
+                                <rect key="frame" x="0.0" y="132" width="320" height="387"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bhj-CW-caE" id="Lce-Ps-D4S"/>
+                                    <outlet property="delegate" destination="bhj-CW-caE" id="BbM-Eo-IzL"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Redeem" id="cIm-DS-lrE"/>
+                    <navigationItem key="navigationItem" id="cIm-DS-lrE"/>
+                    <connections>
+                        <outlet property="avatarImgView" destination="Arz-5r-gV0" id="FM8-ZE-Y3i"/>
+                        <outlet property="headerView" destination="9b7-Jh-w2j" id="iiF-Vm-WkQ"/>
+                        <outlet property="nameLbl" destination="Czs-Xi-Bac" id="umI-B0-AHO"/>
+                        <outlet property="pointLbl" destination="tmC-oL-TWL" id="P5m-7b-cmO"/>
+                        <outlet property="tableView" destination="9dh-Np-gNt" id="P3N-Fc-nru"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDE-h0-0Lw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,10 +159,6 @@
         <scene sceneID="NDN-aW-89o">
             <objects>
                 <viewController id="xsC-z3-Ylc" customClass="AccountViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bJ8-8U-Dgu"/>
-                        <viewControllerLayoutGuide type="bottom" id="8d8-Bw-qHw"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="J5K-M0-ynq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -144,7 +192,7 @@
         <!--Navigation Controller - Đổi Quà-->
         <scene sceneID="LAa-c4-tYK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aFK-Ge-6t3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="aFK-Ge-6t3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Đổi Quà" id="q7V-aZ-Ldp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UtR-zn-hq6">
@@ -152,6 +200,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="V7q-TT-YTp">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="bhj-CW-caE" kind="relationship" relationship="rootViewController" id="fru-cn-0ef"/>
                     </connections>
@@ -180,6 +232,9 @@
             <point key="canvasLocation" x="641" y="1903"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="redeem_header.png" width="638" height="139"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

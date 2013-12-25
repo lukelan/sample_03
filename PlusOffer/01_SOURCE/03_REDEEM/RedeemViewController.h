@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RedeemViewController : CustomGAITrackedViewController
+@interface RedeemViewController : CustomGAITrackedViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImgView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *pointLbl;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
