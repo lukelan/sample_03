@@ -29,11 +29,11 @@
 		18FBCF311867475E00C9E399 /* PlusOfferMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF301867475E00C9E399 /* PlusOfferMapView.xib */; };
 		18FBCF3318674CFD00C9E399 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCF3218674CFD00C9E399 /* MapKit.framework */; };
 		18FBCF3518674D0300C9E399 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCF3418674D0300C9E399 /* CoreLocation.framework */; };
-		18FBCF461869AF5600C9E399 /* OfferTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBCF431869AF5600C9E399 /* OfferTableCell.m */; };
-		18FBCF471869AF5600C9E399 /* OfferTableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBCF451869AF5600C9E399 /* OfferTableItem.m */; };
-		18FBCF4F1869F02500C9E399 /* map_offer.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF4C1869F02500C9E399 /* map_offer.png */; };
-		18FBCF501869F02500C9E399 /* offer_list_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF4D1869F02500C9E399 /* offer_list_1.png */; };
-		18FBCF511869F02500C9E399 /* offer_list_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FBCF4E1869F02500C9E399 /* offer_list_2.png */; };
+		4F5B4E97186966AE00AAE584 /* RKXMLReaderSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4E94186966AE00AAE584 /* RKXMLReaderSerialization.m */; };
+		4F5B4E98186966AE00AAE584 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4E96186966AE00AAE584 /* XMLReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4F5B4EA41869690700AAE584 /* ArrayMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4EA11869690700AAE584 /* ArrayMapping.m */; };
+		4F5B4EA51869690700AAE584 /* DictionaryMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4EA31869690700AAE584 /* DictionaryMapping.m */; };
+		4F5B4EA818696A4E00AAE584 /* CoreAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4EA718696A4E00AAE584 /* CoreAPIManager.m */; };
 		4FBBEB1218681F160040EA12 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEABD18681F160040EA12 /* UIDevice+IdentifierAddition.m */; };
 		4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEAC018681F160040EA12 /* BarCodeGenerator.mm */; };
 		4FBBEB1418681F160040EA12 /* qr_draw_png.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEAC318681F160040EA12 /* qr_draw_png.mm */; };
@@ -44,7 +44,6 @@
 		4FBBEB1A18681F160040EA12 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEAD618681F160040EA12 /* NSString+SHA.m */; };
 		4FBBEB1B18681F160040EA12 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FBBEAD918681F160040EA12 /* FacebookSDK.framework */; };
 		4FBBEB1C18681F160040EA12 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FBBEAE018681F160040EA12 /* libGoogleAnalytics.a */; };
-		4FBBEB1D18681F160040EA12 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FBBEAE118681F160040EA12 /* libGoogleAnalytics_debug.a */; };
 		4FBBEB1F18681F160040EA12 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FBBEAE518681F160040EA12 /* libGoogleConversionTracking.a */; };
 		4FBBEB2018681F160040EA12 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEAE818681F160040EA12 /* iCarousel.m */; };
 		4FBBEB5618682E210040EA12 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEB3F18682E210040EA12 /* png.c */; };
@@ -84,6 +83,12 @@
 		4FBBEC1418684D2D0040EA12 /* UIViewController+TabBarAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEC1118684D2D0040EA12 /* UIViewController+TabBarAnimation.m */; };
 		4FBBEC1818684E3F0040EA12 /* GifImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEC1718684E3F0040EA12 /* GifImageView.m */; };
 		4FBBEC1B18684E530040EA12 /* UIImage+Ultility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEC1A18684E530040EA12 /* UIImage+Ultility.m */; };
+		761C05067D034B0AAD4CD6E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1778E846BBC94BD8B62D0B7D /* libPods.a */; };
+		AA5A71F3186ABEFA00BC8D91 /* OfferTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A71F0186ABEFA00BC8D91 /* OfferTableCell.m */; };
+		AA5A71F4186ABEFA00BC8D91 /* OfferTableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A71F2186ABEFA00BC8D91 /* OfferTableItem.m */; };
+		AA5A71FD186ABF8500BC8D91 /* map_offer.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A71FA186ABF8500BC8D91 /* map_offer.png */; };
+		AA5A71FE186ABF8500BC8D91 /* offer_list_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A71FB186ABF8500BC8D91 /* offer_list_1.png */; };
+		AA5A71FF186ABF8500BC8D91 /* offer_list_2.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A71FC186ABF8500BC8D91 /* offer_list_2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1778E846BBC94BD8B62D0B7D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FBCED218673C1800C9E399 /* PlusOffer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlusOffer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FBCED518673C1800C9E399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18FBCED718673C1800C9E399 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -152,13 +158,17 @@
 		18FBCF301867475E00C9E399 /* PlusOfferMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlusOfferMapView.xib; sourceTree = "<group>"; };
 		18FBCF3218674CFD00C9E399 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		18FBCF3418674D0300C9E399 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		18FBCF421869AF5600C9E399 /* OfferTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableCell.h; sourceTree = "<group>"; };
-		18FBCF431869AF5600C9E399 /* OfferTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableCell.m; sourceTree = "<group>"; };
-		18FBCF441869AF5600C9E399 /* OfferTableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableItem.h; sourceTree = "<group>"; };
-		18FBCF451869AF5600C9E399 /* OfferTableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableItem.m; sourceTree = "<group>"; };
-		18FBCF4C1869F02500C9E399 /* map_offer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_offer.png; sourceTree = "<group>"; };
-		18FBCF4D1869F02500C9E399 /* offer_list_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_list_1.png; sourceTree = "<group>"; };
-		18FBCF4E1869F02500C9E399 /* offer_list_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_list_2.png; sourceTree = "<group>"; };
+		30E7F2528A784472A1F527AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4F5B4E93186966AE00AAE584 /* RKXMLReaderSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKXMLReaderSerialization.h; sourceTree = "<group>"; };
+		4F5B4E94186966AE00AAE584 /* RKXMLReaderSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKXMLReaderSerialization.m; sourceTree = "<group>"; };
+		4F5B4E95186966AE00AAE584 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		4F5B4E96186966AE00AAE584 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		4F5B4EA01869690700AAE584 /* ArrayMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayMapping.h; sourceTree = "<group>"; };
+		4F5B4EA11869690700AAE584 /* ArrayMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayMapping.m; sourceTree = "<group>"; };
+		4F5B4EA21869690700AAE584 /* DictionaryMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryMapping.h; sourceTree = "<group>"; };
+		4F5B4EA31869690700AAE584 /* DictionaryMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryMapping.m; sourceTree = "<group>"; };
+		4F5B4EA618696A4E00AAE584 /* CoreAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAPIManager.h; sourceTree = "<group>"; };
+		4F5B4EA718696A4E00AAE584 /* CoreAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreAPIManager.m; sourceTree = "<group>"; };
 		4FBBEAB918681F0A0040EA12 /* APIDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIDefines.h; sourceTree = "<group>"; };
 		4FBBEABA18681F0A0040EA12 /* DefineConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConstant.h; sourceTree = "<group>"; };
 		4FBBEABC18681F160040EA12 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
@@ -256,6 +266,13 @@
 		4FBBEC1718684E3F0040EA12 /* GifImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifImageView.m; sourceTree = "<group>"; };
 		4FBBEC1918684E530040EA12 /* UIImage+Ultility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Ultility.h"; sourceTree = "<group>"; };
 		4FBBEC1A18684E530040EA12 /* UIImage+Ultility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Ultility.m"; sourceTree = "<group>"; };
+		AA5A71EF186ABEFA00BC8D91 /* OfferTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableCell.h; sourceTree = "<group>"; };
+		AA5A71F0186ABEFA00BC8D91 /* OfferTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableCell.m; sourceTree = "<group>"; };
+		AA5A71F1186ABEFA00BC8D91 /* OfferTableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableItem.h; sourceTree = "<group>"; };
+		AA5A71F2186ABEFA00BC8D91 /* OfferTableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableItem.m; sourceTree = "<group>"; };
+		AA5A71FA186ABF8500BC8D91 /* map_offer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_offer.png; sourceTree = "<group>"; };
+		AA5A71FB186ABF8500BC8D91 /* offer_list_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_list_1.png; sourceTree = "<group>"; };
+		AA5A71FC186ABF8500BC8D91 /* offer_list_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_list_2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,13 +280,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FBBEC0A18684AE80040EA12 /* CFNetwork.framework in Frameworks */,
+				761C05067D034B0AAD4CD6E7 /* libPods.a in Frameworks */,
 				4FBBEBE9186848AB0040EA12 /* libSDWebImage.a in Frameworks */,
 				4FBBEBDB18683B8B0040EA12 /* libz.dylib in Frameworks */,
 				4FBBEB1718681F160040EA12 /* libCrittercism_v4_3_0.a in Frameworks */,
-				4FBBEB1D18681F160040EA12 /* libGoogleAnalytics_debug.a in Frameworks */,
 				4FBBEB1F18681F160040EA12 /* libGoogleConversionTracking.a in Frameworks */,
 				4FBBEB1C18681F160040EA12 /* libGoogleAnalytics.a in Frameworks */,
+				4FBBEC0A18684AE80040EA12 /* CFNetwork.framework in Frameworks */,
 				4FBBEBE118683E9F0040EA12 /* Security.framework in Frameworks */,
 				4FBBEBDE18683BD80040EA12 /* SystemConfiguration.framework in Frameworks */,
 				4FBBEBDD18683BBD0040EA12 /* AdSupport.framework in Frameworks */,
@@ -305,6 +322,7 @@
 				18FBCEFA18673C1900C9E399 /* PlusOfferTests */,
 				18FBCED418673C1800C9E399 /* Frameworks */,
 				18FBCED318673C1800C9E399 /* Products */,
+				30E7F2528A784472A1F527AA /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -336,6 +354,7 @@
 				18FBCED718673C1800C9E399 /* CoreGraphics.framework */,
 				18FBCED918673C1800C9E399 /* UIKit.framework */,
 				18FBCEF418673C1900C9E399 /* XCTest.framework */,
+				1778E846BBC94BD8B62D0B7D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -345,8 +364,8 @@
 			children = (
 				18FBCF0E1867443200C9E399 /* 01_SOURCE */,
 				18FBCF0D1867443200C9E399 /* 02_LIBS */,
+				AA5A71F9186ABF8500BC8D91 /* 03_RESOURCES */,
 				18FBCEED18673C1900C9E399 /* Images.xcassets */,
-				18FBCF4B1869F02500C9E399 /* 03_RESOURCES */,
 				18FBCEDC18673C1900C9E399 /* Supporting Files */,
 			);
 			path = PlusOffer;
@@ -400,6 +419,7 @@
 				4FBBEB66186831620040EA12 /* SDImageView */,
 				4FBBEAE918681F160040EA12 /* SDWebImage-3.3 */,
 				4FBBEBCE18683AD80040EA12 /* SDWebImage.xcodeproj */,
+				4F5B4E92186966AE00AAE584 /* XMLReader */,
 			);
 			path = 02_LIBS;
 			sourceTree = "<group>";
@@ -412,6 +432,7 @@
 				18FBCF121867443200C9E399 /* 02_OFFER */,
 				18FBCF181867448B00C9E399 /* 03_REDEEM */,
 				18FBCF171867448B00C9E399 /* 04_ACCOUNT */,
+				4F5B4E9B1869671400AAE584 /* 05_APIManager */,
 			);
 			path = 01_SOURCE;
 			sourceTree = "<group>";
@@ -468,10 +489,10 @@
 		18FBCF29186746EB00C9E399 /* OBJECTS */ = {
 			isa = PBXGroup;
 			children = (
-				18FBCF421869AF5600C9E399 /* OfferTableCell.h */,
-				18FBCF431869AF5600C9E399 /* OfferTableCell.m */,
-				18FBCF441869AF5600C9E399 /* OfferTableItem.h */,
-				18FBCF451869AF5600C9E399 /* OfferTableItem.m */,
+				AA5A71EF186ABEFA00BC8D91 /* OfferTableCell.h */,
+				AA5A71F0186ABEFA00BC8D91 /* OfferTableCell.m */,
+				AA5A71F1186ABEFA00BC8D91 /* OfferTableItem.h */,
+				AA5A71F2186ABEFA00BC8D91 /* OfferTableItem.m */,
 				18FBCF2A1867471400C9E399 /* PlusOfferListView.h */,
 				18FBCF2B1867471400C9E399 /* PlusOfferListView.m */,
 				18FBCF2D1867472300C9E399 /* PlusOfferMapView.h */,
@@ -481,14 +502,36 @@
 			path = OBJECTS;
 			sourceTree = "<group>";
 		};
-		18FBCF4B1869F02500C9E399 /* 03_RESOURCES */ = {
+		4F5B4E92186966AE00AAE584 /* XMLReader */ = {
 			isa = PBXGroup;
 			children = (
-				18FBCF4C1869F02500C9E399 /* map_offer.png */,
-				18FBCF4D1869F02500C9E399 /* offer_list_1.png */,
-				18FBCF4E1869F02500C9E399 /* offer_list_2.png */,
+				4F5B4E93186966AE00AAE584 /* RKXMLReaderSerialization.h */,
+				4F5B4E94186966AE00AAE584 /* RKXMLReaderSerialization.m */,
+				4F5B4E95186966AE00AAE584 /* XMLReader.h */,
+				4F5B4E96186966AE00AAE584 /* XMLReader.m */,
 			);
-			path = 03_RESOURCES;
+			path = XMLReader;
+			sourceTree = "<group>";
+		};
+		4F5B4E9B1869671400AAE584 /* 05_APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				4F5B4EA618696A4E00AAE584 /* CoreAPIManager.h */,
+				4F5B4EA718696A4E00AAE584 /* CoreAPIManager.m */,
+				4F5B4E9F1869690700AAE584 /* AbstractMapping */,
+			);
+			path = 05_APIManager;
+			sourceTree = "<group>";
+		};
+		4F5B4E9F1869690700AAE584 /* AbstractMapping */ = {
+			isa = PBXGroup;
+			children = (
+				4F5B4EA01869690700AAE584 /* ArrayMapping.h */,
+				4F5B4EA11869690700AAE584 /* ArrayMapping.m */,
+				4F5B4EA21869690700AAE584 /* DictionaryMapping.h */,
+				4F5B4EA31869690700AAE584 /* DictionaryMapping.m */,
+			);
+			path = AbstractMapping;
 			sourceTree = "<group>";
 		};
 		4FBBEAB818681F0A0040EA12 /* 00_DEFINE */ = {
@@ -731,6 +774,16 @@
 			path = GifImageView;
 			sourceTree = "<group>";
 		};
+		AA5A71F9186ABF8500BC8D91 /* 03_RESOURCES */ = {
+			isa = PBXGroup;
+			children = (
+				AA5A71FA186ABF8500BC8D91 /* map_offer.png */,
+				AA5A71FB186ABF8500BC8D91 /* offer_list_1.png */,
+				AA5A71FC186ABF8500BC8D91 /* offer_list_2.png */,
+			);
+			path = 03_RESOURCES;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -738,9 +791,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18FBCF0418673C1900C9E399 /* Build configuration list for PBXNativeTarget "PlusOffer" */;
 			buildPhases = (
+				50BA01729A3E4963B252B56D /* Check Pods Manifest.lock */,
 				18FBCECE18673C1800C9E399 /* Sources */,
 				18FBCECF18673C1800C9E399 /* Frameworks */,
 				18FBCED018673C1800C9E399 /* Resources */,
+				025BAE2ED573477785C3FE19 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -832,15 +887,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FBBEC05186849BF0040EA12 /* pull_arrow.png in Resources */,
-				18FBCF511869F02500C9E399 /* offer_list_2.png in Resources */,
+				AA5A71FF186ABF8500BC8D91 /* offer_list_2.png in Resources */,
 				18FBCF311867475E00C9E399 /* PlusOfferMapView.xib in Resources */,
 				4FBBEB1618681F160040EA12 /* dsym_upload.sh in Resources */,
 				18FBCF161867445B00C9E399 /* Main.storyboard in Resources */,
 				4FBBEC04186849BF0040EA12 /* loading.gif in Resources */,
 				18FBCEEE18673C1900C9E399 /* Images.xcassets in Resources */,
 				18FBCEE018673C1900C9E399 /* InfoPlist.strings in Resources */,
-				18FBCF501869F02500C9E399 /* offer_list_1.png in Resources */,
-				18FBCF4F1869F02500C9E399 /* map_offer.png in Resources */,
+				AA5A71FE186ABF8500BC8D91 /* offer_list_1.png in Resources */,
+				AA5A71FD186ABF8500BC8D91 /* map_offer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,13 +909,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		025BAE2ED573477785C3FE19 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50BA01729A3E4963B252B56D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		18FBCECE18673C1800C9E399 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4FBBEC1318684D2D0040EA12 /* UIViewController+CustomNavigation.m in Sources */,
+				4F5B4EA41869690700AAE584 /* ArrayMapping.m in Sources */,
 				18FBCF2F1867472300C9E399 /* PlusOfferMapView.m in Sources */,
+				4F5B4EA818696A4E00AAE584 /* CoreAPIManager.m in Sources */,
 				18FBCF21186744F300C9E399 /* RedeemViewController.m in Sources */,
 				18FBCF1E186744DE00C9E399 /* OfferDetailViewController.m in Sources */,
 				4FBBEC03186849BF0040EA12 /* CustomViewController.m in Sources */,
@@ -869,14 +959,16 @@
 				18FBCF24186744FE00C9E399 /* AccountViewController.m in Sources */,
 				4FBBEB1918681F160040EA12 /* NSString+MD5Addition.m in Sources */,
 				4FBBEB5A18682E210040EA12 /* pngpread.c in Sources */,
-				18FBCF471869AF5600C9E399 /* OfferTableItem.m in Sources */,
 				4FBBEB5B18682E210040EA12 /* pngread.c in Sources */,
 				18FBCF131867443200C9E399 /* AppDelegate.m in Sources */,
 				4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */,
 				4FBBEB5E18682E210040EA12 /* pngrutil.c in Sources */,
 				4FBBEB6418682E210040EA12 /* pngwutil.c in Sources */,
 				4FBBEB5D18682E210040EA12 /* pngrtran.c in Sources */,
+				4F5B4E97186966AE00AAE584 /* RKXMLReaderSerialization.m in Sources */,
 				4FBBEB6318682E210040EA12 /* pngwtran.c in Sources */,
+				AA5A71F4186ABEFA00BC8D91 /* OfferTableItem.m in Sources */,
+				4F5B4E98186966AE00AAE584 /* XMLReader.m in Sources */,
 				4FBBEB1218681F160040EA12 /* UIDevice+IdentifierAddition.m in Sources */,
 				4FBBEB5F18682E210040EA12 /* pngset.c in Sources */,
 				4FBBEC1B18684E530040EA12 /* UIImage+Ultility.m in Sources */,
@@ -885,13 +977,14 @@
 				4FBBEB2018681F160040EA12 /* iCarousel.m in Sources */,
 				4FBBEB6218682E210040EA12 /* pngwrite.c in Sources */,
 				4FBBEB1A18681F160040EA12 /* NSString+SHA.m in Sources */,
-				18FBCF461869AF5600C9E399 /* OfferTableCell.m in Sources */,
 				4FBBEC1218684D2D0040EA12 /* NSString+trimSpecialCharacter.m in Sources */,
 				18FBCEE218673C1900C9E399 /* main.m in Sources */,
+				4F5B4EA51869690700AAE584 /* DictionaryMapping.m in Sources */,
 				4FBBEC08186849BF0040EA12 /* PullRefreshTableViewController.m in Sources */,
 				4FBBEB5918682E210040EA12 /* pngmem.c in Sources */,
 				4FBBEC07186849BF0040EA12 /* LoadingView.m in Sources */,
 				4FBBEC1818684E3F0040EA12 /* GifImageView.m in Sources */,
+				AA5A71F3186ABEFA00BC8D91 /* OfferTableCell.m in Sources */,
 				4FBBEC1418684D2D0040EA12 /* UIViewController+TabBarAnimation.m in Sources */,
 				4FBBEC01186849BF0040EA12 /* CustomUIImagePickerController.m in Sources */,
 				4FBBEB6018682E210040EA12 /* pngtrans.c in Sources */,
@@ -1030,13 +1123,14 @@
 		};
 		18FBCF0518673C1900C9E399 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30E7F2528A784472A1F527AA /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"${SRCROOT}/PlusOffer/02_LIBS/FacebookSDK/3.8",
-					"${SRCROOT}/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
+					"$(SRCROOT)/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -1044,9 +1138,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"${SRCROOT}/PlusOffer/02_LIBS/CrittercismSDK",
-					"${SRCROOT}/PlusOffer/02_LIBS/GoogleAnalytics",
-					"${SRCROOT}/PlusOffer/02_LIBS/GoogleConversionTrackingSDK",
+					"$(SRCROOT)/PlusOffer/02_LIBS/CrittercismSDK",
+					"$(SRCROOT)/PlusOffer/02_LIBS/GoogleAnalytics",
+					"$(SRCROOT)/PlusOffer/02_LIBS/GoogleConversionTrackingSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1055,13 +1149,14 @@
 		};
 		18FBCF0618673C1900C9E399 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30E7F2528A784472A1F527AA /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"${SRCROOT}/PlusOffer/02_LIBS/FacebookSDK/3.8",
-					"${SRCROOT}/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
+					"$(SRCROOT)/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -1069,9 +1164,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"${SRCROOT}/PlusOffer/02_LIBS/CrittercismSDK",
-					"${SRCROOT}/PlusOffer/02_LIBS/GoogleAnalytics",
-					"${SRCROOT}/PlusOffer/02_LIBS/GoogleConversionTrackingSDK",
+					"$(SRCROOT)/PlusOffer/02_LIBS/CrittercismSDK",
+					"$(SRCROOT)/PlusOffer/02_LIBS/GoogleAnalytics",
+					"$(SRCROOT)/PlusOffer/02_LIBS/GoogleConversionTrackingSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

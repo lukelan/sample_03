@@ -16,7 +16,7 @@
     #import <CoreData/CoreData.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
-//    #import <RestKit/RestKit.h>
+    #import <RestKit/RestKit.h>
     #import "DefineConstant.h"
     #import "APIDefines.h"
     #import "SDImageView.h"

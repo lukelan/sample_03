@@ -71,7 +71,7 @@ int mh = 140;
     }
     
     CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, image.size.width, image.size.height), maskedImageRef);
-    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsGetImageFromCurrentImageContext();
     CGImageRelease(maskedImageRef);
     UIGraphicsEndImageContext();
 }

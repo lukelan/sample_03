@@ -23,6 +23,4 @@
 
 -(void)hideLoadingView;
 -(void)showLoadingScreenWithType:(NSInteger)type;
--(void)showDynamicViewWithProperties: (NSDictionary *)properties;
-
 @end

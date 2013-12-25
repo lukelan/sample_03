@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GAI.h"
+#import "RKXMLReaderSerialization.h"
 
 @implementation AppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
@@ -95,6 +96,26 @@
     }
     NSString* tmp = [versionNum substringWithRange:NSMakeRange([versionNum length]-3, 3)];
     return tmp;
+}
+
+#pragma mark -
+#pragma mark register Push notification
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    // Send device token to the Provider
+    NSString *tokenStr=[deviceToken description];
+    NSString *pushToken=[[[tokenStr stringByReplacingOccurrencesOfString:@">" withString:@""]stringByReplacingOccurrencesOfString:@"<" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"--------------device token = %@", pushToken);
+//    NSString *deviceLocal = [APIManager getStringInAppForKey:KEY_STORE_MY_DEVICE_TOKEN];//lay device luu local
+//    if (![pushToken isEqualToString:deviceLocal]) {
+//        [[APIManager sharedAPIManager] postUIID:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier] andDeviceToken:pushToken context:[MainViewController sharedMainViewController]];
+//        [APIManager setStringInApp:pushToken ForKey:KEY_STORE_MY_DEVICE_TOKEN];
+//    }
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	LOG_APP(@"Failed to get token, error: %@", error.localizedDescription);
 }
 
 #pragma mark -
@@ -245,5 +266,60 @@
 - (NSURL *)applicationCacheDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark -
+#pragma mark setup config for restkit
+- (void)setupReskit123Phim
+{
+    //let AFNetworking manage the activity indicator
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    // Initialize RestKit
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:BASE_URL_SERVER]];//[[RKObjectManager alloc] initWithHTTPClient:client];
+    
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
+    manager.managedObjectStore = managedObjectStore;
+    
+    /**
+     Complete Core Data stack initialization
+     */
+    [managedObjectStore createPersistentStoreCoordinator];
+    [RKManagedObjectStore setDefaultStore:managedObjectStore];
+    NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"CoreDataMovie.sqlite"];
+    NSError *error;
+    NSPersistentStore *persistentStore = [managedObjectStore addSQLitePersistentStoreAtPath:storePath fromSeedDatabaseAtPath:nil  withConfiguration:nil options:@{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES} error:&error];
+    NSAssert(persistentStore, @"Failed to add persistent store with error: %@", error);
+    // Create the managed object contexts
+    [managedObjectStore createManagedObjectContexts];
+    // Configure a managed object cache to ensure we do not create duplicate objects
+    managedObjectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc] initWithManagedObjectContext:managedObjectStore.persistentStoreManagedObjectContext];
+    [[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    
+    [RKMIMETypeSerialization registerClass:[RKXMLReaderSerialization class] forMIMEType:@"text/html"];
+    [[RKObjectManager sharedManager] setAcceptHeaderWithMIMEType:@"text/html"];
+    
+    [[RKObjectManager sharedManager] addFetchRequestBlock:^NSFetchRequest *(NSURL *URL)
+     {
+         RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:BASE_URL_SERVER];
+         NSDictionary *filmDict = nil;
+         BOOL match = [pathMatcher matchesPath:BASE_URL_SERVER tokenizeQueryStrings:NO parsedArguments:&filmDict];
+         if (match) {
+             RKResponseDescriptor *currentResponse = nil;
+             if (![RKObjectManager sharedManager].responseDescriptors || [RKObjectManager sharedManager].responseDescriptors.count == 0) {
+                 return nil;
+             }
+             currentResponse = [RKObjectManager sharedManager].responseDescriptors[0];
+             if (!currentResponse || ![currentResponse.mapping isKindOfClass:[RKEntityMapping class]]) {
+                 return nil;
+             }
+             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+             NSEntityDescription *entity = [NSEntityDescription entityForName:[(RKEntityMapping *)currentResponse.mapping entity].name inManagedObjectContext:[RKManagedObjectStore defaultStore].persistentStoreManagedObjectContext];
+             [fetchRequest setEntity:entity];
+             return fetchRequest;
+         }
+         
+         return nil;
+     }];
 }
 @end
