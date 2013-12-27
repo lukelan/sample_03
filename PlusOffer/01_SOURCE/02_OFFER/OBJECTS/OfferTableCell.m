@@ -2,8 +2,8 @@
 //  OfferTableCell.m
 //  PlusOffer
 //
-//  Created by Tai Truong on 12/24/13.
-//  Copyright (c) 2013 Tai Truong. All rights reserved.
+//  Created by Trongvm on 12/24/13.
+//  Copyright (c) 2013 Trongvm. All rights reserved.
 //
 
 #import "OfferTableCell.h"

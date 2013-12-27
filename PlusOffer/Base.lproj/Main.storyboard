@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="goz-fO-FJR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="goz-fO-FJR">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Plus Offer View Controller-->
@@ -29,6 +29,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Map" id="8of-bD-IZ2">
                             <connections>
                                 <action selector="listBtnTouchUpInside:" destination="3IJ-jh-7sq" id="fnU-dN-cOz"/>
+                                <segue destination="hAm-0X-Rvs" kind="push" identifier="OfferMap" id="jDV-hd-wtC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -40,6 +41,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vwz-ln-Mi2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1167" y="572"/>
+        </scene>
+        <!--Map Offer View Controller-->
+        <scene sceneID="GCp-22-J58">
+            <objects>
+                <viewController id="hAm-0X-Rvs" customClass="MapOfferViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aCE-HO-sdj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Nui-eE-GTS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yKk-3d-4k0"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapOfferView" destination="Nui-eE-GTS" id="GOF-Pp-nx3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b4N-e5-4nf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1628" y="-79"/>
         </scene>
         <!--Offer Detail View Controller-->
         <scene sceneID="Scl-Jd-MNb">

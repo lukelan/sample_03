@@ -112,6 +112,19 @@ static CoreAPIManager* _sharedCoreAPIManager = nil;
     [self RK_RequestWithObjectMapping:dicMapping pathURL:[self getFullLinkAPI:url] postData:temp keyPost:keyPost keyPath:keyPath withContext:context_id requestId:request_id];
 }
 
+- (void)RK_RequestArrayMappingResponseWithURL:(NSString *)url postData:(NSDictionary *)temp keyPath:(NSString *)keyPath withContext:(id)context_id requestId:(int)request_id
+{
+    [self RK_RequestArrayMappingResponseWithURL:url postData:temp keyPost:nil keyPath:keyPath withContext:context_id requestId:request_id];
+}
+- (void)RK_RequestArrayMappingResponseWithURL:(NSString *)url postData:(NSDictionary *)temp keyPost:(NSString *)keyPost keyPath:(NSString *)keyPath withContext:(id)context_id requestId:(int)request_id
+{
+    RKObjectMapping *arrMapping = [RKObjectMapping mappingForClass:[ArrayMapping class]];
+    [arrMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:nil toKeyPath:@"curArray"]];
+    NSString *linkUrl = [self getFullLinkAPI:url];
+    [self RK_RequestWithObjectMapping:arrMapping pathURL:linkUrl postData:temp keyPost:keyPost keyPath:keyPath withContext:context_id requestId:request_id];
+}
+
+
 //request general mapping object and send, receive response
 - (void)RK_RequestWithObjectMapping:(RKObjectMapping *)objMapping pathURL:(NSString *)pathURL postData:(NSDictionary *)temp keyPost:(NSString *)keyPost keyPath:(NSString *)keyPath withContext:(id)context_id requestId:(int)request_id
 {
@@ -253,25 +266,6 @@ static CoreAPIManager* _sharedCoreAPIManager = nil;
             }
         }
     }
-}
-
-#pragma mark API request with restkit
--(void)RK_RequestApiGetListPlusOfferContext:(id)context_id
-{
-//    NSString *url = [NSString stringWithFormat:ADN_API_GET_CATEGORY,ROOT_SERVER];
-//    //---------------------------------//
-//    RKObjectMapping *category = [RKObjectMapping mappingForClass:[AppCategory class]];
-//    [category addAttributeMappingsFromDictionary:@{
-//     @"id" : @"cat_id",
-//     @"name" : @"name",
-//     @"created" : @"created",
-//     @"update_date" : @"update_date",
-//     @"channel" : @"channel",
-//     @"code" : @"code",
-//     @"banner" : @"banner"
-//     }];
-//    RKResponseDescriptor *locationDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:category method:RKRequestMethodAny pathPattern:nil keyPath:@"result" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-//    [self RK_SendRequestAPI_Descriptor:locationDescriptor withURL:[NSURL URLWithString:url] postData:nil keyPost:nil withContext:context_id requestId:ID_REQUEST_GET_CATEGORY];
 }
 @end
 

@@ -25,6 +25,9 @@
         [self replaceDatabase];
     }
     
+    //setup restkit
+    [self setupReskit123Phim];
+    
     // init cache and clear mem
     [[SDWebImageManager sharedManagerWithCachePath:CACHE_IMAGE_PATH] setCacheKeyFilter:^NSString *(NSURL *url) {
         if ([url isKindOfClass:[NSURL class]])

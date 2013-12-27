@@ -24,6 +24,8 @@
     #import "Crittercism.h"
     #import "CustomGAITrackedViewController.h"
     #import "AppDelegate.h"
+    #import "PlusAPIManager.h"
+    #import "Location.h"
 
 #pragma mark import class category ultility
 #import "UIDevice+IdentifierAddition.h"

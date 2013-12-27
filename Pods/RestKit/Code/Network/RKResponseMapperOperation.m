@@ -420,7 +420,25 @@ static inline NSManagedObjectID *RKObjectIDFromObjectIfManaged(id object)
 - (RKMappingResult *)performMappingWithObject:(id)sourceObject error:(NSError **)error
 {
     NSAssert(self.managedObjectContext, @"Unable to perform mapping: No `managedObjectContext` assigned. (Mapping response.URL = %@)", self.response.URL);
-
+    //Duyln 26/12 fixed bug crash when no data return from API and then map to core data
+    if ([self.responseDescriptors count] > 0) {
+        RKResponseDescriptor *responseDescriptor = (RKResponseDescriptor *) [self.responseDescriptors objectAtIndex:0];
+        id temp = [sourceObject objectForKey:responseDescriptor.keyPath];
+        if ([responseDescriptor.mapping isKindOfClass:[RKObjectMapping class]]) {
+            if (![temp isKindOfClass:[NSArray class]]) {
+                if (error)
+                {
+                    NSString *errorMessage = @"Could not find key to map to entity object";
+                    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                                     errorMessage, NSLocalizedDescriptionKey,nil];
+                    NSError *errorTemp = [NSError errorWithDomain:RKErrorDomain code:RKMappingErrorNotFound userInfo:userInfo];
+                    *error = errorTemp;
+                }
+                return nil;
+            }
+        }
+    }
+    //---------------------end-------------------------//
     __block NSError *blockError = nil;
     __block RKMappingResult *mappingResult = nil;
     self.operationQueue = [NSOperationQueue new];

@@ -53,6 +53,7 @@
 #define REDEEM_VIEW_NAME @"UIRedeem"
 #define PLUS_VIEW_CONTROLLER @"UIPlusViewController"
 #define OFFER_DETAIL_VIEW_CONTROLLER @"UIOfferDetailViewController"
+#define CHOOSE_CITY_VIEW_NAME @"UIChooseLocation"
 #pragma mark -
 
 typedef enum

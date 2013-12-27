@@ -856,6 +856,15 @@ static NSString *const RKRootKeyPathPrefix = @"@root.";
 
     // Handle metadata
     self.sourceObject = [[RKMappingSourceObject alloc] initWithObject:self.sourceObject parentObject:self.parentSourceObject rootObject:self.rootSourceObject metadata:self.metadata];
+    //Duyln 27/12 fixed bug crash when no data return from API and then map to object
+    if (![self.sourceObject isKindOfClass:[NSArray class]] && ![self.sourceObject isKindOfClass:[NSDictionary class]]) {
+        NSString *errorMessage = @"Could not find key to map to object mapping";
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         errorMessage, NSLocalizedDescriptionKey,nil];
+        self.error = [NSError errorWithDomain:RKErrorDomain code:RKMappingErrorNotFound userInfo:userInfo];
+        return;
+    }
+    //---------------------end-------------------------//
 
     RKLogDebug(@"Starting mapping operation...");
     RKLogTrace(@"Performing mapping operation: %@", self);
