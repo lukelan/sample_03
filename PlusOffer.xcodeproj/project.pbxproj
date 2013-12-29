@@ -20,6 +20,7 @@
 		1843A35E186B3F45002698D0 /* redeem_notAllowBtn_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1843A354186B3F45002698D0 /* redeem_notAllowBtn_1.png */; };
 		1843A35F186B3F45002698D0 /* redeem_notAllowBtn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1843A355186B3F45002698D0 /* redeem_notAllowBtn_2.png */; };
 		18924CBD186F322C005D0432 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18924CBC186F322C005D0432 /* libzbar.a */; };
+		18DDE8081870052400399747 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DDE8071870052400399747 /* libiconv.dylib */; };
 		18FBCED618673C1800C9E399 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCED518673C1800C9E399 /* Foundation.framework */; };
 		18FBCED818673C1800C9E399 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCED718673C1800C9E399 /* CoreGraphics.framework */; };
 		18FBCEDA18673C1800C9E399 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCED918673C1800C9E399 /* UIKit.framework */; };
@@ -230,6 +231,7 @@
 		18924CBA186F322C005D0432 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
 		18924CBB186F322C005D0432 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
 		18924CBC186F322C005D0432 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		18DDE8071870052400399747 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		18FBCED218673C1800C9E399 /* PlusOffer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlusOffer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FBCED518673C1800C9E399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18FBCED718673C1800C9E399 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -458,6 +460,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18DDE8081870052400399747 /* libiconv.dylib in Frameworks */,
 				18924CBD186F322C005D0432 /* libzbar.a in Frameworks */,
 				761C05067D034B0AAD4CD6E7 /* libPods.a in Frameworks */,
 				4FBBEBE9186848AB0040EA12 /* libSDWebImage.a in Frameworks */,
@@ -580,6 +583,7 @@
 		18FBCED418673C1800C9E399 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18DDE8071870052400399747 /* libiconv.dylib */,
 				4FBBEBE7186847DF0040EA12 /* QuartzCore.framework */,
 				4FBBEBE5186847B90040EA12 /* CFNetwork.framework */,
 				4FBBEBE3186847AB0040EA12 /* Accelerate.framework */,

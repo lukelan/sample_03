@@ -111,7 +111,7 @@
     if (seletecLocation.location_id == self.chosenCity.location_id) {
         retCell.accessoryType = UITableViewCellAccessoryCheckmark;
         retCell.textLabel.textColor = [UIColor colorWithRed:100.0/255.0 green:101.0/255.0 blue:102.0/255.0 alpha:1.0];
-        [retCell.textLabel setFont:[UIFont getFontNormalSize13]];
+//        [retCell.textLabel setFont:[UIFont getFontNormalSize13]];
     }
     
     retCell.textLabel.text = [NSString stringWithFormat:@"%@", seletecLocation.location_name];
@@ -128,32 +128,32 @@
     Location *selectLocation = [self.listOfCity objectAtIndex:indexPath.row];
     BOOL isNeedReload = (selectLocation.location_id != self.chosenCity.location_id);
     if (isNeedReload) {
-        [[GAI sharedInstance].defaultTracker sendEventWithCategory:@"Cinema" withAction:@"Change" withLabel:@"city" withValue:[NSNumber numberWithInteger:109]];
+//        [[GAI sharedInstance].defaultTracker sendEventWithCategory:@"Cinema" withAction:@"Change" withLabel:@"city" withValue:[NSNumber numberWithInteger:109]];
         
         self.chosenCity = selectLocation;
-        [APIManager saveLocationObject:self.chosenCity];
-        AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+//        [APIManager saveLocationObject:self.chosenCity];
+//        AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         //clean list cinema
-        [delegate setArrayCinema:nil];
+//        [delegate setArrayCinema:nil];
         
         // clean list cinema with distance
-        [delegate setArrayCinemaDistance:nil];
+//        [delegate setArrayCinemaDistance:nil];
 
         //send nofification
-        NSNotificationCenter* notificationSender = [NSNotificationCenter defaultCenter];
-        if ([fromView isEqualToString:CINEMA_VIEW_NAME]) {
-            [notificationSender postNotificationName: NOTIFICATION_NAME_NEW_CITY object:nil];
-        } else {
-            [notificationSender postNotificationName: NOTIFICATION_NAME_NEW_CITY object:[NSNumber numberWithInt:1]];
-        }
+//        NSNotificationCenter* notificationSender = [NSNotificationCenter defaultCenter];
+//        if ([fromView isEqualToString:CINEMA_VIEW_NAME]) {
+//            [notificationSender postNotificationName: NOTIFICATION_NAME_NEW_CITY object:nil];
+//        } else {
+//            [notificationSender postNotificationName: NOTIFICATION_NAME_NEW_CITY object:[NSNumber numberWithInt:1]];
+//        }
         
         // send log to 123phim server
-        [[APIManager sharedAPIManager] sendLogToSever123PhimRequestURL:delegate.currentView
-                                                              comeFrom:delegate.currentView
-                                                          withActionID:ACTION_LOCATION_CHANGE_CITY
-                                                         currentFilmID:[NSNumber numberWithInt:NO_FILM_ID]
-                                                       currentCinemaID:[NSNumber numberWithInt:NO_CINEMA_ID]
-                                                       returnCodeValue:0 context:nil];
+//        [[APIManager sharedAPIManager] sendLogToSever123PhimRequestURL:delegate.currentView
+//                                                              comeFrom:delegate.currentView
+//                                                          withActionID:ACTION_LOCATION_CHANGE_CITY
+//                                                         currentFilmID:[NSNumber numberWithInt:NO_FILM_ID]
+//                                                       currentCinemaID:[NSNumber numberWithInt:NO_CINEMA_ID]
+//                                                       returnCodeValue:0 context:nil];
     }
     [self.navigationController popViewControllerAnimated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
