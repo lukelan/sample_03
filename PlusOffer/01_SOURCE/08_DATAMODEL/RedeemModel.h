@@ -28,4 +28,8 @@
 @property (nonatomic, retain) NSNumber * is_redeem;
 @property (nonatomic, retain) NSNumber * is_redeemable;
 
+// additional variables
+@property (nonatomic, assign) double  distance; // meter
+@property (nonatomic, retain) NSString * distanceStr;
+@property (nonatomic, readonly) BOOL allowRedeem;
 @end

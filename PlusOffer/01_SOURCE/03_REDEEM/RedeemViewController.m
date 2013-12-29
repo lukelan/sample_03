@@ -43,8 +43,6 @@
     viewName = REDEEM_VIEW_NAME;
     self.trackedViewName = viewName;
     
-    [self initDataForTesting];
-    
     // barcode scanner
     
     zBarReader = [[ZBarReaderViewController alloc] init];
@@ -60,16 +58,19 @@
     [_overlayView addSubview:overlayImage];
     // cancel button
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 70, 25)];
-<<<<<<< HEAD
-//    [cancelBtn sett]
-=======
->>>>>>> fd17101f16265b9ff937bfdacc2b5aef6acc9548
+
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
     [_overlayView addSubview:cancelBtn];
     zBarReader.cameraOverlayView = _overlayView;
     
-    if (self.fetchedResultsController) {}
+    // init fetched result controller
+    [self fetchedResultsController];
+    
+    // load default data
+    self.dataSource = [self.fetchedResultsController.fetchedObjects mutableCopy];
+    [self.tableView reloadData];
+    
     // load list redeem item
     [self loadRedeemOffers];
 }
@@ -109,60 +110,13 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self executeLoadingLayout];
+    [self reloadInterface];
 }
 
-- (void)executeLoadingLayout
+- (void)reloadInterface
 {
     NSLog(@"data = %@", self.fetchedResultsController.fetchedObjects);
-}
-
-// for tesing purpose
--(void)initDataForTesting
-{
-    self.dataSource = [NSMutableArray array];
-    
-    // 1
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"McDonald", @"name",
-                         @"01 Big Mac miễn phí cho bạn", @"detail",
-                         @"0", @"distance",
-                         @"redeem_logo_1", @"imageUrl",
-                         nil];
-    RedeemTableViewItem *item = [[RedeemTableViewItem alloc] initWithData:dic andType:enumRedeemItemType_allowRedeem];
-    [self.dataSource addObject:item];
-    
-    // 2
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"Urban Station", @"name",
-                         @"01 Mocha Latte miễn phí", @"detail",
-                         @"2.8km", @"distance",
-                         @"redeem_logo_2", @"imageUrl",
-                         nil];
-    item = [[RedeemTableViewItem alloc] initWithData:dic andType:enumRedeemItemType_notAllow];
-    [self.dataSource addObject:item];
-    
-    // 3
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"Urban Station", @"name",
-                         @"Giảm 20% các loại bánh", @"detail",
-                         @"3.6km", @"distance",
-                         @"redeem_logo_3", @"imageUrl",
-                         nil];
-    item = [[RedeemTableViewItem alloc] initWithData:dic andType:enumRedeemItemType_notAllow];
-    [self.dataSource addObject:item];
-    
-    // 4
-    dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"BHD Cineplex", @"name",
-                         @"01 vé xem phim 2D miến phí", @"detail",
-                         @"4.5km", @"distance",
-                         @"redeem_logo_4", @"imageUrl",
-                         nil];
-    item = [[RedeemTableViewItem alloc] initWithData:dic andType:enumRedeemItemType_notAllow];
-    [self.dataSource addObject:item];
-    
-    // reload table
+    self.dataSource = [self.fetchedResultsController.fetchedObjects mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -172,9 +126,8 @@
     zBarReader.readerDelegate = self;
 
     zBarReader.supportedOrientationsMask = ZBarOrientationMask(UIInterfaceOrientationPortrait);
-//    zBarReader.cameraOverlayView = scanOverlay;
     ZBarImageScanner *scanner = zBarReader.scanner;
-    // TODO: (optional) additional reader configuration here
+    // (optional) additional reader configuration here
     //            readerController.scanCrop = _scanZoneImage.frame;
     // EXAMPLE: disable rarely used I2/5 to improve performance
     [scanner setSymbology: ZBAR_I25
@@ -272,18 +225,4 @@
     [self loadBarCodeReader];
 }
 
-#pragma mark RKManageDelegate
-#pragma mark -
--(void)processResultResponseArray:(NSArray *)array requestId:(int)request_id
-{
-    switch (request_id) {
-        case ID_REQUEST_REDEEM:
-        {
-            NSLog(@"result = %@", array);
-            break;
-        }
-        default:
-            break;
-    }
-}
 @end

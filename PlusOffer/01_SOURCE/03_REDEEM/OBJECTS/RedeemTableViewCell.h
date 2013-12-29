@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RedeemTableViewItem.h"
 
 @class RedeemTableViewCell;
 @protocol RedeemTableViewCellDelegate <NSObject>
