@@ -7,6 +7,7 @@
 //
 
 #import "RedeemTableViewCell.h"
+#import "RedeemModel.h"
 
 #define REDEEMTABLE_CELL_HEIGHT 90.0f
 #define OFFERTABLE_CELL_PADDING 5.0f
@@ -63,7 +64,9 @@
         _redeemBtn = [[UIButton alloc] initWithFrame:CGRectMake(230, 25, 60, 30)];
         [_redeemBtn addTarget:self action:@selector(redeemBtnTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
         [_containerView addSubview:_redeemBtn];
-        [self.redeemBtn setImage:[UIImage imageNamed:@"redeem_notAllowBtn_1.png"] forState:UIControlStateNormal];
+//        [self.redeemBtn setBackgroundImage:[UIImage imageNamed:@"redeem_notAllowBtn_1.png"] forState:UIControlStateNormal];
+        [self.redeemBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.redeemBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     }
     return self;
 }
@@ -93,23 +96,25 @@
 -(void)prepareForReuse{
     self.logoImageView.image = nil;
     self.nameLbl.text = self.descriptionLbl.text = @"";
-    [self.redeemBtn setImage:[UIImage imageNamed:@"redeem_notAllowBtn_1.png"] forState:UIControlStateNormal];
+    [self.redeemBtn setImage:nil forState:UIControlStateNormal];
 }
 
 -(void)setObject:(id)object
 {
     _object = object;
     
-    RedeemTableViewItem *item = object;
-    [self.logoImageView setImage:[UIImage imageNamed:item.imageUrl]];
-    self.nameLbl.text = item.name;
-    self.descriptionLbl.text = item.redeemDetail;
+    RedeemModel *item = object;
+    [self.logoImageView setImage:[UIImage imageNamed:@"redeem_logo_1"]];
+    self.nameLbl.text = item.brand_name;
+    self.descriptionLbl.text = item.offer_description;
     
-    if (item.type == enumRedeemItemType_allowRedeem) {
+    if (item.allowRedeem) {
         [self.redeemBtn setImage:[UIImage imageNamed:@"redeem_allowBtn"] forState:UIControlStateNormal];
+        self.redeemBtn.enabled = YES;
     }
     else {
-        [self.redeemBtn setTitle:item.distance forState:UIControlStateNormal];
+        [self.redeemBtn setTitle:item.distanceStr forState:UIControlStateNormal];
+        self.redeemBtn.enabled = NO;
     }
 }
 

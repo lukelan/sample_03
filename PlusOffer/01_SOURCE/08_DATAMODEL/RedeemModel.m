@@ -9,6 +9,7 @@
 #import "RedeemModel.h"
 #import "AppDelegate.h"
 
+#define MINIMUM_DISTANCE_ALLOW_USER_REDEEM 100.0f // in 100 meters
 @implementation RedeemModel
 
 @dynamic redeem_id;
@@ -26,12 +27,41 @@
 @dynamic max_punch;
 @dynamic is_redeem;
 @dynamic is_redeemable;
-@synthesize distance;
-@synthesize distanceStr;
+@synthesize distance = _distance;
+@synthesize distanceStr = _distanceStr;
+@synthesize allowRedeem = _allowRedeem;
 
--(NSInteger)distance
+-(double)distance
 {
-//    [((AppDelegate*)[[UIApplication sharedApplication] delegate])
-    return 0;
+    Location *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
+    
+    CLLocation *pinLocation = [[CLLocation alloc]
+                               initWithLatitude:[self.latitude doubleValue]
+                               longitude:[self.longitude doubleValue]];
+    
+    CLLocation *currentLocation = [[CLLocation alloc]
+                                   initWithLatitude:userLocation.latitude
+                                   longitude:userLocation.longtitude];
+    
+    _distance = [pinLocation distanceFromLocation:currentLocation];
+
+    return _distance;
 }
+
+-(NSString *)distanceStr
+{
+    if (self.distance < 1000) {
+        _distanceStr = [NSString stringWithFormat:@"%.0fm", _distance];
+    }
+    else {
+        _distanceStr = [NSString stringWithFormat:@"%.1fkm", _distance / 1000.0f];
+    }
+    return _distanceStr;
+}
+
+-(BOOL)allowRedeem
+{
+    return self.distance <= MINIMUM_DISTANCE_ALLOW_USER_REDEEM;
+}
+
 @end
