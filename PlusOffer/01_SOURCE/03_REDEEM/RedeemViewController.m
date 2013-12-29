@@ -43,14 +43,20 @@
     [self initDataForTesting];
     
     // barcode scanner
+    
     zBarReader = [[ZBarReaderViewController alloc] init];
     _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
     _overlayView.backgroundColor = [UIColor clearColor];
     UIImageView *overlayImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
+    if (CGRectGetHeight(self.view.bounds) == 568) { // 4 inches
+        overlayImage.frame = CGRectMake(0, 0, CGRectGetWidth(overlayImage.frame), CGRectGetHeight(overlayImage.frame));
+    }
+    else { // 3.5 inches
+        overlayImage.frame = CGRectMake(0, -65, CGRectGetWidth(overlayImage.frame), CGRectGetHeight(overlayImage.frame));
+    }
     [_overlayView addSubview:overlayImage];
     // cancel button
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 70, 25)];
-    [cancelBtn sett]
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
     [_overlayView addSubview:cancelBtn];
