@@ -176,24 +176,25 @@
         
         JCGridMenuColumn *favouriteView = [[JCGridMenuColumn alloc]
                                            initWithButtonImageTextLeft:CGRectMake(0, 0, 88, 44)
-                                           image:@"FavouriteSmall"
-                                           selected:@"FavouriteSmallSelected"
+                                           image:@"Favourite"
+                                           selected:@"FavouriteSelected"
                                            text:@"Gần đây"];
         [favouriteView.button setBackgroundColor:[UIColor blackColor]];
+        [favouriteView.button setSelected:YES];
         [favouriteView setCloseOnSelect:YES];
         
         JCGridMenuColumn *favouriteObject = [[JCGridMenuColumn alloc]
                                              initWithButtonImageTextLeft:CGRectMake(0, 0, 88, 44)
-                                             image:@"FavouriteSmall"
-                                             selected:@"FavouriteSmallSelected"
+                                             image:@"Pocket"
+                                             selected:@"PocketSelected"
                                              text:@"Ẩm thực"];
         [favouriteObject.button setBackgroundColor:[UIColor blackColor]];
         [favouriteObject setCloseOnSelect:YES];
         
         JCGridMenuColumn *favouriteMethod = [[JCGridMenuColumn alloc]
                                              initWithButtonImageTextLeft:CGRectMake(0, 0, 88, 44)
-                                             image:@"FavouriteSmall"
-                                             selected:@"FavouriteSmallSelected"
+                                             image:@"Facebook"
+                                             selected:@"FacebookSelected"
                                              text:@"Giải trí"];
         [favouriteMethod.button setBackgroundColor:[UIColor blackColor]];
         [favouriteMethod setCloseOnSelect:YES];
@@ -208,51 +209,52 @@
         [favourites setIsExpanded:YES];
         [favourites setIsModal:YES];
         [favourites setHideAlpha:0.0f];
+        [favourites setHideOnExpand:YES];
         [favourites.button setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.4f]];
+        [favourites.button setSelected:YES];
         
-        
-        // Share
-        
-        JCGridMenuColumn *twitter = [[JCGridMenuColumn alloc]
-                                     initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
-                                     normal:@"Twitter"
-                                     selected:@"TwitterSelected"
-                                     highlighted:@"TwitterSelected"
-                                     disabled:@"Twiiter"];
-        [twitter.button setBackgroundColor:[UIColor blackColor]];
-        
-        JCGridMenuColumn *email = [[JCGridMenuColumn alloc]
-                                   initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
-                                   normal:@"Email"
-                                   selected:@"EmailSelected"
-                                   highlighted:@"EmailSelected"
-                                   disabled:@"Email"];
-        email.button.titleLabel.text = @"Gần đây";
-        [email.button setBackgroundColor:[UIColor blackColor]];
-        
-        JCGridMenuColumn *pocket = [[JCGridMenuColumn alloc]
-                                    initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
-                                    normal:@"Pocket"
-                                    selected:@"PocketSelected"
-                                    highlighted:@"PocketSelected"
-                                    disabled:@"Pocket"];
-        [pocket.button setBackgroundColor:[UIColor blackColor]];
-        
-        JCGridMenuColumn *facebook = [[JCGridMenuColumn alloc]
-                                      initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
-                                      normal:@"Facebook"
-                                      selected:@"FacebookSelected"
-                                      highlighted:@"FacebookSelected"
-                                      disabled:@"Facebook"];
-        [facebook.button setBackgroundColor:[UIColor blackColor]];
-        
-        JCGridMenuRow *share = [[JCGridMenuRow alloc] initWithImages:@"Share" selected:@"Close" highlighted:@"ShareSelected" disabled:@"Share"];
-        [share setColumns:[[NSMutableArray alloc] initWithObjects:pocket, twitter, facebook, email, nil]];
-        [share setIsExpanded:YES];
-        [share setIsModal:YES];
-        [share setHideAlpha:0.0f];
-        [share.button setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.4f]];
-        
+//        // Share
+//        
+//        JCGridMenuColumn *twitter = [[JCGridMenuColumn alloc]
+//                                     initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
+//                                     normal:@"Twitter"
+//                                     selected:@"TwitterSelected"
+//                                     highlighted:@"TwitterSelected"
+//                                     disabled:@"Twiiter"];
+//        [twitter.button setBackgroundColor:[UIColor blackColor]];
+//        
+//        JCGridMenuColumn *email = [[JCGridMenuColumn alloc]
+//                                   initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
+//                                   normal:@"Email"
+//                                   selected:@"EmailSelected"
+//                                   highlighted:@"EmailSelected"
+//                                   disabled:@"Email"];
+//        email.button.titleLabel.text = @"Gần đây";
+//        [email.button setBackgroundColor:[UIColor blackColor]];
+//        
+//        JCGridMenuColumn *pocket = [[JCGridMenuColumn alloc]
+//                                    initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
+//                                    normal:@"Pocket"
+//                                    selected:@"PocketSelected"
+//                                    highlighted:@"PocketSelected"
+//                                    disabled:@"Pocket"];
+//        [pocket.button setBackgroundColor:[UIColor blackColor]];
+//        
+//        JCGridMenuColumn *facebook = [[JCGridMenuColumn alloc]
+//                                      initWithButtonAndImages:CGRectMake(0, 0, 44, 44)
+//                                      normal:@"Facebook"
+//                                      selected:@"FacebookSelected"
+//                                      highlighted:@"FacebookSelected"
+//                                      disabled:@"Facebook"];
+//        [facebook.button setBackgroundColor:[UIColor blackColor]];
+//        
+//        JCGridMenuRow *share = [[JCGridMenuRow alloc] initWithImages:@"Share" selected:@"Close" highlighted:@"ShareSelected" disabled:@"Share"];
+//        [share setColumns:[[NSMutableArray alloc] initWithObjects:pocket, twitter, facebook, email, nil]];
+//        [share setIsExpanded:YES];
+//        [share setIsModal:YES];
+//        [share setHideAlpha:0.0f];
+//        [share.button setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.4f]];
+//        
         
         // Rows...
         
@@ -344,23 +346,24 @@
             // Favourites
             UIButton *selected = (UIButton *)[[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:indexColumn];
             [selected setSelected:![selected isSelected]];
-            BOOL hasSelected = NO;
             
             for (int i=0; i<[[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] count]; i++) {
                 
                 UIButton *selectChildButton = [[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i];
-                if ([selectChildButton isSelected]) {
-                    hasSelected = YES;
-                    selected setImage:selectChildButton. forState:UI
-//                    break;
+                if (i != indexColumn) {
+                    [selectChildButton setSelected:NO];
                 } else {
-                    UIButton *unselected = [[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i];
-                    [unselected setSelected:NO];
+                    [selectChildButton setSelected:YES];
                 }
                 
             }
             
-            [[[_gmDemo.gridCells objectAtIndex:indexRow] button] setSelected:hasSelected];
+            UIImage *selectedImage = [[[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:indexColumn] imageForState:UIControlStateSelected];
+            
+            [[[_gmDemo.gridCells objectAtIndex:indexRow] button] setImage:selectedImage forState:UIControlStateSelected];
+     
+            [[[_gmDemo.gridCells objectAtIndex:indexRow] button] setSelected:YES];
+            
             [_gmDemo setIsRowModal:NO];
         } else if (indexRow==2) {
             [[[_gmDemo.gridCells objectAtIndex:indexRow] button] setSelected:NO];
