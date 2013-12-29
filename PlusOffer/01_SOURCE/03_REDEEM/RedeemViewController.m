@@ -9,8 +9,10 @@
 #import "RedeemViewController.h"
 #import "RedeemTableViewCell.h"
 #import "ZBarReaderViewController.h"
+#import "PlusAPIManager.h"
+#import "RedeemModel.h"
 
-@interface RedeemViewController () <ZBarReaderDelegate, RedeemTableViewCellDelegate>
+@interface RedeemViewController () <ZBarReaderDelegate, RedeemTableViewCellDelegate, NSFetchedResultsControllerDelegate>
 {
     ZBarReaderViewController *zBarReader;
     BOOL isScaning;
@@ -19,6 +21,7 @@
     UIView *_overlayView;
 }
 @property (nonatomic, retain) NSMutableArray *dataSource;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation RedeemViewController
@@ -43,24 +46,75 @@
     [self initDataForTesting];
     
     // barcode scanner
+    
     zBarReader = [[ZBarReaderViewController alloc] init];
     _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
     _overlayView.backgroundColor = [UIColor clearColor];
     UIImageView *overlayImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
+    if (CGRectGetHeight(self.view.bounds) == 568) { // 4 inches
+        overlayImage.frame = CGRectMake(0, 0, CGRectGetWidth(overlayImage.frame), CGRectGetHeight(overlayImage.frame));
+    }
+    else { // 3.5 inches
+        overlayImage.frame = CGRectMake(0, -65, CGRectGetWidth(overlayImage.frame), CGRectGetHeight(overlayImage.frame));
+    }
     [_overlayView addSubview:overlayImage];
     // cancel button
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 70, 25)];
+<<<<<<< HEAD
 //    [cancelBtn sett]
+=======
+>>>>>>> fd17101f16265b9ff937bfdacc2b5aef6acc9548
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
     [_overlayView addSubview:cancelBtn];
     zBarReader.cameraOverlayView = _overlayView;
+    
+    if (self.fetchedResultsController) {}
+    // load list redeem item
+    [self loadRedeemOffers];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - API
+-(void)loadRedeemOffers
+{
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferRedeem:self forUserID:@"1"];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (NSFetchedResultsController *)fetchedResultsController{
+    
+    if (!_fetchedResultsController)
+    {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([RedeemModel class])];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"redeem_id" ascending:YES]];
+        
+        NSFetchedResultsController *myFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        [myFetchedResultsController setDelegate:self];
+        self.fetchedResultsController = myFetchedResultsController;
+        
+        NSError *error = nil;
+        [self.fetchedResultsController performFetch:&error];
+        
+        NSAssert(!error, @"Error performing fetch request: %@", error);
+    }
+    return _fetchedResultsController;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self executeLoadingLayout];
+}
+
+- (void)executeLoadingLayout
+{
+    NSLog(@"data = %@", self.fetchedResultsController.fetchedObjects);
 }
 
 // for tesing purpose
@@ -216,5 +270,20 @@
 -(void)redeemTableCell:(RedeemTableViewCell *)cell redeemOffer:(id)object
 {
     [self loadBarCodeReader];
+}
+
+#pragma mark RKManageDelegate
+#pragma mark -
+-(void)processResultResponseArray:(NSArray *)array requestId:(int)request_id
+{
+    switch (request_id) {
+        case ID_REQUEST_REDEEM:
+        {
+            NSLog(@"result = %@", array);
+            break;
+        }
+        default:
+            break;
+    }
 }
 @end

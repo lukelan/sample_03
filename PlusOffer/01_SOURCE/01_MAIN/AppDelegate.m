@@ -306,7 +306,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
      */
     [managedObjectStore createPersistentStoreCoordinator];
     [RKManagedObjectStore setDefaultStore:managedObjectStore];
-    NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"CoreDataMovie.sqlite"];
+    NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"PlusOfferModel.sqlite"];
     NSError *error;
     NSPersistentStore *persistentStore = [managedObjectStore addSQLitePersistentStoreAtPath:storePath fromSeedDatabaseAtPath:nil  withConfiguration:nil options:@{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES} error:&error];
     NSAssert(persistentStore, @"Failed to add persistent store with error: %@", error);

@@ -11,4 +11,5 @@
 
 @interface PlusAPIManager : CoreAPIManager
 -(void)RK_RequestApiGetListPlusOfferContext:(id)context_id;
+-(void)RK_RequestApiGetListPlusOfferRedeem:(id)context_id forUserID:(NSString*)userID;
 @end

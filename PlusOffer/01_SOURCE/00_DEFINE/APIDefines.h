@@ -18,9 +18,9 @@
 #pragma mark server config
 #define ROOT_SERVER ([NSString stringWithFormat:@"%@%@",BASE_URL_SERVER,MSERVICE_API])
 #define IS_TEST 0//Khi build len app store nho xoa key nay
-#define MSERVICE_API @"mservice12?"
+#define MSERVICE_API @"?"
 #ifdef DEBUG
-    #define BASE_URL_SERVER @"http://mapp-dev.123phim.vn/"
+    #define BASE_URL_SERVER @"http://plusoffer-api-dev.123phim.vn/"
     #define MAPP_KEY @"MAPP_1@3Phim1@3"
     #define ROOT_FBSERVICE @"http://mapp-dev.123phim.vn/fbservice/"
     #define SERVER_SET_DEVICETOKEN @"http://mapp-dev.123phim.vn/auth?method=Device.save"
@@ -34,6 +34,10 @@
 #pragma mark
 #pragma mark function city
 #define API_REQUEST_CITY_GET_LIST @"%@method=Location.getList"
+
+#pragma mark
+#pragma mark function Redeem
+#define API_REQUEST_GET_LIST_REDEEM @"%@method=User.getListRedeem&user_id=%@"
 
 #pragma mark
 #pragma mark function user

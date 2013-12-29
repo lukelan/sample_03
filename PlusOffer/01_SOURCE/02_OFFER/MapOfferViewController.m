@@ -351,7 +351,7 @@
                 UIButton *selectChildButton = [[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i];
                 if ([selectChildButton isSelected]) {
                     hasSelected = YES;
-//                    selected setImage:selectChildButton. forState:UI
+                    selected setImage:selectChildButton. forState:UI
 //                    break;
                 } else {
                     UIButton *unselected = [[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i];
