@@ -8,6 +8,7 @@
 
 #import "MapOfferViewController.h"
 #import "JPSThumbnailAnnotation.h"
+#import "DefineConstant.h"
 
 #define GM_TAG        1002
 
@@ -15,7 +16,10 @@
 
 @end
 
-@implementation MapOfferViewController
+@implementation MapOfferViewController {
+    float _radiusMeters;
+    CLLocationCoordinate2D _centralPoint;
+}
 
 @synthesize gmDemo = _gmDemo;
 
@@ -44,6 +48,17 @@
     self.mapOfferView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.mapOfferView.delegate = self;
     [self.mapOfferView addAnnotations:[self generateAnnotations]];
+    self.mapOfferView.showsUserLocation = YES;
+    
+    // calculate central point of kards
+    MKCoordinateRegion region = [self createZoomRegionFromCentralPointAndRadius :self.mapOfferView.annotations];
+    region = [self.mapOfferView regionThatFits:region];
+    
+    // Zoom and scale to central point
+    [self.mapOfferView setRegion:region animated:TRUE];
+    [self.mapOfferView regionThatFits:region];
+    [self.mapOfferView reloadInputViews];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,30 +81,30 @@
     // Empire State Building
     JPSThumbnail *empire = [[JPSThumbnail alloc] init];
     empire.image = [UIImage imageNamed:@"map_offer.png"];
-    empire.title = @"Empire State Building";
-    empire.subtitle = @"NYC Landmark";
-    empire.coordinate = CLLocationCoordinate2DMake(40.75, -73.99);
-    empire.disclosureBlock = ^{ NSLog(@"selected Empire"); };
+    empire.title = @"McDonald's";
+    empire.subtitle = @"McDonald's Q.7";
+    empire.coordinate = CLLocationCoordinate2DMake(10.729608, 106.721385);
+    empire.disclosureBlock = ^{ NSLog(@"selected McDonald's Q.7"); };
     
     [annotations addObject:[[JPSThumbnailAnnotation alloc] initWithThumbnail:empire]];
     
     // Apple HQ
     JPSThumbnail *apple = [[JPSThumbnail alloc] init];
     apple.image = [UIImage imageNamed:@"map_offer.png"];
-    apple.title = @"Apple HQ";
-    apple.subtitle = @"Apple Headquarters";
-    apple.coordinate = CLLocationCoordinate2DMake(37.33, -122.03);
-    apple.disclosureBlock = ^{ NSLog(@"selected Appple"); };
+    apple.title = @"Urban Station - CMT8";
+    apple.subtitle = @"Urban Station - CMT8";
+    apple.coordinate = CLLocationCoordinate2DMake(10.791523, 106.655974);
+    apple.disclosureBlock = ^{ NSLog(@"selected Urban Station - CMT8"); };
     
     [annotations addObject:[[JPSThumbnailAnnotation alloc] initWithThumbnail:apple]];
     
     // Parliament of Canada
     JPSThumbnail *ottawa = [[JPSThumbnail alloc] init];
     ottawa.image = [UIImage imageNamed:@"map_offer.png"];
-    ottawa.title = @"Parliament of Canada";
-    ottawa.subtitle = @"Oh Canada!";
-    ottawa.coordinate = CLLocationCoordinate2DMake(45.43, -75.70);
-    ottawa.disclosureBlock = ^{ NSLog(@"selected Ottawa"); };
+    ottawa.title = @"Urban Station - Gò Vấp";
+    ottawa.subtitle = @"Urban Station - Gò Vấp";
+    ottawa.coordinate = CLLocationCoordinate2DMake(10.836309,  106.675519);
+    ottawa.disclosureBlock = ^{ NSLog(@"selected Urban Station - Gò Vấp"); };
     
     [annotations addObject:[[JPSThumbnailAnnotation alloc] initWithThumbnail:ottawa]];
     
@@ -137,11 +152,17 @@
                                          highlighted:@"CloseSelected"
                                          disabled:@"Close"];
         
+//        JCGridMenuRow *search = [[JCGridMenuRow alloc]
+//                                 initWithImages:@"Search"
+//                                 selected:@"CloseSelected"
+//                                 highlighted:@"SearchSelected"
+//                                 disabled:@"Search"];
+        
         JCGridMenuRow *search = [[JCGridMenuRow alloc]
-                                 initWithImages:@"Search"
+                                 initWithImages:@"Close"
                                  selected:@"CloseSelected"
-                                 highlighted:@"SearchSelected"
-                                 disabled:@"Search"];
+                                 highlighted:@"CloseSelected"
+                                 disabled:@"Close"];
         [search.button setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.4f]];
         [search setHideOnExpand:YES];
         [search setIsExpanded:YES];
@@ -154,28 +175,28 @@
         // Favourites
         
         JCGridMenuColumn *favouriteView = [[JCGridMenuColumn alloc]
-                                           initWithButtonImageTextLeft:CGRectMake(0, 0, 76, 44)
+                                           initWithButtonImageTextLeft:CGRectMake(0, 0, 88, 44)
                                            image:@"FavouriteSmall"
                                            selected:@"FavouriteSmallSelected"
-                                           text:@"Event"];
+                                           text:@"Gần đây"];
         [favouriteView.button setBackgroundColor:[UIColor blackColor]];
-        [favouriteView setCloseOnSelect:NO];
+        [favouriteView setCloseOnSelect:YES];
         
         JCGridMenuColumn *favouriteObject = [[JCGridMenuColumn alloc]
-                                             initWithButtonImageTextLeft:CGRectMake(0, 0, 80, 44)
+                                             initWithButtonImageTextLeft:CGRectMake(0, 0, 88, 44)
                                              image:@"FavouriteSmall"
                                              selected:@"FavouriteSmallSelected"
-                                             text:@"Object"];
+                                             text:@"Ẩm thực"];
         [favouriteObject.button setBackgroundColor:[UIColor blackColor]];
-        [favouriteObject setCloseOnSelect:NO];
+        [favouriteObject setCloseOnSelect:YES];
         
         JCGridMenuColumn *favouriteMethod = [[JCGridMenuColumn alloc]
                                              initWithButtonImageTextLeft:CGRectMake(0, 0, 88, 44)
                                              image:@"FavouriteSmall"
                                              selected:@"FavouriteSmallSelected"
-                                             text:@"Method"];
+                                             text:@"Giải trí"];
         [favouriteMethod.button setBackgroundColor:[UIColor blackColor]];
-        [favouriteMethod setCloseOnSelect:NO];
+        [favouriteMethod setCloseOnSelect:YES];
         
         
         JCGridMenuRow *favourites = [[JCGridMenuRow alloc]
@@ -206,6 +227,7 @@
                                    selected:@"EmailSelected"
                                    highlighted:@"EmailSelected"
                                    disabled:@"Email"];
+        email.button.titleLabel.text = @"Gần đây";
         [email.button setBackgroundColor:[UIColor blackColor]];
         
         JCGridMenuColumn *pocket = [[JCGridMenuColumn alloc]
@@ -234,7 +256,8 @@
         
         // Rows...
         
-        NSArray *rows = [[NSArray alloc] initWithObjects:search, favourites, share, nil];
+//        NSArray *rows = [[NSArray alloc] initWithObjects:search, favourites, share, nil];
+        NSArray *rows = [[NSArray alloc] initWithObjects:search, favourites, nil];
         _gmDemo = [[JCGridMenuController alloc] initWithFrame:CGRectMake(0,20,320,(44*[rows count])+[rows count]) rows:rows tag:GM_TAG];
         [_gmDemo setDelegate:self];
         [self.view addSubview:_gmDemo.view];
@@ -325,14 +348,20 @@
             
             for (int i=0; i<[[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] count]; i++) {
                 
-                if ([[[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i] isSelected]) {
+                UIButton *selectChildButton = [[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i];
+                if ([selectChildButton isSelected]) {
                     hasSelected = YES;
-                    break;
+//                    selected setImage:selectChildButton. forState:UI
+//                    break;
+                } else {
+                    UIButton *unselected = [[[_gmDemo.gridCells objectAtIndex:indexRow] buttons] objectAtIndex:i];
+                    [unselected setSelected:NO];
                 }
                 
             }
             
             [[[_gmDemo.gridCells objectAtIndex:indexRow] button] setSelected:hasSelected];
+            [_gmDemo setIsRowModal:NO];
         } else if (indexRow==2) {
             [[[_gmDemo.gridCells objectAtIndex:indexRow] button] setSelected:NO];
             [_gmDemo setIsRowModal:NO];
@@ -361,6 +390,85 @@
         [text resignFirstResponder];
         [text removeFromSuperview];
     }
+    
+}
+
+
+- (MKCoordinateRegion)createZoomRegionFromCentralPointAndRadius:(NSArray*) categoryArray {
+    
+    [self calculateCentralPointAndRadiusFromLocationKards:categoryArray withCurrenLocation:YES];
+    
+    // have no deal zoom minimum scale to current location
+    if ([categoryArray count] == 0) {
+        _radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS/2;
+        _centralPoint.latitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
+        _centralPoint.longitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
+    }
+    
+    if (_radiusMeters > MAXIMUM_SCALEABLE_RADIUS_METERS) {
+        _radiusMeters = 1000;
+        _centralPoint.latitude = ((JPSThumbnail *)categoryArray[0]).coordinate.latitude;
+        _centralPoint.longitude = ((JPSThumbnail *)categoryArray[0]).coordinate.longitude;
+    }
+    return MKCoordinateRegionMakeWithDistance(_centralPoint, _radiusMeters*2, _radiusMeters*3);
+}
+
+#pragma mark - Map procedures
+
+- (void)calculateCentralPointAndRadiusFromLocationKards:(NSArray*) categoryArray withCurrenLocation:(BOOL)bCurrentLocation {
+    
+    // Find latitude and longtitude smallest and biggest
+    float smallLongtitute   = 0;
+    float smallLattitute    = 0;
+    float bigLongtitute     = 0;
+    float bigLattitute      = 0;
+    
+    // include current location in calculate
+    if (bCurrentLocation) {
+        smallLongtitute   = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
+        smallLattitute    = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
+        bigLongtitute     = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
+        bigLattitute      = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
+    }
+    
+    for (JPSThumbnail *venue in categoryArray) {
+        
+        float lat = venue.coordinate.latitude;
+        float lng = venue.coordinate.longitude;
+        if (lat < smallLattitute || smallLattitute == 0) {
+            smallLattitute = lat;
+        }
+        if (lat> bigLattitute || bigLattitute == 0) {
+            bigLattitute = lat;
+        }
+        if (lng < smallLongtitute || smallLongtitute == 0) {
+            smallLongtitute = lng;
+        }
+        if (lng> bigLongtitute || bigLongtitute == 0) {
+            bigLongtitute = lng;
+        }
+    }
+    
+    // Update central point
+    _centralPoint.latitude    = (bigLattitute + smallLattitute)/2;
+    _centralPoint.longitude   = (bigLongtitute + smallLongtitute)/2;
+    
+    NSLog(@"-caluclateCentralPointWithLocationKards-central point - latitude=%f---longtitude=%f",_centralPoint.latitude, _centralPoint.longitude);
+    
+    // Calculate radius
+    CLLocation *marklocation = [[CLLocation alloc] initWithLatitude:smallLattitute longitude:smallLongtitute];
+    CLLocation *centralLocation = [[CLLocation alloc] initWithLatitude:_centralPoint.latitude longitude:_centralPoint.longitude];
+    
+    _radiusMeters = ([marklocation distanceFromLocation:centralLocation]);
+    
+    if (_radiusMeters == 0) {
+        // Default for radius is 1km
+        //Too far is when you show the entire USA.  Too close is when you show only a 300 ft/100m radius.
+        //I think we can settle on something in the middle.  How about something like a 1Km radius
+        _radiusMeters = 1000;
+    }
+    
+    NSLog(@"Distance in meters: %f", _radiusMeters);
     
 }
 

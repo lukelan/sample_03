@@ -14,6 +14,9 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
+@synthesize userPosition,locationManager;
+
+UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 
 #pragma mark -
 #pragma mark UIApplicationDelegate method
@@ -61,6 +64,20 @@
     }
     
 #pragma GCC diagnostic warning "-Wdeprecated-declarations"
+    
+    // init location manager
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = 100.0f;
+    userPosition = [[Location alloc] init];
+    
+    // update location
+//    if ([APIManager getBooleanInAppForKey:KEY_STORE_IS_SHOW_MY_LOCATION]) {
+        [self updateUserLocationWithType:UpdateLocationTypeAuto];
+//    }
+
+    
     return YES;
 }
 							
@@ -325,4 +342,102 @@
          return nil;
      }];
 }
+
+
+#pragma mark - Location
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    double distance = CGFLOAT_MAX;
+    if (oldLocation)
+    {
+        distance = [newLocation distanceFromLocation:oldLocation];
+    }
+    // accurary is 100 metters
+    if (distance > 100.0) //metters
+    {
+        //        LOG_123PHIM(@"distance = %f", distance);
+        // update new location
+        userPosition.longtitude = newLocation.coordinate.longitude;
+        userPosition.latitude = newLocation.coordinate.latitude;
+        [self getUserPositionFromLocation:newLocation];//it also reload Location cell in Accout view
+    }
+    
+    [locationManager stopUpdatingLocation];
+}
+
+- (void)getUserPositionFromLocation:(CLLocation *)newLocation
+{
+    userPosition.longtitude = newLocation.coordinate.longitude;
+    userPosition.latitude = newLocation.coordinate.latitude;
+    
+//    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=true", newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//        if (!error)
+//        {
+//            SBJsonParser* parsor = [[SBJsonParser alloc] init];
+//            NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSDictionary* rawData = [parsor objectWithString:string];
+//            
+//            if ([[rawData objectForKey:@"status"] isEqual:@"OK"]) {
+//                
+//                NSArray* result = [rawData objectForKey:@"results"];
+//                
+//                NSDictionary* address = [result objectAtIndex:0];
+//                
+//                NSString* formatted_address = [address objectForKey:@"formatted_address"];
+//                
+//                userPosition.address = formatted_address;
+//                
+//                if (updateLocationFrom == UpdateLocationTypeAuto) {
+//                    //get user location then save on server
+//                    [self storeUserLocationHistory];
+//                }
+//                CinemaViewController* cinema = [self.navCinema.viewControllers objectAtIndex:0];
+//                [cinema newLocation:newLocation address:userPosition.address];
+//                
+//                AccountViewController* account = [self.navUser.viewControllers objectAtIndex:0];
+//                [account newLocation:newLocation address:userPosition.address];
+//            }
+//        }
+//    }];
+}
+
+- (void)updateUserLocationWithType:(UpdateLocationType)type
+{
+    //    LOG_123PHIM(@"updateUserLocationWithType");
+    [locationManager startUpdatingLocation];
+    updateLocationFrom = type;
+}
+
+- (void)storeUserLocationHistory
+{
+    // Trongvm - 27/12/2013 - Skip check user login due to user_ID is optional
+    //    if (!self.isUserLoggedIn) {
+    //        return;
+    //    }
+    
+//    NSString* addr;
+//    NSString* lat;
+//    NSString* log;
+//    NSString* time;
+//    
+//    addr =  userPosition.address;
+//    lat =  [NSString stringWithFormat:@"%f", userPosition.positionCoodinate2D.latitude];
+//    log =  [NSString stringWithFormat:@"%f", userPosition.positionCoodinate2D.longitude];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    time = [dateFormatter stringFromDate:[NSDate date]];
+//    if ([lat doubleValue] != lastSentLat || [log doubleValue] != lastSentLog) { //if new location
+//        NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
+//        if ((now - lastTimeSentLocationToServer) > INTERVAL_BETWEEN_TWO_SEND_USER_LOCATION_TO_SERVER) {
+//            [[APIManager sharedAPIManager] user: (self.isUserLoggedIn?self.userProfile.user_id:[NSString stringWithFormat:@"%d", NO_USER_ID]) beInAddress:addr lat:lat log:log atTime:time context:[MainViewController sharedMainViewController]];
+//            lastSentLat = [lat doubleValue];
+//            lastSentLog = [log doubleValue];
+//            lastTimeSentLocationToServer = now;
+//        }
+//    }
+}
+
 @end

@@ -64,9 +64,18 @@ typedef enum
     TAB_ORTHER
 }ENUM_TAB_INDEX;
 
+typedef enum{
+    UpdateLocationTypeForce = 0,
+    UpdateLocationTypeAuto
+} UpdateLocationType;
+
+
 #define DEGREES_TO_RADIANS(x) (M_PI * x / 180.0) //rotate
 #define kSqliteFileName @"CoreDataPlus"
 #define BUNDLE_PATH ([[NSBundle mainBundle] bundlePath])
 #define CACHE_IMAGE_PATH ([NSString stringWithFormat:@"%@/images/",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]])
 #endif
+
+
+#define MAXIMUM_SCALEABLE_RADIUS_METERS                                     5000000
 
