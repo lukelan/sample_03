@@ -78,7 +78,9 @@
 #pragma mark - Actions
 -(void)redeemBtnTouchUpInside
 {
-    
+    if ([self.delegate respondsToSelector:@selector(redeemTableCell:redeemOffer:)]) {
+        [self.delegate redeemTableCell:self redeemOffer:self.object];
+    }
 }
 
 #pragma mark - Public Methods

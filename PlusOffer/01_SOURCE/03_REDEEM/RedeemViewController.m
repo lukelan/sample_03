@@ -8,8 +8,17 @@
 
 #import "RedeemViewController.h"
 #import "RedeemTableViewCell.h"
+#import "ZBarReaderViewController.h"
 
-@interface RedeemViewController ()
+@interface RedeemViewController () <ZBarReaderDelegate, RedeemTableViewCellDelegate>
+{
+    ZBarReaderViewController *zBarReader;
+    CGPoint topCenter;
+    CGPoint botCenter;
+    BOOL isScaning;
+    BOOL isScanScreen;
+    NSTimer *timer;
+}
 @property (nonatomic, retain) NSMutableArray *dataSource;
 @end
 
@@ -33,6 +42,9 @@
     self.trackedViewName = viewName;
     
     [self initDataForTesting];
+    
+    // barcode scanner
+    zBarReader = [[ZBarReaderViewController alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,6 +102,27 @@
     [self.tableView reloadData];
 }
 
+- (void)loadBarCodeReader
+{
+    zBarReader.showsZBarControls = NO;
+    zBarReader.readerDelegate = self;
+
+    zBarReader.supportedOrientationsMask = ZBarOrientationMask(UIInterfaceOrientationPortrait);
+//    zBarReader.cameraOverlayView = scanOverlay;
+    ZBarImageScanner *scanner = zBarReader.scanner;
+    // TODO: (optional) additional reader configuration here
+    //            readerController.scanCrop = _scanZoneImage.frame;
+    // EXAMPLE: disable rarely used I2/5 to improve performance
+    [scanner setSymbology: ZBAR_I25
+                   config: ZBAR_CFG_ENABLE
+                       to: 0];
+    
+    // present and release the controller
+    [self.navigationController presentViewController:zBarReader animated:NO completion:nil];
+    isScanScreen = YES;
+    
+}
+
 #pragma mark - Interfaces
 -(void)initInterface
 {
@@ -113,6 +146,7 @@
     RedeemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
         cell = [[RedeemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell.delegate = self;
     }
     
     [cell setObject:[self.dataSource objectAtIndex:indexPath.row]];
@@ -120,10 +154,9 @@
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - RedeemTableViewCellDelegate
+-(void)redeemTableCell:(RedeemTableViewCell *)cell redeemOffer:(id)object
 {
-    // deselecte row
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self loadBarCodeReader];
 }
 @end
