@@ -13,11 +13,10 @@
 @interface RedeemViewController () <ZBarReaderDelegate, RedeemTableViewCellDelegate>
 {
     ZBarReaderViewController *zBarReader;
-    CGPoint topCenter;
-    CGPoint botCenter;
     BOOL isScaning;
     BOOL isScanScreen;
     NSTimer *timer;
+    UIView *_overlayView;
 }
 @property (nonatomic, retain) NSMutableArray *dataSource;
 @end
@@ -45,6 +44,11 @@
     
     // barcode scanner
     zBarReader = [[ZBarReaderViewController alloc] init];
+//    _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+//    _overlayView.backgroundColor = [UIColor clearColor];
+    _overlayView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
+//    [_overlayView addSubview:overlayImage];
+    zBarReader.cameraOverlayView = _overlayView;
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,6 +124,52 @@
     // present and release the controller
     [self.navigationController presentViewController:zBarReader animated:NO completion:nil];
     isScanScreen = YES;
+    
+    // start timer to check scan time out
+    timer = [NSTimer scheduledTimerWithTimeInterval:60
+                                             target:self
+                                           selector: @selector(scanTimeOut)
+                                           userInfo:nil
+                                            repeats:NO];
+    
+
+    isScaning = YES;
+
+    
+}
+
+-(void)closeScanner
+{
+    isScaning =  NO;
+    [zBarReader dismissViewControllerAnimated:NO completion:nil];
+
+    [timer invalidate];
+    timer = nil;
+}
+
+- (void)scanTimeOut
+{
+    if (isScaning) {
+        
+        [self closeScanner];
+    }
+}
+
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    // ADD: get the decode results
+    id<NSFastEnumeration> results =
+    [info objectForKey: ZBarReaderControllerResults];
+    ZBarSymbol *symbol = nil;
+    for(symbol in results)
+        // EXAMPLE: just grab the first barcode
+        break;
+    
+    [self closeScanner];
+    NSLog(@"data = %@", symbol.data);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Code" message:symbol.data delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
     
 }
 
