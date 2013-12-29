@@ -25,6 +25,10 @@
 		18814D1D18701ACE00765498 /* frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18814D1B18701ACE00765498 /* frame@2x.png */; };
 		18814D21187021C400765498 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 18814D1A18701ACE00765498 /* frame.png */; };
 		18814D22187021C400765498 /* frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18814D1B18701ACE00765498 /* frame@2x.png */; };
+		18814D2D18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */; };
+		18814D2E18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */; };
+		18814D3118702DCD00765498 /* RedeemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18814D3018702DCD00765498 /* RedeemModel.m */; };
+		18814D3218702DCD00765498 /* RedeemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18814D3018702DCD00765498 /* RedeemModel.m */; };
 		18924CBD186F322C005D0432 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18924CBC186F322C005D0432 /* libzbar.a */; };
 		18DDE8081870052400399747 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DDE8071870052400399747 /* libiconv.dylib */; };
 		18FBCED618673C1800C9E399 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCED518673C1800C9E399 /* Foundation.framework */; };
@@ -380,6 +384,9 @@
 		18814D18187016A500765498 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		18814D1A18701ACE00765498 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		18814D1B18701ACE00765498 /* frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame@2x.png"; sourceTree = "<group>"; };
+		18814D2C18702CF100765498 /* PlusOfferModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlusOfferModel.xcdatamodel; sourceTree = "<group>"; };
+		18814D2F18702DCD00765498 /* RedeemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemModel.h; sourceTree = "<group>"; };
+		18814D3018702DCD00765498 /* RedeemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedeemModel.m; sourceTree = "<group>"; };
 		18924CA8186F322C005D0432 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		18924CA9186F322C005D0432 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		18924CAA186F322C005D0432 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -712,6 +719,16 @@
 			path = OBJECTS;
 			sourceTree = "<group>";
 		};
+		18814D2818702CB300765498 /* 08_DATAMODEL */ = {
+			isa = PBXGroup;
+			children = (
+				18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */,
+				18814D2F18702DCD00765498 /* RedeemModel.h */,
+				18814D3018702DCD00765498 /* RedeemModel.m */,
+			);
+			path = 08_DATAMODEL;
+			sourceTree = "<group>";
+		};
 		18924CA4186F322C005D0432 /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +909,7 @@
 				4F5B4E9B1869671400AAE584 /* 05_APIManager */,
 				4F6848E1186D8CB90031893D /* 06_CLASSES */,
 				4F6848E4186D8CB90031893D /* 07_LOCATION */,
+				18814D2818702CB300765498 /* 08_DATAMODEL */,
 			);
 			path = 01_SOURCE;
 			sourceTree = "<group>";
@@ -1944,7 +1962,9 @@
 				4FBBEB6318682E210040EA12 /* pngwtran.c in Sources */,
 				AA5A71F4186ABEFA00BC8D91 /* OfferTableItem.m in Sources */,
 				4F5B4E98186966AE00AAE584 /* XMLReader.m in Sources */,
+				18814D3118702DCD00765498 /* RedeemModel.m in Sources */,
 				4FBBEB1218681F160040EA12 /* UIDevice+IdentifierAddition.m in Sources */,
+				18814D2D18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */,
 				AA5A7286186C29AB00BC8D91 /* UIButton+JCUI.m in Sources */,
 				4FBBEB5F18682E210040EA12 /* pngset.c in Sources */,
 				AA5A7289186C29AB00BC8D91 /* JCGridMenuColumn.m in Sources */,
@@ -2023,7 +2043,9 @@
 				AAB01B6818701805006E2552 /* pngwtran.c in Sources */,
 				AAB01B6918701805006E2552 /* OfferTableItem.m in Sources */,
 				AAB01B6A18701805006E2552 /* XMLReader.m in Sources */,
+				18814D3218702DCD00765498 /* RedeemModel.m in Sources */,
 				AAB01B6B18701805006E2552 /* UIDevice+IdentifierAddition.m in Sources */,
+				18814D2E18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */,
 				AAB01B6C18701805006E2552 /* UIButton+JCUI.m in Sources */,
 				AAB01B6D18701805006E2552 /* pngset.c in Sources */,
 				AAB01B6E18701805006E2552 /* JCGridMenuColumn.m in Sources */,
@@ -2380,6 +2402,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18814D2C18702CF100765498 /* PlusOfferModel.xcdatamodel */,
+			);
+			currentVersion = 18814D2C18702CF100765498 /* PlusOfferModel.xcdatamodel */;
+			path = PlusOfferModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 18FBCECA18673C1800C9E399 /* Project object */;
 }
