@@ -60,6 +60,10 @@
     [_overlayView addSubview:overlayImage];
     // cancel button
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 70, 25)];
+<<<<<<< HEAD
+//    [cancelBtn sett]
+=======
+>>>>>>> fd17101f16265b9ff937bfdacc2b5aef6acc9548
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
     [_overlayView addSubview:cancelBtn];
