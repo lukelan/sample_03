@@ -28,4 +28,7 @@
 @property (nonatomic, retain) NSNumber * is_redeem;
 @property (nonatomic, retain) NSNumber * is_redeemable;
 
+// additional variables
+@property (nonatomic, assign) NSInteger  distance; // meter
+@property (nonatomic, retain) NSString * distanceStr;
 @end

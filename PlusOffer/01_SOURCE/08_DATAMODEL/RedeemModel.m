@@ -7,7 +7,7 @@
 //
 
 #import "RedeemModel.h"
-
+#import "AppDelegate.h"
 
 @implementation RedeemModel
 
@@ -26,5 +26,12 @@
 @dynamic max_punch;
 @dynamic is_redeem;
 @dynamic is_redeemable;
+@synthesize distance;
+@synthesize distanceStr;
 
+-(NSInteger)distance
+{
+//    [((AppDelegate*)[[UIApplication sharedApplication] delegate])
+    return 0;
+}
 @end

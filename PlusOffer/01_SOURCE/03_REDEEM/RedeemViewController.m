@@ -65,7 +65,8 @@
     [_overlayView addSubview:cancelBtn];
     zBarReader.cameraOverlayView = _overlayView;
     
-    if (self.fetchedResultsController) {}
+    // init fetched result controller
+    [self fetchedResultsController];
     // load list redeem item
     [self loadRedeemOffers];
 }
@@ -105,10 +106,10 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self executeLoadingLayout];
+    [self reloadInterface];
 }
 
-- (void)executeLoadingLayout
+- (void)reloadInterface
 {
     NSLog(@"data = %@", self.fetchedResultsController.fetchedObjects);
 }
@@ -268,18 +269,4 @@
     [self loadBarCodeReader];
 }
 
-#pragma mark RKManageDelegate
-#pragma mark -
--(void)processResultResponseArray:(NSArray *)array requestId:(int)request_id
-{
-    switch (request_id) {
-        case ID_REQUEST_REDEEM:
-        {
-            NSLog(@"result = %@", array);
-            break;
-        }
-        default:
-            break;
-    }
-}
 @end
