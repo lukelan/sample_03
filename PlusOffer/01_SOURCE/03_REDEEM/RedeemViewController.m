@@ -44,10 +44,16 @@
     
     // barcode scanner
     zBarReader = [[ZBarReaderViewController alloc] init];
-//    _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-//    _overlayView.backgroundColor = [UIColor clearColor];
-    _overlayView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
-//    [_overlayView addSubview:overlayImage];
+    _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+    _overlayView.backgroundColor = [UIColor clearColor];
+    UIImageView *overlayImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
+    [_overlayView addSubview:overlayImage];
+    // cancel button
+    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 70, 25)];
+    [cancelBtn sett]
+    [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
+    [_overlayView addSubview:cancelBtn];
     zBarReader.cameraOverlayView = _overlayView;
 }
 
@@ -126,7 +132,7 @@
     isScanScreen = YES;
     
     // start timer to check scan time out
-    timer = [NSTimer scheduledTimerWithTimeInterval:60
+    timer = [NSTimer scheduledTimerWithTimeInterval:10
                                              target:self
                                            selector: @selector(scanTimeOut)
                                            userInfo:nil
@@ -150,8 +156,10 @@
 - (void)scanTimeOut
 {
     if (isScaning) {
-        
         [self closeScanner];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Time out" message:@"Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
