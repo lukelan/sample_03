@@ -76,7 +76,7 @@
     [self fetchedResultsController];
     
     // load default data in coredata
-    [self reloadInterface];
+//    [self reloadInterface];
     
     //request load from server
     [self loadOfferDetail];
@@ -119,7 +119,7 @@
 
 - (void)reloadInterface
 {
-    [NSFetchedResultsController deleteCacheWithName:@"offerDetail"];
+//    [NSFetchedResultsController deleteCacheWithName:@"offerDetail"];
     NSLog(@"data = %@", self.fetchedResultsController.fetchedObjects);
     NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
     for (OfferDetailModel *itemModel in temp)

@@ -18,6 +18,7 @@
 
 @interface PlusOfferMapView : UIView <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *btnUserLocation;
 
 @property (nonatomic, weak) id<PlusOfferMapViewDelegate> delegate;
 @property (nonatomic, weak) NSMutableArray *dataSource;
