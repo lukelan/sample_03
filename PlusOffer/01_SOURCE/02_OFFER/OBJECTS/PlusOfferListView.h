@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OfferTableCell.h"
-
+#import "OfferDetailViewController.h"
 @protocol PlusOfferListViewDelegate <NSObject>
 
 
@@ -19,6 +19,6 @@
 @property (nonatomic, weak) id<PlusOfferListViewDelegate> delegate;
 @property (nonatomic, weak) NSMutableArray *dataSource;
 
-@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end

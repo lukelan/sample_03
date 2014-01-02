@@ -7,7 +7,35 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlusOfferMapView.h"
 
-@interface OfferDetailViewController : CustomGAITrackedViewController
+typedef enum
+{
+    enumInfoPlusOfferCell = 0,
+    enumDiscountCell,
+    enumSlideCheckinCell,
+    enumPuchCollectCell,
+    enumOtherCell
+}enumCellOfferDetail;
+
+typedef enum
+{
+    enumOfferDetailInterfaceType_List = 0,
+    enumOfferDetailInterfaceType_Map,
+    enumOfferDetailInterfaceType_Num
+}enumOfferDetailInterfaceType;
+
+@interface OfferDetailViewController : CustomGAITrackedViewController <PlusOfferMapViewDelegate>
+{
+    ZBarReaderViewController *zBarReader;
+    BOOL isScaning;
+    BOOL isScanScreen;
+    NSTimer *timer;
+    UIView *_overlayView;
+    
+    PlusOfferMapView *_mapView;
+}
+
+@property (strong, nonatomic) IBOutlet UITableView *tableViewDetail;
 
 @end

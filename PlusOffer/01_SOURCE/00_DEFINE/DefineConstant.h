@@ -23,12 +23,14 @@
 #define LOG_APP(s...) ;
 #endif
 #define PINGREMARKETING {[GoogleConversionPing pingRemarketingWithConversionId:@"983463027" label:@"jLppCIXKgAgQ8-j51AM" screenName:viewName customParameters:nil];}
-#pragma mark -
+
+#pragma mark - FONT
 
 #define FONT_NAME @"Helvetica"
 #define FONT_BOLD_NAME @"Helvetica-Bold"
+#define FONT_UVFTYPOSLABSERIF @"UVF TypoSlabserif"
+#define FONT_AVENIR_NEXT @"Avenir Next"
 
-#pragma mark -
 #pragma mark define key store in NSUserDefault
 //Define key store in app setting
 #define KEY_STORE_MY_USER_ID @"USER_ID"
@@ -42,6 +44,7 @@
 #define TITLE_BAR_HEIGHT 20 //[UIApplication sharedApplication].statusBarFrame.size.height)
 #define NAVIGATION_BAR_HEIGHT 44
 #define TAB_BAR_HEIGHT 44
+#define MARGIN_CELLX_GROUP 10
 #pragma mark -
 
 //Define for keyboard rect
@@ -51,6 +54,7 @@
 #pragma mark - View name track ga
 #define ACCOUNT_VIEW_NAME @"UIAccount"
 #define REDEEM_VIEW_NAME @"UIRedeem"
+#define REDEEM_DETAIL_VIEW_NAME @"UIRedeemDetailViewController"
 #define PLUS_VIEW_CONTROLLER @"UIPlusViewController"
 #define OFFER_DETAIL_VIEW_CONTROLLER @"UIOfferDetailViewController"
 #define CHOOSE_CITY_VIEW_NAME @"UIChooseLocation"
@@ -63,6 +67,7 @@ typedef enum
     TAB_ACCOUNT,
     TAB_ORTHER
 }ENUM_TAB_INDEX;
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 typedef enum{
     UpdateLocationTypeForce = 0,
@@ -76,6 +81,13 @@ typedef enum{
 #define CACHE_IMAGE_PATH ([NSString stringWithFormat:@"%@/images/",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]])
 #endif
 
+#define IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
 
 #define MAXIMUM_SCALEABLE_RADIUS_METERS                                     5000000
+#define MINIMUM_DISTANCE_ALLOW_USER_REDEEM                                  100.0f // in 100 meters
 
+//Xanh lá: #2ed072
+//Xám: #9f9f9f
+//Background: #e4eef0
+//Text đậm: #333333
+//Text nhạt: #666666

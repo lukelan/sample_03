@@ -3,13 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict>
-		<key>PlusOffer.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-	</dict>
+	<dict/>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>18FBCED118673C1800C9E399</key>
@@ -18,6 +12,11 @@
 			<true/>
 		</dict>
 		<key>18FBCEF218673C1900C9E399</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAB01B4B18701805006E2552</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -2,14 +2,13 @@
 //  RedeemModel.m
 //  PlusOffer
 //
-//  Created by Tai Truong on 12/29/13.
+//  Created by Trongvm on 12/29/13.
 //  Copyright (c) 2013 Trongvm. All rights reserved.
 //
 
 #import "RedeemModel.h"
 #import "AppDelegate.h"
 
-#define MINIMUM_DISTANCE_ALLOW_USER_REDEEM 100.0f // in 100 meters
 @implementation RedeemModel
 
 @dynamic redeem_id;
@@ -44,7 +43,7 @@
                                    longitude:userLocation.longtitude];
     
     _distance = [pinLocation distanceFromLocation:currentLocation];
-
+    
     return _distance;
 }
 

@@ -425,7 +425,7 @@ static inline NSManagedObjectID *RKObjectIDFromObjectIfManaged(id object)
         RKResponseDescriptor *responseDescriptor = (RKResponseDescriptor *) [self.responseDescriptors objectAtIndex:0];
         id temp = [sourceObject objectForKey:responseDescriptor.keyPath];
         if ([responseDescriptor.mapping isKindOfClass:[RKObjectMapping class]]) {
-            if (![temp isKindOfClass:[NSArray class]]) {
+            if (![temp isKindOfClass:[NSArray class]] && ![temp isKindOfClass:[NSDictionary class]]) {
                 if (error)
                 {
                     NSString *errorMessage = @"Could not find key to map to entity object";

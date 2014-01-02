@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame)) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -46,17 +46,33 @@
     if (!cell) {
         cell = [[OfferTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setObject:[self.dataSource objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 5;
+}
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // deselecte row
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    OfferDetailViewController *offerDetailViewController = [[appDelegate getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferDetailViewController"];
+    [offerDetailViewController setHidesBottomBarWhenPushed:NO];
+    NSLog(@"%@",[self.dataSource objectAtIndex:indexPath.row]);
+    [[appDelegate getCurrentViewController].navigationController pushViewController:offerDetailViewController animated:YES];
+    
+    
 }
 
 @end

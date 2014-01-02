@@ -85,7 +85,6 @@
         [self.delegate redeemTableCell:self redeemOffer:self.object];
     }
 }
-
 #pragma mark - Public Methods
 
 +(CGFloat)tableView:(UITableView *)tableView rowHeightForObject:(id)object

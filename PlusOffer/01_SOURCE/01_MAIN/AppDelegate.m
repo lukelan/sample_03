@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "GAI.h"
 #import "RKXMLReaderSerialization.h"
-
+#import "PlusOfferViewController.h"
 @implementation AppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -40,7 +40,42 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
         return (NSString *)url;
     }];
     
-#ifdef IS_GA_ENABLE
+    
+       //[_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
+//    PlusOfferViewController *plusOfferViewController =  [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"PlusOfferViewController"];
+//    [plusOfferViewController.tabBarController.tabBarItem setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
+    UITabBarController *tabBarController
+    = (UITabBarController
+       *)self.window.rootViewController;
+    UIImage *selectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer-active.png"];
+    UIImage *unselectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer.png"];
+    UIImage *selectedImage1 = [UIImage imageNamed:@"tab-bar-redeem-active.png"];
+    UIImage *unselectedImage1 = [UIImage imageNamed:@"tab-bar-redeem.png"];    UIImage *selectedImage2 = [UIImage imageNamed:@"tab-bar-account-active.png"];
+    UIImage *unselectedImage2 = [UIImage imageNamed:@"tab-bar-account.png"];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    view.backgroundColor = [UIColor blueColor];
+    UITabBar *tabBar = tabBarController.tabBar;
+   // [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar.png"]];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        [tabBar setTintColor:UIColorFromRGB(0x2ed072)];
+    }
+    UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
+    
+    [item0 setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:11]} forState:UIControlStateNormal];
+    [item2 setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:11]} forState:UIControlStateNormal];
+   // [item1 setImageInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
+    [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
+    [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar.png"]];
+    [tabBarController.tabBar setSelectionIndicatorImage:nil];
+    [tabBarController.tabBar setShadowImage:[[UIImage alloc] init]];
+    
+    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:13]} forState:UIControlStateNormal];
+ #ifdef IS_GA_ENABLE
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 20;
         [GAI sharedInstance].debug = !YES;
@@ -71,7 +106,8 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 100.0f;
     userPosition = [[Location alloc] init];
-    
+    userPosition.latitude = 0;
+    userPosition.longtitude = 0;
     // update location
 //    if ([APIManager getBooleanInAppForKey:KEY_STORE_IS_SHOW_MY_LOCATION]) {
         [self updateUserLocationWithType:UpdateLocationTypeAuto];
@@ -341,6 +377,13 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
          
          return nil;
      }];
+}
+-(UIViewController *) getCurrentViewController
+{
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UINavigationController *currentNavi = (UINavigationController *)[tabBarController selectedViewController] ;
+    UIViewController *currentViewController = [currentNavi topViewController];
+    return currentViewController;
 }
 
 

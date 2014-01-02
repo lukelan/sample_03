@@ -36,6 +36,12 @@
 #define API_REQUEST_CITY_GET_LIST @"%@method=Location.getList"
 
 #pragma mark
+#pragma mark function Offer
+#define API_REQUEST_GET_LIST_OFFER @"%@method=Offer.getList"
+#define API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY @"%@method=Offer.getList&category_id=%@"
+#define API_REQUEST_GET_LIST_OFFER_DETAIL @"%@method=Offer.getDetail&offer_id=%@"
+
+#pragma mark
 #pragma mark function Redeem
 #define API_REQUEST_GET_LIST_REDEEM @"%@method=User.getListRedeem&user_id=%@"
 

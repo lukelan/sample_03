@@ -17,14 +17,25 @@ typedef enum
     enumOfferInterfaceType_Num
 }enumOfferInterfaceType;
 
+typedef enum
+{
+    ENUM_PLUS_OFFER_CATEGORY_GETLIST = 0,
+    ENUM_PLUS_OFFER_CATEGORY_CUISINE,
+    ENUM_PLUS_OFFER_CATEGORY_ENTERTAINMENT,
+}ENUM_PLUS_OFFER_CATEGORY_TYPE;
+
 @interface PlusOfferViewController : CustomGAITrackedViewController <PlusOfferListViewDelegate, PlusOfferMapViewDelegate>
 {
     // List view
     PlusOfferListView *_listView;
     // Mapview
     PlusOfferMapView *_mapView;
+    // Last state
+    enumOfferInterfaceType _vcType;
 }
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *viewTypeBtn;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *viewTypeBtn;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentPlusOffers;
+- (IBAction)btSegmented:(id)sender;
 
 - (IBAction)listBtnTouchUpInside:(UIBarButtonItem *)sender;
 @end

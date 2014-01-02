@@ -8,6 +8,8 @@
 
 #import "PlusAPIManager.h"
 #import "RedeemModel.h"
+#import "OfferModel.h"
+#import "OfferDetailModel.h"
 
 @implementation PlusAPIManager
 #pragma mark API request with restkit
@@ -54,4 +56,83 @@
     
     [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
+-(void)RK_RequestApiGetListPlusOffer:(id)context_id;
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER,ROOT_SERVER];
+    
+    
+    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    ticketMapping.identificationAttributes = @[@"offer_id"];
+    [ticketMapping addAttributeMappingsFromDictionary:@{
+                                                        @"offer_id" : @"offer_id",
+                                                        @"brand_id" : @"brand_id",
+                                                        @"branch_id" : @"branch_id",
+                                                        @"offer_name" : @"offer_name",
+                                                        @"latitude" : @"latitude",
+                                                        @"longitude" : @"longitude",
+                                                        @"count_punch" : @"count_punch",
+                                                        @"category_id" : @"category_id",
+                                                        @"discount_type" : @"discount_type",
+                                                        @"discount_value" : @"discount_value",
+                                                        @"date_add" : @"date_add"
+                                                        }];
+    
+    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+}
+-(void)RK_RequestApiGetListPlusOfferWithCategory:(id)context_id forCategory:(NSString*)categoryID;
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY,ROOT_SERVER,categoryID];
+    
+    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    ticketMapping.identificationAttributes = @[@"offer_id"];
+    [ticketMapping addAttributeMappingsFromDictionary:@{
+                                                        @"offer_id" : @"offer_id",
+                                                        @"brand_id" : @"brand_id",
+                                                        @"branch_id" : @"branch_id",
+                                                        @"offer_name" : @"offer_name",
+                                                        @"latitude" : @"latitude",
+                                                        @"longitude" : @"longitude",
+                                                        @"count_punch" : @"count_punch",
+                                                        @"category_id" : @"category_id",
+                                                        @"discount_type" : @"discount_type",
+                                                        @"discount_value" : @"discount_value",
+                                                        @"date_add" : @"date_add"
+                                                        }];
+    
+    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+}
+
+-(void)RK_RequestApiGetListPlusOfferDetail:(id)context_id forOfferID:(NSString*)offerID;
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_DETAIL,ROOT_SERVER,offerID];
+    
+    
+    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferDetailModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    ticketMapping.identificationAttributes = @[@"offer_id"];
+    [ticketMapping addAttributeMappingsFromDictionary:@{
+                                                        @"offer_id" : @"offer_id",
+                                                        @"offer_name" :@"offer_name",
+                                                        @"brand_id" : @"brand_id",
+                                                        @"branch_id" : @"branch_id",
+                                                        @"category_id" : @"category_id",
+                                                        @"offer_description" : @"offer_description",
+                                                        @"offer_content" : @"offer_content",
+                                                        @"discount_type" : @"discount_type",
+                                                        @"discount_type_name" : @"discount_type_name",
+                                                        @"discount_value" : @"discount_value",
+                                                        @"date_add" : @"date_add",
+                                                        @"branch_name" : @"branch_name",
+                                                        @"branch_address" : @"branch_address",
+                                                        @"branch_tel" : @"branch_tel",
+                                                        @"hour_open" : @"hour_open",
+                                                        @"hour_close" : @"hour_close",
+                                                        @"latitude" : @"latitude",
+                                                        @"longitude" : @"longitude",
+                                                        @"max_punch": @"max_punch",
+                                                        @"count_punch": @"count_punch"
+                                                        }];
+    
+    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+}
+
 @end

@@ -26,6 +26,8 @@
     #import "AppDelegate.h"
     #import "PlusAPIManager.h"
     #import "Location.h"
+    #import "ZBarSDK.h"
+    #import "UIColor+CreateMethods.h"
 
 #pragma mark import class category ultility
 #import "UIDevice+IdentifierAddition.h"

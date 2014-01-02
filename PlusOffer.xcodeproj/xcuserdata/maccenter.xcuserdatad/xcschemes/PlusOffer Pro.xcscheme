@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18FBCED118673C1800C9E399"
-               BuildableName = "PlusOffer.app"
-               BlueprintName = "PlusOffer"
+               BuildableName = "PlusOffer Dev.app"
+               BlueprintName = "PlusOffer Dev"
                ReferencedContainer = "container:PlusOffer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18FBCED118673C1800C9E399"
+            BlueprintIdentifier = "AAB01B4B18701805006E2552"
             BuildableName = "PlusOffer.app"
-            BlueprintName = "PlusOffer"
+            BlueprintName = "PlusOffer Pro"
             ReferencedContainer = "container:PlusOffer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,9 +61,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18FBCED118673C1800C9E399"
+            BlueprintIdentifier = "AAB01B4B18701805006E2552"
             BuildableName = "PlusOffer.app"
-            BlueprintName = "PlusOffer"
+            BlueprintName = "PlusOffer Pro"
             ReferencedContainer = "container:PlusOffer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -79,9 +79,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18FBCED118673C1800C9E399"
+            BlueprintIdentifier = "AAB01B4B18701805006E2552"
             BuildableName = "PlusOffer.app"
-            BlueprintName = "PlusOffer"
+            BlueprintName = "PlusOffer Pro"
             ReferencedContainer = "container:PlusOffer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -91,6 +91,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "PlusOffer"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

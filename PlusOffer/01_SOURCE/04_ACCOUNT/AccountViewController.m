@@ -31,6 +31,11 @@
     self.trackedViewName = viewName;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    PINGREMARKETING
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,12 @@
 #import "DefineConstant.h"
 #import "Location.h"
 
+@protocol OpenBarcodeScannerDelegate <NSObject>
+
+- (void)processOpenBarcodeScanner;
+
+@end
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
 #pragma mark property using for core data
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -26,4 +32,5 @@
 @property (strong, nonatomic) UIWindow *window;
 
 +(NSString *)getVersionOfApplication;
+-(UIViewController *) getCurrentViewController;
 @end

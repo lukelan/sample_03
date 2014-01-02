@@ -22,6 +22,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>UVF TypoSlabserif-Light.ttf</string>
+		<string>TypoSlabserif-Light.ttf</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>

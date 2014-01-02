@@ -2,7 +2,7 @@
 //  RedeemModel.h
 //  PlusOffer
 //
-//  Created by Tai Truong on 12/29/13.
+//  Created by Trongvm on 12/29/13.
 //  Copyright (c) 2013 Trongvm. All rights reserved.
 //
 

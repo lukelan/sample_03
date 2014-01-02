@@ -61,6 +61,11 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    PINGREMARKETING
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -212,6 +217,7 @@
         [favourites setHideOnExpand:YES];
         [favourites.button setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.4f]];
         [favourites.button setSelected:YES];
+        [favourites setIsSelected:YES];
         
 //        // Share
 //        
@@ -399,7 +405,7 @@
 
 - (MKCoordinateRegion)createZoomRegionFromCentralPointAndRadius:(NSArray*) categoryArray {
     
-    [self calculateCentralPointAndRadiusFromLocationKards:categoryArray withCurrenLocation:YES];
+    [self calculateCentralPointAndRadiusFromLocationKardsNew:categoryArray withCurrenLocation:YES];
     
     // have no deal zoom minimum scale to current location
     if ([categoryArray count] == 0) {
@@ -417,6 +423,35 @@
 }
 
 #pragma mark - Map procedures
+
+- (void)calculateCentralPointAndRadiusFromLocationKardsNew:(NSArray*) categoryArray withCurrenLocation:(BOOL)bCurrentLocation {
+    
+    // If current location not found -> return the radius default 1km.
+    if (((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude == 0 && ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude == 0) {
+        _centralPoint.latitude = ((JPSThumbnail*)categoryArray[0]).coordinate.latitude;
+        _centralPoint.longitude = ((JPSThumbnail*)categoryArray[0]).coordinate.longitude;
+        _radiusMeters = 1000;
+        return;
+    }
+    
+    // Find the nearest location
+    CLLocation *locA = [[CLLocation alloc] initWithLatitude:((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude longitude:((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude];
+    
+    _centralPoint.longitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
+    _centralPoint.latitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
+    
+    _radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS;
+    for (JPSThumbnail *venue in categoryArray) {
+        
+        CLLocation *locB = [[CLLocation alloc] initWithLatitude:venue.coordinate.latitude longitude:venue.coordinate.longitude];
+        
+        CLLocationDistance distance = [locA distanceFromLocation:locB];
+        
+        if (distance < _radiusMeters) {
+            _radiusMeters = distance;
+        }
+    }
+}
 
 - (void)calculateCentralPointAndRadiusFromLocationKards:(NSArray*) categoryArray withCurrenLocation:(BOOL)bCurrentLocation {
     
