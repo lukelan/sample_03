@@ -23,7 +23,26 @@
         _brand_id = data[@"brand_id"];
          _discount_type = data[@"discount_type"];
         _allowRedeem = data[@"allow_redeem"];
+        _category_id = data[@"category_id"];
+        CGFloat latitude = [[data objectForKey:@"latitude"] floatValue];
+        CGFloat longtitude = [[data objectForKey:@"longitude"] floatValue];
+        self.location = CLLocationCoordinate2DMake(latitude, longtitude);
+        
     }
     return self;
+}
+-(NSString *)title
+{
+    return self.offer_name;
+}
+
+-(NSString *)subtitle
+{
+    return self.offer_name;
+}
+
+-(CLLocationCoordinate2D)coordinate
+{
+    return self.location;
 }
 @end

@@ -28,6 +28,9 @@ typedef enum {
 
 @end
 
+@interface ShadowShapeLayer : CAShapeLayer
+@end
+
 @interface JPSThumbnailAnnotationView : MKAnnotationView <JPSThumbnailAnnotationViewProtocol> {
     CAShapeLayer *_shapeLayer;
     CAShapeLayer *_strokeAndShadowLayer;

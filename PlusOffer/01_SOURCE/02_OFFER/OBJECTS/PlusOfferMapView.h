@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @protocol PlusOfferMapViewDelegate <NSObject>
 
@@ -22,5 +23,6 @@
 @property (nonatomic, weak) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 
--(void)reloadInterface;
+- (IBAction)showUserLocation:(id)sender;
+-(void)reloadInterface:(NSMutableArray*)listOffers;
 @end

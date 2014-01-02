@@ -15,9 +15,6 @@
 #define JPSThumbnailAnnotationViewAnimationDuration 0.25f
 #define JPSThumbnailAnnotationViewShadowVisible     TRUE
 
-@interface ShadowShapeLayer : CAShapeLayer
-@end
-
 @implementation ShadowShapeLayer
 
 - (void)drawInContext:(CGContextRef)context {

@@ -32,6 +32,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
+    [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
+    [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *random = [[UIBarButtonItem alloc] initWithCustomView:a1];
+    _viewTypeBtn = random;
+    [self.viewTypeBtn setTitle:@"Map"];
+    self.navigationItem.rightBarButtonItem = random;
     
     // init fetched result controller
     [self fetchedResultsController];
@@ -72,16 +80,14 @@
                 }
             }
             if (_mapView) [_mapView removeFromSuperview];
-            UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-            [a1 addTarget:self action:@selector(selectMap) forControlEvents:UIControlEventTouchUpInside];
-            [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
-            UIBarButtonItem *random = [[UIBarButtonItem alloc] initWithCustomView:a1];
-            _viewTypeBtn = random;
+
             [self.viewTypeBtn setTitle:@"Map"];
-             self.navigationItem.rightBarButtonItem = random;
-           //   [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
+
+//              [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
            // [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
+            
+            self.tabBarController.tabBar.hidden = NO;
+            
             _listView.dataSource = self.listOffers;
             [self.view addSubview:_listView];
             [self reloadInterface:type];
@@ -90,29 +96,40 @@
         case enumOfferInterfaceType_Map:
         {
             if (!_mapView) {
-                _mapView = [[PlusOfferMapView alloc] initWithFrame:CGRectMake(0, 65, 320, 455)];
+                _mapView = [[PlusOfferMapView alloc] initWithFrame:CGRectMake(0, 65, 320, 505)];
                 _mapView.delegate = self;
             }
             if (_listView) [_listView removeFromSuperview];
+            
             [self.viewTypeBtn setTitle:@"List"];
             [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
             [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
-            _mapView.dataSource = self.listOffers;
+            
             [self.view addSubview:_mapView];
             
-            self.navigationController.navigationBarHidden = YES;
             self.tabBarController.tabBar.hidden = YES;
+//            self.navigationController.navigationBarHidden = YES;
+//            [UIView animateWithDuration:1.0f animations:^{
+//                self.tabBarController.tabBar.hidden = YES;
+//            }];
             
-            [_mapView reloadInterface];
+            [_mapView reloadInterface:self.listOffers];
             break;
         }
         default:
             break;
     }
 }
--(void)selectMap
+-(void)selectMap:(UIButton*)sender
 {
-    NSLog(@"test");
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        
+        [self loadInterface:enumOfferInterfaceType_Map];
+    }
+    else {
+        [self loadInterface:enumOfferInterfaceType_List];
+    }
 }
 #pragma mark - API
 -(void)loadOffers
@@ -187,8 +204,20 @@
     for (OfferModel *itemModel in self.dataSource)
     {
         
-        NSLog(@"%@",[NSString stringWithFormat:@"%hhd",  itemModel.allowRedeem ]);
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"map_offer.png", @"url", [NSString stringWithFormat:@"%@", itemModel.discount_value], @"discount",[NSString stringWithFormat:@"%@" ,itemModel.distanceStr], @"distance",[NSString stringWithFormat:@"%@" ,itemModel.offer_id], @"offer_id", itemModel.offer_name, @"offer_name", itemModel.brand_id, @"brand_id", itemModel.discount_type,@"discount_type", itemModel.allowRedeem ,@"allow_redeem", nil];
+//        NSLog(@"%@",[NSString stringWithFormat:@"%hhd",  itemModel.allowRedeem ]);
+//        NSLog(@"%f - %f", [itemModel.latitude floatValue], [itemModel.longitude floatValue]);
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                             @"map_offer.png", @"url",
+                             itemModel.discount_value.stringValue, @"discount",
+                             itemModel.distanceStr, @"distance",
+                             itemModel.offer_id.stringValue, @"offer_id",
+                             itemModel.offer_name, @"offer_name",
+                             itemModel.brand_id, @"brand_id",
+                             itemModel.discount_type, @"discount_type",
+                             @(itemModel.allowRedeem) , @"allow_redeem",
+                             itemModel.latitude , @"latitude",
+                             itemModel.longitude , @"longitude",
+                             itemModel.category_id , @"category_id", nil];
         OfferTableItem *item = [[OfferTableItem alloc] initWithData:dic];
         [self.listOffers addObject:item];
     }
@@ -200,8 +229,7 @@
             break;
         }
         case enumOfferInterfaceType_Map: {
-            _mapView.dataSource = self.listOffers;
-            [_mapView reloadInterface];
+            [_mapView reloadInterface:self.listOffers];
             break;
         }
         default:
