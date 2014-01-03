@@ -26,6 +26,11 @@
         // setup map view
         self.mapView.delegate = self;
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+        
+        if (IS_IPHONE5) {
+        } else {
+            [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, _btnUserLocation.frame.origin.y - 90, _btnUserLocation.frame.size.height, _btnUserLocation.frame.size.width)];
+        }
     }
     return self;
 }
@@ -119,7 +124,7 @@
     CLLocation *currentLocation = [[CLLocation alloc]
                                 initWithLatitude:userLocation.latitude
                                 longitude:userLocation.longtitude];;
-    CLLocationDistance radiusMeters;
+    CLLocationDistance radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS;
     CLLocation *nearestlocation = nil;
     
     for (OfferTableItem *item in categoryArray)
@@ -135,9 +140,18 @@
     
     // Update central point
     CLLocationCoordinate2D centralPoint;
-    centralPoint.latitude    = (currentLocation.coordinate.latitude + nearestlocation.coordinate.latitude)/2;
-    centralPoint.longitude   = (currentLocation.coordinate.longitude + nearestlocation.coordinate.longitude)/2;
-    if (radiusMeters <= 0 || radiusMeters > 1000) {
+    
+    // If current location not found -> return the radius default 1km.
+    if (currentLocation.coordinate.latitude == 0 && currentLocation.coordinate.longitude  == 0) {
+        centralPoint.latitude   = nearestlocation.coordinate.latitude;
+        centralPoint.longitude  = nearestlocation.coordinate.longitude;
+        radiusMeters = 1000;
+    } else {
+        centralPoint.latitude    = currentLocation.coordinate.latitude;
+        centralPoint.longitude   = currentLocation.coordinate.longitude ;
+    }
+    
+    if (radiusMeters <= 0 || radiusMeters > MAXIMUM_SCALEABLE_RADIUS_METERS) {
         // Default for radius is 1km
         radiusMeters = 1000;
     }
