@@ -40,13 +40,13 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
         return (NSString *)url;
     }];
     
-    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar-ios-6-bg.png"] forBarMetrics:UIBarMetricsDefault];
+
+
        //[_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
 //    PlusOfferViewController *plusOfferViewController =  [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"PlusOfferViewController"];
 //    [plusOfferViewController.tabBarController.tabBarItem setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
-    UITabBarController *tabBarController
-    = (UITabBarController
-       *)self.window.rootViewController;
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UIImage *selectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer-active.png"];
     UIImage *unselectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer.png"];
     UIImage *selectedImage1 = [UIImage imageNamed:@"tab-bar-redeem-active.png"];
@@ -71,10 +71,22 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
     [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar.png"]];
-    [tabBarController.tabBar setSelectionIndicatorImage:nil];
+    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar-selected.png"]];
     [tabBarController.tabBar setShadowImage:[[UIImage alloc] init]];
     
-    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:13]} forState:UIControlStateNormal];
+    NSArray *arrNav = [tabBarController childViewControllers] ;
+    for (int i = 0; i < arrNav.count; i++) {
+        UINavigationController *temp = [arrNav objectAtIndex:i];
+        if ([temp isKindOfClass:[UINavigationController class]])
+        {
+            if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
+                [temp setBackGroundImage:@"nav-bar-bg.png" forNavigationBar:temp.navigationBar];
+            } else {
+                [temp setBackGroundImage:@"nav-bar-bg-ios7.png" forNavigationBar:temp.navigationBar];
+            }
+        }
+    }
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x666666), UITextAttributeTextColor, nil] forState:UIControlStateHighlighted];
  #ifdef IS_GA_ENABLE
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 20;

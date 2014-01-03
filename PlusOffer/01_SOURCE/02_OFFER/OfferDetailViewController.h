@@ -25,7 +25,7 @@ typedef enum
     enumOfferDetailInterfaceType_Num
 }enumOfferDetailInterfaceType;
 
-@interface OfferDetailViewController : CustomGAITrackedViewController <PlusOfferMapViewDelegate>
+@interface OfferDetailViewController : CustomGAITrackedViewController <PlusOfferMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     ZBarReaderViewController *zBarReader;
     BOOL isScaning;
@@ -34,6 +34,7 @@ typedef enum
     UIView *_overlayView;
     
     PlusOfferMapView *_mapView;
+    BOOL isShowingMap;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableViewDetail;

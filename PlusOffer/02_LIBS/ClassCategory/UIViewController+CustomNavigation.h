@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (CustomNavigation)
+-(void)setImageCustomBarRight:(UIImage *)imageRight;
+-(void)setImageCustomBarLeft:(UIImage *)imageLeft;
 -(void)setCustomBarRightWithImage:(UIImage *)imageRight selector:(SEL)function context_id:(id)context_id;
--(void)setCustomBarLeftWithImage:(UIImage *)img selector:(SEL)function context_id:(id)context_id;
+-(void)setCustomBarLeftWithImage:(UIImage *)imageLeft selector:(SEL)function context_id:(id)context_id;
 -(void)setBackGroundImage:(NSString *) linkImage forNavigationBar:(UINavigationBar *)naviBar;
 @end

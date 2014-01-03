@@ -41,7 +41,11 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)processOpenMapView:(id)sender {
+- (IBAction)processOpenMapView:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(processOpenMapView)]) {
+        [_delegate processOpenMapView];
+    }
 }
 
 -(void)setObject:(id)object

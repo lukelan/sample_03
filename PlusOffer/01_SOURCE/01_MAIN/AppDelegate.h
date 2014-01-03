@@ -17,6 +17,12 @@
 
 @end
 
+@protocol OpenMapViewDelegate <NSObject>
+
+- (void)processOpenMapView;
+
+@end
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
 #pragma mark property using for core data
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

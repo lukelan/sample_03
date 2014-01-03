@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface InfoPlusOfferCell : UITableViewCell
+{
+    __weak id<OpenMapViewDelegate> _delegate;
+}
+@property (nonatomic, weak) id<OpenMapViewDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UILabel *lbtime;
 @property (strong, nonatomic) IBOutlet UILabel *lblocation;

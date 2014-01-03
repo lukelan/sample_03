@@ -81,8 +81,9 @@ typedef enum{
 #define CACHE_IMAGE_PATH ([NSString stringWithFormat:@"%@/images/",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]])
 #endif
 
+#define IS_IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 #define IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
-
+#define CHECK_IOS (IS_IOS7 ? TITLE_BAR_HEIGHT : 0 )
 #define MAXIMUM_SCALEABLE_RADIUS_METERS                                     5000000
 #define MINIMUM_DISTANCE_ALLOW_USER_REDEEM                                  100.0f // in 100 meters
 

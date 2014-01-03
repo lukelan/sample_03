@@ -8,27 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum
-{
-    ENUM_MCDONALDS = 1,
-    ENUM_URBAN_STATION,
-    ENUM_BHD,
-}ENUM_BRAND_ID;
-
-typedef enum
-{
-    ENUM_DISTANCE = 0,
-    ENUM_HERE,
-}ENUM_lOCATION;
-
-typedef enum
-{
-    ENUM_DISCOUNT = 1,
-    ENUM_VALUE,
-    ENUM_GIFT,
-    ENUM_GIFT_TICKET
-}ENUM_DISCOUNT_TYPE;
-
 @interface OfferTableItem : NSObject <MKAnnotation>
 @property (nonatomic, retain) NSString *imageUrl;
 @property (nonatomic, retain) NSString *discount;

@@ -13,8 +13,9 @@
 #import "SlideCheckinCell.h"
 #import "OfferDetailItem.h"
 #import "PunchCell.h"
+#import "OfferTableItem.h"
 
-@interface OfferDetailViewController () <NSFetchedResultsControllerDelegate, ZBarReaderDelegate, MBSliderViewDelegate, OpenBarcodeScannerDelegate>
+@interface OfferDetailViewController () <NSFetchedResultsControllerDelegate, ZBarReaderDelegate, MBSliderViewDelegate, OpenBarcodeScannerDelegate, OpenMapViewDelegate>
 
 @property (nonatomic, retain) OfferDetailItem *dataSource;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -25,6 +26,7 @@
 
 -(void)dealloc
 {
+    [NSFetchedResultsController deleteCacheWithName:@"offerDetail"];
     self.fetchedResultsController = nil;
     self.dataSource = nil;
     self.tableViewDetail = nil;
@@ -47,9 +49,6 @@
 	// Do any additional setup after loading the view.
     viewName = OFFER_DETAIL_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
-    
-    // barcode scanner
-    
     zBarReader = [[ZBarReaderViewController alloc] init];
     _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
     _overlayView.backgroundColor = [UIColor clearColor];
@@ -70,13 +69,10 @@
     zBarReader.cameraOverlayView = _overlayView;
     
     [self setCustomBarLeftWithImage:[UIImage imageNamed:@"nav-bar-icon-back.png"] selector:nil context_id:nil];
-    [self setCustomBarRightWithImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] selector:nil context_id:nil];
-    
-    // init fetched result controller
-    [self fetchedResultsController];
+    [self setCustomBarRightWithImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] selector:@selector(processOpenMapView) context_id:self];
     
     // load default data in coredata
-//    [self reloadInterface];
+    [self reloadInterface];
     
     //request load from server
     [self loadOfferDetail];
@@ -114,17 +110,18 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    [NSFetchedResultsController deleteCacheWithName:@"offerDetail"];
     [self reloadInterface];
 }
 
 - (void)reloadInterface
 {
-//    [NSFetchedResultsController deleteCacheWithName:@"offerDetail"];
-    NSLog(@"data = %@", self.fetchedResultsController.fetchedObjects);
+//    NSLog(@"data = %@", self.fetchedResultsController.fetchedObjects);
     NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
     for (OfferDetailModel *itemModel in temp)
     {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"banner", [NSString stringWithFormat:@"%@", itemModel.branch_name], @"name",[NSString stringWithFormat:@"%@" ,itemModel.branch_address], @"address",[NSString stringWithFormat:@"%@" ,itemModel.branch_tel], @"tel", [NSString stringWithFormat:@"Mở cửa: %@ - %@", itemModel.hour_open, itemModel.hour_close], @"hour_working", [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"id", itemModel.offer_name, @"offer_name", itemModel.offer_description, @"description", @"http://plusoffer-dev.123phim.vn/img/temp/big-mac.png", @"icon", [NSString stringWithFormat:@"%d", itemModel.max_punch.intValue], @"max", [NSString stringWithFormat:@"%d", itemModel.count_punch.intValue], @"count", nil];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"banner", [NSString stringWithFormat:@"%@", itemModel.branch_name], @"name",[NSString stringWithFormat:@"%@" ,itemModel.branch_address], @"address",[NSString stringWithFormat:@"%@" ,itemModel.branch_tel], @"tel", [NSString stringWithFormat:@"Mở cửa: %@ - %@", itemModel.hour_open, itemModel.hour_close], @"hour_working", [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"id", itemModel.offer_name, @"offer_name", itemModel.offer_description, @"description", @"http://plusoffer-dev.123phim.vn/img/temp/big-mac.png", @"icon", [NSString stringWithFormat:@"%d", itemModel.max_punch.intValue], @"max", [NSString stringWithFormat:@"%d", itemModel.count_punch.intValue], @"count",
+            [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id", [NSString stringWithFormat:@"%f", itemModel.latitude.floatValue], @"latitude", [NSString stringWithFormat:@"%f", itemModel.longitude.floatValue], @"longitude",nil];
         self.dataSource = [[OfferDetailItem alloc] initWithData:dic];
         [self setTitle:itemModel.branch_name];
         break;
@@ -153,7 +150,9 @@
         if (!cell) {
             cell = [[InfoPlusOfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
- 
+        if (![cell delegate]) {
+            [cell setDelegate:self];
+        }
         [cell setObject:self.dataSource];
         return cell;
     }
@@ -324,54 +323,78 @@
     [self loadBarCodeReader];
 }
 
-//#pragma mark - Interface
-//-(void)loadInterface:(enumOfferDetailInterfaceType)type
-//{
-//    switch (type) {
-//        case enumOfferDetailInterfaceType_List:
-//        {
-//            if (!_tableViewDetail) {
-//                _tableViewDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, TITLE_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - TITLE_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT)];
-//            }
-//            
-//            if (_mapView) [_mapView removeFromSuperview];
-//            
-//            [_tableViewDetail setDelegate:self];
-//            [self.view addSubview:_listView];
-//            
-//            break;
-//        }
-//        case enumOfferDetailInterfaceType_Map:
-//        {
-//            if (!_mapView) {
-//                _mapView = [[PlusOfferMapView alloc] initWithFrame:CGRectMake(0, 65, 320, 455)];
-//            }
-//            
-//            if (_listView) [_listView removeFromSuperview];
-//            
-//            [self.viewTypeBtn setTitle:@"List"];
-//            [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
-//            [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
-//            _mapView.dataSource = self.listOffers;
-//            [self.view addSubview:_mapView];
-//            [_mapView reloadInterface];
-//            
-//            break;
-//        }
-//            
-//        default:
-//            break;
-//    }
-//}
-//
-//#pragma mark - Actions
-//- (IBAction)listBtnTouchUpInside:(UIBarButtonItem *)sender {
-//    if ([sender.title isEqualToString:@"Map"]) {
-//        
-//        [self loadInterface:enumOfferInterfaceType_Map];
-//    }
-//    else {
-//        [self loadInterface:enumOfferInterfaceType_List];
-//    }
-//}
+#pragma mark - Interface
+-(void)loadInterface:(enumOfferDetailInterfaceType)type
+{
+    switch (type) {
+        case enumOfferDetailInterfaceType_List:
+        {
+            if (!_tableViewDetail) {
+                _tableViewDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, TITLE_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - TITLE_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT)];
+            }
+            
+            if (_mapView) {
+                [_mapView removeFromSuperview];
+            }
+            [_tableViewDetail setDataSource:self];
+            [_tableViewDetail setDelegate:self];
+
+            isShowingMap = NO;
+            [self setImageCustomBarRight:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
+            [self.view addSubview:_tableViewDetail];
+            break;
+        }
+        case enumOfferDetailInterfaceType_Map:
+        {
+            //-------Get object to display on map view------//
+            OfferTableItem *item = nil;
+            NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
+            for (OfferDetailModel *itemModel in temp)
+            {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"url",  [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"offer_id",
+                    itemModel.offer_name, @"offer_name",
+                    [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id",
+                    itemModel.discount_type.stringValue, @"discount_type",
+                    itemModel.latitude.stringValue, @"latitude",
+                    itemModel.longitude.stringValue, @"longitude",
+                    itemModel.category_id.stringValue, @"category_id",nil];
+                item = [[OfferTableItem alloc] initWithData:dic];
+            }
+            if (![item isKindOfClass:[OfferTableItem class]]) {
+                return;
+            }
+            //---------------------------------------------//
+
+            [self setImageCustomBarRight:[UIImage imageNamed:@"map-icon-list.png"]];
+            if (!_mapView) {
+                _mapView = [[PlusOfferMapView alloc] initWithFrame:_tableViewDetail.frame];
+            }
+            
+            if (_tableViewDetail) {
+                [_tableViewDetail removeFromSuperview];
+            }
+            isShowingMap = YES;
+            [self.view addSubview:_mapView];
+            [_mapView reloadInterface:[NSMutableArray arrayWithObject:item]];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark -
+#pragma mark OpenMapViewDelegate method
+- (void)processOpenMapView
+{
+    if (isShowingMap)
+    {
+        [self loadInterface:enumOfferDetailInterfaceType_List];
+    }
+    else
+    {
+        [self loadInterface:enumOfferDetailInterfaceType_Map];
+    }
+}
 @end

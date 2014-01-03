@@ -9,7 +9,6 @@
 #import "PlusOfferMapView.h"
 #import "OfferTableItem.h"
 #import "GradientPolylineView.h"
-#import "OfferAnnotationView.h"
 
 @implementation PlusOfferMapView
 {
@@ -75,15 +74,21 @@
 
 #pragma mark - MKMapViewDelegate
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    
+    static NSString *identifier = @"BankItemID";
     if ([annotation isKindOfClass:[OfferTableItem class]]) {
-        NSString *identifier = [[OfferAnnotationView class] description];
-        OfferAnnotationView *annotationView = (OfferAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        if (!annotationView) {
-            annotationView = [[OfferAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        }
+        // select pin image
+        NSString *imageName = [((OfferTableItem*)annotation).category_id integerValue] != 1 ? @"map-icon-pin-entertainment.png" : @"map-icon-pin-food-beverage.png";
         
-        annotationView.annotation = annotation;
+        MKAnnotationView *annotationView = (MKAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView.enabled = YES;
+            annotationView.canShowCallout = NO;
+        } else {
+            annotationView.annotation = annotation;
+        }
+        annotationView.image = [UIImage imageNamed:imageName];
+        
         return annotationView;
     }
     else if ([annotation isKindOfClass:[MKUserLocation class]])
@@ -96,16 +101,17 @@
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    if ([view conformsToProtocol:@protocol(OfferAnnotationViewProtocol)]) {
+    //NSLog(@"didSelectAnnotationView");
+    if ([view.annotation isKindOfClass:[OfferTableItem class]]) {
+        //        self.directionBtn.hidden = NO;
         _selectedOfferItem = (OfferTableItem*)view.annotation;
-        [((NSObject<OfferAnnotationViewProtocol> *)view) didSelectAnnotationViewInMap:mapView];
     }
 }
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
-    if ([view conformsToProtocol:@protocol(OfferAnnotationViewProtocol)]) {
+    //NSLog(@"didDeselectAnnotationView");
+    if ([view.annotation isKindOfClass:[OfferTableItem class]]) {
         _selectedOfferItem = nil;
-        [((NSObject<OfferAnnotationViewProtocol> *)view) didDeselectAnnotationViewInMap:mapView];
     }
 }
 

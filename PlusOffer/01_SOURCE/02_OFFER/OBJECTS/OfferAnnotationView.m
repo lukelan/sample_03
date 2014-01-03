@@ -10,11 +10,9 @@
 #import "JPSThumbnailAnnotationView.h"
 #import "OfferTableItem.h"
 
-#define OfferAnnotationViewNormal_Width 27.0f
-#define OfferAnnotationViewNormal_Height 39.0f
-#define OfferAnnotationViewExpanded_Width 142.0f
-#define OfferAnnotationViewExpanded_Height 87.0f
-#define OfferAnnotationViewImageHeight 59.0f
+#define OfferAnnotationView_Width 145.0f
+#define OfferAnnotationView_Height 100.0f
+
 
 @implementation OfferAnnotationView
 
@@ -40,189 +38,111 @@
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.frame = CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height);
+        self.frame = CGRectMake(0, 0, OfferAnnotationView_Width, OfferAnnotationView_Height);
         self.backgroundColor = [UIColor clearColor];
-        self.canShowCallout = NO;
-        
-        // normal view
-        _normalView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height)];
-        [self addSubview:_normalView];
-        
-        // expanded view
-        _expandedView = [[UIView alloc] initWithFrame:CGRectMake((OfferAnnotationViewNormal_Width - OfferAnnotationViewExpanded_Width)/2.0f, OfferAnnotationViewNormal_Height - OfferAnnotationViewExpanded_Height - 14, OfferAnnotationViewExpanded_Width, OfferAnnotationViewExpanded_Height)];
-        _expandedView.backgroundColor = [UIColor clearColor];
         
         // Image View
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.5, 0.5, OfferAnnotationViewExpanded_Width - 1, OfferAnnotationViewExpanded_Height - 1)];
-        [self setMaskTo:_imageView byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
-        [_expandedView addSubview:_imageView];
-        
-        // discount image
-        _discountImage = [[SDImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-        [_expandedView addSubview:_discountImage];
-        // discount label
-        _discountLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        _discountLbl.frame = CGRectMake(0, 0 , _discountLbl.frame.size.width, _discountLbl.frame.size.height);
-        _discountLbl.backgroundColor = [UIColor clearColor];
-        _discountLbl.textColor = [ UIColor blueColor];
-        _discountLbl.font = [UIFont systemFontOfSize:16.0f];
-        _discountLbl.transform = CGAffineTransformMakeRotation (-DEGREES_TO_RADIANS(45));
-        _discountLbl.textAlignment = NSTextAlignmentCenter;
-        [_discountLbl setFont:[UIFont fontWithName:@"Avenir Next" size:8]];
-        _discountLbl.textColor = UIColorFromRGB(0x333333);
-        
-        [_discountImage addSubview:_discountLbl];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, OfferAnnotationView_Width - 10, OfferAnnotationView_Height - 10)];
+        _imageView.layer.cornerRadius = 4.0;
+        _imageView.layer.masksToBounds = YES;
+        [self addSubview:_imageView];
         
         // Name Label
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 57, OfferAnnotationViewExpanded_Width, 20)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 55, OfferAnnotationView_Width - 10, 20)];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
         _titleLabel.shadowOffset = CGSizeMake(0, -1);
-        _titleLabel.font = [UIFont boldSystemFontOfSize:8.5f];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:12.0f];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        [_expandedView addSubview:_titleLabel];
+        _titleLabel.minimumScaleFactor = .8f;
+        _titleLabel.adjustsFontSizeToFitWidth = YES;
+        [self addSubview:_titleLabel];
         
-        // address Label
-        _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, OfferAnnotationViewExpanded_Width, 20)];
+        // Distance Label
+        _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 75, OfferAnnotationView_Width - 10, 20)];
         _subtitleLabel.backgroundColor = [UIColor clearColor];
         _subtitleLabel.textColor = [UIColor whiteColor];
-        _subtitleLabel.font = [UIFont systemFontOfSize:7.5f];
-        _subtitleLabel.textAlignment = NSTextAlignmentCenter;
-        [_expandedView addSubview:_subtitleLabel];
-        
-        // shape layer
-        _strokeAndShadowLayer = [CAShapeLayer layer];
-        CGPathRef _strokeAndShadowLayerPath = [self newBubbleWithRect:_expandedView.bounds];
-        _strokeAndShadowLayer.path = _strokeAndShadowLayerPath;
-        CGPathRelease(_strokeAndShadowLayerPath);
-        _strokeAndShadowLayer.fillColor = [UIColor colorWithRed:158.0f/255.0f green:11.0f/255.0f blue:15.0f/255.0f alpha:1.0f].CGColor;
-        _strokeAndShadowLayer.shadowColor = [UIColor whiteColor].CGColor;
-        _strokeAndShadowLayer.shadowOffset = CGSizeMake (0, [[[UIDevice currentDevice] systemVersion] floatValue] >= 3.2 ? 1.0f : -3);
-        _strokeAndShadowLayer.shadowRadius = 5.0;
-        _strokeAndShadowLayer.shadowOpacity = .7;
-        _strokeAndShadowLayer.strokeColor = [UIColor colorWithWhite:1.0 alpha:1.0].CGColor;
-        _strokeAndShadowLayer.lineWidth = 1.0;
-        _strokeAndShadowLayer.masksToBounds = NO;
-        [_expandedView.layer insertSublayer:_strokeAndShadowLayer atIndex:0];
-        
-        // default state
-        _state = OfferAnnotationViewState_Normal;
-        
+        _subtitleLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
+        _subtitleLabel.shadowOffset = CGSizeMake(0, -1);
+        _subtitleLabel.font = [UIFont systemFontOfSize:9.0f];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_subtitleLabel];
     }
     return self;
-}
-
--(void) setMaskTo:(UIView*)view byRoundingCorners:(UIRectCorner)corners
-{
-    CGRect rect = view.bounds;
-    rect.size.height = OfferAnnotationViewImageHeight;
-    CGFloat radius = 7.0;
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-	//Create Path For Callout Bubble
-	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + radius);
-	CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height);
-	CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
-	CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + radius);
-    CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - radius, rect.origin.y + radius, radius, 0.0f, -M_PI_2, 1);
-
-	CGPathAddLineToPoint(path, NULL, rect.origin.x + radius, rect.origin.y);
-	CGPathAddArc(path, NULL, rect.origin.x + radius, rect.origin.y + radius, radius, -M_PI_2, M_PI, 1);
-	CGPathCloseSubpath(path);
-    
-//    UIBezierPath* rounded = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(7.0, 7.0)];
-    
-    CAShapeLayer* shape = [[CAShapeLayer alloc] init];
-    [shape setPath:path];
-    
-    view.layer.mask = shape;
 }
 
 -(void)setAnnotation:(id<MKAnnotation>)annotation
 {
     [super setAnnotation:annotation];
     OfferTableItem *item = annotation;
-    self.coordinate = item.location;
-    
-    // normal view
-    NSString *imageName = [item.category_id integerValue] != 1 ? @"map-icon-pin-entertainment.png" : @"map-icon-pin-food-beverage.png";
-    [self.normalView setImage:[UIImage imageNamed:imageName]];
-    
-    // expanded view
     self.titleLabel.text = item.title;
     self.subtitleLabel.text = item.subtitle;
     [self.imageView setImage:[UIImage imageNamed:@"img-loc-mcdonalds.jpg"]];
-    
-    if (item.discount_type.intValue == ENUM_DISCOUNT || item.discount_type.intValue == ENUM_VALUE)
-    {
-        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-silver.png"]];
-        NSString *stringFormat = @"%";
-        self.discountLbl.text = [NSString stringWithFormat:@"OFF %@%@"
-                                 ,item.discount, stringFormat];
-    }
-    else if (item.discount_type.intValue == ENUM_GIFT)
-    {
-        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-green.png"]];
-        self.discountLbl.text = [NSString stringWithFormat:@"%@ quà tặng"
-                                 ,item.discount];
-    }
-    else if (item.discount_type.intValue == ENUM_GIFT_TICKET)
-    {
-        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-red.png"]];
-        self.discountLbl.text = [NSString stringWithFormat:@"Tặng %@ vé"
-                                 ,item.discount];
-    }
 }
 
-#pragma mark - OfferAnnotationViewProtocol
-- (void)didSelectAnnotationViewInMap:(MKMapView *)mapView {
-    // Center map at annotation point
-    [mapView setCenterCoordinate:_coordinate animated:YES];
+- (void)setLayerProperties {
+    _shapeLayer = [ShadowShapeLayer layer];
+    CGPathRef shapeLayerPath = [self newBubbleWithRect:self.bounds andOffset:CGSizeMake(200.0f/2, 0)];
+    _shapeLayer.path = shapeLayerPath;
+    CGPathRelease(shapeLayerPath);
     
-    if (_state != OfferAnnotationViewState_Normal) return;
-    _state = OfferAnnotationViewState_Animating;
+    // Fill Callout Bubble & Add Shadow
+    _shapeLayer.fillColor = [[UIColor blackColor] CGColor];
     
-    [UIView animateWithDuration:1.0f animations:^{
-        [self.normalView removeFromSuperview];
-        [self addSubview:self.expandedView];
-    } completion:^(BOOL finished) {
-        _state = OfferAnnotationViewState_Expanded;
-    }];
+    _strokeAndShadowLayer = [CAShapeLayer layer];
+    
+    CGPathRef _strokeAndShadowLayerPath = [self newBubbleWithRect:self.bounds];
+    _strokeAndShadowLayer.path = _strokeAndShadowLayerPath;
+    CGPathRelease(_strokeAndShadowLayerPath);
+    
+    _strokeAndShadowLayer.fillColor = [UIColor clearColor].CGColor;
+    
+    if (0) {
+        _strokeAndShadowLayer.shadowColor = [UIColor blackColor].CGColor;
+        _strokeAndShadowLayer.shadowOffset = CGSizeMake (0, [[[UIDevice currentDevice] systemVersion] floatValue] >= 3.2 ? 3 : -3);
+        _strokeAndShadowLayer.shadowRadius = 5.0;
+        _strokeAndShadowLayer.shadowOpacity = 1.0;
+    }
+    
+    _strokeAndShadowLayer.strokeColor = [UIColor colorWithWhite:0.22 alpha:1.0].CGColor;
+    _strokeAndShadowLayer.lineWidth = 1.0;
+    
+    CAGradientLayer *bubbleGradient = [CAGradientLayer layer];
+    bubbleGradient.frame = CGRectMake(self.bounds.origin.x-100, self.bounds.origin.y, 200+self.bounds.size.width, self.bounds.size.height-7);
+    bubbleGradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:0 alpha:.75].CGColor, (id)[UIColor colorWithWhite:0 alpha:.75].CGColor,(id)[UIColor colorWithWhite:0.13 alpha:.75].CGColor,(id)[UIColor colorWithWhite:0.33 alpha:.75].CGColor, nil];
+    bubbleGradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0],[NSNumber numberWithFloat:0.53],[NSNumber numberWithFloat:.54],[NSNumber numberWithFloat:1], nil];
+    bubbleGradient.startPoint = CGPointMake(0.0f, 1.0f);
+    bubbleGradient.endPoint = CGPointMake(0.0f, 0.0f);
+    bubbleGradient.mask = _shapeLayer;
+    
+    _shapeLayer.masksToBounds = NO;
+    bubbleGradient.masksToBounds = NO;
+    _strokeAndShadowLayer.masksToBounds = NO;
+    
+    [_strokeAndShadowLayer addSublayer:bubbleGradient];
+    [self.layer insertSublayer:_strokeAndShadowLayer atIndex:0];
 }
 
-- (void)didDeselectAnnotationViewInMap:(MKMapView *)mapView {
-    if (_state != OfferAnnotationViewState_Expanded) return;
-    _state = OfferAnnotationViewState_Animating;
-    
-    [UIView animateWithDuration:1.0f animations:^{
-        [self.expandedView removeFromSuperview];
-        [self addSubview:self.normalView];
-    } completion:^(BOOL finished) {
-        _state = OfferAnnotationViewState_Normal;
-    }];
-}
-
-#pragma mark - Utilities
 - (CGPathRef)newBubbleWithRect:(CGRect)rect {
-//    CGFloat stroke = 1.0;
+    CGFloat stroke = 1.0;
 	CGFloat radius = 7.0;
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGFloat parentX = rect.origin.x + rect.size.width/2;
 	
 	//Determine Size
-//	rect.size.width -= stroke + 14;
-//	rect.size.height -= stroke + 29;
-//	rect.origin.x += stroke / 2.0 + 7;
-//	rect.origin.y += stroke / 2.0 + 7;
+	rect.size.width -= stroke + 14;
+	rect.size.height -= stroke + 29;
+	rect.origin.x += stroke / 2.0 + 7;
+	rect.origin.y += stroke / 2.0 + 7;
     
 	//Create Path For Callout Bubble
 	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + radius);
 	CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - radius);
 	CGPathAddArc(path, NULL, rect.origin.x + radius, rect.origin.y + rect.size.height - radius, radius, M_PI, M_PI_2, 1);
-	CGPathAddLineToPoint(path, NULL, parentX - 10, rect.origin.y + rect.size.height);
+	CGPathAddLineToPoint(path, NULL, parentX - 14, rect.origin.y + rect.size.height);
 	CGPathAddLineToPoint(path, NULL, parentX, rect.origin.y + rect.size.height + 14);
-	CGPathAddLineToPoint(path, NULL, parentX + 10, rect.origin.y + rect.size.height);
+	CGPathAddLineToPoint(path, NULL, parentX + 14, rect.origin.y + rect.size.height);
 	CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - radius, rect.origin.y + rect.size.height);
 	CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - radius, rect.origin.y + rect.size.height - radius, radius, M_PI_2, 0.0f, 1);
 	CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + radius);
@@ -231,6 +151,11 @@
 	CGPathAddArc(path, NULL, rect.origin.x + radius, rect.origin.y + radius, radius, -M_PI_2, M_PI, 1);
 	CGPathCloseSubpath(path);
     return path;
+}
+
+- (CGPathRef)newBubbleWithRect:(CGRect)rect andOffset:(CGSize)offset {
+    CGRect offsetRect = CGRectMake(rect.origin.x+offset.width, rect.origin.y+offset.height, rect.size.width, rect.size.height);
+    return [self newBubbleWithRect:offsetRect];
 }
 
 @end

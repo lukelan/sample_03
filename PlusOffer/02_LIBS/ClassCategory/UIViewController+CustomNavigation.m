@@ -9,6 +9,27 @@
 #import "UIViewController+CustomNavigation.h"
 
 @implementation UIViewController (CustomNavigation)
+-(void)setImageCustomBarRight:(UIImage *)imageRight
+{
+    if ([self.navigationItem.rightBarButtonItem isKindOfClass:[UIBarButtonItem class]])
+    {
+        UIButton *btn = (UIButton *)[self.navigationItem.rightBarButtonItem customView];
+        if ([btn isKindOfClass:[UIButton class]]) {
+            [btn setBackgroundImage:imageRight forState:UIControlStateNormal];
+        }
+    }
+}
+
+-(void)setImageCustomBarLeft:(UIImage *)imageLeft
+{
+    if ([self.navigationItem.leftBarButtonItem isKindOfClass:[UIBarButtonItem class]])
+    {
+        UIButton *btn = (UIButton *)[self.navigationItem.leftBarButtonItem customView];
+        if ([btn isKindOfClass:[UIButton class]]) {
+            [btn setBackgroundImage:imageLeft forState:UIControlStateNormal];
+        }
+    }
+}
 
 -(void)setCustomBarRightWithImage:(UIImage *)imageRight selector:(SEL)function context_id:(id)context_id
 {

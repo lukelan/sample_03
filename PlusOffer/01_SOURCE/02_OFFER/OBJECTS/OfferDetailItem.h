@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface OfferDetailItem : NSObject
+@property (nonatomic, retain) NSString *branch_id;
 @property (nonatomic, retain) NSString *offer_id;
 //data cell Info
 @property (nonatomic, retain) NSString *bannerUrl;
@@ -23,5 +24,7 @@
 //data cell punch
 @property (nonatomic, retain) NSString *max_punch;
 @property (nonatomic, retain) NSString *count_puch;
+
+@property (assign, nonatomic) CLLocationCoordinate2D  location;
 -(id)initWithData:(NSDictionary*)data;
 @end

@@ -13,6 +13,7 @@
 @interface PlusOfferViewController () <NSFetchedResultsControllerDelegate>
 @property (nonatomic, retain) NSMutableArray *listOffers;
 @property (nonatomic, retain) NSMutableArray *dataSource;
+
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
 
@@ -32,15 +33,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-    [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
-    [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *random = [[UIBarButtonItem alloc] initWithCustomView:a1];
-    _viewTypeBtn = random;
-    [self.viewTypeBtn setTitle:@"Map"];
-    self.navigationItem.rightBarButtonItem = random;
-    
     // init fetched result controller
     [self fetchedResultsController];
     
@@ -52,6 +44,7 @@
     _vcType = enumOfferInterfaceType_List;
     [self loadInterface:_vcType];
     [self reloadInterface:_vcType];
+    [self setPropertiesForSegmentControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +58,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)setPropertiesForSegmentControl
+{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        UIImage *segUnselectedSelected = [UIImage imageNamed:@"segment_deselected_selected.png"];
+        [self.segmentPlusOffers setDividerImage:segUnselectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+        
+        UIImage *segmentSelectedUnselected = [UIImage imageNamed:@"segment_selected_deselected.png"];
+        [self.segmentPlusOffers setDividerImage:segmentSelectedUnselected forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        UIImage *segmentUnselectedUnselected = [UIImage imageNamed:@"segment_deselected_deselected.png"];
+        [self.segmentPlusOffers setDividerImage:segmentUnselectedUnselected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    }
+    [self.segmentPlusOffers setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                              [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                     [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:13], UITextAttributeFont,UIColorFromRGB(0x2ed072),UITextAttributeTextColor,[UIColor clearColor], UITextAttributeTextShadowColor,
+                                                              nil] forState:UIControlStateNormal];
+    [self.segmentPlusOffers setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                              [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                              [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:13], UITextAttributeFont,[UIColor whiteColor], UITextAttributeTextColor
+                                                              ,[UIColor clearColor], UITextAttributeTextShadowColor,
+                                                              nil] forState:UIControlStateSelected];
+    
+    [self.segmentPlusOffers setBackgroundImage:[UIImage imageNamed:@"segment_bg.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.segmentPlusOffers setBackgroundImage:[UIImage imageNamed:@"segment_selected_hl.png"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+}
+
 #pragma mark - Interface
 -(void)loadInterface:(enumOfferInterfaceType)type
 {
@@ -73,21 +92,19 @@
         case enumOfferInterfaceType_List:
         {
             if (!_listView) {
-                if (IS_IPHONE5) {
-                    _listView = [[PlusOfferListView alloc] initWithFrame:CGRectMake(0, 65, 320, 455)];
-                } else {
-                    _listView = [[PlusOfferListView alloc] initWithFrame:CGRectMake(0, 65, 320, 380)];
-                }
+                _listView = [[PlusOfferListView alloc] initWithFrame: CGRectMake(0, 0, 320, self.view.frame.size.height - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT - CHECK_IOS )];
             }
-            if (_mapView) [_mapView removeFromSuperview];
-
+             if (_mapView) [_mapView removeFromSuperview];
             [self.viewTypeBtn setTitle:@"Map"];
-
-//              [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
-           // [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
-            
+            UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+            [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
+            [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
+            [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
+            _viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
+            [self.viewTypeBtn setTitle:@"Map"];
+            self.navigationItem.rightBarButtonItem = _viewTypeBtn;
             self.tabBarController.tabBar.hidden = NO;
-            
+            _checkListOrMap = YES;
             _listView.dataSource = self.listOffers;
             [self.view addSubview:_listView];
             [self reloadInterface:type];
@@ -96,23 +113,30 @@
         case enumOfferInterfaceType_Map:
         {
             if (!_mapView) {
-                _mapView = [[PlusOfferMapView alloc] initWithFrame:CGRectMake(0, 65, 320, 505)];
-                _mapView.delegate = self;
+                _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, _listView.frame.size.height)];                _mapView.delegate = self;
             }
             if (_listView) [_listView removeFromSuperview];
             
             [self.viewTypeBtn setTitle:@"List"];
-            [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
-            [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
-            
+//            [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
+//            [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
             [self.view addSubview:_mapView];
-            
             self.tabBarController.tabBar.hidden = YES;
-//            self.navigationController.navigationBarHidden = YES;
+            UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+            [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
+            [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
+            [a1 setImage:[UIImage imageNamed:@"map-icon-list.png"] forState:UIControlStateNormal];
+            _viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
+            [self.viewTypeBtn setTitle:@"Map"];
+            self.navigationItem.rightBarButtonItem = _viewTypeBtn;
+            self.tabBarController.tabBar.hidden = NO;
+            _checkListOrMap = NO;
+
+          //            self.navigationController.navigationBarHidden = YES;
 //            [UIView animateWithDuration:1.0f animations:^{
 //                self.tabBarController.tabBar.hidden = YES;
 //            }];
-            
+
             [_mapView reloadInterface:self.listOffers];
             break;
         }
@@ -123,7 +147,7 @@
 -(void)selectMap:(UIButton*)sender
 {
     sender.selected = !sender.selected;
-    if (sender.selected) {
+    if (_checkListOrMap) {
         
         [self loadInterface:enumOfferInterfaceType_Map];
     }

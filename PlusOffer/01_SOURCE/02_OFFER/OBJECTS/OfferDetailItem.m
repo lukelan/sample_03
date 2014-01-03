@@ -28,7 +28,17 @@
         
         _max_punch = data[@"max"];
         _count_puch = data[@"count"];
+        
+        _branch_id = data[@"branch_id"];
+        CGFloat latitude = [[data objectForKey:@"latitude"] floatValue];
+        CGFloat longtitude = [[data objectForKey:@"longitude"] floatValue];
+        self.location = CLLocationCoordinate2DMake(latitude, longtitude);
     }
     return self;
+}
+
+-(CLLocationCoordinate2D)coordinate
+{
+    return self.location;
 }
 @end
