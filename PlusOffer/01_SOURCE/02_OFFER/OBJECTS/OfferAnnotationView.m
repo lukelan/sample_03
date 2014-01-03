@@ -57,6 +57,22 @@
         [self setMaskTo:_imageView byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
         [_expandedView addSubview:_imageView];
         
+        // discount image
+        _discountImage = [[SDImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        [_expandedView addSubview:_discountImage];
+        // discount label
+        _discountLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        _discountLbl.frame = CGRectMake(0, 0 , _discountLbl.frame.size.width, _discountLbl.frame.size.height);
+        _discountLbl.backgroundColor = [UIColor clearColor];
+        _discountLbl.textColor = [ UIColor blueColor];
+        _discountLbl.font = [UIFont systemFontOfSize:16.0f];
+        _discountLbl.transform = CGAffineTransformMakeRotation (-DEGREES_TO_RADIANS(45));
+        _discountLbl.textAlignment = NSTextAlignmentCenter;
+        [_discountLbl setFont:[UIFont fontWithName:@"Avenir Next" size:8]];
+        _discountLbl.textColor = UIColorFromRGB(0x333333);
+        
+        [_discountImage addSubview:_discountLbl];
+        
         // Name Label
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 57, OfferAnnotationViewExpanded_Width, 20)];
         _titleLabel.backgroundColor = [UIColor clearColor];
@@ -137,6 +153,26 @@
     self.titleLabel.text = item.title;
     self.subtitleLabel.text = item.subtitle;
     [self.imageView setImage:[UIImage imageNamed:@"img-loc-mcdonalds.jpg"]];
+    
+    if (item.discount_type.intValue == ENUM_DISCOUNT || item.discount_type.intValue == ENUM_VALUE)
+    {
+        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-silver.png"]];
+        NSString *stringFormat = @"%";
+        self.discountLbl.text = [NSString stringWithFormat:@"OFF %@%@"
+                                 ,item.discount, stringFormat];
+    }
+    else if (item.discount_type.intValue == ENUM_GIFT)
+    {
+        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-green.png"]];
+        self.discountLbl.text = [NSString stringWithFormat:@"%@ quà tặng"
+                                 ,item.discount];
+    }
+    else if (item.discount_type.intValue == ENUM_GIFT_TICKET)
+    {
+        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-red.png"]];
+        self.discountLbl.text = [NSString stringWithFormat:@"Tặng %@ vé"
+                                 ,item.discount];
+    }
 }
 
 #pragma mark - OfferAnnotationViewProtocol

@@ -12,26 +12,7 @@
 #define OFFERTABLE_CELL_PADDING 5.0f
 #define OFFERTABLE_CELL_MARGIN 10.0f
 #define OFFERTABLE_CELL_BACKGROUND_HEIGHT OFFERTABLE_CELL_HEIGHT - 2*OFFERTABLE_CELL_PADDING // 134.0f (set background height = cell height for testing purpose)
-typedef enum
-{
-    ENUM_MCDONALDS = 1,
-    ENUM_URBAN_STATION,
-    ENUM_BHD,
-}ENUM_BRAND_ID;
 
-typedef enum
-{
-    ENUM_DISTANCE = 0,
-    ENUM_HERE,
-}ENUM_lOCATION;
-
-typedef enum
-{
-    ENUM_DISCOUNT = 1,
-    ENUM_VALUE,
-    ENUM_GIFT,
-    ENUM_GIFT_TICKET
-}ENUM_DISCOUNT_TYPE;
 @implementation OfferTableCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

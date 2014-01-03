@@ -31,6 +31,8 @@ typedef enum {
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subtitleLabel;
+@property (nonatomic, retain) SDImageView *discountImage;
+@property (nonatomic, retain) UILabel *discountLbl;
 @property (nonatomic, strong) UIView *expandedView;
 @property (nonatomic, strong) UIImageView *normalView;
 
