@@ -176,6 +176,8 @@
     }
 }
 
+- (IBAction)loadDirection:(id)sender {
+}
 #pragma mark - Actions
 
 - (IBAction)btSegmented:(id)sender {

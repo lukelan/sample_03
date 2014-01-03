@@ -19,8 +19,6 @@
 		1819422F1875AEE1006E8870 /* map-icon-user-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 181942241875AEE1006E8870 /* map-icon-user-location.png */; };
 		181942301875AEE1006E8870 /* map-icon-user-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181942251875AEE1006E8870 /* map-icon-user-location@2x.png */; };
 		181942311875AEE1006E8870 /* map-icon-user-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181942251875AEE1006E8870 /* map-icon-user-location@2x.png */; };
-		181942361875C23B006E8870 /* GradientPolylineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181942351875C23B006E8870 /* GradientPolylineView.m */; };
-		181942371875C23B006E8870 /* GradientPolylineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181942351875C23B006E8870 /* GradientPolylineView.m */; };
 		1819423A1875D029006E8870 /* OfferAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181942391875D029006E8870 /* OfferAnnotationView.m */; };
 		1819423B1875D029006E8870 /* OfferAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181942391875D029006E8870 /* OfferAnnotationView.m */; };
 		1843A348186B339C002698D0 /* RedeemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1843A347186B339C002698D0 /* RedeemTableViewCell.m */; };
@@ -44,6 +42,8 @@
 		18814D2D18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */; };
 		18814D2E18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */; };
 		18924CBD186F322C005D0432 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18924CBC186F322C005D0432 /* libzbar.a */; };
+		18D7919E18771AF800D962A9 /* Routes.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7919D18771AF800D962A9 /* Routes.m */; };
+		18D7919F18771AF800D962A9 /* Routes.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7919D18771AF800D962A9 /* Routes.m */; };
 		18DDE8081870052400399747 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DDE8071870052400399747 /* libiconv.dylib */; };
 		18FBCED618673C1800C9E399 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCED518673C1800C9E399 /* Foundation.framework */; };
 		18FBCED818673C1800C9E399 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FBCED718673C1800C9E399 /* CoreGraphics.framework */; };
@@ -491,8 +491,6 @@
 		181942231875AEE1006E8870 /* map-icon-pin-food-beverage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-pin-food-beverage@2x.png"; sourceTree = "<group>"; };
 		181942241875AEE1006E8870 /* map-icon-user-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-user-location.png"; sourceTree = "<group>"; };
 		181942251875AEE1006E8870 /* map-icon-user-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-user-location@2x.png"; sourceTree = "<group>"; };
-		181942341875C23B006E8870 /* GradientPolylineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineView.h; sourceTree = "<group>"; };
-		181942351875C23B006E8870 /* GradientPolylineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineView.m; sourceTree = "<group>"; };
 		181942381875D029006E8870 /* OfferAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferAnnotationView.h; sourceTree = "<group>"; };
 		181942391875D029006E8870 /* OfferAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferAnnotationView.m; sourceTree = "<group>"; };
 		1843A346186B339C002698D0 /* RedeemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemTableViewCell.h; sourceTree = "<group>"; };
@@ -535,6 +533,8 @@
 		18924CBA186F322C005D0432 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
 		18924CBB186F322C005D0432 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
 		18924CBC186F322C005D0432 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		18D7919C18771AF800D962A9 /* Routes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Routes.h; path = PlusOffer/01_SOURCE/06_Classes/Routes.h; sourceTree = SOURCE_ROOT; };
+		18D7919D18771AF800D962A9 /* Routes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Routes.m; path = PlusOffer/01_SOURCE/06_Classes/Routes.m; sourceTree = SOURCE_ROOT; };
 		18DDE8071870052400399747 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		18FBCED218673C1800C9E399 /* PlusOffer Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlusOffer Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FBCED518673C1800C9E399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1201,8 +1201,6 @@
 		18FBCF29186746EB00C9E399 /* OBJECTS */ = {
 			isa = PBXGroup;
 			children = (
-				181942341875C23B006E8870 /* GradientPolylineView.h */,
-				181942351875C23B006E8870 /* GradientPolylineView.m */,
 				AA5A71EF186ABEFA00BC8D91 /* OfferTableCell.h */,
 				AA5A71F0186ABEFA00BC8D91 /* OfferTableCell.m */,
 				AA5A71F1186ABEFA00BC8D91 /* OfferTableItem.h */,
@@ -1269,6 +1267,8 @@
 				4F6848E3186D8CB90031893D /* Location.m */,
 				4F0440541871248A004F93ED /* UserProfile.h */,
 				4F0440551871248A004F93ED /* UserProfile.m */,
+				18D7919C18771AF800D962A9 /* Routes.h */,
+				18D7919D18771AF800D962A9 /* Routes.m */,
 			);
 			path = 06_CLASSES;
 			sourceTree = "<group>";
@@ -2391,11 +2391,11 @@
 				18FBCF2F1867472300C9E399 /* PlusOfferMapView.m in Sources */,
 				4F5B4EA818696A4E00AAE584 /* CoreAPIManager.m in Sources */,
 				AA5A729D186D63F500BC8D91 /* JPSThumbnailAnnotationView.m in Sources */,
+				18D7919E18771AF800D962A9 /* Routes.m in Sources */,
 				18FBCF21186744F300C9E399 /* RedeemViewController.m in Sources */,
 				4F754E181872B3E900540C9B /* PunchCell.m in Sources */,
 				18FBCF1E186744DE00C9E399 /* OfferDetailViewController.m in Sources */,
 				4FBBEC03186849BF0040EA12 /* CustomViewController.m in Sources */,
-				181942361875C23B006E8870 /* GradientPolylineView.m in Sources */,
 				E3941EB0186D272F00B1198E /* RedeemDetailViewController.m in Sources */,
 				18FBCF1B186744C300C9E399 /* PlusOfferViewController.m in Sources */,
 				18FBCF2C1867471400C9E399 /* PlusOfferListView.m in Sources */,
@@ -2524,6 +2524,7 @@
 				AAB01B7618701805006E2552 /* UIView+JCUI.m in Sources */,
 				AAB01B7718701805006E2552 /* NSString+SHA.m in Sources */,
 				AAB01B7818701805006E2552 /* NSString+trimSpecialCharacter.m in Sources */,
+				18D7919F18771AF800D962A9 /* Routes.m in Sources */,
 				AAB01B7918701805006E2552 /* main.m in Sources */,
 				AABB9BE618725FAB0018C0D5 /* OfferModel.m in Sources */,
 				AAB01B7A18701805006E2552 /* DictionaryMapping.m in Sources */,
@@ -2538,7 +2539,6 @@
 				AAB01B8318701805006E2552 /* CustomUIImagePickerController.m in Sources */,
 				AAB01B8418701805006E2552 /* pngtrans.c in Sources */,
 				AAB01B8518701805006E2552 /* pngerror.c in Sources */,
-				181942371875C23B006E8870 /* GradientPolylineView.m in Sources */,
 				AAB01B8618701805006E2552 /* JCGridMenuController.m in Sources */,
 				AAB01B8718701805006E2552 /* JCGridMenuView.m in Sources */,
 				AABB9BEA18727B5F0018C0D5 /* OfferDetailModel.m in Sources */,

@@ -8,11 +8,13 @@
 
 #import "PlusOfferMapView.h"
 #import "OfferTableItem.h"
-#import "GradientPolylineView.h"
+#import "OfferAnnotationView.h"
+#import "Routes.h"
 
 @implementation PlusOfferMapView
 {
     OfferTableItem *_selectedOfferItem;
+    MKPolyline *_polyLine;
 }
 
 
@@ -26,10 +28,10 @@
         self.mapView.delegate = self;
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
         
-        if (IS_IPHONE5) {
-        } else {
-            [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, _btnUserLocation.frame.origin.y - 90, _btnUserLocation.frame.size.height, _btnUserLocation.frame.size.width)];
-        }
+//        if (IS_IPHONE5) {
+//        } else {
+//            [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, _btnUserLocation.frame.origin.y - 90, _btnUserLocation.frame.size.height, _btnUserLocation.frame.size.width)];
+//        }
     }
     return self;
 }
@@ -70,25 +72,27 @@
     [_mapView setRegion:region animated:TRUE];
     [_mapView regionThatFits:region];
     [_mapView reloadInputViews];
+    
+    // if there is only one item in list, draw route to that item
+    if (self.dataSource.count == 1) {
+        if (_selectedOfferItem) {
+            OfferTableItem *item = self.dataSource[0];
+            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
+        }
+    }
 }
 
 #pragma mark - MKMapViewDelegate
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    static NSString *identifier = @"BankItemID";
+    
     if ([annotation isKindOfClass:[OfferTableItem class]]) {
-        // select pin image
-        NSString *imageName = [((OfferTableItem*)annotation).category_id integerValue] != 1 ? @"map-icon-pin-entertainment.png" : @"map-icon-pin-food-beverage.png";
-        
-        MKAnnotationView *annotationView = (MKAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        if (annotationView == nil) {
-            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            annotationView.enabled = YES;
-            annotationView.canShowCallout = NO;
-        } else {
-            annotationView.annotation = annotation;
+        NSString *identifier = [[OfferAnnotationView class] description];
+        OfferAnnotationView *annotationView = (OfferAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (!annotationView) {
+            annotationView = [[OfferAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         }
-        annotationView.image = [UIImage imageNamed:imageName];
         
+        annotationView.annotation = annotation;
         return annotationView;
     }
     else if ([annotation isKindOfClass:[MKUserLocation class]])
@@ -101,25 +105,25 @@
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    //NSLog(@"didSelectAnnotationView");
-    if ([view.annotation isKindOfClass:[OfferTableItem class]]) {
-        //        self.directionBtn.hidden = NO;
+    if ([view conformsToProtocol:@protocol(OfferAnnotationViewProtocol)]) {
         _selectedOfferItem = (OfferTableItem*)view.annotation;
+        [((NSObject<OfferAnnotationViewProtocol> *)view) didSelectAnnotationViewInMap:mapView];
     }
 }
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
-    //NSLog(@"didDeselectAnnotationView");
-    if ([view.annotation isKindOfClass:[OfferTableItem class]]) {
+    if ([view conformsToProtocol:@protocol(OfferAnnotationViewProtocol)]) {
         _selectedOfferItem = nil;
+        [((NSObject<OfferAnnotationViewProtocol> *)view) didDeselectAnnotationViewInMap:mapView];
     }
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView
             viewForOverlay:(id<MKOverlay>)overlay {
-    GradientPolylineView *overlayView = [[GradientPolylineView alloc] initWithOverlay:overlay];
-    overlayView.lineWidth = 5;
-    return overlayView;
+    MKPolylineView *polylineView = [[MKPolylineView alloc] initWithPolyline:overlay];
+    polylineView.strokeColor = [UIColor redColor];
+    polylineView.lineWidth = 5.0;
+    return polylineView;
 }
 
 #pragma mark - Utilities
@@ -164,5 +168,85 @@
 
     return MKCoordinateRegionMakeWithDistance(centralPoint, radiusMeters * 2, radiusMeters *2 );
     
+}
+
+#pragma mark RKManageDelegate
+-(void)processResultResponseArray:(NSArray *)array requestId:(int)request_id;
+{
+    if (request_id == ID_REQUEST_DIRECTION) {
+        // get first route
+        if (array.count > 0) {
+            Routes *routes = array[0];
+            NSString *allPolylines = [routes.overview_polyline objectForKey:@"points"];
+            NSMutableArray *_path = [self decodePolyLine:allPolylines];
+            NSInteger numberOfSteps = _path.count;
+            CLLocationCoordinate2D coordinates[numberOfSteps];
+            for (NSInteger index = 0; index < numberOfSteps; index++) {
+                CLLocation *location = [_path objectAtIndex:index];
+                CLLocationCoordinate2D coordinate = location.coordinate;
+                
+                coordinates[index] = coordinate;
+            }
+            
+            // remove current poly line of map if any
+            [self.mapView removeOverlay:_polyLine];
+            // create new poly line
+            _polyLine = [MKPolyline polylineWithCoordinates:coordinates count:numberOfSteps];
+            // add new poly line to map
+            [self.mapView addOverlay:_polyLine];
+        }
+    }
+    
+}
+
+// decode route
+- (NSMutableArray *)decodePolyLine:(NSString *)encodedStr
+{
+    NSMutableString *encoded = [[NSMutableString alloc] initWithCapacity:[encodedStr length]];
+    [encoded appendString:encodedStr];
+    [encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
+                                options:NSLiteralSearch
+                                  range:NSMakeRange(0, [encoded length])];
+    NSInteger len = [encoded length];
+    NSInteger index = 0;
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSInteger lat=0;
+    NSInteger lng=0;
+    
+    while (index < len)
+    {
+        NSInteger b;
+        NSInteger shift = 0;
+        NSInteger result = 0;
+        
+        do
+        {
+            b = [encoded characterAtIndex:index++] - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        
+        NSInteger dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+        lat += dlat;
+        shift = 0;
+        result = 0;
+        
+        do
+        {
+            b = [encoded characterAtIndex:index++] - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        
+        NSInteger dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+        lng += dlng;
+        NSNumber *latitude = [[NSNumber alloc] initWithFloat:lat * 1e-5];
+        NSNumber *longitude = [[NSNumber alloc] initWithFloat:lng * 1e-5];
+        
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
+        [array addObject:location];
+    }
+    
+    return array;
 }
 @end

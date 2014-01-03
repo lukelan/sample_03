@@ -10,6 +10,7 @@
 #import "RedeemModel.h"
 #import "OfferModel.h"
 #import "OfferDetailModel.h"
+#import "Routes.h"
 
 @implementation PlusAPIManager
 #pragma mark API request with restkit
@@ -27,6 +28,18 @@
                                                    }];
     RKResponseDescriptor *locationDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:location method:RKRequestMethodAny pathPattern:nil keyPath:@"result" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self RK_SendRequestAPI_Descriptor:locationDescriptor withURL:[NSURL URLWithString:[self getFullLinkAPI:url]] postData:nil keyPost:nil withContext:context_id requestId:-1];
+}
+
+-(void)RK_RequestApiGetDirectionContext:(id)context_id from:(CLLocationCoordinate2D)source to:(CLLocationCoordinate2D)destination
+{
+    NSString *url = [NSString stringWithFormat:@"%@?origin=%f,%f&destination=%f,%f&sensor=true",REQUEST_URL_GOOGLE_DIRECTION_API, source.latitude, source.longitude, destination.latitude, destination.longitude];
+    //---------------------------------//
+    RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[Routes class]];
+    [objectMapping addAttributeMappingsFromDictionary:@{
+                                                   @"overview_polyline" : @"overview_polyline"
+                                                   }];
+    RKResponseDescriptor *locationDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:objectMapping method:RKRequestMethodGET pathPattern:nil keyPath:@"routes" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self RK_SendRequestAPI_Descriptor:locationDescriptor withURL:[NSURL URLWithString:url] postData:nil keyPost:nil withContext:context_id requestId:ID_REQUEST_DIRECTION];
 }
 
 -(void)RK_RequestApiGetListPlusOfferRedeem:(id)context_id forUserID:(NSString*)userID;

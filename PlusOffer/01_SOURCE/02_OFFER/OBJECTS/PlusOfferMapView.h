@@ -16,7 +16,7 @@
 
 @end
 
-@interface PlusOfferMapView : UIView <MKMapViewDelegate>
+@interface PlusOfferMapView : UIView <MKMapViewDelegate, RKManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUserLocation;
 

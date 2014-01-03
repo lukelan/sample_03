@@ -60,11 +60,14 @@
 #pragma mark log
 #define API_REQUEST_LOG_POST_WRITING @"%@method=Logs.write&%@"
 
+#define REQUEST_URL_GOOGLE_DIRECTION_API @"http://maps.googleapis.com/maps/api/directions/json"
+
 typedef enum
 {
     ID_REQUEST_PLUS_OFFER = 0,
     ID_REQUEST_REDEEM,
     ID_REQUEST_ACCOUNT,
+    ID_REQUEST_DIRECTION,
     ID_REQUEST_OTHER
 }ENUM_ID_REQUEST_TYPE;
 
