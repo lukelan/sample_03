@@ -201,7 +201,7 @@
 {
     if (indexPath.section == enumInfoPlusOfferCell)
     {
-        return (self.view.frame.size.height - NAVIGATION_BAR_HEIGHT)/2;
+        return 229;
     }
     else if (indexPath.section == enumDiscountCell)
     {
