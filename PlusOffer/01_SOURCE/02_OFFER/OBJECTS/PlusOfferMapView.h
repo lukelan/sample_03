@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "OfferAnnotationView.h"
 
 @protocol PlusOfferMapViewDelegate <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface PlusOfferMapView : UIView <MKMapViewDelegate, RKManagerDelegate>
+@interface PlusOfferMapView : UIView <MKMapViewDelegate, RKManagerDelegate, OfferAnnotationViewProtocol,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUserLocation;
 
@@ -26,4 +27,5 @@
 
 - (IBAction)showUserLocation:(id)sender;
 -(void)reloadInterface:(NSMutableArray*)listOffers;
+-(void)drawRouteToItemIndex:(int)index;
 @end

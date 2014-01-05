@@ -10,6 +10,9 @@
 #import "OfferTableItem.h"
 #import "OfferModel.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
 @interface PlusOfferViewController () <NSFetchedResultsControllerDelegate>
 @property (nonatomic, retain) NSMutableArray *listOffers;
 @property (nonatomic, retain) NSMutableArray *dataSource;
@@ -65,10 +68,13 @@
         UIImage *segUnselectedSelected = [UIImage imageNamed:@"segment_deselected_selected.png"];
         [self.segmentPlusOffers setDividerImage:segUnselectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
         
+        
         UIImage *segmentSelectedUnselected = [UIImage imageNamed:@"segment_selected_deselected.png"];
         [self.segmentPlusOffers setDividerImage:segmentSelectedUnselected forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
         UIImage *segmentUnselectedUnselected = [UIImage imageNamed:@"segment_deselected_deselected.png"];
         [self.segmentPlusOffers setDividerImage:segmentUnselectedUnselected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        
+//        self.segmentPlusOffers.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.97f];
     }
     [self.segmentPlusOffers setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                               [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
@@ -82,6 +88,9 @@
     
     [self.segmentPlusOffers setBackgroundImage:[UIImage imageNamed:@"segment_bg.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.segmentPlusOffers setBackgroundImage:[UIImage imageNamed:@"segment_selected_hl.png"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.translucent = NO;
+
 }
 
 #pragma mark - Interface
@@ -113,7 +122,8 @@
         case enumOfferInterfaceType_Map:
         {
             if (!_mapView) {
-                _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, _listView.frame.size.height)];                _mapView.delegate = self;
+                _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height)];
+                _mapView.delegate = self;
             }
             if (_listView) [_listView removeFromSuperview];
             
@@ -134,7 +144,7 @@
 
           //            self.navigationController.navigationBarHidden = YES;
 //            [UIView animateWithDuration:1.0f animations:^{
-//                self.tabBarController.tabBar.hidden = YES;
+                self.tabBarController.tabBar.hidden = YES;
 //            }];
 
             [_mapView reloadInterface:self.listOffers];

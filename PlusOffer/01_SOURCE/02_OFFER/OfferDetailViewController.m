@@ -47,6 +47,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.tabBarController.tabBar.hidden = NO;
+    
     viewName = OFFER_DETAIL_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
     zBarReader = [[ZBarReaderViewController alloc] init];
@@ -340,6 +343,7 @@
             [_tableViewDetail setDelegate:self];
 
             isShowingMap = NO;
+            self.tabBarController.tabBar.hidden = NO;
             [self setImageCustomBarRight:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
             [self.view addSubview:_tableViewDetail];
             break;
@@ -367,15 +371,18 @@
 
             [self setImageCustomBarRight:[UIImage imageNamed:@"map-icon-list.png"]];
             if (!_mapView) {
-                _mapView = [[PlusOfferMapView alloc] initWithFrame:_tableViewDetail.frame];
+                _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height)];
+                _mapView.delegate = self;
             }
             
             if (_tableViewDetail) {
                 [_tableViewDetail removeFromSuperview];
             }
             isShowingMap = YES;
+            self.tabBarController.tabBar.hidden = YES;
             [self.view addSubview:_mapView];
             [_mapView reloadInterface:[NSMutableArray arrayWithObject:item]];
+            [_mapView drawRouteToItemIndex:0];
             break;
         }
             

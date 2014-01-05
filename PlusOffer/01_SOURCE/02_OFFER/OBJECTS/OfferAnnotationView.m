@@ -7,7 +7,7 @@
 //
 
 #import "OfferAnnotationView.h"
-#import "JPSThumbnailAnnotationView.h"
+//#import "JPSThumbnailAnnotationView.h"
 #import "OfferTableItem.h"
 
 #define OfferAnnotationViewNormal_Width 27.0f
@@ -36,6 +36,12 @@
 }
 */
 
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
 -(id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
@@ -44,13 +50,23 @@
         self.backgroundColor = [UIColor clearColor];
         self.canShowCallout = NO;
         
+        self.userInteractionEnabled = YES;
+        
+        // Add tap gesture to expendedView
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+                                                 initWithTarget:self action:@selector(respondToTapGesture:)];
+        tapRecognizer.delegate = self;
+        
         // normal view
         _normalView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height)];
         [self addSubview:_normalView];
-        
+    
         // expanded view
         _expandedView = [[UIView alloc] initWithFrame:CGRectMake((OfferAnnotationViewNormal_Width - OfferAnnotationViewExpanded_Width)/2.0f, OfferAnnotationViewNormal_Height - OfferAnnotationViewExpanded_Height - 10, OfferAnnotationViewExpanded_Width, OfferAnnotationViewExpanded_Height)];
         _expandedView.backgroundColor = [UIColor clearColor];
+        _expandedView.userInteractionEnabled = YES;
+        
+        [_expandedView addGestureRecognizer:tapRecognizer];
         
         // Image View
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.5, 0.5, OfferAnnotationViewExpanded_Width - 1, OfferAnnotationViewExpanded_Height - 1)];
@@ -105,6 +121,7 @@
         _strokeAndShadowLayer.lineWidth = 1.0;
         _strokeAndShadowLayer.masksToBounds = NO;
         [_expandedView.layer insertSublayer:_strokeAndShadowLayer atIndex:0];
+        
         
         // default state
         _state = OfferAnnotationViewState_Normal;
@@ -183,10 +200,14 @@
     if (_state != OfferAnnotationViewState_Normal) return;
     _state = OfferAnnotationViewState_Animating;
     
+    CGRect orgFrame = self.expandedView.frame;
     [UIView animateWithDuration:1.0f animations:^{
         [self.normalView removeFromSuperview];
         [self addSubview:self.expandedView];
+        self.expandedView.frame = CGRectMake(self.expandedView.frame.origin.x, self.expandedView.frame.origin.y, 20, 20);
+        self.expandedView.frame = orgFrame;
     } completion:^(BOOL finished) {
+        
         _state = OfferAnnotationViewState_Expanded;
     }];
 }
@@ -198,10 +219,18 @@
     [UIView animateWithDuration:1.0f animations:^{
         [self.expandedView removeFromSuperview];
         [self addSubview:self.normalView];
+//        CGPoint temp = self.center;
+//        self.frame = CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height);
+//        self.center = temp;
     } completion:^(BOOL finished) {
         _state = OfferAnnotationViewState_Normal;
     }];
 }
+
+-(void)respondToTapGesture:(UITapGestureRecognizer *)tapGesture {
+    [self.delegate didTapAnnotationExpendedViewInMap:self.tag];
+}
+
 
 #pragma mark - Utilities
 - (CGPathRef)newBubbleWithRect:(CGRect)rect {

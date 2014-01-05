@@ -16,13 +16,14 @@ typedef enum {
 } OfferAnnotationViewState;
 
 @protocol OfferAnnotationViewProtocol <NSObject>
-
+@optional
 - (void)didSelectAnnotationViewInMap:(MKMapView *)mapView;
 - (void)didDeselectAnnotationViewInMap:(MKMapView *)mapView;
+- (void)didTapAnnotationExpendedViewInMap:(int)index;
 
 @end
 
-@interface OfferAnnotationView : MKAnnotationView <OfferAnnotationViewProtocol>
+@interface OfferAnnotationView : MKAnnotationView <OfferAnnotationViewProtocol,UIGestureRecognizerDelegate>
 {
     CAShapeLayer *_strokeAndShadowLayer;
     OfferAnnotationViewState _state;
@@ -35,5 +36,8 @@ typedef enum {
 @property (nonatomic, retain) UILabel *discountLbl;
 @property (nonatomic, strong) UIView *expandedView;
 @property (nonatomic, strong) UIImageView *normalView;
+
+@property (nonatomic, weak) id<OfferAnnotationViewProtocol> delegate;
+
 
 @end

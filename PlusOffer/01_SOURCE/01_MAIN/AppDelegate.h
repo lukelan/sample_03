@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "DefineConstant.h"
 #import "Location.h"
+#import "OfferTableItem.h"
 
 @protocol OpenBarcodeScannerDelegate <NSObject>
 
@@ -39,4 +40,8 @@
 
 +(NSString *)getVersionOfApplication;
 -(UIViewController *) getCurrentViewController;
+
+
+#pragma mark - OfferDetailViewController
+-(void) changeToOfferDetailViewController:(OfferTableItem*)item;
 @end

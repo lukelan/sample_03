@@ -8,7 +8,6 @@
 
 #import "PlusOfferMapView.h"
 #import "OfferTableItem.h"
-#import "OfferAnnotationView.h"
 #import "Routes.h"
 
 @implementation PlusOfferMapView
@@ -16,7 +15,6 @@
     OfferTableItem *_selectedOfferItem;
     MKPolyline *_polyLine;
 }
-
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,12 +26,17 @@
         self.mapView.delegate = self;
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
         
-//        if (IS_IPHONE5) {
-//        } else {
-//            [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, _btnUserLocation.frame.origin.y - 90, _btnUserLocation.frame.size.height, _btnUserLocation.frame.size.width)];
-//        }
+        [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, [[UIScreen mainScreen] bounds].size.height - 140, _btnUserLocation.frame.size.height, _btnUserLocation.frame.size.width)];
+        _btnUserLocation.userInteractionEnabled = YES;
+        
     }
     return self;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 /*
@@ -46,6 +49,15 @@
 */
 - (IBAction)showUserLocation:(id)sender {
     [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate animated:YES];
+}
+
+// draw route to that item
+-(void)drawRouteToItemIndex:(int)index {
+    if (self.dataSource.count > index && index >= 0) {
+        OfferTableItem *item = self.dataSource[index];
+        _selectedOfferItem = item;
+        [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
+    }
 }
 
 -(void)reloadInterface:(NSMutableArray*)listOffers
@@ -74,12 +86,12 @@
     [_mapView reloadInputViews];
     
     // if there is only one item in list, draw route to that item
-    if (self.dataSource.count == 1) {
-        if (_selectedOfferItem) {
-            OfferTableItem *item = self.dataSource[0];
-            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
-        }
-    }
+//    if (self.dataSource.count == 1) {
+//        if (_selectedOfferItem) {
+//            OfferTableItem *item = self.dataSource[0];
+//            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
+//        }
+//    }
 }
 
 #pragma mark - MKMapViewDelegate
@@ -90,6 +102,7 @@
         OfferAnnotationView *annotationView = (OfferAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
         if (!annotationView) {
             annotationView = [[OfferAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView.delegate = self;
         }
         
         annotationView.annotation = annotation;
@@ -249,4 +262,14 @@
     
     return array;
 }
+
+#pragma mark - OfferAnnotationViewProtocol
+- (void)didTapAnnotationExpendedViewInMap:(int)index {
+    if (_selectedOfferItem) {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate changeToOfferDetailViewController:_selectedOfferItem];
+    }
+}
+
+
 @end

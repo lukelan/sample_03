@@ -495,4 +495,13 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 //    }
 }
 
+
+#pragma mark - OfferDetailViewController
+// OfferDetailViewController
+-(void) changeToOfferDetailViewController:(OfferTableItem*)item {
+    OfferDetailViewController *offerDetailViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferDetailViewController"];
+    [offerDetailViewController setHidesBottomBarWhenPushed:NO];
+    [[self getCurrentViewController].navigationController pushViewController:offerDetailViewController animated:YES];
+}
+
 @end
