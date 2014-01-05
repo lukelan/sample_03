@@ -3,7 +3,7 @@
 //  PlusOffer
 //
 //  Created by Dao Pham Hoang Duy on 12/27/13.
-//  Copyright (c) 2013 Tai Truong. All rights reserved.
+//  Copyright (c) 2013 Trong Vu. All rights reserved.
 //
 
 #import "RedeemDetailViewController.h"

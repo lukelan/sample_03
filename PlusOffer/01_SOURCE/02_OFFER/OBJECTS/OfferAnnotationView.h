@@ -2,7 +2,7 @@
 //  OfferAnnotationView.h
 //  PlusOffer
 //
-//  Created by Tai Truong on 1/2/14.
+//  Created by Trong Vu on 1/2/14.
 //  Copyright (c) 2014 Trongvm. All rights reserved.
 //
 

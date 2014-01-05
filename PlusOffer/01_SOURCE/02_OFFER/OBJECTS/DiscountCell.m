@@ -3,7 +3,7 @@
 //  PlusOffer
 //
 //  Created by Dao Pham Hoang Duy on 12/27/13.
-//  Copyright (c) 2013 Tai Truong. All rights reserved.
+//  Copyright (c) 2013 Trong Vu. All rights reserved.
 //
 
 #import "DiscountCell.h"
@@ -32,6 +32,7 @@
     if (![object isKindOfClass:[OfferDetailItem class]]) {
         return;
     }
+   
     OfferDetailItem *item = object;
     
     [self.imageDiscount setImageWithURL:[NSURL URLWithString:item.iconURL]];//setImage:[UIImage imageNamed:@"redeem_logo_1.png"]
@@ -59,6 +60,7 @@
             [lblText setTag:tag_min + i];
             [self.scrollViewDes addSubview:lblIcon];
             [self.scrollViewDes addSubview:lblText];
+            lblText.backgroundColor = [UIColor clearColor];
         }
         [lblText setText:[arrDes objectAtIndex:i]];
     }
