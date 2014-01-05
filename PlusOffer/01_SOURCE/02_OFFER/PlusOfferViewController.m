@@ -53,6 +53,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     PINGREMARKETING
+    switch (_vcType) {
+        case enumOfferInterfaceType_List: {
+            self.tabBarController.tabBar.hidden = NO;
+            break;
+        }
+        case enumOfferInterfaceType_Map: {
+            self.tabBarController.tabBar.hidden = YES;
+            break;
+        }
+        default:
+            break;
+    }
+
     [self loadOffers];
 }
 
