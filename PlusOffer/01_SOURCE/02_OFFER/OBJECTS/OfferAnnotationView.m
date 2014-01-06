@@ -49,20 +49,20 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         self.frame = CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height);
         self.backgroundColor = [UIColor clearColor];
         self.canShowCallout = NO;
+        self.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
         
         self.userInteractionEnabled = YES;
         
         // Add tap gesture to expendedView
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
                                                  initWithTarget:self action:@selector(respondToTapGesture:)];
-        tapRecognizer.delegate = self;
         
         // normal view
         _normalView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height)];
         [self addSubview:_normalView];
     
         // expanded view
-        _expandedView = [[UIView alloc] initWithFrame:CGRectMake((OfferAnnotationViewNormal_Width - OfferAnnotationViewExpanded_Width)/2.0f, OfferAnnotationViewNormal_Height - OfferAnnotationViewExpanded_Height - 10, OfferAnnotationViewExpanded_Width, OfferAnnotationViewExpanded_Height)];
+        _expandedView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, -10.0f, OfferAnnotationViewExpanded_Width, OfferAnnotationViewExpanded_Height)];
         _expandedView.backgroundColor = [UIColor clearColor];
         _expandedView.userInteractionEnabled = YES;
         
@@ -121,8 +121,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         _strokeAndShadowLayer.lineWidth = 1.0;
         _strokeAndShadowLayer.masksToBounds = NO;
         [_expandedView.layer insertSublayer:_strokeAndShadowLayer atIndex:0];
-        
-        
+
         // default state
         _state = OfferAnnotationViewState_Normal;
         
@@ -195,19 +194,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 #pragma mark - OfferAnnotationViewProtocol
 - (void)didSelectAnnotationViewInMap:(MKMapView *)mapView {
     // Center map at annotation point
-    [mapView setCenterCoordinate:_coordinate animated:YES];
+//    [mapView setCenterCoordinate:_coordinate animated:YES];
     
     if (_state != OfferAnnotationViewState_Normal) return;
     _state = OfferAnnotationViewState_Animating;
     
-    CGRect orgFrame = self.expandedView.frame;
-    [UIView animateWithDuration:1.0f animations:^{
-        [self.normalView removeFromSuperview];
-        [self addSubview:self.expandedView];
-        self.expandedView.frame = CGRectMake(self.expandedView.frame.origin.x, self.expandedView.frame.origin.y, 20, 20);
-        self.expandedView.frame = orgFrame;
-    } completion:^(BOOL finished) {
-        
+    CGRect r = self.frame;
+    r.origin.x = r.origin.x + r.size.width/2 - OfferAnnotationViewExpanded_Width/2;
+    r.origin.y = CGRectGetMaxY(r) - OfferAnnotationViewExpanded_Height;
+    r.size = CGSizeMake(OfferAnnotationViewExpanded_Width, OfferAnnotationViewExpanded_Height);
+    self.frame = r;
+
+    [UIView transitionFromView:self.normalView toView:self.expandedView duration:.5f options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
         _state = OfferAnnotationViewState_Expanded;
     }];
 }
@@ -216,13 +214,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (_state != OfferAnnotationViewState_Expanded) return;
     _state = OfferAnnotationViewState_Animating;
     
-    [UIView animateWithDuration:1.0f animations:^{
-        [self.expandedView removeFromSuperview];
-        [self addSubview:self.normalView];
-//        CGPoint temp = self.center;
-//        self.frame = CGRectMake(0, 0, OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height);
-//        self.center = temp;
-    } completion:^(BOOL finished) {
+    CGRect r = self.frame;
+    r.origin.x = r.origin.x + r.size.width/2 - OfferAnnotationViewNormal_Width/2;
+    r.origin.y = CGRectGetMaxY(r) - OfferAnnotationViewNormal_Height;
+    r.size = CGSizeMake(OfferAnnotationViewNormal_Width, OfferAnnotationViewNormal_Height);
+    self.frame = r;
+    
+    [UIView transitionFromView:self.expandedView toView:self.normalView duration:.5f options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
         _state = OfferAnnotationViewState_Normal;
     }];
 }
@@ -238,12 +236,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 	CGFloat radius = 7.0;
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGFloat parentX = rect.origin.x + rect.size.width/2;
-	
-	//Determine Size
-//	rect.size.width -= stroke + 14;
-//	rect.size.height -= stroke + 29;
-//	rect.origin.x += stroke / 2.0 + 7;
-//	rect.origin.y += stroke / 2.0 + 7;
     
 	//Create Path For Callout Bubble
 	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + radius);
