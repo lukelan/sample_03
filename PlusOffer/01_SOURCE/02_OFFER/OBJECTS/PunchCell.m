@@ -33,7 +33,7 @@
         return;
     }
     OfferDetailItem *item = object;
-    UIFont *font = [UIFont fontWithName:@"Avenir Next" size:8.0];
+    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:8.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
     float margin = 10;
     int tag_min_button = 100;

@@ -67,4 +67,43 @@
     }
 }
 
+- (void)performHideTabBarIOS6:(UITabBarController *) tabbarcontroller
+{
+    int height =   (IS_IPHONE5 ? 568 : 480 );
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+    
+    for(UIView *view in tabbarcontroller.view.subviews)
+    {
+        if([view isKindOfClass:[UITabBar class]])
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, height, view.frame.size.width, view.frame.size.height)];
+        }
+        else
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, height)];
+        }
+    }
+    
+    [UIView commitAnimations];
+}
+- (void)performShowTabBarIOS6:(UITabBarController *) tabbarcontroller
+{
+    int height =   (IS_IPHONE5 ? 521  : 433 );
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+    for(UIView *view in tabbarcontroller.view.subviews)
+    {
+        
+        if([view isKindOfClass:[UITabBar class]])
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, height, view.frame.size.width, view.frame.size.height)];
+        }
+        else
+        {
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, height)];
+        }
+    }
+    [UIView commitAnimations];
+}
 @end

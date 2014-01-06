@@ -25,8 +25,7 @@
         // setup map view
         self.mapView.delegate = self;
         [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-        
-        [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, [[UIScreen mainScreen] bounds].size.height - 140, _btnUserLocation.frame.size.height, _btnUserLocation.frame.size.width)];
+        [_btnUserLocation setFrame:CGRectMake(_btnUserLocation.frame.origin.x, frame.size.height - 30 - 10, 30 , 30)];
         _btnUserLocation.userInteractionEnabled = YES;
         
     }
@@ -143,10 +142,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (MKCoordinateRegion)createZoomRegionFromCentralPointAndRadius:(NSMutableArray*) categoryArray {
     
-    Location *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
+    Position *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
     CLLocation *currentLocation = [[CLLocation alloc]
-                                initWithLatitude:userLocation.latitude
-                                longitude:userLocation.longtitude];;
+                                initWithLatitude:userLocation.positionCoodinate2D.latitude
+                                longitude:userLocation.positionCoodinate2D.longitude];;
     CLLocationDistance radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS;
     CLLocation *nearestlocation = nil;
     

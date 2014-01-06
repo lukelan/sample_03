@@ -37,8 +37,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     // init fetched result controller
+     self.navigationController.navigationBar.layer.opacity = 1.0f;
     [self fetchedResultsController];
-    
+    self.navigationController.navigationBar.translucent = NO;
     viewName = PLUS_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
     
@@ -53,6 +54,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     PINGREMARKETING
+    self.navigationController.navigationBar.layer.opacity = 1.0f;
+    self.navigationController.navigationBar.translucent = NO;
     switch (_vcType) {
         case enumOfferInterfaceType_List: {
             self.tabBarController.tabBar.hidden = NO;
@@ -115,9 +118,22 @@
         {
             if (!_listView) {
                 _listView = [[PlusOfferListView alloc] initWithFrame: CGRectMake(0, 0, 320, self.view.frame.size.height - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT - CHECK_IOS )];
+
             }
+      
              if (_mapView) [_mapView removeFromSuperview];
+             self.navigationController.navigationBar.translucent = NO;
+              self.navigationController.navigationBar.layer.opacity = 1.0f;
+//            self.tabBarController.tabBar.hidden = NO;
             [self.viewTypeBtn setTitle:@"Map"];
+            if (IS_IOS7)
+            {
+                [self performShowTabBar];
+            }
+            else
+            {
+                [self performShowTabBarIOS6:self.tabBarController];
+            }
             UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
             [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
             [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
@@ -125,7 +141,6 @@
             _viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
             [self.viewTypeBtn setTitle:@"Map"];
             self.navigationItem.rightBarButtonItem = _viewTypeBtn;
-            self.tabBarController.tabBar.hidden = NO;
             _checkListOrMap = YES;
             _listView.dataSource = self.listOffers;
             [self.view addSubview:_listView];
@@ -134,17 +149,35 @@
         }
         case enumOfferInterfaceType_Map:
         {
+            if (IS_IOS7)
+            {
+                [self performHideTabBar];
+                self.navigationController.navigationBar.layer.opacity = 0.9f;
+            }
+            else
+            {
+                _mapView.frame = CGRectMake(_mapView.frame.origin.x , _mapView.frame.origin.y , 320, IS_IPHONE5 ? 550 : 460 );
+                [self performHideTabBarIOS6:self.tabBarController];
+                self.navigationController.navigationBar.layer.opacity = 0.8f;
+            }
+            
             if (!_mapView) {
-                _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height)];
+              
+                if (IS_IOS7)
+                {
+                    _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, IS_IPHONE5 ? 568  : 480)];
+                }
+                else
+                {
+                    _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, IS_IPHONE5 ? 460  : 372)];
+                }
                 _mapView.delegate = self;
             }
             if (_listView) [_listView removeFromSuperview];
-            
+            self.navigationController.navigationBar.translucent = YES;
+          
             [self.viewTypeBtn setTitle:@"List"];
-//            [_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
-//            [_viewTypeBtn setTintColor:UIColorFromRGB(0x2ed072)];
             [self.view addSubview:_mapView];
-            self.tabBarController.tabBar.hidden = YES;
             UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
             [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
             [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
@@ -152,14 +185,7 @@
             _viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
             [self.viewTypeBtn setTitle:@"Map"];
             self.navigationItem.rightBarButtonItem = _viewTypeBtn;
-            self.tabBarController.tabBar.hidden = NO;
             _checkListOrMap = NO;
-
-          //            self.navigationController.navigationBarHidden = YES;
-//            [UIView animateWithDuration:1.0f animations:^{
-                self.tabBarController.tabBar.hidden = YES;
-//            }];
-
             [_mapView reloadInterface:self.listOffers];
             break;
         }
@@ -262,6 +288,8 @@
                              itemModel.offer_id.stringValue, @"offer_id",
                              itemModel.offer_name, @"offer_name",
                              itemModel.brand_id, @"brand_id",
+                             itemModel.branch_name, @"branch_name",
+                             itemModel.brand_name, @"brand_name",
                              itemModel.discount_type, @"discount_type",
                              @(itemModel.allowRedeem) , @"allow_redeem",
                              itemModel.latitude , @"latitude",
@@ -286,6 +314,5 @@
     }
     
 }
-
 
 @end

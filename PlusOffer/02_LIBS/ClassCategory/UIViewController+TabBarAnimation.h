@@ -12,7 +12,8 @@
 
 - (void)performShowTabBar;
 - (void)performHideTabBar;
-
+- (void)performShowTabBarIOS6:(UITabBarController *) tabbarcontroller;
+- (void)performHideTabBarIOS6:(UITabBarController *) tabbarcontroller;
 - (void)performHideNavigatorBar;
 - (void)performShowNavigatorBar;
 

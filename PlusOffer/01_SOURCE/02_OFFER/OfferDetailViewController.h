@@ -13,8 +13,7 @@ typedef enum
 {
     enumInfoPlusOfferCell = 0,
     enumDiscountCell,
-    enumSlideCheckinCell,
-    enumPuchCollectCell,
+    enumRuleOfferCell,
     enumOtherCell
 }enumCellOfferDetail;
 
@@ -37,6 +36,7 @@ typedef enum
     BOOL isShowingMap;
 }
 
+@property (nonatomic, retain) NSString *offer_id;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewDetail;
 
 @end

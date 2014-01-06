@@ -32,15 +32,15 @@
 
 -(double)distance
 {
-    Location *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
+    Position *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
     
     CLLocation *pinLocation = [[CLLocation alloc]
                                initWithLatitude:[self.latitude doubleValue]
                                longitude:[self.longitude doubleValue]];
     
     CLLocation *currentLocation = [[CLLocation alloc]
-                                   initWithLatitude:userLocation.latitude
-                                   longitude:userLocation.longtitude];
+                                   initWithLatitude:userLocation.positionCoodinate2D.latitude
+                                   longitude:userLocation.positionCoodinate2D.longitude];
     
     _distance = [pinLocation distanceFromLocation:currentLocation];
     

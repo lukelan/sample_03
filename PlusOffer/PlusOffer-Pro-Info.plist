@@ -34,5 +34,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>UVFTypoSlabserif.ttf</string>
+		<string>TypoSlabserif.ttf</string>
+	</array>
 </dict>
 </plist>

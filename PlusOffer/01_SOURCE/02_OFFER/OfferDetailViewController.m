@@ -10,11 +10,12 @@
 #import "InfoPlusOfferCell.h"
 #import "DiscountCell.h"
 #import "OfferDetailModel.h"
-#import "SlideCheckinCell.h"
+#import "RuleCell.h"
+#import "MBSliderView.h"
 #import "OfferDetailItem.h"
 #import "PunchCell.h"
 #import "OfferTableItem.h"
-
+#import "OfferMapViewController.h"
 @interface OfferDetailViewController () <NSFetchedResultsControllerDelegate, ZBarReaderDelegate, MBSliderViewDelegate, OpenBarcodeScannerDelegate, OpenMapViewDelegate>
 
 @property (nonatomic, retain) OfferDetailItem *dataSource;
@@ -47,9 +48,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
     self.tabBarController.tabBar.hidden = NO;
-    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.layer.opacity = 1.0f;
     viewName = OFFER_DETAIL_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
     zBarReader = [[ZBarReaderViewController alloc] init];
@@ -73,7 +75,18 @@
     
     [self setCustomBarLeftWithImage:[UIImage imageNamed:@"nav-bar-icon-back.png"] selector:nil context_id:nil];
     [self setCustomBarRightWithImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] selector:@selector(processOpenMapView) context_id:self];
+
+    [self.tableViewDetail setBackgroundColor:UIColorFromRGB(0xe4eef0)];
+    [self.tableViewDetail setSeparatorColor:[UIColor clearColor]];
     
+    
+    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
+    [a1 addTarget:self action:@selector(selectMap) forControlEvents:UIControlEventTouchUpInside];
+    [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
+    self.navigationItem.rightBarButtonItem = viewTypeBtn;
+
     // load default data in coredata
     [self reloadInterface];
     
@@ -83,11 +96,13 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     PINGREMARKETING
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.layer.opacity = 1.0f;
 }
 #pragma mark - API
 -(void)loadOfferDetail
 {
-    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferDetail:self forOfferID:@"1"];
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferDetail:self forOfferID:self.offer_id];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -124,7 +139,7 @@
     for (OfferDetailModel *itemModel in temp)
     {
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"banner", [NSString stringWithFormat:@"%@", itemModel.branch_name], @"name",[NSString stringWithFormat:@"%@" ,itemModel.branch_address], @"address",[NSString stringWithFormat:@"%@" ,itemModel.branch_tel], @"tel", [NSString stringWithFormat:@"Mở cửa: %@ - %@", itemModel.hour_open, itemModel.hour_close], @"hour_working", [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"id", itemModel.offer_name, @"offer_name", itemModel.offer_description, @"description", @"http://plusoffer-dev.123phim.vn/img/temp/big-mac.png", @"icon", [NSString stringWithFormat:@"%d", itemModel.max_punch.intValue], @"max", [NSString stringWithFormat:@"%d", itemModel.count_punch.intValue], @"count",
-            [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id", [NSString stringWithFormat:@"%f", itemModel.latitude.floatValue], @"latitude", [NSString stringWithFormat:@"%f", itemModel.longitude.floatValue], @"longitude",nil];
+            [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id", [NSString stringWithFormat:@"%f", itemModel.latitude.floatValue], @"latitude", [NSString stringWithFormat:@"%f", itemModel.longitude.floatValue], @"longitude", itemModel.offer_content, @"content",nil];
         self.dataSource = [[OfferDetailItem alloc] initWithData:dic];
         [self setTitle:itemModel.branch_name];
         break;
@@ -169,27 +184,16 @@
         [cell setObject:self.dataSource];
         return cell;
     }
-    else if (indexPath.section == enumSlideCheckinCell)
+    else if (indexPath.section == enumRuleOfferCell)
     {
-        NSString *cellID = @"cellCheckin";
-        SlideCheckinCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        NSString *cellID = [[RuleCell class] description];
+        RuleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
-            cell = [[SlideCheckinCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-            [cell setDelegate:self];
-            [cell loadContent];
-        }
-        return cell;
-    } else if (indexPath.section == enumPuchCollectCell)
-    {
-        NSString *cellID = [[PunchCell class] description];
-        PunchCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        if (!cell) {
-            cell = [[PunchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        }
-        if (!cell.delegate) {
-            [cell setDelegate:self];
+            cell = [[RuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
         [cell setObject:self.dataSource];
+//        [cell setBackgroundView:nil];
+//        [cell setBackgroundColor:[UIColor clearColor]];
         return cell;
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -207,13 +211,9 @@
     {
         return 83;
     }
-    else if (indexPath.section == enumSlideCheckinCell)
+    else if (indexPath.section == enumRuleOfferCell)
     {
-        return 50;
-    }
-    else if (indexPath.section == enumPuchCollectCell)
-    {
-        return 60;
+        return 62;
     }
     return 0;
 }
@@ -228,7 +228,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == enumPuchCollectCell) {
+    if (section == enumRuleOfferCell) {
         return MARGIN_CELLX_GROUP;
     }
     return MARGIN_CELLX_GROUP/2;
@@ -315,8 +315,14 @@
 #pragma mark MBSliderViewDelegate method
 -(void)sliderDidSlide:(MBSliderView *)slideView
 {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //open barcode scanner
-    [self loadBarCodeReader];
+    CLLocationCoordinate2D coordinate = self.dataSource.location;
+    if (CLLocationCoordinate2DIsValid(delegate.userPosition.positionCoodinate2D))
+    {
+        coordinate = delegate.userPosition.positionCoodinate2D;
+    }
+    [(PlusAPIManager *)[PlusAPIManager sharedAPIManager] RK_RequestApiCheckinContext:nil forUserID:delegate.userProfile.user_id atBanchID:self.dataSource.branch_id withCoordinate:coordinate];
 }
 
 #pragma mark -
@@ -391,6 +397,12 @@
     }
 }
 
+- (void)selectMap
+{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate changeToOfferDetailViewControllerWithTitle:self.title];
+}
+
 #pragma mark -
 #pragma mark OpenMapViewDelegate method
 - (void)processOpenMapView
@@ -404,4 +416,5 @@
         [self loadInterface:enumOfferDetailInterfaceType_Map];
     }
 }
+
 @end

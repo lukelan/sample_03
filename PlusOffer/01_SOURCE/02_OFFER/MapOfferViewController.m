@@ -22,6 +22,10 @@
 }
 
 @synthesize gmDemo = _gmDemo;
+- (id)init
+{
+    return [super init];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -410,8 +414,7 @@
     // have no deal zoom minimum scale to current location
     if ([categoryArray count] == 0) {
         _radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS/2;
-        _centralPoint.latitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
-        _centralPoint.longitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
+        _centralPoint = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D;
     }
     
     if (_radiusMeters > MAXIMUM_SCALEABLE_RADIUS_METERS) {
@@ -427,7 +430,7 @@
 - (void)calculateCentralPointAndRadiusFromLocationKardsNew:(NSArray*) categoryArray withCurrenLocation:(BOOL)bCurrentLocation {
     
     // If current location not found -> return the radius default 1km.
-    if (((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude == 0 && ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude == 0) {
+    if (CLLocationCoordinate2DIsValid(((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D)) {
         _centralPoint.latitude = ((JPSThumbnail*)categoryArray[0]).coordinate.latitude;
         _centralPoint.longitude = ((JPSThumbnail*)categoryArray[0]).coordinate.longitude;
         _radiusMeters = 1000;
@@ -435,10 +438,8 @@
     }
     
     // Find the nearest location
-    CLLocation *locA = [[CLLocation alloc] initWithLatitude:((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude longitude:((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude];
-    
-    _centralPoint.longitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
-    _centralPoint.latitude = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
+    CLLocation *locA = [[CLLocation alloc] initWithLatitude:((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D.latitude longitude:((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D.longitude];
+    _centralPoint = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D;
     
     _radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS;
     for (JPSThumbnail *venue in categoryArray) {
@@ -463,10 +464,10 @@
     
     // include current location in calculate
     if (bCurrentLocation) {
-        smallLongtitute   = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
-        smallLattitute    = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
-        bigLongtitute     = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.longtitude;
-        bigLattitute      = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.latitude;
+        smallLongtitute   = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D.longitude;
+        smallLattitute    = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D.latitude;
+        bigLongtitute     = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D.longitude;
+        bigLattitute      = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).userPosition.positionCoodinate2D.latitude;
     }
     
     for (JPSThumbnail *venue in categoryArray) {

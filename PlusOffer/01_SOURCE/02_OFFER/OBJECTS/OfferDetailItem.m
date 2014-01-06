@@ -25,6 +25,7 @@
         _iconURL = data[@"icon"];
         _offer_name = data[@"offer_name"];
         _offer_description = data[@"description"];
+        _offer_content = data[@"content"];
         
         _max_punch = data[@"max"];
         _count_puch = data[@"count"];

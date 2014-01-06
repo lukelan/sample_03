@@ -24,6 +24,8 @@
          _discount_type = data[@"discount_type"];
         _allowRedeem = data[@"allow_redeem"];
         _category_id = data[@"category_id"];
+        _branch_name = data[@"branch_name"];
+        _brand_name = data[@"brand_name"];
         CGFloat latitude = [[data objectForKey:@"latitude"] floatValue];
         CGFloat longtitude = [[data objectForKey:@"longitude"] floatValue];
         self.location = CLLocationCoordinate2DMake(latitude, longtitude);

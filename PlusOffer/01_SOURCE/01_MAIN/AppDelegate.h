@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "DefineConstant.h"
-#import "Location.h"
+#import "Position.h"
+#import "UserProfile.h"
 #import "OfferTableItem.h"
 
 @protocol OpenBarcodeScannerDelegate <NSObject>
@@ -32,7 +33,8 @@
 
 #pragma mark - location
 @property (nonatomic, strong) CLLocationManager* locationManager;
-@property (nonatomic, strong) Location* userPosition;
+@property (nonatomic, strong) Position* userPosition;
+@property (nonatomic, strong) UserProfile *userProfile;
 
 #pragma mark -
 @property (nonatomic, strong) NSString* currentView;
@@ -44,4 +46,12 @@
 
 #pragma mark - OfferDetailViewController
 -(void) changeToOfferDetailViewController:(OfferTableItem*)item;
+
+#pragma mark - OfferMapViewController
+-(void) changeToOfferDetailViewControllerWithTitle:(NSString*)title;
+
+#pragma mark - facebook handle
+- (BOOL)isUserLoggedIn;
+- (void)handleLogout;
+- (void)handleUserAccount;
 @end

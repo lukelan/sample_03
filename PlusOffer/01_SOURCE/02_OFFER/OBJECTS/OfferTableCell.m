@@ -44,7 +44,7 @@
         _discountLbl.font = [UIFont systemFontOfSize:16.0f];
         _discountLbl.transform = CGAffineTransformMakeRotation (-DEGREES_TO_RADIANS(45));
         _discountLbl.textAlignment = NSTextAlignmentCenter;
-            [_discountLbl setFont:[UIFont fontWithName:@"Avenir Next" size:8]];
+            [_discountLbl setFont:[UIFont fontWithName:FONT_AVENIR_NEXT size:8]];
         _discountLbl.textColor = UIColorFromRGB(0x333333);
 
         [_discountImage addSubview:_discountLbl];
@@ -93,7 +93,9 @@
 #pragma mark - Actions
 -(void)mapBtnTouchUpInside
 {
-    NSLog(@"ok");
+    OfferTableItem *item = _object;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate changeToOfferDetailViewControllerWithTitle:item.branch_name];
 }
 
 #pragma mark - Public Methods

@@ -143,6 +143,34 @@
 		4FBFE0AE187568F60022CF61 /* slide-to-check-in@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FBFE0A2187568F60022CF61 /* slide-to-check-in@2x.png */; };
 		4FBFE0B118756E900022CF61 /* punch-reward.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FBFE0AF18756E900022CF61 /* punch-reward.png */; };
 		4FBFE0B218756E900022CF61 /* punch-reward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FBFE0B018756E900022CF61 /* punch-reward@2x.png */; };
+		4FEE9CAE187A588D00BD39A8 /* FacebookHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CAB187A588D00BD39A8 /* FacebookHandler.m */; };
+		4FEE9CAF187A588D00BD39A8 /* FacebookHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CAB187A588D00BD39A8 /* FacebookHandler.m */; };
+		4FEE9CB0187A588D00BD39A8 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CAD187A588D00BD39A8 /* FacebookManager.m */; };
+		4FEE9CB1187A588D00BD39A8 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CAD187A588D00BD39A8 /* FacebookManager.m */; };
+		4FEE9CB9187A6BE900BD39A8 /* FriendInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CB6187A6BE900BD39A8 /* FriendInfoCell.m */; };
+		4FEE9CBA187A6BE900BD39A8 /* FriendInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CB6187A6BE900BD39A8 /* FriendInfoCell.m */; };
+		4FEE9CBB187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CB8187A6BE900BD39A8 /* ProfileTableViewCell.m */; };
+		4FEE9CBC187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CB8187A6BE900BD39A8 /* ProfileTableViewCell.m */; };
+		4FEE9CC2187A977D00BD39A8 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CC1187A977D00BD39A8 /* Position.m */; };
+		4FEE9CC3187A977D00BD39A8 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CC1187A977D00BD39A8 /* Position.m */; };
+		4FEE9CD1187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CC8187A9F6900BD39A8 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4FEE9CD2187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CC8187A9F6900BD39A8 /* NSObject+SBJSON.m */; };
+		4FEE9CD3187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CCA187A9F6900BD39A8 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4FEE9CD4187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CCA187A9F6900BD39A8 /* NSString+SBJSON.m */; };
+		4FEE9CD5187A9F6900BD39A8 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CCC187A9F6900BD39A8 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4FEE9CD6187A9F6900BD39A8 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CCC187A9F6900BD39A8 /* SBJsonBase.m */; };
+		4FEE9CD7187A9F6900BD39A8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CCE187A9F6900BD39A8 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4FEE9CD8187A9F6900BD39A8 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CCE187A9F6900BD39A8 /* SBJsonParser.m */; };
+		4FEE9CD9187A9F6900BD39A8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CD0187A9F6900BD39A8 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4FEE9CDA187A9F6900BD39A8 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CD0187A9F6900BD39A8 /* SBJsonWriter.m */; };
+		4FEE9CE0187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CDF187AAA0F00BD39A8 /* TichDiemDetailViewController.m */; };
+		4FEE9CE1187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CDF187AAA0F00BD39A8 /* TichDiemDetailViewController.m */; };
+		4FEE9CE4187AB06A00BD39A8 /* RuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CE3187AB06A00BD39A8 /* RuleCell.m */; };
+		4FEE9CE5187AB06A00BD39A8 /* RuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE9CE3187AB06A00BD39A8 /* RuleCell.m */; };
+		4FEE9CEB187ABB3500BD39A8 /* TypoSlabserif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE9CE9187ABB3500BD39A8 /* TypoSlabserif.ttf */; };
+		4FEE9CEC187ABB3500BD39A8 /* TypoSlabserif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE9CE9187ABB3500BD39A8 /* TypoSlabserif.ttf */; };
+		4FEE9CED187ABB3500BD39A8 /* UVFTypoSlabserif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE9CEA187ABB3500BD39A8 /* UVFTypoSlabserif.ttf */; };
+		4FEE9CEE187ABB3500BD39A8 /* UVFTypoSlabserif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE9CEA187ABB3500BD39A8 /* UVFTypoSlabserif.ttf */; };
 		4FFCB6FE1876AE9B00D93006 /* map-icon-entertainment.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FFCB6F41876AE9B00D93006 /* map-icon-entertainment.png */; };
 		4FFCB6FF1876AE9B00D93006 /* map-icon-entertainment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FFCB6F51876AE9B00D93006 /* map-icon-entertainment@2x.png */; };
 		4FFCB7001876AE9B00D93006 /* map-icon-food-beverage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FFCB6F61876AE9B00D93006 /* map-icon-food-beverage.png */; };
@@ -401,10 +429,11 @@
 		AABB9BE618725FAB0018C0D5 /* OfferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB9BE418725FAB0018C0D5 /* OfferModel.m */; };
 		AABB9BE918727B5F0018C0D5 /* OfferDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB9BE818727B5F0018C0D5 /* OfferDetailModel.m */; };
 		AABB9BEA18727B5F0018C0D5 /* OfferDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB9BE818727B5F0018C0D5 /* OfferDetailModel.m */; };
-		E306E22C1872B7C60072E5E5 /* UVF TypoSlabserif-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E306E22B1872B7C60072E5E5 /* UVF TypoSlabserif-Light.ttf */; };
-		E306E2301872B97C0072E5E5 /* TypoSlabserif-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E306E22F1872B97C0072E5E5 /* TypoSlabserif-Light.ttf */; };
 		E30ECCA8186D7AAC003F1931 /* InfoPlusOfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30ECCA7186D7AAC003F1931 /* InfoPlusOfferCell.m */; };
 		E30ECCB0186D8981003F1931 /* DiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30ECCAF186D8981003F1931 /* DiscountCell.m */; };
+		E364303A187AAADD00CB6A14 /* OfferMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3643039187AAADD00CB6A14 /* OfferMapViewController.m */; };
+		E364303D187ABA3000CB6A14 /* tab-bar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E364303B187ABA3000CB6A14 /* tab-bar-bg.png */; };
+		E364303E187ABA3000CB6A14 /* tab-bar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E364303C187ABA3000CB6A14 /* tab-bar-bg@2x.png */; };
 		E3682A2818711D9E00FA16DA /* brand-logo-mcdonalds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3682A0918711D9E00FA16DA /* brand-logo-mcdonalds@2x.png */; };
 		E3682A2918711D9E00FA16DA /* brand-logo-urban-station.png in Resources */ = {isa = PBXBuildFile; fileRef = E3682A0A18711D9E00FA16DA /* brand-logo-urban-station.png */; };
 		E3682A2A18711D9E00FA16DA /* brand-logo-urban-station@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3682A0B18711D9E00FA16DA /* brand-logo-urban-station@2x.png */; };
@@ -708,6 +737,33 @@
 		4FBFE0A2187568F60022CF61 /* slide-to-check-in@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slide-to-check-in@2x.png"; sourceTree = "<group>"; };
 		4FBFE0AF18756E900022CF61 /* punch-reward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "punch-reward.png"; sourceTree = "<group>"; };
 		4FBFE0B018756E900022CF61 /* punch-reward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "punch-reward@2x.png"; sourceTree = "<group>"; };
+		4FEE9CAA187A588D00BD39A8 /* FacebookHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHandler.h; sourceTree = "<group>"; };
+		4FEE9CAB187A588D00BD39A8 /* FacebookHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookHandler.m; sourceTree = "<group>"; };
+		4FEE9CAC187A588D00BD39A8 /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
+		4FEE9CAD187A588D00BD39A8 /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
+		4FEE9CB5187A6BE900BD39A8 /* FriendInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoCell.h; sourceTree = "<group>"; };
+		4FEE9CB6187A6BE900BD39A8 /* FriendInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoCell.m; sourceTree = "<group>"; };
+		4FEE9CB7187A6BE900BD39A8 /* ProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewCell.h; sourceTree = "<group>"; };
+		4FEE9CB8187A6BE900BD39A8 /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
+		4FEE9CC0187A977D00BD39A8 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
+		4FEE9CC1187A977D00BD39A8 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Position.m; sourceTree = "<group>"; };
+		4FEE9CC6187A9F6900BD39A8 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		4FEE9CC7187A9F6900BD39A8 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		4FEE9CC8187A9F6900BD39A8 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		4FEE9CC9187A9F6900BD39A8 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		4FEE9CCA187A9F6900BD39A8 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		4FEE9CCB187A9F6900BD39A8 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		4FEE9CCC187A9F6900BD39A8 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		4FEE9CCD187A9F6900BD39A8 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		4FEE9CCE187A9F6900BD39A8 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		4FEE9CCF187A9F6900BD39A8 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		4FEE9CD0187A9F6900BD39A8 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		4FEE9CDE187AAA0F00BD39A8 /* TichDiemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TichDiemDetailViewController.h; sourceTree = "<group>"; };
+		4FEE9CDF187AAA0F00BD39A8 /* TichDiemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TichDiemDetailViewController.m; sourceTree = "<group>"; };
+		4FEE9CE2187AB06A00BD39A8 /* RuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleCell.h; sourceTree = "<group>"; };
+		4FEE9CE3187AB06A00BD39A8 /* RuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleCell.m; sourceTree = "<group>"; };
+		4FEE9CE9187ABB3500BD39A8 /* TypoSlabserif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TypoSlabserif.ttf; sourceTree = "<group>"; };
+		4FEE9CEA187ABB3500BD39A8 /* UVFTypoSlabserif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = UVFTypoSlabserif.ttf; sourceTree = "<group>"; };
 		4FFCB6F41876AE9B00D93006 /* map-icon-entertainment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-entertainment.png"; sourceTree = "<group>"; };
 		4FFCB6F51876AE9B00D93006 /* map-icon-entertainment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-entertainment@2x.png"; sourceTree = "<group>"; };
 		4FFCB6F61876AE9B00D93006 /* map-icon-food-beverage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-food-beverage.png"; sourceTree = "<group>"; };
@@ -813,12 +869,14 @@
 		AABB9BE418725FAB0018C0D5 /* OfferModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferModel.m; sourceTree = "<group>"; };
 		AABB9BE718727B5F0018C0D5 /* OfferDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferDetailModel.h; sourceTree = "<group>"; };
 		AABB9BE818727B5F0018C0D5 /* OfferDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferDetailModel.m; sourceTree = "<group>"; };
-		E306E22B1872B7C60072E5E5 /* UVF TypoSlabserif-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UVF TypoSlabserif-Light.ttf"; sourceTree = "<group>"; };
-		E306E22F1872B97C0072E5E5 /* TypoSlabserif-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TypoSlabserif-Light.ttf"; sourceTree = "<group>"; };
 		E30ECCA6186D7AAC003F1931 /* InfoPlusOfferCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPlusOfferCell.h; sourceTree = "<group>"; };
 		E30ECCA7186D7AAC003F1931 /* InfoPlusOfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPlusOfferCell.m; sourceTree = "<group>"; };
 		E30ECCAE186D8981003F1931 /* DiscountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountCell.h; sourceTree = "<group>"; };
 		E30ECCAF186D8981003F1931 /* DiscountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountCell.m; sourceTree = "<group>"; };
+		E3643038187AAADD00CB6A14 /* OfferMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferMapViewController.h; sourceTree = "<group>"; };
+		E3643039187AAADD00CB6A14 /* OfferMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferMapViewController.m; sourceTree = "<group>"; };
+		E364303B187ABA3000CB6A14 /* tab-bar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-bar-bg.png"; sourceTree = "<group>"; };
+		E364303C187ABA3000CB6A14 /* tab-bar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-bar-bg@2x.png"; sourceTree = "<group>"; };
 		E3682A0918711D9E00FA16DA /* brand-logo-mcdonalds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brand-logo-mcdonalds@2x.png"; sourceTree = "<group>"; };
 		E3682A0A18711D9E00FA16DA /* brand-logo-urban-station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brand-logo-urban-station.png"; sourceTree = "<group>"; };
 		E3682A0B18711D9E00FA16DA /* brand-logo-urban-station@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brand-logo-urban-station@2x.png"; sourceTree = "<group>"; };
@@ -1104,26 +1162,30 @@
 		18FBCF0D1867443200C9E399 /* 02_LIBS */ = {
 			isa = PBXGroup;
 			children = (
-				4F754E0D1872ABB800540C9B /* MBSliderView */,
-				18924CA4186F322C005D0432 /* ZBarSDK */,
-				AA5A7295186D63F400BC8D91 /* JPSThumbnailAnnotation */,
-				AA5A7203186C29AB00BC8D91 /* JCGridMenu */,
+				4FEE9CC5187A9F6900BD39A8 /* JsonLib */,
 				4FBBEABB18681F160040EA12 /* AccessUDID */,
 				4FBBEABE18681F160040EA12 /* BarCodeGenerator */,
 				4FBBEC0B18684D2D0040EA12 /* ClassCategory */,
 				4FBBEAC718681F160040EA12 /* CrittercismSDK */,
 				4FBBEBEA186849BF0040EA12 /* CustomViewController */,
 				4FBBEACD18681F160040EA12 /* Encryption */,
+				4FEE9CA9187A588D00BD39A8 /* FacebookManager */,
 				4FBBEAD718681F160040EA12 /* FacebookSDK */,
 				4FBBEC1518684E3F0040EA12 /* GifImageView */,
 				4FBBEADA18681F160040EA12 /* GoogleAnalytics */,
 				4FBBEAE218681F160040EA12 /* GoogleConversionTrackingSDK */,
 				4FBBEAE618681F160040EA12 /* iCarousel */,
 				18FBCF25186745D300C9E399 /* iCarousel */,
+				AA5A7203186C29AB00BC8D91 /* JCGridMenu */,
+				AA5A7295186D63F400BC8D91 /* JPSThumbnailAnnotation */,
 				4FBBEB3E18682E210040EA12 /* libpng */,
+				4F754E0D1872ABB800540C9B /* MBSliderView */,
 				4FBBEB66186831620040EA12 /* SDImageView */,
 				4FBBEBCE18683AD80040EA12 /* SDWebImage.xcodeproj */,
+				4FEE9CBF187A977C00BD39A8 /* UserPosition */,
+				4FEE9CB4187A6BE900BD39A8 /* UserProfile */,
 				4F5B4E92186966AE00AAE584 /* XMLReader */,
+				18924CA4186F322C005D0432 /* ZBarSDK */,
 			);
 			path = 02_LIBS;
 			sourceTree = "<group>";
@@ -1164,6 +1226,10 @@
 				18FBCF1D186744DE00C9E399 /* OfferDetailViewController.m */,
 				AA5A728E186C307600BC8D91 /* MapOfferViewController.h */,
 				AA5A728F186C307600BC8D91 /* MapOfferViewController.m */,
+				4FEE9CDE187AAA0F00BD39A8 /* TichDiemDetailViewController.h */,
+				4FEE9CDF187AAA0F00BD39A8 /* TichDiemDetailViewController.m */,
+				E3643038187AAADD00CB6A14 /* OfferMapViewController.h */,
+				E3643039187AAADD00CB6A14 /* OfferMapViewController.m */,
 			);
 			path = 02_OFFER;
 			sourceTree = "<group>";
@@ -1222,6 +1288,8 @@
 				4F754E1B18750CFD00540C9B /* OfferDetailItem.m */,
 				181942381875D029006E8870 /* OfferAnnotationView.h */,
 				181942391875D029006E8870 /* OfferAnnotationView.m */,
+				4FEE9CE2187AB06A00BD39A8 /* RuleCell.h */,
+				4FEE9CE3187AB06A00BD39A8 /* RuleCell.m */,
 			);
 			path = OBJECTS;
 			sourceTree = "<group>";
@@ -1526,9 +1594,60 @@
 			path = GifImageView;
 			sourceTree = "<group>";
 		};
+		4FEE9CA9187A588D00BD39A8 /* FacebookManager */ = {
+			isa = PBXGroup;
+			children = (
+				4FEE9CAA187A588D00BD39A8 /* FacebookHandler.h */,
+				4FEE9CAB187A588D00BD39A8 /* FacebookHandler.m */,
+				4FEE9CAC187A588D00BD39A8 /* FacebookManager.h */,
+				4FEE9CAD187A588D00BD39A8 /* FacebookManager.m */,
+			);
+			path = FacebookManager;
+			sourceTree = "<group>";
+		};
+		4FEE9CB4187A6BE900BD39A8 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				4FEE9CB5187A6BE900BD39A8 /* FriendInfoCell.h */,
+				4FEE9CB6187A6BE900BD39A8 /* FriendInfoCell.m */,
+				4FEE9CB7187A6BE900BD39A8 /* ProfileTableViewCell.h */,
+				4FEE9CB8187A6BE900BD39A8 /* ProfileTableViewCell.m */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		4FEE9CBF187A977C00BD39A8 /* UserPosition */ = {
+			isa = PBXGroup;
+			children = (
+				4FEE9CC0187A977D00BD39A8 /* Position.h */,
+				4FEE9CC1187A977D00BD39A8 /* Position.m */,
+			);
+			path = UserPosition;
+			sourceTree = "<group>";
+		};
+		4FEE9CC5187A9F6900BD39A8 /* JsonLib */ = {
+			isa = PBXGroup;
+			children = (
+				4FEE9CC6187A9F6900BD39A8 /* JSON.h */,
+				4FEE9CC7187A9F6900BD39A8 /* NSObject+SBJSON.h */,
+				4FEE9CC8187A9F6900BD39A8 /* NSObject+SBJSON.m */,
+				4FEE9CC9187A9F6900BD39A8 /* NSString+SBJSON.h */,
+				4FEE9CCA187A9F6900BD39A8 /* NSString+SBJSON.m */,
+				4FEE9CCB187A9F6900BD39A8 /* SBJsonBase.h */,
+				4FEE9CCC187A9F6900BD39A8 /* SBJsonBase.m */,
+				4FEE9CCD187A9F6900BD39A8 /* SBJsonParser.h */,
+				4FEE9CCE187A9F6900BD39A8 /* SBJsonParser.m */,
+				4FEE9CCF187A9F6900BD39A8 /* SBJsonWriter.h */,
+				4FEE9CD0187A9F6900BD39A8 /* SBJsonWriter.m */,
+			);
+			path = JsonLib;
+			sourceTree = "<group>";
+		};
 		AA5A71F9186ABF8500BC8D91 /* 03_RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				E364303B187ABA3000CB6A14 /* tab-bar-bg.png */,
+				E364303C187ABA3000CB6A14 /* tab-bar-bg@2x.png */,
 				4FFCB70A1876B96400D93006 /* nav-bar-bg-ios7.png */,
 				4FFCB70B1876B96400D93006 /* nav-bar-bg-ios7@2x.png */,
 				4FFCB70C1876B96400D93006 /* nav-bar-bg.png */,
@@ -1925,8 +2044,8 @@
 		E306E22A1872B7C60072E5E5 /* font */ = {
 			isa = PBXGroup;
 			children = (
-				E306E22F1872B97C0072E5E5 /* TypoSlabserif-Light.ttf */,
-				E306E22B1872B7C60072E5E5 /* UVF TypoSlabserif-Light.ttf */,
+				4FEE9CE9187ABB3500BD39A8 /* TypoSlabserif.ttf */,
+				4FEE9CEA187ABB3500BD39A8 /* UVFTypoSlabserif.ttf */,
 			);
 			path = font;
 			sourceTree = "<group>";
@@ -2101,6 +2220,7 @@
 				AA5A7267186C29AB00BC8D91 /* Facebook@2x.png in Resources */,
 				4FFCB72E1876B96400D93006 /* segment_selected_deselected@2x.png in Resources */,
 				AA5A725B186C29AB00BC8D91 /* Close@2x.png in Resources */,
+				4FEE9CEB187ABB3500BD39A8 /* TypoSlabserif.ttf in Resources */,
 				AA5A71FF186ABF8500BC8D91 /* offer_list_2.png in Resources */,
 				AA5A725C186C29AB00BC8D91 /* CloseSelected.png in Resources */,
 				18FBCF311867475E00C9E399 /* PlusOfferMapView.xib in Resources */,
@@ -2116,6 +2236,7 @@
 				1843A35B186B3F45002698D0 /* redeem_logo_2.png in Resources */,
 				4FFCB7241876B96400D93006 /* segment_deselected_deselected.png in Resources */,
 				E3682A3D18711D9E00FA16DA /* tab-bar-account@2x.png in Resources */,
+				4FEE9CED187ABB3500BD39A8 /* UVFTypoSlabserif.ttf in Resources */,
 				1843A35D186B3F45002698D0 /* redeem_logo_4.png in Resources */,
 				E3682A51187172B600FA16DA /* img-loc-mcdonalds.jpg in Resources */,
 				E3682A4618711D9E00FA16DA /* tab-bar-account-active@2x.png in Resources */,
@@ -2141,6 +2262,7 @@
 				18814D1D18701ACE00765498 /* frame@2x.png in Resources */,
 				4FFCB7201876B96400D93006 /* segment_bg.png in Resources */,
 				AA5A725F186C29AB00BC8D91 /* Comments@2x.png in Resources */,
+				E364303D187ABA3000CB6A14 /* tab-bar-bg.png in Resources */,
 				AA5A7274186C29AB00BC8D91 /* PocketSelected.png in Resources */,
 				4FFCB7021876AE9B00D93006 /* map-icon-list.png in Resources */,
 				AA5A726B186C29AB00BC8D91 /* Favourite@2x.png in Resources */,
@@ -2155,7 +2277,6 @@
 				4FBBEB1618681F160040EA12 /* dsym_upload.sh in Resources */,
 				4FFCB6FE1876AE9B00D93006 /* map-icon-entertainment.png in Resources */,
 				E3682A3518711D9E00FA16DA /* brand-logo-bhd@2x.png in Resources */,
-				E306E2301872B97C0072E5E5 /* TypoSlabserif-Light.ttf in Resources */,
 				18FBCF161867445B00C9E399 /* Main.storyboard in Resources */,
 				4FFCB7031876AE9B00D93006 /* map-icon-list@2x.png in Resources */,
 				4FBFE0A9187568F60022CF61 /* punch-star.png in Resources */,
@@ -2180,7 +2301,7 @@
 				18FBCEE018673C1900C9E399 /* InfoPlist.strings in Resources */,
 				AA5A7276186C29AB00BC8D91 /* Search.png in Resources */,
 				AA5A727A186C29AB00BC8D91 /* Share.png in Resources */,
-				E306E22C1872B7C60072E5E5 /* UVF TypoSlabserif-Light.ttf in Resources */,
+				E364303E187ABA3000CB6A14 /* tab-bar-bg@2x.png in Resources */,
 				4FFCB7041876AE9B00D93006 /* map-icon-near-by.png in Resources */,
 				AA5A725E186C29AB00BC8D91 /* Comments.png in Resources */,
 				4FFCB7001876AE9B00D93006 /* map-icon-food-beverage.png in Resources */,
@@ -2269,6 +2390,8 @@
 				AAB01BC818701805006E2552 /* Pocket.png in Resources */,
 				AAB01BC918701805006E2552 /* FavouriteSmall.png in Resources */,
 				AAB01BCA18701805006E2552 /* Comments@2x.png in Resources */,
+				4FEE9CEE187ABB3500BD39A8 /* UVFTypoSlabserif.ttf in Resources */,
+				4FEE9CEC187ABB3500BD39A8 /* TypoSlabserif.ttf in Resources */,
 				18814D22187021C400765498 /* frame@2x.png in Resources */,
 				AAB01BCB18701805006E2552 /* PocketSelected.png in Resources */,
 				AAB01BCC18701805006E2552 /* Favourite@2x.png in Resources */,
@@ -2394,17 +2517,22 @@
 				18D7919E18771AF800D962A9 /* Routes.m in Sources */,
 				18FBCF21186744F300C9E399 /* RedeemViewController.m in Sources */,
 				4F754E181872B3E900540C9B /* PunchCell.m in Sources */,
+				4FEE9CBB187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */,
 				18FBCF1E186744DE00C9E399 /* OfferDetailViewController.m in Sources */,
 				4FBBEC03186849BF0040EA12 /* CustomViewController.m in Sources */,
 				E3941EB0186D272F00B1198E /* RedeemDetailViewController.m in Sources */,
+				4FEE9CE4187AB06A00BD39A8 /* RuleCell.m in Sources */,
 				18FBCF1B186744C300C9E399 /* PlusOfferViewController.m in Sources */,
 				18FBCF2C1867471400C9E399 /* PlusOfferListView.m in Sources */,
 				18FBCF24186744FE00C9E399 /* AccountViewController.m in Sources */,
 				4FBBEB1918681F160040EA12 /* NSString+MD5Addition.m in Sources */,
 				4FBBEB5A18682E210040EA12 /* pngpread.c in Sources */,
 				4FBBEB5B18682E210040EA12 /* pngread.c in Sources */,
+				E364303A187AAADD00CB6A14 /* OfferMapViewController.m in Sources */,
 				E30ECCA8186D7AAC003F1931 /* InfoPlusOfferCell.m in Sources */,
+				4FEE9CB0187A588D00BD39A8 /* FacebookManager.m in Sources */,
 				1843A348186B339C002698D0 /* RedeemTableViewCell.m in Sources */,
+				4FEE9CAE187A588D00BD39A8 /* FacebookHandler.m in Sources */,
 				18FBCF131867443200C9E399 /* AppDelegate.m in Sources */,
 				4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */,
 				4FBBEB5E18682E210040EA12 /* pngrutil.c in Sources */,
@@ -2413,9 +2541,11 @@
 				4F5B4EB518698D9800AAE584 /* PlusAPIManager.m in Sources */,
 				4FBBEB5D18682E210040EA12 /* pngrtran.c in Sources */,
 				AA5A728A186C29AB00BC8D91 /* JCGridMenuRow.m in Sources */,
+				4FEE9CD9187A9F6900BD39A8 /* SBJsonWriter.m in Sources */,
 				4F6848E7186D8CB90031893D /* Location.m in Sources */,
 				4F5B4E97186966AE00AAE584 /* RKXMLReaderSerialization.m in Sources */,
 				4FBBEB6318682E210040EA12 /* pngwtran.c in Sources */,
+				4FEE9CD1187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */,
 				AA5A71F4186ABEFA00BC8D91 /* OfferTableItem.m in Sources */,
 				4F5B4E98186966AE00AAE584 /* XMLReader.m in Sources */,
 				4FBBEB1218681F160040EA12 /* UIDevice+IdentifierAddition.m in Sources */,
@@ -2427,11 +2557,14 @@
 				4F754E151872B34F00540C9B /* SlideCheckinCell.m in Sources */,
 				4FBBEC1B18684E530040EA12 /* UIImage+Ultility.m in Sources */,
 				4FBBEB5818682E210040EA12 /* pngget.c in Sources */,
+				4FEE9CB9187A6BE900BD39A8 /* FriendInfoCell.m in Sources */,
 				4FBBEC00186849BF0040EA12 /* CustomGAITrackedViewController.m in Sources */,
 				4F0440561871248A004F93ED /* UserProfile.m in Sources */,
 				4FBBEB2018681F160040EA12 /* iCarousel.m in Sources */,
 				4FBBEB6218682E210040EA12 /* pngwrite.c in Sources */,
+				4FEE9CE0187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */,
 				AA5A729E186D63F500BC8D91 /* JPSThumnail.m in Sources */,
+				4FEE9CD3187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */,
 				AABB9BE118725FAA0018C0D5 /* RedeemModel.m in Sources */,
 				AABB9BE918727B5F0018C0D5 /* OfferDetailModel.m in Sources */,
 				1843A34B186B3780002698D0 /* RedeemTableViewItem.m in Sources */,
@@ -2444,6 +2577,7 @@
 				4F5B4EA51869690700AAE584 /* DictionaryMapping.m in Sources */,
 				4F754E101872ABB900540C9B /* MBSliderView.m in Sources */,
 				4FBBEC08186849BF0040EA12 /* PullRefreshTableViewController.m in Sources */,
+				4FEE9CD5187A9F6900BD39A8 /* SBJsonBase.m in Sources */,
 				4FBBEB5918682E210040EA12 /* pngmem.c in Sources */,
 				4FBBEC07186849BF0040EA12 /* LoadingView.m in Sources */,
 				4F6848E8186D8CB90031893D /* ChooseCityViewController.m in Sources */,
@@ -2460,11 +2594,13 @@
 				4FBBEB1418681F160040EA12 /* qr_draw_png.mm in Sources */,
 				4FBBEB1518681F160040EA12 /* QR_Encode.mm in Sources */,
 				AA5A7287186C29AB00BC8D91 /* UILabel+JCUI.m in Sources */,
+				4FEE9CD7187A9F6900BD39A8 /* SBJsonParser.m in Sources */,
 				4FBBEB6118682E210040EA12 /* pngwio.c in Sources */,
 				AA5A7290186C307600BC8D91 /* MapOfferViewController.m in Sources */,
 				4FBBEC02186849BF0040EA12 /* CustomUIResponder.m in Sources */,
 				4FBBEB5C18682E210040EA12 /* pngrio.c in Sources */,
 				4FBBEB5618682E210040EA12 /* png.c in Sources */,
+				4FEE9CC2187A977D00BD39A8 /* Position.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2489,6 +2625,7 @@
 				AAB01B5618701805006E2552 /* OfferDetailViewController.m in Sources */,
 				AAB01B5718701805006E2552 /* CustomViewController.m in Sources */,
 				AAB01B5818701805006E2552 /* PlusOfferViewController.m in Sources */,
+				4FEE9CC3187A977D00BD39A8 /* Position.m in Sources */,
 				AAB01B5918701805006E2552 /* PlusOfferListView.m in Sources */,
 				AAB01B5A18701805006E2552 /* AccountViewController.m in Sources */,
 				AAB01B5B18701805006E2552 /* NSString+MD5Addition.m in Sources */,
@@ -2499,12 +2636,17 @@
 				AAB01B6018701805006E2552 /* BarCodeGenerator.mm in Sources */,
 				AAB01B6118701805006E2552 /* pngrutil.c in Sources */,
 				AAB01B6218701805006E2552 /* pngwutil.c in Sources */,
+				4FEE9CBA187A6BE900BD39A8 /* FriendInfoCell.m in Sources */,
+				4FEE9CDA187A9F6900BD39A8 /* SBJsonWriter.m in Sources */,
 				AAB01B6318701805006E2552 /* PlusAPIManager.m in Sources */,
+				4FEE9CBC187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */,
 				AAB01B6418701805006E2552 /* pngrtran.c in Sources */,
 				AAB01B6518701805006E2552 /* JCGridMenuRow.m in Sources */,
 				AAB01B6618701805006E2552 /* Location.m in Sources */,
+				4FEE9CD2187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */,
 				AAB01B6718701805006E2552 /* RKXMLReaderSerialization.m in Sources */,
 				AAB01B6818701805006E2552 /* pngwtran.c in Sources */,
+				4FEE9CB1187A588D00BD39A8 /* FacebookManager.m in Sources */,
 				AAB01B6918701805006E2552 /* OfferTableItem.m in Sources */,
 				AAB01B6A18701805006E2552 /* XMLReader.m in Sources */,
 				AABB9BE218725FAA0018C0D5 /* RedeemModel.m in Sources */,
@@ -2518,6 +2660,7 @@
 				AAB01B7018701805006E2552 /* pngget.c in Sources */,
 				AAB01B7118701805006E2552 /* CustomGAITrackedViewController.m in Sources */,
 				AAB01B7218701805006E2552 /* iCarousel.m in Sources */,
+				4FEE9CD6187A9F6900BD39A8 /* SBJsonBase.m in Sources */,
 				AAB01B7318701805006E2552 /* pngwrite.c in Sources */,
 				AAB01B7418701805006E2552 /* JPSThumnail.m in Sources */,
 				AAB01B7518701805006E2552 /* RedeemTableViewItem.m in Sources */,
@@ -2527,16 +2670,20 @@
 				18D7919F18771AF800D962A9 /* Routes.m in Sources */,
 				AAB01B7918701805006E2552 /* main.m in Sources */,
 				AABB9BE618725FAB0018C0D5 /* OfferModel.m in Sources */,
+				4FEE9CE1187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */,
 				AAB01B7A18701805006E2552 /* DictionaryMapping.m in Sources */,
 				AAB01B7B18701805006E2552 /* PullRefreshTableViewController.m in Sources */,
+				4FEE9CD4187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */,
 				AAB01B7C18701805006E2552 /* pngmem.c in Sources */,
 				AAB01B7D18701805006E2552 /* LoadingView.m in Sources */,
 				AAB01B7E18701805006E2552 /* ChooseCityViewController.m in Sources */,
+				4FEE9CD8187A9F6900BD39A8 /* SBJsonParser.m in Sources */,
 				AAB01B7F18701805006E2552 /* JPSThumbnailAnnotation.m in Sources */,
 				AAB01B8018701805006E2552 /* GifImageView.m in Sources */,
 				AAB01B8118701805006E2552 /* OfferTableCell.m in Sources */,
 				AAB01B8218701805006E2552 /* UIViewController+TabBarAnimation.m in Sources */,
 				AAB01B8318701805006E2552 /* CustomUIImagePickerController.m in Sources */,
+				4FEE9CAF187A588D00BD39A8 /* FacebookHandler.m in Sources */,
 				AAB01B8418701805006E2552 /* pngtrans.c in Sources */,
 				AAB01B8518701805006E2552 /* pngerror.c in Sources */,
 				AAB01B8618701805006E2552 /* JCGridMenuController.m in Sources */,
@@ -2546,6 +2693,7 @@
 				AAB01B8918701805006E2552 /* QR_Encode.mm in Sources */,
 				AAB01B8A18701805006E2552 /* UILabel+JCUI.m in Sources */,
 				AAB01B8B18701805006E2552 /* pngwio.c in Sources */,
+				4FEE9CE5187AB06A00BD39A8 /* RuleCell.m in Sources */,
 				AAB01B8C18701805006E2552 /* MapOfferViewController.m in Sources */,
 				AAB01B8D18701805006E2552 /* CustomUIResponder.m in Sources */,
 				AAB01B8E18701805006E2552 /* pngrio.c in Sources */,
@@ -2677,9 +2825,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30E7F2528A784472A1F527AA /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Duy Dao Pham Hoang (VTHS5G77QG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2699,7 +2848,8 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "60760B1A-D6D4-4CEA-8535-70313388737E";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2708,9 +2858,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30E7F2528A784472A1F527AA /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Duy Dao Pham Hoang (VTHS5G77QG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2730,7 +2881,8 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "60760B1A-D6D4-4CEA-8535-70313388737E";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

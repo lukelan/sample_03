@@ -84,6 +84,8 @@
                                                         @"latitude" : @"latitude",
                                                         @"longitude" : @"longitude",
                                                         @"count_punch" : @"count_punch",
+                                                        @"branch_name" : @"branch_name",
+                                                        @"brand_name" : @"brand_name",
                                                         @"category_id" : @"category_id",
                                                         @"discount_type" : @"discount_type",
                                                         @"discount_value" : @"discount_value",
@@ -148,4 +150,9 @@
     [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
+-(void)RK_RequestApiCheckinContext:(id)context_id forUserID:(NSString*)userID atBanchID:(NSString *)branch_id withCoordinate:(CLLocationCoordinate2D)destination
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_USER_CHECKIN,ROOT_SERVER, userID,branch_id, destination.latitude, destination.longitude];
+    [self RK_RequestDictionaryMappingResponseWithURL:url postData:nil keyPath:nil withContext:context_id requestId:-1];
+}
 @end

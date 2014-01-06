@@ -68,14 +68,10 @@
 {
     // deselecte row
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    OfferDetailViewController *offerDetailViewController = [[appDelegate getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferDetailViewController"];
-    [offerDetailViewController setHidesBottomBarWhenPushed:NO];
-    NSLog(@"%@",[self.dataSource objectAtIndex:indexPath.row]);
-    [[appDelegate getCurrentViewController].navigationController pushViewController:offerDetailViewController animated:YES];
     
-    
+    OfferTableItem *_selectedOfferItem = (OfferTableItem *)[self.dataSource objectAtIndex:indexPath.row];
+    [appDelegate changeToOfferDetailViewController:_selectedOfferItem];
 }
 
 @end

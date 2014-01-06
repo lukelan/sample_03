@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSNumber * offer_id;
 @property (nonatomic, retain) NSString * offer_name;
+@property (nonatomic, retain) NSString * branch_name;
+@property (nonatomic, retain) NSString * brand_name;
 @property (nonatomic, retain) NSNumber * count_punch;
 @property (nonatomic, retain) NSNumber * category_id;
 @property (nonatomic, retain) NSNumber * discount_type;

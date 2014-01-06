@@ -10,6 +10,10 @@
 #import "GAI.h"
 #import "RKXMLReaderSerialization.h"
 #import "PlusOfferViewController.h"
+#import "FacebookManager.h"
+#import "SBJsonParser.h"
+#import "OfferMapViewController.h"
+
 @implementation AppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -42,7 +46,14 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar-ios-6-bg.png"] forBarMetrics:UIBarMetricsDefault];
 
-
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]}];
+    }
+    else
+    {
+        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]}];
+    }
        //[_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
 //    PlusOfferViewController *plusOfferViewController =  [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"PlusOfferViewController"];
 //    [plusOfferViewController.tabBarController.tabBarItem setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
@@ -70,8 +81,8 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
     [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
     [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
-    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar.png"]];
-    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar-selected.png"]];
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar-bg.png"]];
+//    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar-selected.png"]];
     [tabBarController.tabBar setShadowImage:[[UIImage alloc] init]];
     
     NSArray *arrNav = [tabBarController childViewControllers] ;
@@ -81,6 +92,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
         {
             if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
                 [temp setBackGroundImage:@"nav-bar-bg.png" forNavigationBar:temp.navigationBar];
+             
             } else {
                 [temp setBackGroundImage:@"nav-bar-bg-ios7.png" forNavigationBar:temp.navigationBar];
             }
@@ -95,11 +107,11 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
         [ga setAppVersion:[AppDelegate getVersionOfApplication]];
         [GAI sharedInstance].defaultTracker = ga;
 #endif
-    
+ 
 #ifdef DEBUG
-    [Crittercism enableWithAppID:@"529c35b78b2e33351a000008"]; //Dev
+    [Crittercism enableWithAppID:@"52bd2b0c8b2e334653000001"]; //Dev
 #else
-    [Crittercism enableWithAppID:@"52a67e17558d6a242700000b"]; // Pro
+    [Crittercism enableWithAppID:@"52bd2b5140020530ee000004"]; // Pro
 #endif
     
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -117,15 +129,9 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 100.0f;
-    userPosition = [[Location alloc] init];
-    userPosition.latitude = 0;
-    userPosition.longtitude = 0;
-    // update location
-//    if ([APIManager getBooleanInAppForKey:KEY_STORE_IS_SHOW_MY_LOCATION]) {
-        [self updateUserLocationWithType:UpdateLocationTypeAuto];
-//    }
+    userPosition = [[Position alloc] init];
+    [self updateUserLocationWithType:UpdateLocationTypeAuto];
 
-    
     return YES;
 }
 							
@@ -410,10 +416,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     // accurary is 100 metters
     if (distance > 100.0) //metters
     {
-        //        LOG_123PHIM(@"distance = %f", distance);
         // update new location
-        userPosition.longtitude = newLocation.coordinate.longitude;
-        userPosition.latitude = newLocation.coordinate.latitude;
         [self getUserPositionFromLocation:newLocation];//it also reload Location cell in Accout view
     }
     
@@ -422,40 +425,45 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 
 - (void)getUserPositionFromLocation:(CLLocation *)newLocation
 {
-    userPosition.longtitude = newLocation.coordinate.longitude;
-    userPosition.latitude = newLocation.coordinate.latitude;
+    userPosition.positionCoodinate2D = newLocation.coordinate;
+    //Use apple to get address not ful (ward, dictrict)
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+//    [geocoder reverseGeocodeLocation:newLocation
+//                   completionHandler:^(NSArray *placemarks, NSError *error) {
+//                       if (error){
+//                           NSLog(@"Geocode failed with error: %@", error);
+//                           return;
+//                       }
+//                       CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//                       NSLog(@"placemark.ISOcountryCode %@",placemark.name);
+//                   }];
     
-//    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=true", newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        if (!error)
-//        {
-//            SBJsonParser* parsor = [[SBJsonParser alloc] init];
-//            NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//            NSDictionary* rawData = [parsor objectWithString:string];
-//            
-//            if ([[rawData objectForKey:@"status"] isEqual:@"OK"]) {
-//                
-//                NSArray* result = [rawData objectForKey:@"results"];
-//                
-//                NSDictionary* address = [result objectAtIndex:0];
-//                
-//                NSString* formatted_address = [address objectForKey:@"formatted_address"];
-//                
-//                userPosition.address = formatted_address;
-//                
-//                if (updateLocationFrom == UpdateLocationTypeAuto) {
-//                    //get user location then save on server
-//                    [self storeUserLocationHistory];
-//                }
-//                CinemaViewController* cinema = [self.navCinema.viewControllers objectAtIndex:0];
-//                [cinema newLocation:newLocation address:userPosition.address];
-//                
-//                AccountViewController* account = [self.navUser.viewControllers objectAtIndex:0];
-//                [account newLocation:newLocation address:userPosition.address];
-//            }
-//        }
-//    }];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=true", newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (!error)
+        {
+            SBJsonParser* parsor = [[SBJsonParser alloc] init];
+            NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSDictionary* rawData = [parsor objectWithString:string];
+            
+            if ([[rawData objectForKey:@"status"] isEqual:@"OK"]) {
+                
+                NSArray* result = [rawData objectForKey:@"results"];
+                
+                NSDictionary* address = [result objectAtIndex:0];
+                
+                NSString* formatted_address = [address objectForKey:@"formatted_address"];
+                
+                userPosition.address = formatted_address;
+                
+                if (updateLocationFrom == UpdateLocationTypeAuto) {
+                    //get user location then save on server
+                    [self storeUserLocationHistory];
+                }
+            }
+        }
+    }];
 }
 
 - (void)updateUserLocationWithType:(UpdateLocationType)type
@@ -500,8 +508,82 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 // OfferDetailViewController
 -(void) changeToOfferDetailViewController:(OfferTableItem*)item {
     OfferDetailViewController *offerDetailViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferDetailViewController"];
-    [offerDetailViewController setHidesBottomBarWhenPushed:NO];
+    [offerDetailViewController setOffer_id:item.offer_id];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        [offerDetailViewController setHidesBottomBarWhenPushed:YES];
+    }
     [[self getCurrentViewController].navigationController pushViewController:offerDetailViewController animated:YES];
 }
 
+#pragma mark - offerMapViewController
+// OfferDetailViewController
+-(void) changeToOfferDetailViewControllerWithTitle:(NSString*)title {
+    OfferMapViewController *offerMapViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferMapViewController"];
+    [offerMapViewController setHidesBottomBarWhenPushed:YES];
+    [offerMapViewController setBrandName:title];
+    [[self getCurrentViewController].navigationController pushViewController:offerMapViewController animated:YES];
+}
+
+#pragma mark - Facebook Handle
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    [self handleLaunchOpenUrl:url];
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+- (void)handleUserAccount
+{
+    FacebookManager *fbManager = [FacebookManager shareMySingleton];
+    BOOL actived = [fbManager initFacebookSession];
+    if (actived)
+    {
+        //[self performSelectorInBackground:@selector(getFacebookAccountInfo) withObject:nil];
+        [self getFacebookAccountInfo];
+    }
+}
+
+-(void)getFacebookAccountInfo
+{
+    LOG_APP(@"begin get face book info");
+    FacebookManager *fbManager = [FacebookManager shareMySingleton];
+    [fbManager getFacebookAccountInfoWithResponseContext:self selector:@selector(finishGetFacebookAccountInfo:)];
+}
+
+- (void)finishGetFacebookAccountInfo:(id<FBGraphUser>)fbUser
+{
+    if (fbUser)
+    {
+        //send request login to our server
+//        [[APIManager sharedAPIManager] getRequestLoginFaceBookAccountWithContext:[APIManager sharedAPIManager]];
+        
+        //Chua co api login tam thoi login = facebook => login sucessful
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center postNotificationName:NOTIFICATION_NAME_FACEBOOK_ACCOUNT_INFO_DID_LOAD_AVATAR object:nil];
+    }
+    else
+    {
+        //        login but can not get profile
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Không thể kết nối tới Facebook" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+    
+}
+
+- (BOOL)isUserLoggedIn
+{
+    return self.userProfile != nil;
+}
+
+- (void)handleLogout
+{
+    [[FacebookManager shareMySingleton] logout];
+    _userProfile = nil;
+}
+
+-(void)handleLaunchOpenUrl:(NSURL *) idUrl
+{
+    //try to catch link to open view in my app (config in .plist) URL_scheme
+}
 @end

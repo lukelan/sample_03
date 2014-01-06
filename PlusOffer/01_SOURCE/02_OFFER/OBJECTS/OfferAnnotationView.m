@@ -84,7 +84,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         _discountLbl.font = [UIFont systemFontOfSize:16.0f];
         _discountLbl.transform = CGAffineTransformMakeRotation (-DEGREES_TO_RADIANS(45));
         _discountLbl.textAlignment = NSTextAlignmentCenter;
-        [_discountLbl setFont:[UIFont fontWithName:@"Avenir Next" size:8]];
+        [_discountLbl setFont:[UIFont fontWithName:FONT_AVENIR_NEXT size:8]];
         _discountLbl.textColor = UIColorFromRGB(0x333333);
         
         [_discountImage addSubview:_discountLbl];

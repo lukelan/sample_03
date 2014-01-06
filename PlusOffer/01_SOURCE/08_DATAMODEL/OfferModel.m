@@ -17,6 +17,8 @@
 @dynamic longitude;
 @dynamic offer_id;
 @dynamic offer_name;
+@dynamic branch_name;
+@dynamic brand_name;
 @dynamic count_punch;
 @dynamic category_id;
 @dynamic discount_type;
@@ -30,15 +32,15 @@
 
 -(double)distance
 {
-    Location *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
+    Position *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
     
     CLLocation *pinLocation = [[CLLocation alloc]
                                initWithLatitude:[self.latitude doubleValue]
                                longitude:[self.longitude doubleValue]];
     
     CLLocation *currentLocation = [[CLLocation alloc]
-                                   initWithLatitude:userLocation.latitude
-                                   longitude:userLocation.longtitude];
+                                   initWithLatitude:userLocation.positionCoodinate2D.latitude
+                                   longitude:userLocation.positionCoodinate2D.longitude];
     
     _distance = [pinLocation distanceFromLocation:currentLocation];
     

@@ -51,6 +51,7 @@
 #define API_REQUEST_USER_POST_UPDATE_RECEIVED_NOTIFICATION @"%@method=User.setNotification"
 #define API_REQUEST_USER_GET_FB_FRIEND_LIST @"%@friends/?facebook_id=%@&access_token=%@"
 #define API_REQUEST_USER_POST_LOCATION_TRACKING @"%@method=User.addLocationHistory"
+#define API_REQUEST_USER_CHECKIN @"%@method=User.checkin&user_id=%@&branch_id=%@&latitude=%f&longitude=%f"
 
 #pragma mark
 #pragma mark text

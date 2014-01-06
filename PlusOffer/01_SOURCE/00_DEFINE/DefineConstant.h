@@ -16,20 +16,21 @@
 #pragma mark define for tracking GA, maketting
 #define IS_GA_ENABLE
 #ifdef DEBUG
-#define GA_TRACKING_ID @"UA-39785275-1"
+#define GA_TRACKING_ID @"UA-46861269-2"
 #define LOG_APP(s...) {NSLog(@"%@",[NSString stringWithFormat:@"Plus_LOG: %@",[NSString stringWithFormat:s]]);}
 #else
-#define GA_TRACKING_ID @"UA-39785275-1"
+#define GA_TRACKING_ID @"UA-46861269-2"
 #define LOG_APP(s...) ;
 #endif
+
 #define PINGREMARKETING {[GoogleConversionPing pingRemarketingWithConversionId:@"983463027" label:@"jLppCIXKgAgQ8-j51AM" screenName:viewName customParameters:nil];}
 
 #pragma mark - FONT
 
 #define FONT_NAME @"Helvetica"
 #define FONT_BOLD_NAME @"Helvetica-Bold"
-#define FONT_UVFTYPOSLABSERIF @"UVF TypoSlabserif"
-#define FONT_AVENIR_NEXT @"Avenir Next"
+#define FONT_UVFTYPOSLABSERIF @"UVFTypoSlabserif-light"
+#define FONT_AVENIR_NEXT @"TypoSlabserif-light"
 
 #pragma mark define key store in NSUserDefault
 //Define key store in app setting

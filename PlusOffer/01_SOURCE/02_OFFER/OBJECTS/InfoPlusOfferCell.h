@@ -14,11 +14,11 @@
 }
 @property (nonatomic, weak) id<OpenMapViewDelegate> delegate;
 
-@property (strong, nonatomic) IBOutlet UILabel *lbtime;
-@property (strong, nonatomic) IBOutlet UILabel *lblocation;
+//@property (strong, nonatomic) IBOutlet UILabel *lbtime;
+//@property (strong, nonatomic) IBOutlet UILabel *lblocation;
 @property (strong, nonatomic) IBOutlet SDImageView *imageInfoPlus;
-@property (weak, nonatomic) IBOutlet UIButton *btnOpenMap;
-- (IBAction)processOpenMapView:(id)sender;
+//@property (weak, nonatomic) IBOutlet UIButton *btnOpenMap;
+//- (IBAction)processOpenMapView:(id)sender;
 -(void)setObject:(id)object;
 
 @end

@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString *iconURL;
 @property (nonatomic, retain) NSString *offer_name;
 @property (nonatomic, retain) NSString *offer_description;
+@property (nonatomic, retain) NSString *offer_content;
 //data cell punch
 @property (nonatomic, retain) NSString *max_punch;
 @property (nonatomic, retain) NSString *count_puch;
