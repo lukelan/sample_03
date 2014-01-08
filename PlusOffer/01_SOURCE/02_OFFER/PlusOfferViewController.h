@@ -33,10 +33,7 @@ typedef enum
     // Last state
     enumOfferInterfaceType _vcType;
 }
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *viewTypeBtn;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentPlusOffers;
 @property BOOL checkListOrMap;
 - (IBAction)btSegmented:(id)sender;
-
-- (IBAction)listBtnTouchUpInside:(UIBarButtonItem *)sender;
 @end

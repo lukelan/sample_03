@@ -44,19 +44,6 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
         return (NSString *)url;
     }];
     
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar-ios-6-bg.png"] forBarMetrics:UIBarMetricsDefault];
-
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-    {
-        [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]}];
-    }
-    else
-    {
-        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]}];
-    }
-       //[_viewTypeBtn setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
-//    PlusOfferViewController *plusOfferViewController =  [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"PlusOfferViewController"];
-//    [plusOfferViewController.tabBarController.tabBarItem setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UIImage *selectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer-active.png"];
     UIImage *unselectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer.png"];
@@ -69,8 +56,9 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
    // [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar.png"]];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
-        [tabBar setTintColor:UIColorFromRGB(0x2ed072)];
+        [tabBar setTintColor:UIColorFromRGB(0x8ed400)];
     }
+
     UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
     UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
     UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
@@ -78,22 +66,31 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     [item0 setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:11]} forState:UIControlStateNormal];
     [item2 setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:11]} forState:UIControlStateNormal];
    // [item1 setImageInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    item0.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    item1.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    item2.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
     [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
     [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar-bg.png"]];
 //    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar-selected.png"]];
-    [tabBarController.tabBar setShadowImage:[[UIImage alloc] init]];
-    
+    //
+    CGRect myRect = tabBarController.tabBar.frame;
+    myRect.size.height = 20;
+    tabBarController.tabBar.frame = myRect;
+    //
     NSArray *arrNav = [tabBarController childViewControllers] ;
     for (int i = 0; i < arrNav.count; i++) {
         UINavigationController *temp = [arrNav objectAtIndex:i];
         if ([temp isKindOfClass:[UINavigationController class]])
         {
-            if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
+            if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0)
+            {
+                [temp.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15], UITextAttributeTextColor : [UIColor blackColor]}];
                 [temp setBackGroundImage:@"nav-bar-bg.png" forNavigationBar:temp.navigationBar];
              
             } else {
+                [temp.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15], NSForegroundColorAttributeName : [UIColor blackColor]}];
                 [temp setBackGroundImage:@"nav-bar-bg-ios7.png" forNavigationBar:temp.navigationBar];
             }
         }
@@ -517,10 +514,13 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 
 #pragma mark - offerMapViewController
 // OfferDetailViewController
--(void) changeToOfferDetailViewControllerWithTitle:(NSString*)title {
+-(void) toMapViewController:(id)object withTitle:(NSString*)title isHandleAction:(BOOL)isHandle
+{
     OfferMapViewController *offerMapViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferMapViewController"];
     [offerMapViewController setHidesBottomBarWhenPushed:YES];
     [offerMapViewController setBrandName:title];
+    [offerMapViewController setObject:object];
+    [offerMapViewController setIsRegisterHandleTapAnotation:isHandle];
     [[self getCurrentViewController].navigationController pushViewController:offerMapViewController animated:YES];
 }
 

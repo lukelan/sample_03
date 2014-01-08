@@ -7,13 +7,14 @@
 //
 
 #import "PlusOfferViewController.h"
+#import "VersionNotificationViewController.h"
 #import "OfferTableItem.h"
 #import "OfferModel.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
-@interface PlusOfferViewController () <NSFetchedResultsControllerDelegate>
+@interface PlusOfferViewController () <NSFetchedResultsControllerDelegate, RKManagerDelegate>
 @property (nonatomic, retain) NSMutableArray *listOffers;
 @property (nonatomic, retain) NSMutableArray *dataSource;
 
@@ -37,12 +38,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     // init fetched result controller
-     self.navigationController.navigationBar.layer.opacity = 1.0f;
+  //   self.navigationController.navigationBar.layer.opacity = 1.0f;
     [self fetchedResultsController];
     self.navigationController.navigationBar.translucent = NO;
     viewName = PLUS_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
     
+    [self setCustomBarRightWithImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] selector:@selector(selectMap:) context_id:self];
     // just for testing purpose
     self.listOffers = [NSMutableArray array];
     _vcType = enumOfferInterfaceType_List;
@@ -53,9 +55,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    PINGREMARKETING
-    self.navigationController.navigationBar.layer.opacity = 1.0f;
-    self.navigationController.navigationBar.translucent = NO;
+//    PINGREMARKETING
     switch (_vcType) {
         case enumOfferInterfaceType_List: {
             self.tabBarController.tabBar.hidden = NO;
@@ -68,8 +68,8 @@
         default:
             break;
     }
-
-    [self loadOffers];
+    //check New version to update
+    [(PlusAPIManager *)[PlusAPIManager sharedAPIManager] RK_RequestApiCheckAppVersion:[AppDelegate getVersionOfApplication] responseContext:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,12 +89,15 @@
         [self.segmentPlusOffers setDividerImage:segmentSelectedUnselected forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
         UIImage *segmentUnselectedUnselected = [UIImage imageNamed:@"segment_deselected_deselected.png"];
         [self.segmentPlusOffers setDividerImage:segmentUnselectedUnselected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-        
-//        self.segmentPlusOffers.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.97f];
+        self.segmentPlusOffers.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.97f];
     }
+    self.segmentPlusOffers.tintColor = UIColorFromRGB(0x8ed400);
+    [_segmentPlusOffers setContentOffset:CGSizeMake(0, 1) forSegmentAtIndex:0];
+     [_segmentPlusOffers setContentOffset:CGSizeMake(0, 1) forSegmentAtIndex:0];
+     [_segmentPlusOffers setContentOffset:CGSizeMake(0, 1) forSegmentAtIndex:0];
     [self.segmentPlusOffers setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                               [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
-                                                     [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:13], UITextAttributeFont,UIColorFromRGB(0x2ed072),UITextAttributeTextColor,[UIColor clearColor], UITextAttributeTextShadowColor,
+                                                     [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:13], UITextAttributeFont,UIColorFromRGB(0x8ed400),UITextAttributeTextColor,[UIColor clearColor], UITextAttributeTextShadowColor,
                                                               nil] forState:UIControlStateNormal];
     [self.segmentPlusOffers setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                               [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
@@ -118,14 +121,14 @@
         {
             if (!_listView) {
                 _listView = [[PlusOfferListView alloc] initWithFrame: CGRectMake(0, 0, 320, self.view.frame.size.height - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT - CHECK_IOS )];
-
             }
       
-             if (_mapView) [_mapView removeFromSuperview];
-             self.navigationController.navigationBar.translucent = NO;
-              self.navigationController.navigationBar.layer.opacity = 1.0f;
-//            self.tabBarController.tabBar.hidden = NO;
-            [self.viewTypeBtn setTitle:@"Map"];
+            if (_mapView)
+            {
+                [_mapView removeFromSuperview];
+            }
+            self.navigationController.navigationBar.translucent = NO;
+            self.navigationController.navigationBar.layer.opacity = 1.0f;
             if (IS_IOS7)
             {
                 [self performShowTabBar];
@@ -134,13 +137,7 @@
             {
                 [self performShowTabBarIOS6:self.tabBarController];
             }
-            UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-            [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
-            [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
-            _viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
-            [self.viewTypeBtn setTitle:@"Map"];
-            self.navigationItem.rightBarButtonItem = _viewTypeBtn;
+            [self setImageCustomBarRight:[UIImage imageNamed:@"nav-bar-icon-map.png"]];
             _checkListOrMap = YES;
             _listView.dataSource = self.listOffers;
             [self.view addSubview:_listView];
@@ -152,7 +149,7 @@
             if (IS_IOS7)
             {
                 [self performHideTabBar];
-                self.navigationController.navigationBar.layer.opacity = 0.9f;
+                self.navigationController.navigationBar.layer.opacity = 0.95f;
             }
             else
             {
@@ -173,18 +170,14 @@
                 }
                 _mapView.delegate = self;
             }
-            if (_listView) [_listView removeFromSuperview];
+            [_mapView setIsRegisteredHanleTap:YES];
+            if (_listView)
+            {
+                [_listView removeFromSuperview];
+            }
             self.navigationController.navigationBar.translucent = YES;
-          
-            [self.viewTypeBtn setTitle:@"List"];
+            [self setImageCustomBarRight:[UIImage imageNamed:@"map-icon-list.png"]];
             [self.view addSubview:_mapView];
-            UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-            [a1 addTarget:self action:@selector(selectMap:) forControlEvents:UIControlEventTouchUpInside];
-            [a1 setImage:[UIImage imageNamed:@"map-icon-list.png"] forState:UIControlStateNormal];
-            _viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
-            [self.viewTypeBtn setTitle:@"Map"];
-            self.navigationItem.rightBarButtonItem = _viewTypeBtn;
             _checkListOrMap = NO;
             [_mapView reloadInterface:self.listOffers];
             break;
@@ -213,7 +206,7 @@
             break;
         }
         case ENUM_PLUS_OFFER_CATEGORY_CUISINE: {
-                      [(PlusAPIManager*)[PlusAPIManager sharedAPIManager]
+            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager]
              RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
             break;
         }
@@ -225,24 +218,12 @@
     }
 }
 
-- (IBAction)loadDirection:(id)sender {
-}
-#pragma mark - Actions
+#pragma mark - Actions Segment change
 
 - (IBAction)btSegmented:(id)sender {
        checkOfferCategory = self.segmentPlusOffers.selectedSegmentIndex;
      [self loadOffers];
    // NSLog(@"%u",checkOfferCategory );
-}
-
-- (IBAction)listBtnTouchUpInside:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"Map"]) {
-        
-        [self loadInterface:enumOfferInterfaceType_Map];
-    }
-    else {
-        [self loadInterface:enumOfferInterfaceType_List];
-    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -278,9 +259,6 @@
     self.listOffers = [NSMutableArray array];
     for (OfferModel *itemModel in self.dataSource)
     {
-        
-//        NSLog(@"%@",[NSString stringWithFormat:@"%hhd",  itemModel.allowRedeem ]);
-//        NSLog(@"%f - %f", [itemModel.latitude floatValue], [itemModel.longitude floatValue]);
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                              @"map_offer.png", @"url",
                              itemModel.discount_value.stringValue, @"discount",
@@ -314,5 +292,35 @@
     }
     
 }
+#pragma mark -
+#pragma mark RKManagerDelegate
+#pragma mark -
+-(void)processResultResponseDictionaryMapping:(DictionaryMapping *)dictionary requestId:(int)request_id
+{
+    if (request_id == ID_REQUEST_CHECK_VERSION)
+    {
+        [self getResultCheckVersionResponse:[(PlusAPIManager *)[PlusAPIManager sharedAPIManager] parseToGetVersionInfo:dictionary.curDictionary]];
+    }
+}
 
+- (void)getResultCheckVersionResponse:(NSDictionary *)dic
+{
+    if (dic)
+    {
+        // Fix bug VersionNotificationViewController no action
+        NSString *imageLink = [dic objectForKey:@"logo"];
+        NSNumber *status = [dic objectForKey:@"status"];
+        BOOL canSkip = status.intValue < 2;
+        VersionNotificationViewController *versionNotifiCation = [[VersionNotificationViewController alloc] init];
+        versionNotifiCation.canSkip = canSkip;
+        versionNotifiCation.imageLink = imageLink;
+        versionNotifiCation.dismissWhenSkip = YES;
+        [self.navigationController presentViewController:versionNotifiCation animated:YES completion:^{
+        }];
+    }
+    else
+    {
+        [self loadOffers];
+    }
+}
 @end

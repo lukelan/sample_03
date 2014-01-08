@@ -17,6 +17,7 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
     #import <RestKit/RestKit.h>
+    #import <CoreLocation/CoreLocation.h>
     #import "DefineConstant.h"
     #import "APIDefines.h"
     #import "SDImageView.h"

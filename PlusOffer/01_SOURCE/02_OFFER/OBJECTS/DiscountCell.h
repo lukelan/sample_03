@@ -10,7 +10,8 @@
 
 @interface DiscountCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *lbTitle;
-@property (strong, nonatomic) IBOutlet SDImageView *imageDiscount;
+//@property (strong, nonatomic) IBOutlet SDImageView *imageDiscount;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewDes;
 -(void)setObject:(id)object;
++ (CGFloat)getHeight:(id)object;
 @end

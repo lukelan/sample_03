@@ -23,14 +23,14 @@
 #define LOG_APP(s...) ;
 #endif
 
-#define PINGREMARKETING {[GoogleConversionPing pingRemarketingWithConversionId:@"983463027" label:@"jLppCIXKgAgQ8-j51AM" screenName:viewName customParameters:nil];}
+#define PINGREMARKETING {[GoogleConversionPing pingRemarketingWithConversionId:@"983463027" label:@"jLppCIXKgAgQ8-j51AM" screenName:viewName customParamete rs:nil];}
 
 #pragma mark - FONT
 
 #define FONT_NAME @"Helvetica"
 #define FONT_BOLD_NAME @"Helvetica-Bold"
-#define FONT_UVFTYPOSLABSERIF @"UVFTypoSlabserif-light"
-#define FONT_AVENIR_NEXT @"TypoSlabserif-light"
+#define FONT_UVFTYPOSLABSERIF @"UVFTypoSlabserif-Light"
+#define FONT_AVENIR_NEXT @"Avenir Next"
 
 #pragma mark define key store in NSUserDefault
 //Define key store in app setting
@@ -59,6 +59,7 @@
 #define PLUS_VIEW_CONTROLLER @"UIPlusViewController"
 #define OFFER_DETAIL_VIEW_CONTROLLER @"UIOfferDetailViewController"
 #define CHOOSE_CITY_VIEW_NAME @"UIChooseLocation"
+#define VERSION_NOTIFICATION_VIEW_NAME @"UIVersionNotification"
 #pragma mark -
 
 typedef enum
@@ -77,7 +78,7 @@ typedef enum{
 
 
 #define DEGREES_TO_RADIANS(x) (M_PI * x / 180.0) //rotate
-#define kSqliteFileName @"CoreDataPlus"
+#define kSqliteFileName @"PlusOfferModel"
 #define BUNDLE_PATH ([[NSBundle mainBundle] bundlePath])
 #define CACHE_IMAGE_PATH ([NSString stringWithFormat:@"%@/images/",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]])
 #endif
@@ -88,8 +89,9 @@ typedef enum{
 #define MAXIMUM_SCALEABLE_RADIUS_METERS                                     5000000
 #define MINIMUM_DISTANCE_ALLOW_USER_REDEEM                                  100.0f // in 100 meters
 
-//Xanh lá: #2ed072
+//Xanh lá: #8ed400
 //Xám: #9f9f9f
 //Background: #e4eef0
 //Text đậm: #333333
 //Text nhạt: #666666
+#define APP_ITUNES_LINK @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=615186197"

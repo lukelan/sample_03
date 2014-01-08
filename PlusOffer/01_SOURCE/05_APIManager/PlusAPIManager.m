@@ -107,6 +107,8 @@
                                                         @"offer_name" : @"offer_name",
                                                         @"latitude" : @"latitude",
                                                         @"longitude" : @"longitude",
+                                                        @"brand_name" : @"brand_name",
+                                                        @"branch_name" : @"branch_name",
                                                         @"count_punch" : @"count_punch",
                                                         @"category_id" : @"category_id",
                                                         @"discount_type" : @"discount_type",
@@ -154,5 +156,27 @@
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_USER_CHECKIN,ROOT_SERVER, userID,branch_id, destination.latitude, destination.longitude];
     [self RK_RequestDictionaryMappingResponseWithURL:url postData:nil keyPath:nil withContext:context_id requestId:-1];
+}
+
+#pragma mark check version to update
+-(void)RK_RequestApiCheckAppVersion:(NSString *) currentVersion responseContext: (id)context_id
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_APP_GET_NEW_VERSION,BASE_URL_SERVER,currentVersion];
+    [self RK_RequestDictionaryMappingResponseWithURL:url postData:nil keyPath:nil withContext:context_id requestId:ID_REQUEST_CHECK_VERSION];
+}
+
+-(NSDictionary*)parseToGetVersionInfo: (NSDictionary *) dicObject
+{
+    NSNumber *status = [dicObject objectForKey:@"status"];
+    if (!status.intValue)
+    {
+        return nil;
+    }
+    dicObject = [dicObject objectForKey:@"result"];
+    if ([dicObject isKindOfClass:[NSNull class]])
+    {
+        return nil;
+    }
+    return dicObject;
 }
 @end

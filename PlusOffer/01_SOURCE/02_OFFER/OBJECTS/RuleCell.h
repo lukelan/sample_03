@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewDes;
 -(void)setObject:(id)object;
++ (CGFloat)getHeight:(id)object;
 @end

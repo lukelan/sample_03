@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "18FBCED118673C1800C9E399"
-               BuildableName = "PlusOffer Dev.app"
-               BlueprintName = "PlusOffer Dev"
+               BlueprintIdentifier = "AAB01B4B18701805006E2552"
+               BuildableName = "PlusOffer.app"
+               BlueprintName = "PlusOffer Pro"
                ReferencedContainer = "container:PlusOffer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -91,7 +91,6 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "PlusOffer"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

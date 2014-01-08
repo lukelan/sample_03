@@ -35,6 +35,23 @@
     // Configure the view for the selected state
 }
 
++ (CGFloat)getHeight:(id)object
+{
+    CGFloat height = 47;
+    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
+    CGSize sizeText = [@"ABC" sizeWithFont:font];
+    
+    if (![object isKindOfClass:[OfferDetailItem class]]) {
+        return height;
+    }
+    OfferDetailItem *item = object;
+    NSArray *arrDes = [item.offer_content componentsSeparatedByString:@"\n"];
+    if (![arrDes isKindOfClass:[NSArray class]]) {
+        return height;
+    }
+    return (height + (sizeText.height * arrDes.count));
+}
+
 -(void)setObject:(id)object
 {
     if (![object isKindOfClass:[OfferDetailItem class]]) {
@@ -44,12 +61,16 @@
 //    [self.lblTitle setTextColor:UIColorFromRGB(0x333333)];
     OfferDetailItem *item = object;
        
-    NSArray *arrDes = [item.offer_content componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSArray *arrDes = [item.offer_content componentsSeparatedByString:@"\n"];
     if (![arrDes isKindOfClass:[NSArray class]]) {
         return;
     }
+
     UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
+    CGRect frame = self.scrollViewDes.frame;
+    frame.size.height = sizeText.height * arrDes.count;
+    [self.scrollViewDes setFrame:frame];
     
     int tag_min = 100;
     for (int i = 0; i < arrDes.count; i++)
@@ -70,6 +91,6 @@
         }
         [lblText setText:[arrDes objectAtIndex:i]];
     }
-    [self.scrollViewDes setContentSize:CGSizeMake(self.scrollViewDes.frame.size.width, sizeText.height*arrDes.count)];
+//    [self.scrollViewDes setContentSize:CGSizeMake(self.scrollViewDes.frame.size.width, sizeText.height*arrDes.count)];
 }
 @end

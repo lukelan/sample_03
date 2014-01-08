@@ -57,7 +57,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Duydph - 04/12/2013 - Add Remarketing Code
-    PINGREMARKETING
+//    PINGREMARKETING
     if (!self.listOfCity || self.listOfCity.count == 0) {
         [(PlusAPIManager *)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferContext:self];
     }

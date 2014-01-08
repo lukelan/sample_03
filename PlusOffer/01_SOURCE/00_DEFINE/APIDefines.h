@@ -32,8 +32,9 @@
 #endif
 
 #pragma mark
-#pragma mark function city
+#pragma mark get city, check version
 #define API_REQUEST_CITY_GET_LIST @"%@method=Location.getList"
+#define API_REQUEST_APP_GET_NEW_VERSION @"%@auth?method=App.getNewsVersion&version=%@"
 
 #pragma mark
 #pragma mark function Offer
@@ -69,6 +70,7 @@ typedef enum
     ID_REQUEST_REDEEM,
     ID_REQUEST_ACCOUNT,
     ID_REQUEST_DIRECTION,
+    ID_REQUEST_CHECK_VERSION,
     ID_REQUEST_OTHER
 }ENUM_ID_REQUEST_TYPE;
 

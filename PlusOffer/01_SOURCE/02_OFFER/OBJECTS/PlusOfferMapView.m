@@ -16,6 +16,11 @@
     MKPolyline *_polyLine;
 }
 
+- (void)dealloc
+{
+    _dataSource = nil;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [[[NSBundle mainBundle] loadNibNamed:[self.class description] owner:self options:nil] objectAtIndex:0];
@@ -46,6 +51,25 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     // Drawing code
 }
 */
+
+- (BOOL) isValidUserCoordinate
+{
+    if (!CLLocationCoordinate2DIsValid(self.mapView.userLocation.coordinate) || (self.mapView.userLocation.coordinate.latitude == 0.0f && self.mapView.userLocation.coordinate.longitude == 0.0f)) {
+        return NO;
+    }
+    return YES;
+}
+
+-(void)checkToDrawRoute
+{
+    isNeedDrawRoute = NO;
+    if ([self isValidUserCoordinate]) {
+        [self drawRouteToItemIndex:0];
+    } else {
+        isNeedDrawRoute = YES;
+    }
+}
+
 - (IBAction)showUserLocation:(id)sender {
     [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate animated:YES];
 }
@@ -62,7 +86,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)reloadInterface:(NSMutableArray*)listOffers
 {
     _dataSource = listOffers;
-    
     // remove current current anotations
     for (id<MKAnnotation> annotation in _mapView.annotations) {
         if ([annotation isKindOfClass:[OfferTableItem class]]) {
@@ -75,7 +98,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
     
     // add new anotations
-    [self.mapView addAnnotations:self.dataSource];
+    [_mapView addAnnotations:_dataSource];
     
     // zoom to visual region
     MKCoordinateRegion region = [self createZoomRegionFromCentralPointAndRadius :self.dataSource];
@@ -138,6 +161,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return polylineView;
 }
 
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    if (isNeedDrawRoute) {
+        [self drawRouteToItemIndex:0];
+    }
+}
+
 #pragma mark - Utilities
 
 - (MKCoordinateRegion)createZoomRegionFromCentralPointAndRadius:(NSMutableArray*) categoryArray {
@@ -168,6 +198,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         centralPoint.latitude   = nearestlocation.coordinate.latitude;
         centralPoint.longitude  = nearestlocation.coordinate.longitude;
         radiusMeters = 1000;
+    } else if (radiusMeters <= MAXIMUM_SCALEABLE_RADIUS_METERS) {
+        centralPoint.latitude    = (currentLocation.coordinate.latitude + nearestlocation.coordinate.latitude)/2;
+        centralPoint.longitude   = (currentLocation.coordinate.longitude + nearestlocation.coordinate.longitude)/2 ;
     } else {
         centralPoint.latitude    = currentLocation.coordinate.latitude;
         centralPoint.longitude   = currentLocation.coordinate.longitude ;
@@ -178,7 +211,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         radiusMeters = 1000;
     }
 
-    return MKCoordinateRegionMakeWithDistance(centralPoint, radiusMeters * 2, radiusMeters *2 );
+    return MKCoordinateRegionMakeWithDistance(centralPoint, radiusMeters * 1.2, radiusMeters *1.2 );
     
 }
 
@@ -264,9 +297,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 #pragma mark - OfferAnnotationViewProtocol
 - (void)didTapAnnotationExpendedViewInMap:(int)index {
-    if (_selectedOfferItem) {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [appDelegate changeToOfferDetailViewController:_selectedOfferItem];
+    if (_selectedOfferItem)
+    {
+        if (_isRegisteredHanleTap) {
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate changeToOfferDetailViewController:_selectedOfferItem];
+        }
     }
 }
 

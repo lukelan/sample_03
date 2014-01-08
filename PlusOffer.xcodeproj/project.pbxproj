@@ -431,6 +431,14 @@
 		AABB9BEA18727B5F0018C0D5 /* OfferDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB9BE818727B5F0018C0D5 /* OfferDetailModel.m */; };
 		E30ECCA8186D7AAC003F1931 /* InfoPlusOfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30ECCA7186D7AAC003F1931 /* InfoPlusOfferCell.m */; };
 		E30ECCB0186D8981003F1931 /* DiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30ECCAF186D8981003F1931 /* DiscountCell.m */; };
+		E31056C6187D8B8A0088818F /* VersionNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31056BF187D8B8A0088818F /* VersionNotificationViewController.m */; };
+		E31056C7187D8B8A0088818F /* VersionNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31056BF187D8B8A0088818F /* VersionNotificationViewController.m */; };
+		E31056C8187D8B8A0088818F /* PunchCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31056C3187D8B8A0088818F /* PunchCardCell.m */; };
+		E31056C9187D8B8A0088818F /* PunchCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E31056C3187D8B8A0088818F /* PunchCardCell.m */; };
+		E31056CA187D8B8A0088818F /* TichDiemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31056C5187D8B8A0088818F /* TichDiemViewController.m */; };
+		E31056CB187D8B8A0088818F /* TichDiemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E31056C5187D8B8A0088818F /* TichDiemViewController.m */; };
+		E346C45E187CFF680070EC91 /* PunchCard.png in Resources */ = {isa = PBXBuildFile; fileRef = E346C45C187CFF680070EC91 /* PunchCard.png */; };
+		E346C45F187CFF680070EC91 /* PunchCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E346C45D187CFF680070EC91 /* PunchCard@2x.png */; };
 		E364303A187AAADD00CB6A14 /* OfferMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3643039187AAADD00CB6A14 /* OfferMapViewController.m */; };
 		E364303D187ABA3000CB6A14 /* tab-bar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E364303B187ABA3000CB6A14 /* tab-bar-bg.png */; };
 		E364303E187ABA3000CB6A14 /* tab-bar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E364303C187ABA3000CB6A14 /* tab-bar-bg@2x.png */; };
@@ -873,6 +881,18 @@
 		E30ECCA7186D7AAC003F1931 /* InfoPlusOfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPlusOfferCell.m; sourceTree = "<group>"; };
 		E30ECCAE186D8981003F1931 /* DiscountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountCell.h; sourceTree = "<group>"; };
 		E30ECCAF186D8981003F1931 /* DiscountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountCell.m; sourceTree = "<group>"; };
+		E31056BE187D8B8A0088818F /* VersionNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionNotificationViewController.h; sourceTree = "<group>"; };
+		E31056BF187D8B8A0088818F /* VersionNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionNotificationViewController.m; sourceTree = "<group>"; };
+		E31056C2187D8B8A0088818F /* PunchCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchCardCell.h; sourceTree = "<group>"; };
+		E31056C3187D8B8A0088818F /* PunchCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchCardCell.m; sourceTree = "<group>"; };
+		E31056C4187D8B8A0088818F /* TichDiemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TichDiemViewController.h; sourceTree = "<group>"; };
+		E31056C5187D8B8A0088818F /* TichDiemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TichDiemViewController.m; sourceTree = "<group>"; };
+		E32C06C1187C360F000472E3 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		E32C06C2187C360F000472E3 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		E32C06C5187C360F000472E3 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		E32C06C6187C360F000472E3 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		E346C45C187CFF680070EC91 /* PunchCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PunchCard.png; sourceTree = "<group>"; };
+		E346C45D187CFF680070EC91 /* PunchCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PunchCard@2x.png"; sourceTree = "<group>"; };
 		E3643038187AAADD00CB6A14 /* OfferMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferMapViewController.h; sourceTree = "<group>"; };
 		E3643039187AAADD00CB6A14 /* OfferMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferMapViewController.m; sourceTree = "<group>"; };
 		E364303B187ABA3000CB6A14 /* tab-bar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-bar-bg.png"; sourceTree = "<group>"; };
@@ -1202,6 +1222,9 @@
 				4F6848E1186D8CB90031893D /* 06_CLASSES */,
 				4F6848E4186D8CB90031893D /* 07_LOCATION */,
 				18814D2818702CB300765498 /* 08_DATAMODEL */,
+				E32C06C0187C360F000472E3 /* 09_MENU */,
+				E31056BD187D8B8A0088818F /* 10_VERSION */,
+				E31056C0187D8B8A0088818F /* 11_TICHDIEM */,
 			);
 			path = 01_SOURCE;
 			sourceTree = "<group>";
@@ -1646,6 +1669,8 @@
 		AA5A71F9186ABF8500BC8D91 /* 03_RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				E346C45C187CFF680070EC91 /* PunchCard.png */,
+				E346C45D187CFF680070EC91 /* PunchCard@2x.png */,
 				E364303B187ABA3000CB6A14 /* tab-bar-bg.png */,
 				E364303C187ABA3000CB6A14 /* tab-bar-bg@2x.png */,
 				4FFCB70A1876B96400D93006 /* nav-bar-bg-ios7.png */,
@@ -2050,6 +2075,53 @@
 			path = font;
 			sourceTree = "<group>";
 		};
+		E31056BD187D8B8A0088818F /* 10_VERSION */ = {
+			isa = PBXGroup;
+			children = (
+				E31056BE187D8B8A0088818F /* VersionNotificationViewController.h */,
+				E31056BF187D8B8A0088818F /* VersionNotificationViewController.m */,
+			);
+			path = 10_VERSION;
+			sourceTree = "<group>";
+		};
+		E31056C0187D8B8A0088818F /* 11_TICHDIEM */ = {
+			isa = PBXGroup;
+			children = (
+				E31056C1187D8B8A0088818F /* OBJECTS */,
+				E31056C4187D8B8A0088818F /* TichDiemViewController.h */,
+				E31056C5187D8B8A0088818F /* TichDiemViewController.m */,
+			);
+			path = 11_TICHDIEM;
+			sourceTree = "<group>";
+		};
+		E31056C1187D8B8A0088818F /* OBJECTS */ = {
+			isa = PBXGroup;
+			children = (
+				E31056C2187D8B8A0088818F /* PunchCardCell.h */,
+				E31056C3187D8B8A0088818F /* PunchCardCell.m */,
+			);
+			path = OBJECTS;
+			sourceTree = "<group>";
+		};
+		E32C06C0187C360F000472E3 /* 09_MENU */ = {
+			isa = PBXGroup;
+			children = (
+				E32C06C4187C360F000472E3 /* OBJECTS */,
+				E32C06C1187C360F000472E3 /* MenuViewController.h */,
+				E32C06C2187C360F000472E3 /* MenuViewController.m */,
+			);
+			name = 09_MENU;
+			sourceTree = "<group>";
+		};
+		E32C06C4187C360F000472E3 /* OBJECTS */ = {
+			isa = PBXGroup;
+			children = (
+				E32C06C5187C360F000472E3 /* MenuCell.h */,
+				E32C06C6187C360F000472E3 /* MenuCell.m */,
+			);
+			name = OBJECTS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2216,6 +2288,7 @@
 				AA5A7273186C29AB00BC8D91 /* Pocket@2x.png in Resources */,
 				AA5A7285186C29AB00BC8D91 /* TwitterSelected@2x.png in Resources */,
 				4FBFE0AA187568F60022CF61 /* punch-star@2x.png in Resources */,
+				E346C45E187CFF680070EC91 /* PunchCard.png in Resources */,
 				181942301875AEE1006E8870 /* map-icon-user-location@2x.png in Resources */,
 				AA5A7267186C29AB00BC8D91 /* Facebook@2x.png in Resources */,
 				4FFCB72E1876B96400D93006 /* segment_selected_deselected@2x.png in Resources */,
@@ -2329,6 +2402,7 @@
 				AA5A7283186C29AB00BC8D91 /* Twitter@2x.png in Resources */,
 				4FFCB71C1876B96400D93006 /* nav-bar-bg.png in Resources */,
 				AA5A7261186C29AB00BC8D91 /* CommentsSelected@2x.png in Resources */,
+				E346C45F187CFF680070EC91 /* PunchCard@2x.png in Resources */,
 				AA5A727B186C29AB00BC8D91 /* Share@2x.png in Resources */,
 				AA5A7262186C29AB00BC8D91 /* Email.png in Resources */,
 			);
@@ -2525,6 +2599,7 @@
 				18FBCF1B186744C300C9E399 /* PlusOfferViewController.m in Sources */,
 				18FBCF2C1867471400C9E399 /* PlusOfferListView.m in Sources */,
 				18FBCF24186744FE00C9E399 /* AccountViewController.m in Sources */,
+				E31056C8187D8B8A0088818F /* PunchCardCell.m in Sources */,
 				4FBBEB1918681F160040EA12 /* NSString+MD5Addition.m in Sources */,
 				4FBBEB5A18682E210040EA12 /* pngpread.c in Sources */,
 				4FBBEB5B18682E210040EA12 /* pngread.c in Sources */,
@@ -2564,6 +2639,7 @@
 				4FBBEB6218682E210040EA12 /* pngwrite.c in Sources */,
 				4FEE9CE0187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */,
 				AA5A729E186D63F500BC8D91 /* JPSThumnail.m in Sources */,
+				E31056CA187D8B8A0088818F /* TichDiemViewController.m in Sources */,
 				4FEE9CD3187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */,
 				AABB9BE118725FAA0018C0D5 /* RedeemModel.m in Sources */,
 				AABB9BE918727B5F0018C0D5 /* OfferDetailModel.m in Sources */,
@@ -2574,6 +2650,7 @@
 				4FBBEC1218684D2D0040EA12 /* NSString+trimSpecialCharacter.m in Sources */,
 				18FBCEE218673C1900C9E399 /* main.m in Sources */,
 				4F754E1C18750CFD00540C9B /* OfferDetailItem.m in Sources */,
+				E31056C6187D8B8A0088818F /* VersionNotificationViewController.m in Sources */,
 				4F5B4EA51869690700AAE584 /* DictionaryMapping.m in Sources */,
 				4F754E101872ABB900540C9B /* MBSliderView.m in Sources */,
 				4FBBEC08186849BF0040EA12 /* PullRefreshTableViewController.m in Sources */,
@@ -2621,6 +2698,7 @@
 				AAB01B5218701805006E2552 /* PlusOfferMapView.m in Sources */,
 				AAB01B5318701805006E2552 /* CoreAPIManager.m in Sources */,
 				AAB01B5418701805006E2552 /* JPSThumbnailAnnotationView.m in Sources */,
+				E31056CB187D8B8A0088818F /* TichDiemViewController.m in Sources */,
 				AAB01B5518701805006E2552 /* RedeemViewController.m in Sources */,
 				AAB01B5618701805006E2552 /* OfferDetailViewController.m in Sources */,
 				AAB01B5718701805006E2552 /* CustomViewController.m in Sources */,
@@ -2641,6 +2719,7 @@
 				AAB01B6318701805006E2552 /* PlusAPIManager.m in Sources */,
 				4FEE9CBC187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */,
 				AAB01B6418701805006E2552 /* pngrtran.c in Sources */,
+				E31056C7187D8B8A0088818F /* VersionNotificationViewController.m in Sources */,
 				AAB01B6518701805006E2552 /* JCGridMenuRow.m in Sources */,
 				AAB01B6618701805006E2552 /* Location.m in Sources */,
 				4FEE9CD2187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */,
@@ -2669,6 +2748,7 @@
 				AAB01B7818701805006E2552 /* NSString+trimSpecialCharacter.m in Sources */,
 				18D7919F18771AF800D962A9 /* Routes.m in Sources */,
 				AAB01B7918701805006E2552 /* main.m in Sources */,
+				E31056C9187D8B8A0088818F /* PunchCardCell.m in Sources */,
 				AABB9BE618725FAB0018C0D5 /* OfferModel.m in Sources */,
 				4FEE9CE1187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */,
 				AAB01B7A18701805006E2552 /* DictionaryMapping.m in Sources */,
@@ -2828,7 +2908,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Duy Dao Pham Hoang (VTHS5G77QG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2848,7 +2928,7 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "60760B1A-D6D4-4CEA-8535-70313388737E";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2861,7 +2941,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Duy Dao Pham Hoang (VTHS5G77QG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2881,7 +2961,7 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "60760B1A-D6D4-4CEA-8535-70313388737E";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

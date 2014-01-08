@@ -20,6 +20,23 @@
     return self;
 }
 
++ (CGFloat)getHeight:(id)object
+{
+    CGFloat height = 47;
+    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
+    CGSize sizeText = [@"ABC" sizeWithFont:font];
+    
+    if (![object isKindOfClass:[OfferDetailItem class]]) {
+        return height;
+    }
+    OfferDetailItem *item = object;
+    NSArray *arrDes = [item.offer_description componentsSeparatedByString:@"\n"];
+    if (![arrDes isKindOfClass:[NSArray class]]) {
+        return height;
+    }
+    return (height + (sizeText.height * arrDes.count));
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -33,18 +50,20 @@
         return;
     }
     [self.lbTitle setFont:[UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]];
-//    [self.lbTitle setTextColor:UIColorFromRGB(0x333333)];
     OfferDetailItem *item = object;
     
-    [self.imageDiscount setImageWithURL:[NSURL URLWithString:item.iconURL]];//setImage:[UIImage imageNamed:@"redeem_logo_1.png"]
+//    [self.imageDiscount setImageWithURL:[NSURL URLWithString:item.iconURL]];//setImage:[UIImage imageNamed:@"redeem_logo_1.png"]
     self.lbTitle.text = item.offer_name;
     
-    NSArray *arrDes = [item.offer_description componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSArray *arrDes = [item.offer_description componentsSeparatedByString:@"\n"];
     if (![arrDes isKindOfClass:[NSArray class]]) {
         return;
     }
     UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
+    CGRect frame = self.scrollViewDes.frame;
+    frame.size.height = sizeText.height * arrDes.count;
+    [self.scrollViewDes setFrame:frame];
     
     int tag_min = 100;
     for (int i = 0; i < arrDes.count; i++)
@@ -65,6 +84,6 @@
         }
         [lblText setText:[arrDes objectAtIndex:i]];
     }
-    [self.scrollViewDes setContentSize:CGSizeMake(self.scrollViewDes.frame.size.width, sizeText.height*arrDes.count)];
+//    [self.scrollViewDes setContentSize:CGSizeMake(self.scrollViewDes.frame.size.width, sizeText.height*arrDes.count)];
 }
 @end

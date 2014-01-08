@@ -32,7 +32,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    PINGREMARKETING
+//    PINGREMARKETING
 }
 
 - (void)didReceiveMemoryWarning

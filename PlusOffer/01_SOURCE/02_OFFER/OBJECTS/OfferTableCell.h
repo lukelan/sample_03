@@ -11,7 +11,7 @@
 
 @interface OfferTableCell : UITableViewCell
 
-@property (nonatomic, weak) id object;
+@property (nonatomic, strong) id object;
 @property (nonatomic, retain) SDImageView *backgroundImage;
 @property (nonatomic, retain) SDImageView *discountImage;
 @property (nonatomic, retain) SDImageView *logoImage;

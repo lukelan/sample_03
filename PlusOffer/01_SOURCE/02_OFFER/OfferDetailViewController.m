@@ -48,10 +48,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
-    self.tabBarController.tabBar.hidden = NO;
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.layer.opacity = 1.0f;
+    self.tabBarController.tabBar.hidden = YES;
     viewName = OFFER_DETAIL_VIEW_CONTROLLER;
     self.trackedViewName = viewName;
     zBarReader = [[ZBarReaderViewController alloc] init];
@@ -74,18 +71,10 @@
     zBarReader.cameraOverlayView = _overlayView;
     
     [self setCustomBarLeftWithImage:[UIImage imageNamed:@"nav-bar-icon-back.png"] selector:nil context_id:nil];
-    [self setCustomBarRightWithImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] selector:@selector(processOpenMapView) context_id:self];
+    [self setCustomBarRightWithImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] selector:@selector(selectMap) context_id:self];
 
     [self.tableViewDetail setBackgroundColor:UIColorFromRGB(0xe4eef0)];
     [self.tableViewDetail setSeparatorColor:[UIColor clearColor]];
-    
-    
-    UIButton *a1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [a1 setFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-    [a1 addTarget:self action:@selector(selectMap) forControlEvents:UIControlEventTouchUpInside];
-    [a1 setImage:[UIImage imageNamed:@"nav-bar-icon-map.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *viewTypeBtn = [[UIBarButtonItem alloc] initWithCustomView:a1];
-    self.navigationItem.rightBarButtonItem = viewTypeBtn;
 
     // load default data in coredata
     [self reloadInterface];
@@ -95,7 +84,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    PINGREMARKETING
+    //PINGREMARKETING
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.layer.opacity = 1.0f;
 }
@@ -209,11 +198,11 @@
     }
     else if (indexPath.section == enumDiscountCell)
     {
-        return 83;
+        return [DiscountCell getHeight:self.dataSource];
     }
     else if (indexPath.section == enumRuleOfferCell)
     {
-        return 62;
+        return [RuleCell getHeight:self.dataSource];
     }
     return 0;
 }
@@ -221,7 +210,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == enumInfoPlusOfferCell) {
-        return 1.0f;
+        return 0.01f;
     }
     return MARGIN_CELLX_GROUP/2;
 }
@@ -399,8 +388,25 @@
 
 - (void)selectMap
 {
+    //-------Get object to display on map view------//
+    OfferTableItem *item = nil;
+    NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
+    for (OfferDetailModel *itemModel in temp)
+    {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"url",  [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"offer_id",
+                             itemModel.offer_name, @"offer_name",
+                             [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id",
+                             itemModel.discount_type.stringValue, @"discount_type",
+                             itemModel.latitude.stringValue, @"latitude",
+                             itemModel.longitude.stringValue, @"longitude",
+                             itemModel.category_id.stringValue, @"category_id",nil];
+        item = [[OfferTableItem alloc] initWithData:dic];
+    }
+    if (![item isKindOfClass:[OfferTableItem class]]) {
+        return;
+    }
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate changeToOfferDetailViewControllerWithTitle:self.title];
+    [appDelegate toMapViewController:item withTitle:self.title isHandleAction:NO];
 }
 
 #pragma mark -

@@ -48,7 +48,7 @@
 -(void) changeToOfferDetailViewController:(OfferTableItem*)item;
 
 #pragma mark - OfferMapViewController
--(void) changeToOfferDetailViewControllerWithTitle:(NSString*)title;
+-(void) toMapViewController:(id)object withTitle:(NSString*)title isHandleAction:(BOOL)isHandle;
 
 #pragma mark - facebook handle
 - (BOOL)isUserLoggedIn;

@@ -18,14 +18,19 @@
 @end
 
 @interface PlusOfferMapView : UIView <MKMapViewDelegate, RKManagerDelegate, OfferAnnotationViewProtocol,UIGestureRecognizerDelegate>
+{
+    BOOL isNeedDrawRoute;
+}
+@property (nonatomic, assign) BOOL isRegisteredHanleTap;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUserLocation;
 
 @property (nonatomic, weak) id<PlusOfferMapViewDelegate> delegate;
-@property (nonatomic, weak) NSMutableArray *dataSource;
+@property (nonatomic, retain) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 
 - (IBAction)showUserLocation:(id)sender;
 -(void)reloadInterface:(NSMutableArray*)listOffers;
 -(void)drawRouteToItemIndex:(int)index;
+-(void)checkToDrawRoute;
 @end

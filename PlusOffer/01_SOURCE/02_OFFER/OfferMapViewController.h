@@ -11,7 +11,9 @@
 #import "PlusOfferMapView.h"
 @interface OfferMapViewController : CustomGAITrackedViewController <PlusOfferListViewDelegate, PlusOfferMapViewDelegate>
 {
-PlusOfferMapView *_mapView;
+    PlusOfferMapView *_mapView;
 }
 @property (nonatomic, strong) NSString *brandName;
+@property (nonatomic, strong) id object;
+@property (nonatomic, assign) BOOL isRegisterHandleTapAnotation;
 @end

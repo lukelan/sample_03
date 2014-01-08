@@ -11,10 +11,9 @@
 #import "OfferDetailItem.h"
 #import "OfferTableItem.h"
 
-@interface OfferMapViewController () <NSFetchedResultsControllerDelegate, ZBarReaderDelegate, OpenMapViewDelegate>
+@interface OfferMapViewController () <NSFetchedResultsControllerDelegate, ZBarReaderDelegate>
 
 
-@property (nonatomic, retain) OfferDetailItem *dataSource;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @end
@@ -38,7 +37,9 @@
     [self setTitle:_brandName];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
     [self setCustomBarLeftWithImage:[UIImage imageNamed:@"nav-bar-icon-back.png"] selector:nil context_id:nil];
-	OfferTableItem *item = nil;
+    OfferTableItem *item = nil;
+    if (_object == nil)
+    {
     NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
     for (OfferDetailModel *itemModel in temp)
     {
@@ -48,11 +49,15 @@
                              itemModel.discount_type.stringValue, @"discount_type",
                              itemModel.latitude.stringValue, @"latitude",
                              itemModel.longitude.stringValue, @"longitude",
-                             itemModel.category_id.stringValue, @"category_id",nil];
-        item = [[OfferTableItem alloc] initWithData:dic];
+                             itemModel.category_id.stringValue, @"category_id",nil];        item = [[OfferTableItem alloc] initWithData:dic];
     }
     if (![item isKindOfClass:[OfferTableItem class]]) {
         return;
+    }
+    }
+    else
+    {
+        item = _object;
     }
     //---------------------------------------------//
     
@@ -67,10 +72,11 @@
         }
         _mapView.delegate = self;
     }
+    [_mapView setIsRegisteredHanleTap:_isRegisterHandleTapAnotation];
     self.tabBarController.tabBar.hidden = YES;
     [self.view addSubview:_mapView];
     [_mapView reloadInterface:[NSMutableArray arrayWithObject:item]];
-    [_mapView drawRouteToItemIndex:0];
+    [_mapView checkToDrawRoute];    
 }
 
 - (NSFetchedResultsController *)fetchedResultsController{
@@ -97,5 +103,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

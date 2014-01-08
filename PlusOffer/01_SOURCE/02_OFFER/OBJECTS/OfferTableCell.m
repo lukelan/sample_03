@@ -37,10 +37,9 @@
         _logoImage.frame = CGRectMake(containerView.frame.size.width - _logoImage.frame.size.width, 0 , _logoImage.frame.size.width, _logoImage.frame.size.height);
          [containerView addSubview:_logoImage];
         // discount label
-        _discountLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        _discountLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
         _discountLbl.frame = CGRectMake(0, 0 , _discountLbl.frame.size.width, _discountLbl.frame.size.height);
         _discountLbl.backgroundColor = [UIColor clearColor];
-        _discountLbl.textColor = [ UIColor blueColor];
         _discountLbl.font = [UIFont systemFontOfSize:16.0f];
         _discountLbl.transform = CGAffineTransformMakeRotation (-DEGREES_TO_RADIANS(45));
         _discountLbl.textAlignment = NSTextAlignmentCenter;
@@ -95,7 +94,7 @@
 {
     OfferTableItem *item = _object;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate changeToOfferDetailViewControllerWithTitle:item.branch_name];
+    [appDelegate toMapViewController:_object withTitle:item.branch_name isHandleAction:YES];
 }
 
 #pragma mark - Public Methods
