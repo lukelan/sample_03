@@ -7,12 +7,12 @@
 //
 
 #import "PlusOfferMapView.h"
-#import "OfferTableItem.h"
+#import "BranchModel.h"
 #import "Routes.h"
 
 @implementation PlusOfferMapView
 {
-    OfferTableItem *_selectedOfferItem;
+    BranchModel *_selectedOfferItem;
     MKPolyline *_polyLine;
 }
 
@@ -64,10 +64,31 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     isNeedDrawRoute = NO;
     if ([self isValidUserCoordinate]) {
-        [self drawRouteToItemIndex:0];
+        [self drawRouteToItemIndex:[self getNearestItemIndex]];
     } else {
         isNeedDrawRoute = YES;
     }
+}
+
+-(NSInteger)getNearestItemIndex
+{
+    NSInteger result = 0;
+    CLLocation *currentLocation = self.mapView.userLocation.location;
+    CLLocationDistance distance = -1;
+    for (NSInteger i = 0; i < self.dataSource.count ; i++)
+    {
+        BranchModel *item = [self.dataSource objectAtIndex:i];
+        CLLocation *pinLocation = [[CLLocation alloc]
+                                   initWithLatitude:[item.latitude doubleValue]
+                                   longitude:[item.longitude doubleValue]];
+        CLLocationDistance temp = [pinLocation distanceFromLocation:currentLocation];
+        if (distance == -1 || temp < distance) {
+            result = i;
+            distance = temp;
+        }
+    }
+    
+    return result;
 }
 
 - (IBAction)showUserLocation:(id)sender {
@@ -83,18 +104,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
     
     if (self.dataSource.count > index && index >= 0) {
-        OfferTableItem *item = self.dataSource[index];
+        BranchModel *item = self.dataSource[index];
         _selectedOfferItem = item;
        [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
     }
 }
 
--(void)reloadInterface:(NSMutableArray*)listOffers
+-(void)reloadInterface:(NSArray*)listOffers
 {
     _dataSource = listOffers;
     // remove current current anotations
     for (id<MKAnnotation> annotation in _mapView.annotations) {
-        if ([annotation isKindOfClass:[OfferTableItem class]]) {
+        if ([annotation isKindOfClass:[BranchModel class]]) {
             [_mapView removeAnnotation:annotation];
         }
     }
@@ -125,7 +146,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 #pragma mark - MKMapViewDelegate
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     
-    if ([annotation isKindOfClass:[OfferTableItem class]]) {
+    if ([annotation isKindOfClass:[BranchModel class]]) {
         NSString *identifier = [[OfferAnnotationView class] description];
         OfferAnnotationView *annotationView = (OfferAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
         if (!annotationView) {
@@ -147,7 +168,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     if ([view conformsToProtocol:@protocol(OfferAnnotationViewProtocol)]) {
-        _selectedOfferItem = (OfferTableItem*)view.annotation;
+        _selectedOfferItem = (BranchModel*)view.annotation;
         [((NSObject<OfferAnnotationViewProtocol> *)view) didSelectAnnotationViewInMap:mapView];
     }
 }
@@ -170,14 +191,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     if (isNeedDrawRoute) {
-        [self drawRouteToItemIndex:0];
+        [self drawRouteToItemIndex:[self getNearestItemIndex]];
         isNeedDrawRoute = NO;
     }
 }
 
 #pragma mark - Utilities
 
-- (MKCoordinateRegion)createZoomRegionFromCentralPointAndRadius:(NSMutableArray*) categoryArray {
+- (MKCoordinateRegion)createZoomRegionFromCentralPointAndRadius:(NSArray*) categoryArray {
     
     Position *userLocation = [((AppDelegate*)[[UIApplication sharedApplication] delegate]) userPosition];
     CLLocation *currentLocation = [[CLLocation alloc]
@@ -186,9 +207,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     CLLocationDistance radiusMeters = MAXIMUM_SCALEABLE_RADIUS_METERS;
     CLLocation *nearestlocation = nil;
     
-    for (OfferTableItem *item in categoryArray)
+    for (BranchModel *item in categoryArray)
     {
-        CLLocation *marklocation = [[CLLocation alloc] initWithLatitude:item.location.latitude longitude:item.location.longitude];
+        CLLocation *marklocation = [[CLLocation alloc] initWithLatitude:[item.latitude floatValue] longitude:[item.longitude floatValue]];
         CLLocationDistance temp = [marklocation distanceFromLocation:currentLocation];
         // find nearest item
         if (!nearestlocation || temp < radiusMeters) {
@@ -307,8 +328,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (_selectedOfferItem)
     {
         if (_isRegisteredHanleTap) {
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            [appDelegate changeToOfferDetailViewController:_selectedOfferItem];
+            // rem for now, because map shows branches, not offer item anymore
+            //AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            //[appDelegate changeToOfferDetailViewController:_selectedOfferItem];
         }
     }
 }

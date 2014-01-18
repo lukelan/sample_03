@@ -8,7 +8,7 @@
 
 #import "OfferAnnotationView.h"
 //#import "JPSThumbnailAnnotationView.h"
-#import "OfferTableItem.h"
+#import "BranchModel.h"
 
 #define OfferAnnotationViewNormal_Width 27.0f
 #define OfferAnnotationViewNormal_Height 39.0f
@@ -158,39 +158,39 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 -(void)setAnnotation:(id<MKAnnotation>)annotation
 {
     [super setAnnotation:annotation];
-    OfferTableItem *item = annotation;
+    BranchModel *item = annotation;
     self.coordinate = item.location;
     
     // normal view
-    NSString *imageName = [item.category_id integerValue] != 1 ? @"map-icon-pin-entertainment.png" : @"map-icon-pin-food-beverage.png";
+    NSString *imageName = [item.is_active integerValue] != 1 ? @"map-icon-pin-entertainment.png" : @"map-icon-pin-food-beverage.png";
     [self.normalView setImage:[UIImage imageNamed:imageName]];
     
     // expanded view
     self.titleLabel.text = item.title;
     self.subtitleLabel.text = item.subtitle;
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.imageView setImageWithURL:[NSURL URLWithString:item.size2]];
+    [self.imageView setImageWithURL:[NSURL URLWithString:item.size1]];
 
     
-    if (item.discount_type.intValue == ENUM_DISCOUNT || item.discount_type.intValue == ENUM_VALUE)
-    {
-        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-silver.png"]];
-        NSString *stringFormat = @"%";
-        self.discountLbl.text = [NSString stringWithFormat:@"OFF %@%@"
-                                 ,item.discount, stringFormat];
-    }
-    else if (item.discount_type.intValue == ENUM_GIFT)
-    {
-        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-green.png"]];
-        self.discountLbl.text = [NSString stringWithFormat:@"%@ quà tặng"
-                                 ,item.discount];
-    }
-    else if (item.discount_type.intValue == ENUM_GIFT_TICKET)
-    {
-        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-red.png"]];
-        self.discountLbl.text = [NSString stringWithFormat:@"Tặng %@ vé"
-                                 ,item.discount];
-    }
+//    if (item.discount_type.intValue == ENUM_DISCOUNT || item.discount_type.intValue == ENUM_VALUE)
+//    {
+//        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-silver.png"]];
+//        NSString *stringFormat = @"%";
+//        self.discountLbl.text = [NSString stringWithFormat:@"OFF %@%@"
+//                                 ,item.discount, stringFormat];
+//    }
+//    else if (item.discount_type.intValue == ENUM_GIFT)
+//    {
+//        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-green.png"]];
+//        self.discountLbl.text = [NSString stringWithFormat:@"%@ quà tặng"
+//                                 ,item.discount];
+//    }
+//    else if (item.discount_type.intValue == ENUM_GIFT_TICKET)
+//    {
+//        [_discountImage setImage:[UIImage imageNamed:@"ribbon-promotion-red.png"]];
+//        self.discountLbl.text = [NSString stringWithFormat:@"Tặng %@ vé"
+//                                 ,item.discount];
+//    }
 }
 
 #pragma mark - OfferAnnotationViewProtocol

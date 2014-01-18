@@ -42,6 +42,8 @@
 		18814D2D18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */; };
 		18814D2E18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */; };
 		18924CBD186F322C005D0432 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18924CBC186F322C005D0432 /* libzbar.a */; };
+		1898C37D188A81DC00EF029E /* BranchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898C37C188A81DC00EF029E /* BranchModel.m */; };
+		1898C37E188A81DC00EF029E /* BranchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898C37C188A81DC00EF029E /* BranchModel.m */; };
 		18D7919E18771AF800D962A9 /* Routes.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7919D18771AF800D962A9 /* Routes.m */; };
 		18D7919F18771AF800D962A9 /* Routes.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7919D18771AF800D962A9 /* Routes.m */; };
 		18DDE8081870052400399747 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DDE8071870052400399747 /* libiconv.dylib */; };
@@ -615,6 +617,8 @@
 		18924CBA186F322C005D0432 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
 		18924CBB186F322C005D0432 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
 		18924CBC186F322C005D0432 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		1898C37B188A81DC00EF029E /* BranchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchModel.h; sourceTree = "<group>"; };
+		1898C37C188A81DC00EF029E /* BranchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchModel.m; sourceTree = "<group>"; };
 		18D7919C18771AF800D962A9 /* Routes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Routes.h; path = PlusOffer/01_SOURCE/06_Classes/Routes.h; sourceTree = SOURCE_ROOT; };
 		18D7919D18771AF800D962A9 /* Routes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Routes.m; path = PlusOffer/01_SOURCE/06_Classes/Routes.m; sourceTree = SOURCE_ROOT; };
 		18DDE8071870052400399747 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -1104,6 +1108,8 @@
 			isa = PBXGroup;
 			children = (
 				18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */,
+				1898C37B188A81DC00EF029E /* BranchModel.h */,
+				1898C37C188A81DC00EF029E /* BranchModel.m */,
 				4F7D45DA1887D4DB006CC520 /* BrandModel.h */,
 				4F7D45DB1887D4DB006CC520 /* BrandModel.m */,
 				E3A9A77F18854B3E00993FA0 /* MenuModel.h */,
@@ -2754,6 +2760,7 @@
 				4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */,
 				4FBBEB5E18682E210040EA12 /* pngrutil.c in Sources */,
 				4FBBEB6418682E210040EA12 /* pngwutil.c in Sources */,
+				1898C37D188A81DC00EF029E /* BranchModel.m in Sources */,
 				E3203B3618864B1E00389FAE /* MenuItem.m in Sources */,
 				1819423A1875D029006E8870 /* OfferAnnotationView.m in Sources */,
 				4F5B4EB518698D9800AAE584 /* PlusAPIManager.m in Sources */,
@@ -2915,6 +2922,7 @@
 				AAB01B7F18701805006E2552 /* JPSThumbnailAnnotation.m in Sources */,
 				AAB01B8018701805006E2552 /* GifImageView.m in Sources */,
 				AAB01B8118701805006E2552 /* OfferTableCell.m in Sources */,
+				1898C37E188A81DC00EF029E /* BranchModel.m in Sources */,
 				AAB01B8218701805006E2552 /* UIViewController+TabBarAnimation.m in Sources */,
 				AAB01B8318701805006E2552 /* CustomUIImagePickerController.m in Sources */,
 				4FEE9CAF187A588D00BD39A8 /* FacebookHandler.m in Sources */,

@@ -50,6 +50,7 @@
 #pragma mark -
 #pragma mark get brand info
 #define API_REQUEST_GET_LIST_BRAND @"%@method=Brand.getListCard&user_id=%@"
+#define API_REQUEST_GET_LIST_BRANCH @"%@method=Branch.getList"
 
 #pragma mark
 #pragma mark function user

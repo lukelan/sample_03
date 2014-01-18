@@ -34,6 +34,7 @@
 @property (nonatomic, retain) NSString *is_like;
 @property (nonatomic, retain) id menu;
 @property (nonatomic, retain) NSString *brand_name;
+@property (nonatomic, retain) NSString *brand_id;
 @property (assign, nonatomic) CLLocationCoordinate2D  location;
 -(id)initWithData:(NSDictionary*)data;
 @end

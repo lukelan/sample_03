@@ -26,4 +26,6 @@
 
 -(void)RK_RequestApiAddFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id;
 -(void)RK_RequestApiRemoveFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id;
+// branch
+-(void)RK_RequestApiGetListBranch:(id)context_id ofBrand:(NSString*)brand_id;
 @end

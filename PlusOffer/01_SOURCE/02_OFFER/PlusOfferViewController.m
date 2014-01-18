@@ -10,12 +10,14 @@
 #import "VersionNotificationViewController.h"
 #import "OfferTableItem.h"
 #import "OfferModel.h"
+#import "BranchModel.h"
 
 @interface PlusOfferViewController () <NSFetchedResultsControllerDelegate, RKManagerDelegate>
 @property (nonatomic, retain) NSMutableArray *listOffers;
 @property (nonatomic, retain) NSMutableArray *dataSource;
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController_Branches;
 @end
 
 @implementation PlusOfferViewController
@@ -61,6 +63,7 @@
     [center addObserver:self selector:@selector(receiveUserLocation:) name:NOTIFICATION_NAME_PLUSOFFER_GPS_USER_LOCATION_DID_RECEIVE object:nil];
     
     [self fetchedResultsController];
+    [self fetchedResultsController_Branches];
     self.navigationController.navigationBar.translucent = NO;
     if (IOS_VERSION >= 7.0) {
         self.navigationController.navigationBar.layer.opacity = 0.95f;
@@ -96,7 +99,7 @@
             self.navigationController.navigationBar.translucent = YES;
             [self setImageCustomBarRight:[UIImage imageNamed:@"map-icon-list.png"]];
             _checkListOrMap = NO;
-            [_mapView reloadInterface:self.listOffers];
+            [_mapView reloadInterface:self.fetchedResultsController_Branches.fetchedObjects];
             break;
         }
         default:
@@ -206,7 +209,7 @@
             [self.view addSubview:_mapView];
 //            [AppDelegate explode:self.view level:0];
             _checkListOrMap = NO;
-            [_mapView reloadInterface:self.listOffers];
+            [_mapView reloadInterface:self.fetchedResultsController_Branches.fetchedObjects];
             
             break;
         }
@@ -242,6 +245,8 @@
 {
     sender.selected = !sender.selected;
     if (_checkListOrMap) {
+        _checkListOrMap = NO;
+        [self loadOffers];
         [self loadInterface:enumOfferInterfaceType_Map];
     }
     else {
@@ -266,21 +271,28 @@
 #pragma mark - API
 -(void)loadOffers
 {
-    switch (checkOfferCategory) {
-        case ENUM_PLUS_OFFER_CATEGORY_GETLIST: {
-            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOffer:self];
-            break;
+    if (!_checkListOrMap) {
+        // map: get branches of all brand
+        [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListBranch:self ofBrand:nil];
+    }
+    else {
+        // list
+        switch (checkOfferCategory) {
+            case ENUM_PLUS_OFFER_CATEGORY_GETLIST: {
+                [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOffer:self];
+                break;
+            }
+            case ENUM_PLUS_OFFER_CATEGORY_CUISINE: {
+                [(PlusAPIManager*)[PlusAPIManager sharedAPIManager]
+                 RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
+                break;
+            }
+            case ENUM_PLUS_OFFER_CATEGORY_ENTERTAINMENT: {
+                [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
+            }
+            default:
+                break;
         }
-        case ENUM_PLUS_OFFER_CATEGORY_CUISINE: {
-            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager]
-             RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
-            break;
-        }
-        case ENUM_PLUS_OFFER_CATEGORY_ENTERTAINMENT: {
-            [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
-        }
-        default:
-            break;
     }
 }
 
@@ -312,6 +324,24 @@
     return _fetchedResultsController;
 }
 
+- (NSFetchedResultsController *)fetchedResultsController_Branches {
+    
+    if (!_fetchedResultsController_Branches)
+    {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([BranchModel class])];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"branch_id" ascending:YES]];
+        
+        _fetchedResultsController_Branches = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        [_fetchedResultsController_Branches setDelegate:self];
+        
+        NSError *error = nil;
+        [_fetchedResultsController_Branches performFetch:&error];
+        
+        NSAssert(!error, @"Error performing fetch request: %@", error);
+    }
+    return _fetchedResultsController_Branches;
+}
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self reloadInterface:_vcType];
@@ -319,55 +349,35 @@
 
 - (void)reloadInterface:(enumOfferInterfaceType)type
 {
-    self.dataSource = [self.fetchedResultsController.fetchedObjects mutableCopy];
-
-    self.listOffers = [NSMutableArray array];
-    for (OfferModel *itemModel in self.dataSource)
-    {
-//        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                             @"map_offer.png", @"url",
-//                             itemModel.discount_value.stringValue, @"discount",
-//                             itemModel.distanceStr, @"distance",
-//                             itemModel.offer_id.stringValue, @"offer_id",
-//                             itemModel.offer_name, @"offer_name",
-//                             itemModel.brand_id, @"brand_id",
-//                             itemModel.branch_name, @"branch_name",
-//                             itemModel.brand_name, @"brand_name",
-//                             itemModel.discount_type, @"discount_type",
-//                             @(itemModel.allowRedeem) , @"allow_redeem",
-//                             itemModel.latitude , @"latitude",
-//                             itemModel.longitude , @"longitude",
-//                             itemModel.category_id , @"category_id",
-//                             itemModel.offer_date_end,@"offer_date_end",
-//                             itemModel.user_punch, @"user_punch",
-//                             itemModel.max_punch,@"max_punch",
-//                             itemModel.size1, @"size1",
-//                             itemModel.size2, @"size2", nil];
-        NSMutableDictionary *dic = [NSMutableDictionary new];
-        [dic setValue:itemModel.discount_value.stringValue forKey:@"discount"];
-        [dic setValue:itemModel.distanceStr forKey:@"distance"];
-        [dic setValue:@(itemModel.distance) forKey:@"distanceNum"];
-        [dic setValue:itemModel.offer_id.stringValue forKey:@"offer_id"];
-        [dic setValue:itemModel.offer_name forKey:@"offer_name"];
-        [dic setValue:itemModel.brand_id forKey:@"brand_id"];
-        [dic setValue:itemModel.branch_name forKey:@"branch_name"];
-        [dic setValue:itemModel.brand_name forKey:@"brand_name"];
-        [dic setValue:itemModel.discount_type forKey:@"discount_type"];
-        [dic setValue:@(itemModel.allowRedeem)  forKey:@"allow_redeem"];
-        [dic setValue:itemModel.latitude forKey:@"latitude"];
-        [dic setValue:itemModel.longitude forKey:@"longitude"];
-        [dic setValue:itemModel.category_id forKey:@"category_id"];
-        [dic setValue:itemModel.offer_date_end forKey:@"offer_date_end"];
-        [dic setValue:itemModel.user_punch forKey:@"user_punch"];
-        [dic setValue:itemModel.max_punch forKey:@"max_punch"];
-        [dic setValue:itemModel.size1 forKey:@"size1"];
-        [dic setValue:itemModel.size2 forKey:@"size2"];
-        OfferTableItem *item = [[OfferTableItem alloc] initWithData:dic];
-        [self.listOffers addObject:item];
-    }
-    
     switch (type) {
         case enumOfferInterfaceType_List: {
+            self.dataSource = [self.fetchedResultsController.fetchedObjects mutableCopy];
+            
+            self.listOffers = [NSMutableArray array];
+            for (OfferModel *itemModel in self.dataSource)
+            {
+                NSMutableDictionary *dic = [NSMutableDictionary new];
+                [dic setValue:itemModel.discount_value.stringValue forKey:@"discount"];
+                [dic setValue:itemModel.distanceStr forKey:@"distance"];
+                [dic setValue:@(itemModel.distance) forKey:@"distanceNum"];
+                [dic setValue:itemModel.offer_id.stringValue forKey:@"offer_id"];
+                [dic setValue:itemModel.offer_name forKey:@"offer_name"];
+                [dic setValue:itemModel.brand_id forKey:@"brand_id"];
+                [dic setValue:itemModel.branch_name forKey:@"branch_name"];
+                [dic setValue:itemModel.brand_name forKey:@"brand_name"];
+                [dic setValue:itemModel.discount_type forKey:@"discount_type"];
+                [dic setValue:@(itemModel.allowRedeem)  forKey:@"allow_redeem"];
+                [dic setValue:itemModel.latitude forKey:@"latitude"];
+                [dic setValue:itemModel.longitude forKey:@"longitude"];
+                [dic setValue:itemModel.category_id forKey:@"category_id"];
+                [dic setValue:itemModel.offer_date_end forKey:@"offer_date_end"];
+                [dic setValue:itemModel.user_punch forKey:@"user_punch"];
+                [dic setValue:itemModel.max_punch forKey:@"max_punch"];
+                [dic setValue:itemModel.size1 forKey:@"size1"];
+                [dic setValue:itemModel.size2 forKey:@"size2"];
+                OfferTableItem *item = [[OfferTableItem alloc] initWithData:dic];
+                [self.listOffers addObject:item];
+            }
             
             self.listOffers = [NSMutableArray arrayWithArray:[self.listOffers sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
                 float first = [(OfferTableItem*)a distanceNum];
@@ -381,7 +391,8 @@
             break;
         }
         case enumOfferInterfaceType_Map: {
-            [_mapView reloadInterface:self.listOffers];
+            
+            [_mapView reloadInterface:self.fetchedResultsController_Branches.fetchedObjects];
             break;
         }
         default:

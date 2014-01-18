@@ -40,6 +40,7 @@
         _menu = data [@"menu"];
         _distance = data [@"distance"];
         _brand_name = data [@"brand_name"];
+        _brand_id = data [@"brand_id"];
          _is_like = data [@"_is_like"];
         CGFloat latitude = [[data objectForKey:@"latitude"] floatValue];
         CGFloat longtitude = [[data objectForKey:@"longitude"] floatValue];

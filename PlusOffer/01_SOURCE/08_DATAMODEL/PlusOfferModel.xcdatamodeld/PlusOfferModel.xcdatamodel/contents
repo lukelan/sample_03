@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="BranchModel" representedClassName="BranchModel" syncable="YES">
+        <attribute name="branch_address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="branch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="branch_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="branch_name_slug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="branch_tel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="brand_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="date_add" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date_update" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hour_close" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hour_open" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_active" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="location_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="size1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="size2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="size3" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="BrandModel" representedClassName="BrandModel" syncable="YES">
         <attribute name="brand_card_color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="brand_card_image" optional="YES" attributeType="String" syncable="YES"/>
@@ -95,10 +115,11 @@
         <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BrandModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MenuModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="OfferDetailModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="OfferModel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="RedeemModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="BrandModel" positionX="-18" positionY="189" width="128" height="268"/>
+        <element name="MenuModel" positionX="-27" positionY="0" width="128" height="150"/>
+        <element name="OfferDetailModel" positionX="-207" positionY="0" width="128" height="450"/>
+        <element name="OfferModel" positionX="385" positionY="0" width="128" height="330"/>
+        <element name="RedeemModel" positionX="169" positionY="3" width="128" height="285"/>
+        <element name="BranchModel" positionX="178" positionY="335" width="128" height="313"/>
     </elements>
 </model>

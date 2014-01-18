@@ -178,6 +178,7 @@
         [dic setValue:itemModel.menu forKey:@"menu"];
         [dic setValue:_detailDistance forKey:@"distance"];
         [dic setValue:_brandName forKey:@"brand_name"];
+        [dic setValue:itemModel.brand_id.stringValue forKey:@"brand_id"];
         self.dataSource = [[OfferDetailItem alloc] initWithData:dic];
         [self setTitle:itemModel.brand_name];
         [self setBrand_id:itemModel.brand_id.stringValue];

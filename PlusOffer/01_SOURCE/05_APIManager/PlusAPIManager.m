@@ -13,6 +13,7 @@
 #import "BrandModel.h"
 #import "Routes.h"
 #import "MenuModel.h"
+#import "BranchModel.h"
 
 @implementation PlusAPIManager
 #pragma mark API request with restkit
@@ -99,6 +100,39 @@
                                                         }];
     [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
     [self RK_RequestApi_EntityMapping:offerMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+}
+
+-(void)RK_RequestApiGetListBranch:(id)context_id ofBrand:(NSString *)brand_id
+{
+    NSString *url = [NSString stringWithFormat:API_REQUEST_GET_LIST_BRANCH,ROOT_SERVER];
+    if (brand_id) {
+        url = [NSString stringWithFormat:@"%@&brand_id=%@", url, brand_id];
+    }
+    
+    RKEntityMapping *objectMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([BranchModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    objectMapping.identificationAttributes = @[@"branch_id"];
+    [objectMapping addAttributeMappingsFromDictionary:@{
+                                                        @"branch_id"       : @"branch_id",
+                                                        @"branch_name"     : @"branch_name",
+                                                        @"branch_name_slug": @"branch_name_slug",
+                                                        @"branch_address"  : @"branch_address",
+                                                        @"branch_tel"      : @"branch_tel",
+                                                        @"brand_id"        : @"brand_id",
+                                                        @"location_id"     : @"location_id",
+                                                        @"latitude"        : @"latitude",
+                                                        @"longitude"       : @"longitude",
+                                                        @"hour_open"       : @"hour_open",       
+                                                        @"hour_close"      : @"hour_close",      
+                                                        @"number"          : @"number",          
+                                                        @"is_active"       : @"is_active",       
+                                                        @"date_add"        : @"date_add",        
+                                                        @"date_update"     : @"date_update",     
+                                                        @"size1"           : @"size1",           
+                                                        @"size2"           : @"size2",           
+                                                        @"size3"           : @"size3"
+                                                       }];
+//    [objectMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"branch_id"]];
+    [self RK_RequestApi_EntityMapping:objectMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
 -(void)RK_RequestApiGetListPlusOfferWithCategory:(id)context_id forCategory:(NSString*)categoryID;

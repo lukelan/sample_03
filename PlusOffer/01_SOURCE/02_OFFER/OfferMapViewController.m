@@ -9,7 +9,7 @@
 #import "OfferMapViewController.h"
 #import "OfferDetailModel.h"
 #import "OfferDetailItem.h"
-#import "OfferTableItem.h"
+#import "BranchModel.h"
 
 @interface OfferMapViewController () <NSFetchedResultsControllerDelegate, ZBarReaderDelegate>
 
@@ -39,41 +39,11 @@
     [self setTitle:_brandName];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
     [self setCustomBarLeftWithImage:[UIImage imageNamed:@"nav-bar-icon-back.png"] selector:nil context_id:nil];
-    OfferTableItem *item = nil;
-    if (_object == nil)
-    {
-    NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
-    for (OfferDetailModel *itemModel in temp)
-    {
-//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"url",  [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"offer_id",
-//                             itemModel.offer_name, @"offer_name",
-//                             [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id",
-//                             itemModel.discount_type.stringValue, @"discount_type",
-//                             itemModel.latitude.stringValue, @"latitude",
-//                             itemModel.longitude.stringValue, @"longitude",
-//                             itemModel.category_id.stringValue, @"category_id",nil];
-        NSMutableDictionary *dic = [ NSMutableDictionary new];
-        [dic setValue:[NSString stringWithFormat:@"%d", itemModel.offer_id.intValue] forKey:@"offer_id"];
-        [dic setValue:itemModel.offer_name forKey:@"offer_name"];
-        [dic setValue:[NSString stringWithFormat:@"%d", itemModel.branch_id.intValue] forKey:@"branch_id"];
-        [dic setValue:itemModel.discount_type.stringValue forKey:@"discount_type"];
-        [dic setValue:itemModel.latitude.stringValue forKey:@"latitude"];
-        [dic setValue:itemModel.longitude.stringValue forKey:@"longitude"];
-        [dic setValue:itemModel.category_id.stringValue forKey:@"category_id"];
-        [dic setValue:itemModel.size2 forKey:@"size2"];
-        item = [[OfferTableItem alloc] initWithData:dic];
-    }
-    if (![item isKindOfClass:[OfferTableItem class]]) {
-        return;
-    }
-    }
-    else
-    {
-        item = _object;
-    }
-    //---------------------------------------------//
-    
     [self setImageCustomBarRight:[UIImage imageNamed:@"map-icon-list.png"]];
+    
+    // load list branchs of current brand
+    [self loadListBranchs];
+    
     if (!_mapView) {
         if (IOS_VERSION >= 7.0)
         {
@@ -87,32 +57,51 @@
     }
     [_mapView setIsRegisteredHanleTap:_isRegisterHandleTapAnotation];
     [self.view addSubview:_mapView];
-    [_mapView reloadInterface:[NSMutableArray arrayWithObject:item]];
-    [_mapView checkToDrawRoute];    
+    [self reloadInterface];
+}
+
+-(void)reloadInterface
+{
+    [_mapView reloadInterface:self.fetchedResultsController.fetchedObjects];
+    [_mapView checkToDrawRoute];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController{
     
     if (!_fetchedResultsController)
     {
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([OfferDetailModel class])];
-        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"offer_id" ascending:YES]];
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([BranchModel class])];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"branch_id" ascending:YES]];
         
-        NSFetchedResultsController *myFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:@"offerDetail"];
-        [myFetchedResultsController setDelegate:self];
-        self.fetchedResultsController = myFetchedResultsController;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"brand_id = %@", [self.object brand_id]];
+        [fetchRequest setPredicate:predicate];
+        
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        [_fetchedResultsController setDelegate:self];
         
         NSError *error = nil;
-        [self.fetchedResultsController performFetch:&error];
+        [_fetchedResultsController performFetch:&error];
         
         NSAssert(!error, @"Error performing fetch request: %@", error);
+        NSLog(@"num = %d", _fetchedResultsController.fetchedObjects.count);
     }
     return _fetchedResultsController;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self reloadInterface];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - API
+-(void)loadListBranchs
+{
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListBranch:self ofBrand:[self.object brand_id]];
 }
 @end

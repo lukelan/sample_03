@@ -147,7 +147,7 @@
 - (IBAction)processOpenMapView:(id)sender
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate toMapViewController:nil withTitle:item.brand_name isHandleAction:NO];
+    [appDelegate toMapViewController:item withTitle:item.brand_name isHandleAction:NO];
 }
 
 -(void)setObject:(id)object

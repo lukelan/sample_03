@@ -26,11 +26,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnUserLocation;
 
 @property (nonatomic, weak) id<PlusOfferMapViewDelegate> delegate;
-@property (nonatomic, retain) NSMutableArray *dataSource;
+@property (nonatomic, retain) NSArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 
 - (IBAction)showUserLocation:(id)sender;
--(void)reloadInterface:(NSMutableArray*)listOffers;
+-(void)reloadInterface:(NSArray*)listOffers;
 -(void)drawRouteToItemIndex:(int)index;
 -(void)checkToDrawRoute;
 @end
