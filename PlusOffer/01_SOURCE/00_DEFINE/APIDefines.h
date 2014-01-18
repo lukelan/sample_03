@@ -23,14 +23,13 @@
     #define BASE_URL_SERVER @"http://plusoffer-api-dev.123phim.vn/"
     #define MAPP_KEY @"MAPP_1@3Phim1@3"
     #define ROOT_FBSERVICE @"http://mapp-dev.123phim.vn/fbservice/"
-    #define SERVER_SET_DEVICETOKEN @"http://mapp-dev.123phim.vn/auth?method=Device.save"
 #else
     #define BASE_URL_SERVER @"https://mapp.123phim.vn/"
     #define MAPP_KEY @"MAPP_1@3Phim_IOS_920"
     #define ROOT_FBSERVICE @"https://mapp.123phim.vn/fbservice/"
-    #define SERVER_SET_DEVICETOKEN @"https://mapp.123phim.vn/auth?method=Device.save"
 #endif
 
+#define API_REQUEST_SET_DEVICETOKEN @"%@method=Device.setToken&device_type_id=1"
 #pragma mark
 #pragma mark get city, check version
 #define API_REQUEST_CITY_GET_LIST @"%@method=Location.getList"
@@ -42,12 +41,19 @@
 #define API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY @"%@method=Offer.getList&category_id=%@"
 #define API_REQUEST_GET_LIST_OFFER_DETAIL @"%@method=Offer.getDetail&offer_id=%@"
 
+#pragma mark menu item
+#define API_REQUEST_GET_LIST_MENU_WITH_BRAND @"%@method=Menu.getListItem&brand_id=%@"
 #pragma mark
 #pragma mark function Redeem
 #define API_REQUEST_GET_LIST_REDEEM @"%@method=User.getListRedeem&user_id=%@"
 
+#pragma mark -
+#pragma mark get brand info
+#define API_REQUEST_GET_LIST_BRAND @"%@method=Brand.getListCard&user_id=%@"
+
 #pragma mark
 #pragma mark function user
+#define API_REQUEST_USER_PUNCH @"%@method=User.punch"//user_id, offer_id,punch_code
 #define API_REQUEST_USER_POST_LOGIN @"%@method=User.checkLogin"
 #define API_REQUEST_USER_POST_UPDATE_RECEIVED_NOTIFICATION @"%@method=User.setNotification"
 #define API_REQUEST_USER_GET_FB_FRIEND_LIST @"%@friends/?facebook_id=%@&access_token=%@"
@@ -63,7 +69,10 @@
 #define API_REQUEST_LOG_POST_WRITING @"%@method=Logs.write&%@"
 
 #define REQUEST_URL_GOOGLE_DIRECTION_API @"http://maps.googleapis.com/maps/api/directions/json"
-
+#pragma mark
+#pragma mark Favorite
+#define API_REQUEST_ADD_FAVORITE @"%@method=Offer.addFavorite"
+#define API_REQUEST_REMOVE_FAVORITE @"%@method=Offer.removeFavorite"
 typedef enum
 {
     ID_REQUEST_PLUS_OFFER = 0,
@@ -71,6 +80,11 @@ typedef enum
     ID_REQUEST_ACCOUNT,
     ID_REQUEST_DIRECTION,
     ID_REQUEST_CHECK_VERSION,
+    ID_REQUEST_LIST_BRAND,
+    ID_POST_UDID_DEVICE_TOKEN,
+    ID_REQUEST_STORE_USER_LOCATION,
+    ID_REQUEST_USER_PUNCH,
+    ID_REQUEST_FAVORITE,
     ID_REQUEST_OTHER
 }ENUM_ID_REQUEST_TYPE;
 

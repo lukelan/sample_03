@@ -18,8 +18,7 @@
 @property (nonatomic, retain) UILabel *discountLbl;
 @property (nonatomic, retain) UILabel *descriptionLbl;
 @property (nonatomic, retain) UILabel *priceLbl;
-
--(void) setData;
+-(void)setObject:(id)object;
 
 
 @end

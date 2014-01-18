@@ -16,7 +16,23 @@
 
 //@property (strong, nonatomic) IBOutlet UILabel *lbtime;
 //@property (strong, nonatomic) IBOutlet UILabel *lblocation;
-@property (strong, nonatomic) IBOutlet SDImageView *imageInfoPlus;
+@property (strong, nonatomic)  SDImageView *imageInfoPlus;
+@property (strong, nonatomic)  UIView *containerView;
+@property (strong, nonatomic)  UIView *containerViewInfo;
+@property (strong, nonatomic)  UILabel *offerNameLbl;
+@property (strong, nonatomic)  UILabel *branchNameLbl;
+@property (nonatomic, retain) UILabel *deadLine;
+@property (nonatomic, retain) UILabel *titleDeadLine;
+@property (nonatomic, retain) UILabel *punchLbl;
+@property (nonatomic, retain) UILabel *titlePunchLbl;
+@property (nonatomic, retain) UILabel *distanceLbl;
+@property (nonatomic, retain) UILabel *titleDistanceLbl;
+@property (nonatomic, retain) UILabel *processPunch;
+@property (nonatomic, retain) UILabel *processPunch1;
+@property (nonatomic, retain) SDImageView *processPunchBackGround;
+@property (nonatomic, retain) UIButton *btMap;
+@property (nonatomic, retain)  CALayer *shadowLayer;
+ @property (nonatomic, retain) NSString *title;
 //@property (weak, nonatomic) IBOutlet UIButton *btnOpenMap;
 //- (IBAction)processOpenMapView:(id)sender;
 -(void)setObject:(id)object;

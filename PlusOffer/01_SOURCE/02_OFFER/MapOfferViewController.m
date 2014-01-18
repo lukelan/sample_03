@@ -42,7 +42,9 @@
     
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden = YES;
+//    self.tabBarController.tabBar.hidden = YES;
+    
+    self.tabBarDisplayType = TAB_BAR_DISPLAY_HIDE;
     
     [self initMenu];
     [self open];
@@ -80,7 +82,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
     self.navigationController.navigationBarHidden = NO;
-    self.tabBarController.tabBar.hidden = NO;
+//    self.tabBarController.tabBar.hidden = NO;
 
 }
 

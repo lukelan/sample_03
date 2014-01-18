@@ -23,7 +23,7 @@
 + (CGFloat)getHeight:(id)object
 {
     CGFloat height = 47;
-    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
+    UIFont *font = [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:10.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
     
     if (![object isKindOfClass:[OfferDetailItem class]]) {
@@ -49,7 +49,7 @@
     if (![object isKindOfClass:[OfferDetailItem class]]) {
         return;
     }
-    [self.lbTitle setFont:[UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]];
+    [self.lbTitle setFont:[UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:15]];
     OfferDetailItem *item = object;
     
 //    [self.imageDiscount setImageWithURL:[NSURL URLWithString:item.iconURL]];//setImage:[UIImage imageNamed:@"redeem_logo_1.png"]
@@ -59,7 +59,7 @@
     if (![arrDes isKindOfClass:[NSArray class]]) {
         return;
     }
-    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
+    UIFont *font = [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:10.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
     CGRect frame = self.scrollViewDes.frame;
     frame.size.height = sizeText.height * arrDes.count;

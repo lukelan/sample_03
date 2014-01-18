@@ -25,6 +25,7 @@
     #import "Crittercism.h"
     #import "CustomGAITrackedViewController.h"
     #import "AppDelegate.h"
+    #import "Location.h"
     #import "PlusAPIManager.h"
     #import "Location.h"
     #import "ZBarSDK.h"
@@ -35,4 +36,7 @@
 #import "UIImage+Ultility.h"
 #import "UIViewController+CustomNavigation.h"
 #import "UIViewController+TabBarAnimation.h"
+#import "NSString+MD5Addition.h"
+#import "NSString+SHA.h"
+#import "NSData+AES256.h"
 #endif

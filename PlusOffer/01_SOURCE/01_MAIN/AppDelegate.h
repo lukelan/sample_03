@@ -26,6 +26,12 @@
 @end
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
+{
+    double lastSentLat;
+    double lastSentLog;
+}
+
+@property (nonatomic, assign) int punch_item_count;
 #pragma mark property using for core data
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -40,12 +46,16 @@
 @property (nonatomic, strong) NSString* currentView;
 @property (strong, nonatomic) UIWindow *window;
 
++(void) explode: (id) aView level: (int) level;
 +(NSString *)getVersionOfApplication;
 -(UIViewController *) getCurrentViewController;
 
 
 #pragma mark - OfferDetailViewController
 -(void) changeToOfferDetailViewController:(OfferTableItem*)item;
+
+#pragma mark - MenuViewController
+-(void) toMenuViewController :(NSString*)brand_id;
 
 #pragma mark - OfferMapViewController
 -(void) toMapViewController:(id)object withTitle:(NSString*)title isHandleAction:(BOOL)isHandle;

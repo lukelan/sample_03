@@ -29,8 +29,18 @@
         
         _max_punch = data[@"max"];
         _count_puch = data[@"count"];
-        
+     
         _branch_id = data[@"branch_id"];
+        _user_punch = data[@"_user_punch"];
+        _offer_date_end = data[@"offer_date_end"];
+        _user_punch = data [@"user_punch"];
+        _size1 = data [@"size1"];
+        _size2 = data [@"size2"];
+        _path = data [@"path"];
+        _menu = data [@"menu"];
+        _distance = data [@"distance"];
+        _brand_name = data [@"brand_name"];
+         _is_like = data [@"_is_like"];
         CGFloat latitude = [[data objectForKey:@"latitude"] floatValue];
         CGFloat longtitude = [[data objectForKey:@"longitude"] floatValue];
         self.location = CLLocationCoordinate2DMake(latitude, longtitude);

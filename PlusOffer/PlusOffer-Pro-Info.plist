@@ -39,5 +39,7 @@
 		<string>UVFTypoSlabserif.ttf</string>
 		<string>TypoSlabserif.ttf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

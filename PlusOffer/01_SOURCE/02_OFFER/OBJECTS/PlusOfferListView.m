@@ -25,7 +25,7 @@
         [_tableView setSeparatorColor:[UIColor clearColor]];
         [self.tableView setBackgroundView:nil];
         
-        _tableView.backgroundColor = [UIColor colorWithRed:228.0f/255.0f green:238.0f/255.0f blue:240.0f/255.0f alpha:1.0f];
+        [_tableView setBackgroundColor:UIColorFromRGB(0xeeeeee) ];
         [self addSubview:_tableView];
     }
     return self;

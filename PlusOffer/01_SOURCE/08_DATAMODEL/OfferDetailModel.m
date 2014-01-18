@@ -14,7 +14,7 @@
 @dynamic branch_id;
 @dynamic branch_name;
 @dynamic brand_id;
-@dynamic count_punch;
+@dynamic user_punch;
 @dynamic discount_value;
 @dynamic discount_type;
 @dynamic latitude;
@@ -32,4 +32,12 @@
 @dynamic date_add;
 @dynamic discount_type_name;
 
+// update new api
+@dynamic offer_date_end;
+@dynamic size2;
+@dynamic size1;
+@dynamic distance;
+@dynamic path;
+@dynamic menu;
+@dynamic brand_name;
 @end

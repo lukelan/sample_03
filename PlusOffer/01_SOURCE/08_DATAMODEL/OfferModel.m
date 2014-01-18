@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 
 @implementation OfferModel
-
 @dynamic branch_id;
 @dynamic brand_id;
 @dynamic latitude;
@@ -19,12 +18,19 @@
 @dynamic offer_name;
 @dynamic branch_name;
 @dynamic brand_name;
-@dynamic count_punch;
+@dynamic user_punch;
 @dynamic category_id;
 @dynamic discount_type;
 @dynamic discount_value;
 @dynamic date_add;
-
+@dynamic order_id;
+@dynamic is_like;
+// update new api
+@dynamic offer_date_end;
+@dynamic max_punch;
+//@dynamic user_punch;
+@dynamic size1;
+@dynamic size2;
 @synthesize distance = _distance;
 @synthesize distanceStr = _distanceStr;
 @synthesize allowRedeem = _allowRedeem;

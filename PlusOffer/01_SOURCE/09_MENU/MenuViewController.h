@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MenuCell.h"
+#import "AppDelegate.h"
 @interface MenuViewController : CustomGAITrackedViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-
+@property (nonatomic, strong) NSString *brandID;
 @end

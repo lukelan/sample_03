@@ -38,7 +38,7 @@
 + (CGFloat)getHeight:(id)object
 {
     CGFloat height = 47;
-    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
+    UIFont *font = [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:10.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
     
     if (![object isKindOfClass:[OfferDetailItem class]]) {
@@ -57,7 +57,7 @@
     if (![object isKindOfClass:[OfferDetailItem class]]) {
         return;
     }
-    [self.lblTitle setFont:[UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15]];
+    [self.lblTitle setFont:[UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:15]];
 //    [self.lblTitle setTextColor:UIColorFromRGB(0x333333)];
     OfferDetailItem *item = object;
        
@@ -66,7 +66,7 @@
         return;
     }
 
-    UIFont *font = [UIFont fontWithName:FONT_AVENIR_NEXT size:10.0];
+    UIFont *font = [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:10.0];
     CGSize sizeText = [@"ABC" sizeWithFont:font];
     CGRect frame = self.scrollViewDes.frame;
     frame.size.height = sizeText.height * arrDes.count;

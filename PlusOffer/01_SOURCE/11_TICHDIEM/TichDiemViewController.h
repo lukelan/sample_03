@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PunchCardCell.h"
-@interface TichDiemViewController :  CustomGAITrackedViewController <UITableViewDataSource, UITableViewDelegate, PunchCardCellDelegate>
+@interface TichDiemViewController :  CustomGAITrackedViewController <UITableViewDataSource, UITableViewDelegate>
 {
+    ZBarReaderViewController *zBarReader;
+    BOOL isScaning;
+    BOOL isScanScreen;
+    NSTimer *timer;
+    UIView *_overlayView;
+    
     CGFloat _punchCardCellHeight;
 }
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, retain) NSMutableArray *dataSource;
 @end

@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSString * branch_name;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSNumber * count_punch;
+@property (nonatomic, retain) NSNumber * user_punch;
 @property (nonatomic, retain) NSNumber * max_punch;
 @property (nonatomic, retain) NSNumber * is_redeem;
 @property (nonatomic, retain) NSNumber * is_redeemable;
@@ -32,4 +32,5 @@
 @property (nonatomic, assign) double  distance; // meter
 @property (nonatomic, retain) NSString * distanceStr;
 @property (nonatomic, readonly) BOOL allowRedeem;
+@property (nonatomic, retain) NSNumber * order_id;
 @end

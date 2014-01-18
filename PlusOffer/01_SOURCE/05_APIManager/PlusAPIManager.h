@@ -19,4 +19,11 @@
 -(void)RK_RequestApiCheckinContext:(id)context_id forUserID:(NSString*)userID atBanchID:(NSString *)branch_id withCoordinate:(CLLocationCoordinate2D)destination;
 -(void)RK_RequestApiCheckAppVersion:(NSString *) currentVersion responseContext: (id)context_id;
 -(NSDictionary*)parseToGetVersionInfo: (NSDictionary *) dicObject;
+- (void)RK_RequestAPIGetListBrandContext:(id)context_id;
+-(void)RK_RequestPostUIID:(NSString *)udid andDeviceToken:(NSString *)device_token context:context_id;
+-(void)RK_RequestApiGetListItemMenu:(id)context_id forBrand_id:(NSString*)brand_id;
+- (void)RK_RequestPunchUser:(NSString *)userId atBrand:(NSString *)brand_id withCode:(NSString *)punch_code numberOfPunch:(NSNumber *)punch_count context:(id)context;
+
+-(void)RK_RequestApiAddFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id;
+-(void)RK_RequestApiRemoveFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id;
 @end

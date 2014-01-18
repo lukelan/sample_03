@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSNumber * branch_id;
 @property (nonatomic, retain) NSString * branch_name;
 @property (nonatomic, retain) NSNumber * brand_id;
-@property (nonatomic, retain) NSNumber * count_punch;
+@property (nonatomic, retain) NSNumber * user_punch;
 @property (nonatomic, retain) NSNumber * discount_value;
 @property (nonatomic, retain) NSNumber * discount_type;
 @property (nonatomic, retain) NSNumber * latitude;
@@ -32,5 +32,14 @@
 @property (nonatomic, retain) NSString * branch_address;
 @property (nonatomic, retain) NSString * date_add;
 @property (nonatomic, retain) NSString * discount_type_name;
+// update new api
+@property (nonatomic, retain) NSString *offer_date_end;
+@property (nonatomic, retain) NSString *size2;
+@property (nonatomic, retain) NSString *size1;
+@property (nonatomic, retain) NSString *path;
+@property (nonatomic, retain) NSString *distance;
+@property (nonatomic, retain) NSString *brand_name;
+@property (nonatomic, retain) id menu;
+
 
 @end

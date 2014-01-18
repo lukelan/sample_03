@@ -25,7 +25,15 @@
 //data cell punch
 @property (nonatomic, retain) NSString *max_punch;
 @property (nonatomic, retain) NSString *count_puch;
-
+@property (nonatomic, retain) NSString *offer_date_end;
+@property (nonatomic, retain) NSString *user_punch;
+@property (nonatomic, retain) NSString *size1;
+@property (nonatomic, retain) NSString *size2;
+@property (nonatomic, retain) NSString *distance;
+@property (nonatomic, retain) NSString *path;
+@property (nonatomic, retain) NSString *is_like;
+@property (nonatomic, retain) id menu;
+@property (nonatomic, retain) NSString *brand_name;
 @property (assign, nonatomic) CLLocationCoordinate2D  location;
 -(id)initWithData:(NSDictionary*)data;
 @end

@@ -12,8 +12,7 @@
 typedef enum
 {
     enumInfoPlusOfferCell = 0,
-    enumDiscountCell,
-    enumRuleOfferCell,
+    enumDescription,
     enumOtherCell
 }enumCellOfferDetail;
 
@@ -37,6 +36,17 @@ typedef enum
 }
 
 @property (nonatomic, retain) NSString *offer_id;
-@property (strong, nonatomic) IBOutlet UITableView *tableViewDetail;
+@property (nonatomic, retain) NSString *detailDistance;
+@property (nonatomic, retain) NSString *brandName;
+@property (nonatomic, retain) NSString *brand_id;
+@property (nonatomic, strong) NSMutableArray *arrayMenu;
+@property (nonatomic) float heightDescription;
+@property (nonatomic) BOOL checkHeightDescription;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
+@property (weak, nonatomic) IBOutlet UIButton *btnPunch;
+- (IBAction)processActionPunch:(id)sender;
+- (IBAction)processActionAdd:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *tableViewDetail;
+@property (strong, nonatomic) IBOutlet UIView *viewBottom;
 @end

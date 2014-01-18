@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (trimSpecialCharacter)
+@interface NSString (Ultility)
 -(NSString *)trimSpecialCharacter;
+- (NSString*) reverseString;
+- (BOOL) isAllDigits;
 @end

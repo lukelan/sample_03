@@ -33,6 +33,7 @@ typedef enum
 @property (nonatomic, retain) NSString *imageUrl;
 @property (nonatomic, retain) NSString *discount;
 @property (nonatomic, retain) NSString *distance;
+@property (nonatomic, assign) float    distanceNum;
 @property (nonatomic, retain) NSString *offer_id;
 @property (nonatomic, retain) NSString *offer_name;
 @property (nonatomic, retain) NSNumber *brand_id;
@@ -41,6 +42,12 @@ typedef enum
 @property (nonatomic, retain) NSNumber *category_id;
 @property (nonatomic, retain) NSNumber *discount_type;
 @property (nonatomic, retain) NSNumber *allowRedeem;
-@property (assign, nonatomic) CLLocationCoordinate2D          location;
+@property (assign, nonatomic) CLLocationCoordinate2D location;
+// update new api
+@property (nonatomic, retain) NSString *offer_date_end;
+@property (nonatomic, retain) NSNumber *max_punch;
+@property (nonatomic, retain) NSNumber *user_punch;
+@property (nonatomic, retain) NSString *size1;
+@property (nonatomic, retain) NSString *size2;
 -(id)initWithData:(NSDictionary*)data;
 @end

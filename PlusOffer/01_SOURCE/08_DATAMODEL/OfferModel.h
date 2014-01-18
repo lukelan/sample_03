@@ -20,15 +20,21 @@
 @property (nonatomic, retain) NSString * offer_name;
 @property (nonatomic, retain) NSString * branch_name;
 @property (nonatomic, retain) NSString * brand_name;
-@property (nonatomic, retain) NSNumber * count_punch;
+@property (nonatomic, retain) NSNumber * user_punch;
+@property (nonatomic, retain) NSNumber * is_like;
 @property (nonatomic, retain) NSNumber * category_id;
 @property (nonatomic, retain) NSNumber * discount_type;
 @property (nonatomic, retain) NSNumber * discount_value;
 @property (nonatomic, retain) NSString * date_add;
-
 // additional variables
 @property (nonatomic, assign) double  distance; // meter
 @property (nonatomic, retain) NSString * distanceStr;
 @property (nonatomic, readonly) BOOL allowRedeem;
 
+// update new api
+@property (nonatomic, retain) NSString *size2;
+@property (nonatomic, retain) NSString *size1;
+@property (nonatomic, retain) NSString *offer_date_end;
+@property (nonatomic, retain) NSNumber *max_punch;
+@property (nonatomic, retain) NSNumber * order_id;
 @end

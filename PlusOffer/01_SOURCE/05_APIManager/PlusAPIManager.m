@@ -10,7 +10,9 @@
 #import "RedeemModel.h"
 #import "OfferModel.h"
 #import "OfferDetailModel.h"
+#import "BrandModel.h"
 #import "Routes.h"
+#import "MenuModel.h"
 
 @implementation PlusAPIManager
 #pragma mark API request with restkit
@@ -30,7 +32,7 @@
     [self RK_SendRequestAPI_Descriptor:locationDescriptor withURL:[NSURL URLWithString:[self getFullLinkAPI:url]] postData:nil keyPost:nil withContext:context_id requestId:-1];
 }
 
--(void)RK_RequestApiGetDirectionContext:(id)context_id from:(CLLocationCoordinate2D)source to:(CLLocationCoordinate2D)destination
+-(void)RK_RequestApiGetDirectionContext :(id)context_id from:(CLLocationCoordinate2D)source to:(CLLocationCoordinate2D)destination
 {
     NSString *url = [NSString stringWithFormat:@"%@?origin=%f,%f&destination=%f,%f&sensor=true",REQUEST_URL_GOOGLE_DIRECTION_API, source.latitude, source.longitude, destination.latitude, destination.longitude];
     //---------------------------------//
@@ -45,11 +47,10 @@
 -(void)RK_RequestApiGetListPlusOfferRedeem:(id)context_id forUserID:(NSString*)userID;
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_REDEEM,ROOT_SERVER, userID];
-
     
-    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([RedeemModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
-    ticketMapping.identificationAttributes = @[@"redeem_id"];
-    [ticketMapping addAttributeMappingsFromDictionary:@{
+    RKEntityMapping *redeemMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([RedeemModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    redeemMapping.identificationAttributes = @[@"redeem_id"];
+    [redeemMapping addAttributeMappingsFromDictionary:@{
                                                         @"redeem_id" : @"redeem_id",
                                                         @"offer_id" : @"offer_id",
                                                         @"brand_id" : @"brand_id",
@@ -61,46 +62,52 @@
                                                         @"branch_name" : @"branch_name",
                                                         @"latitude" : @"latitude",
                                                         @"longitude" : @"longitude",
-                                                        @"count_punch" : @"count_punch",
+                                                        @"user_punch" : @"user_punch",
                                                         @"max_punch" : @"max_punch",
                                                         @"is_redeem" : @"is_redeem",
                                                         @"is_redeemable" : @"is_redeemable"
                                                         }];
-    
-    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+
+    [redeemMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+    [self RK_RequestApi_EntityMapping:redeemMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 -(void)RK_RequestApiGetListPlusOffer:(id)context_id;
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER,ROOT_SERVER];
     
     
-    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
-    ticketMapping.identificationAttributes = @[@"offer_id"];
-    [ticketMapping addAttributeMappingsFromDictionary:@{
+    RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    offerMapping.identificationAttributes = @[@"offer_id"];
+    [offerMapping addAttributeMappingsFromDictionary:@{
                                                         @"offer_id" : @"offer_id",
                                                         @"brand_id" : @"brand_id",
                                                         @"branch_id" : @"branch_id",
                                                         @"offer_name" : @"offer_name",
                                                         @"latitude" : @"latitude",
-                                                        @"longitude" : @"longitude",
-                                                        @"count_punch" : @"count_punch",
+                                                        @"longitude" : @"longitude",     
                                                         @"branch_name" : @"branch_name",
                                                         @"brand_name" : @"brand_name",
                                                         @"category_id" : @"category_id",
                                                         @"discount_type" : @"discount_type",
                                                         @"discount_value" : @"discount_value",
-                                                        @"date_add" : @"date_add"
+                                                        @"date_add" : @"date_add",
+                                                         @"offer_date_end" : @"offer_date_end",
+                                                         @"max_punch" : @"max_punch",
+                                                        @"size1" : @"size1",
+                                                        @"size2" : @"size2",
+                                                        @"is_like" : @"is_like"
                                                         }];
-    
-    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+    [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+    [self RK_RequestApi_EntityMapping:offerMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
+
 -(void)RK_RequestApiGetListPlusOfferWithCategory:(id)context_id forCategory:(NSString*)categoryID;
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY,ROOT_SERVER,categoryID];
     
-    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
-    ticketMapping.identificationAttributes = @[@"offer_id"];
-    [ticketMapping addAttributeMappingsFromDictionary:@{
+    RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    offerMapping.identificationAttributes = @[@"offer_id"];
+    [offerMapping addAttributeMappingsFromDictionary:@{
                                                         @"offer_id" : @"offer_id",
                                                         @"brand_id" : @"brand_id",
                                                         @"branch_id" : @"branch_id",
@@ -109,14 +116,19 @@
                                                         @"longitude" : @"longitude",
                                                         @"brand_name" : @"brand_name",
                                                         @"branch_name" : @"branch_name",
-                                                        @"count_punch" : @"count_punch",
+                                                        @"user_punch" : @"user_punch",
                                                         @"category_id" : @"category_id",
                                                         @"discount_type" : @"discount_type",
                                                         @"discount_value" : @"discount_value",
-                                                        @"date_add" : @"date_add"
+                                                        @"date_add" : @"date_add",
+                                                        @"offer_date_end" : @"offer_date_end",
+                                                        @"max_punch" : @"max_punch",
+                                                        @"size1" : @"size1",
+                                                        @"size2" : @"size2",
+                                                        @"is_like" : @"is_like"
                                                         }];
-    
-    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+    [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+    [self RK_RequestApi_EntityMapping:offerMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
 -(void)RK_RequestApiGetListPlusOfferDetail:(id)context_id forOfferID:(NSString*)offerID;
@@ -124,9 +136,9 @@
     NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_DETAIL,ROOT_SERVER,offerID];
     
     
-    RKEntityMapping *ticketMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferDetailModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
-    ticketMapping.identificationAttributes = @[@"offer_id"];
-    [ticketMapping addAttributeMappingsFromDictionary:@{
+    RKEntityMapping *offerDetailMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferDetailModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    offerDetailMapping.identificationAttributes = @[@"offer_id"];
+    [offerDetailMapping addAttributeMappingsFromDictionary:@{
                                                         @"offer_id" : @"offer_id",
                                                         @"offer_name" :@"offer_name",
                                                         @"brand_id" : @"brand_id",
@@ -146,12 +158,36 @@
                                                         @"latitude" : @"latitude",
                                                         @"longitude" : @"longitude",
                                                         @"max_punch": @"max_punch",
-                                                        @"count_punch": @"count_punch"
+                                                        @"user_punch": @"user_punch",
+                                                        @"offer_date_end" : @"offer_date_end",
+                                                        @"size1" : @"size1",
+                                                        @"size2" : @"size2",
+                                                        @"user_punch" : @"user_punch",
+                                                        @"path" : @"path",
+                                                        @"menu" : @"menu",
+                                                        @"brand_name" : @"brand_name"
                                                         }];
-    
-    [self RK_RequestApi_EntityMapping:ticketMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+    [self RK_RequestApi_EntityMapping:offerDetailMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
+-(void)RK_RequestApiGetListItemMenu:(id)context_id forBrand_id:(NSString*)brand_id;
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_MENU_WITH_BRAND,ROOT_SERVER,brand_id];
+    
+    RKEntityMapping *menuMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([MenuModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    menuMapping.identificationAttributes = @[@"item_id"];
+    [menuMapping addAttributeMappingsFromDictionary:@{
+                                                        @"item_id" : @"item_id",
+                                                        @"item_name" :@"item_name",
+                                                        @"item_price" : @"item_price",
+                                                        @"item_description" : @"item_description",
+                                                        @"item_image" : @"item_image",
+                                                        @"offer_description" : @"offer_description",
+                                                        @"brand_id" : @"brand_id",
+                                                        }];
+    [menuMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+    [self RK_RequestApi_EntityMapping:menuMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+}
 -(void)RK_RequestApiCheckinContext:(id)context_id forUserID:(NSString*)userID atBanchID:(NSString *)branch_id withCoordinate:(CLLocationCoordinate2D)destination
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_USER_CHECKIN,ROOT_SERVER, userID,branch_id, destination.latitude, destination.longitude];
@@ -178,5 +214,69 @@
         return nil;
     }
     return dicObject;
+}
+
+#pragma mark -
+#pragma mark get Brand info
+- (void)RK_RequestAPIGetListBrandContext:(id)context_id
+{
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;    
+    NSString *url = [NSString stringWithFormat:API_REQUEST_GET_LIST_BRAND, ROOT_SERVER, [delegate isUserLoggedIn] ? delegate.userProfile.user_id:@"1"];
+    //-------------------------------//
+    RKEntityMapping *brandMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([BrandModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    brandMapping.identificationAttributes = @[ @"brand_id" ];
+    [brandMapping addAttributeMappingsFromArray:@[@"brand_id",@"brand_card_image",@"brand_card_logo", @"brand_card_color",@"list_prize", @"max_punch", @"user_punch", @"punch_color_active", @"punch_color", @"punch_image", @"punch_image_active", @"punch_image_select", @"date_end"]];
+    [brandMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+    //-------------------------------//
+    [self RK_RequestApi_EntityMapping:brandMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
+}
+
+#pragma mark post udid and device token
+-(void)RK_RequestPostUIID:(NSString *)udid andDeviceToken:(NSString *)device_token context:context_id
+{
+    NSDictionary *temp  = [NSDictionary dictionaryWithObjectsAndKeys:
+                           udid, @"udid",
+                           device_token, @"device_token",
+                           nil];
+    RKObjectMapping *dicMapping = [RKObjectMapping mappingForClass:[DictionaryMapping class]];
+    [dicMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:nil toKeyPath:@"curDictionary"]];
+    RKResponseDescriptor *objDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:dicMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"result" statusCodes:nil];
+    
+    [self RK_SendRequestGetAPI_Descriptor:objDescriptor withURL:[self getFullLinkAPI:API_REQUEST_SET_DEVICETOKEN] parameters:temp withContext:nil requestId:ID_POST_UDID_DEVICE_TOKEN];
+}
+
+#pragma mark
+#pragma mark user request punch
+- (void)RK_RequestPunchUser:(NSString *)userId atBrand:(NSString *)brand_id withCode:(NSString *)punch_code numberOfPunch:(NSNumber *)punch_count context:(id)context;
+{
+    NSString* urlString = [NSString stringWithFormat:API_REQUEST_USER_PUNCH, ROOT_SERVER];
+    NSDictionary* temp = [NSDictionary dictionaryWithObjectsAndKeys:
+                          userId, @"user_id",
+                          brand_id, @"brand_id",
+                          punch_code, @"punch_code",
+                          punch_count, @"punch_count",
+                          nil];
+    [self RK_RequestDictionaryMappingResponseWithURL:urlString postData:temp keyPath:nil withContext:context requestId:ID_REQUEST_USER_PUNCH];
+    
+}
+#pragma mark offer favorite
+-(void)RK_RequestApiAddFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_ADD_FAVORITE,ROOT_SERVER];
+    NSDictionary* temp = [NSDictionary dictionaryWithObjectsAndKeys:
+                          userId, @"user_id",
+                          offer_id, @"offer_id",
+                          nil];
+    [self RK_RequestDictionaryMappingResponseWithURL:url postData:temp keyPath:nil withContext:context_id requestId:ID_REQUEST_FAVORITE];
+
+}
+-(void)RK_RequestApiRemoveFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_REMOVE_FAVORITE,ROOT_SERVER];
+    NSDictionary* temp = [NSDictionary dictionaryWithObjectsAndKeys:
+                          userId, @"user_id",
+                          offer_id, @"offer_id",
+                          nil];
+    [self RK_RequestDictionaryMappingResponseWithURL:url postData:temp keyPath:nil withContext:context_id requestId:ID_REQUEST_FAVORITE];
 }
 @end

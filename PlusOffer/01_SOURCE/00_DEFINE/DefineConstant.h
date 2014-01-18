@@ -29,8 +29,11 @@
 
 #define FONT_NAME @"Helvetica"
 #define FONT_BOLD_NAME @"Helvetica-Bold"
-#define FONT_UVFTYPOSLABSERIF @"UVFTypoSlabserif-Light"
-#define FONT_AVENIR_NEXT @"Avenir Next"
+//#define FONT_ROBOTOCONDENSED_REGULAR @"UVFTypoSlabserif-Light"
+//#define FONT_AVENIR_NEXT @"Avenir Next"
+
+#define FONT_ROBOTOCONDENSED_REGULAR @"RobotoCondensed-Regular"
+#define FONT_ROBOTOCONDENSED_LIGHT @"RobotoCondensed-Light"
 
 #pragma mark define key store in NSUserDefault
 //Define key store in app setting
@@ -69,6 +72,7 @@ typedef enum
     TAB_ACCOUNT,
     TAB_ORTHER
 }ENUM_TAB_INDEX;
+
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 typedef enum{
@@ -83,9 +87,9 @@ typedef enum{
 #define CACHE_IMAGE_PATH ([NSString stringWithFormat:@"%@/images/",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]])
 #endif
 
-#define IS_IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 #define IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
-#define CHECK_IOS (IS_IOS7 ? TITLE_BAR_HEIGHT : 0 )
+#define CHECK_IOS (IOS_VERSION >= 7.0 ? TITLE_BAR_HEIGHT : 0 )
 #define MAXIMUM_SCALEABLE_RADIUS_METERS                                     5000000
 #define MINIMUM_DISTANCE_ALLOW_USER_REDEEM                                  100.0f // in 100 meters
 
@@ -95,3 +99,6 @@ typedef enum{
 //Text đậm: #333333
 //Text nhạt: #666666
 #define APP_ITUNES_LINK @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=615186197"
+
+// Define Notification
+#define NOTIFICATION_NAME_PLUSOFFER_GPS_USER_LOCATION_DID_RECEIVE @"NOTIFICATION_NAME_PLUSOFFER_GPS_USER_LOCATION_DID_RECEIVE"

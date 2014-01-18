@@ -8,7 +8,7 @@
 
 #import "NSString+trimSpecialCharacter.h"
 
-@implementation NSString (trimSpecialCharacter)
+@implementation NSString (Ultility)
 -(NSString *)trimSpecialCharacter
 {
     NSMutableString *asciiCharacters = [NSMutableString string];
@@ -17,5 +17,27 @@
     }
     NSCharacterSet *nonAsciiCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:asciiCharacters] invertedSet];
     return [[self componentsSeparatedByCharactersInSet:nonAsciiCharacterSet] componentsJoinedByString:@""];
+}
+
+- (NSString*) reverseString
+{
+    NSMutableString *reversedStr;
+    int len = [self length];
+    
+    // auto released string
+    reversedStr = [NSMutableString stringWithCapacity:len];
+    
+    // quick-and-dirty implementation
+    while ( len > 0 )
+        [reversedStr appendString:[NSString stringWithFormat:@"%C",[self characterAtIndex:--len]]];
+    
+    return reversedStr;
+}
+
+- (BOOL) isAllDigits
+{
+    NSCharacterSet* nonNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSRange r = [self rangeOfCharacterFromSet: nonNumbers];
+    return r.location == NSNotFound;
 }
 @end

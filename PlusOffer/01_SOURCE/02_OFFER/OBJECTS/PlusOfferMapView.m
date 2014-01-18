@@ -76,10 +76,16 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 // draw route to that item
 -(void)drawRouteToItemIndex:(int)index {
+    
+    //Check User Location first
+    if (![self isValidUserCoordinate]) {
+        return;
+    }
+    
     if (self.dataSource.count > index && index >= 0) {
         OfferTableItem *item = self.dataSource[index];
         _selectedOfferItem = item;
-        [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
+       [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetDirectionContext:self from:self.mapView.userLocation.coordinate to:item.coordinate];
     }
 }
 
@@ -165,6 +171,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     if (isNeedDrawRoute) {
         [self drawRouteToItemIndex:0];
+        isNeedDrawRoute = NO;
     }
 }
 

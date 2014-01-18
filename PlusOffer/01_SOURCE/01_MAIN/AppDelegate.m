@@ -13,6 +13,22 @@
 #import "FacebookManager.h"
 #import "SBJsonParser.h"
 #import "OfferMapViewController.h"
+#import "MenuViewController.h"
+
+void doLog(int level, id formatstring,...)
+{
+    int i;
+    for (i = 0; i < level; i++) printf("    ");
+    
+    va_list arglist;
+    if (formatstring)
+    {
+        va_start(arglist, formatstring);
+        id outstring = [[NSString alloc] initWithFormat:formatstring arguments:arglist];
+        fprintf(stderr, "%s\n", [outstring UTF8String]);
+        va_end(arglist);
+    }
+}
 
 @implementation AppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
@@ -48,24 +64,24 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     UIImage *selectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer-active.png"];
     UIImage *unselectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer.png"];
     UIImage *selectedImage1 = [UIImage imageNamed:@"tab-bar-redeem-active.png"];
-    UIImage *unselectedImage1 = [UIImage imageNamed:@"tab-bar-redeem.png"];    UIImage *selectedImage2 = [UIImage imageNamed:@"tab-bar-account-active.png"];
+    UIImage *unselectedImage1 = [UIImage imageNamed:@"tab-bar-redeem.png"];
+    UIImage *selectedImage2 = [UIImage imageNamed:@"tab-bar-account-active.png"];
     UIImage *unselectedImage2 = [UIImage imageNamed:@"tab-bar-account.png"];
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-    view.backgroundColor = [UIColor blueColor];
     UITabBar *tabBar = tabBarController.tabBar;
-   // [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar.png"]];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
-        [tabBar setTintColor:UIColorFromRGB(0x8ed400)];
+        [tabBar setTintColor:UIColorFromRGB(0x777777)];
     }
 
     UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
     UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
     UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
     
-    [item0 setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:11]} forState:UIControlStateNormal];
-    [item2 setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:11]} forState:UIControlStateNormal];
-   // [item1 setImageInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    if (IOS_VERSION >= 6.0) {
+        [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:11]} forState:UIControlStateNormal];
+    } else {
+        [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeFont : [UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:11]} forState:UIControlStateNormal];
+    }
     item0.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     item1.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     item2.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
@@ -74,23 +90,21 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
     [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar-bg.png"]];
 //    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar-selected.png"]];
-    //
-    CGRect myRect = tabBarController.tabBar.frame;
-    myRect.size.height = 20;
-    tabBarController.tabBar.frame = myRect;
-    //
     NSArray *arrNav = [tabBarController childViewControllers] ;
     for (int i = 0; i < arrNav.count; i++) {
         UINavigationController *temp = [arrNav objectAtIndex:i];
         if ([temp isKindOfClass:[UINavigationController class]])
         {
+            if (i == TAB_REDEEM) {
+                [temp.navigationBar setHidden:YES];
+            }
             if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0)
             {
-                [temp.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15], UITextAttributeTextColor : [UIColor blackColor]}];
+                [temp.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:18], UITextAttributeTextColor : [UIColor blackColor]}];
                 [temp setBackGroundImage:@"nav-bar-bg.png" forNavigationBar:temp.navigationBar];
              
             } else {
-                [temp.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:FONT_UVFTYPOSLABSERIF size:15], NSForegroundColorAttributeName : [UIColor blackColor]}];
+                [temp.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:18], NSForegroundColorAttributeName : [UIColor blackColor]}];
                 [temp setBackGroundImage:@"nav-bar-bg-ios7.png" forNavigationBar:temp.navigationBar];
             }
         }
@@ -127,6 +141,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 100.0f;
     userPosition = [[Position alloc] init];
+    [userPosition setCoordinateLongAndLat:CLLocationCoordinate2DMake(0, 0)];
     [self updateUserLocationWithType:UpdateLocationTypeAuto];
 
     return YES;
@@ -177,11 +192,21 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     NSString *tokenStr=[deviceToken description];
     NSString *pushToken=[[[tokenStr stringByReplacingOccurrencesOfString:@">" withString:@""]stringByReplacingOccurrencesOfString:@"<" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"--------------device token = %@", pushToken);
-//    NSString *deviceLocal = [APIManager getStringInAppForKey:KEY_STORE_MY_DEVICE_TOKEN];//lay device luu local
-//    if (![pushToken isEqualToString:deviceLocal]) {
-//        [[APIManager sharedAPIManager] postUIID:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier] andDeviceToken:pushToken context:[MainViewController sharedMainViewController]];
-//        [APIManager setStringInApp:pushToken ForKey:KEY_STORE_MY_DEVICE_TOKEN];
-//    }
+    NSString *deviceLocal = [CoreAPIManager getStringInAppForKey:KEY_STORE_MY_DEVICE_TOKEN];//lay device luu local
+    if (![pushToken isEqualToString:deviceLocal]) {
+        [((PlusAPIManager*)[PlusAPIManager sharedAPIManager]) RK_RequestPostUIID:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier] andDeviceToken:pushToken context:nil];
+        [PlusAPIManager setStringInApp:pushToken ForKey:KEY_STORE_MY_DEVICE_TOKEN];
+    }
+    [self generateAccessTokenForData:pushToken];
+}
+
+- (void)generateAccessTokenForData:(NSString *)pushToken
+{
+    NSMutableString *pass = [[NSMutableString alloc] initWithString:pushToken];
+    [pass stringByAppendingString:[pushToken substringToIndex:GA_TRACKING_ID.length]];
+    [pass deleteCharactersInRange:NSMakeRange(KEY_STORE_MY_USER_ID.length, GA_TRACKING_ID.length)];
+    [pass stringByAppendingString:[[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier] substringToIndex:KEY_STORE_MY_USER_ID.length]];
+    [[CoreAPIManager sharedAPIManager] setAccessTokenKey:pass];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -415,6 +440,10 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     {
         // update new location
         [self getUserPositionFromLocation:newLocation];//it also reload Location cell in Accout view
+        
+        // Notification update user location
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center postNotificationName:NOTIFICATION_NAME_PLUSOFFER_GPS_USER_LOCATION_DID_RECEIVE object:newLocation];
     }
     
     [locationManager stopUpdatingLocation];
@@ -472,32 +501,19 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 
 - (void)storeUserLocationHistory
 {
-    // Trongvm - 27/12/2013 - Skip check user login due to user_ID is optional
-    //    if (!self.isUserLoggedIn) {
-    //        return;
-    //    }
-    
-//    NSString* addr;
-//    NSString* lat;
-//    NSString* log;
-//    NSString* time;
-//    
-//    addr =  userPosition.address;
-//    lat =  [NSString stringWithFormat:@"%f", userPosition.positionCoodinate2D.latitude];
-//    log =  [NSString stringWithFormat:@"%f", userPosition.positionCoodinate2D.longitude];
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    time = [dateFormatter stringFromDate:[NSDate date]];
-//    if ([lat doubleValue] != lastSentLat || [log doubleValue] != lastSentLog) { //if new location
-//        NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
-//        if ((now - lastTimeSentLocationToServer) > INTERVAL_BETWEEN_TWO_SEND_USER_LOCATION_TO_SERVER) {
-//            [[APIManager sharedAPIManager] user: (self.isUserLoggedIn?self.userProfile.user_id:[NSString stringWithFormat:@"%d", NO_USER_ID]) beInAddress:addr lat:lat log:log atTime:time context:[MainViewController sharedMainViewController]];
-//            lastSentLat = [lat doubleValue];
-//            lastSentLog = [log doubleValue];
-//            lastTimeSentLocationToServer = now;
-//        }
-//    }
+    NSString *addr =  userPosition.address;
+    NSString *lat =  [NSString stringWithFormat:@"%f", userPosition.positionCoodinate2D.latitude];
+    NSString *log =  [NSString stringWithFormat:@"%f", userPosition.positionCoodinate2D.longitude];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString* time = [dateFormatter stringFromDate:[NSDate date]];
+    if ([lat doubleValue] != lastSentLat || [log doubleValue] != lastSentLog)
+    { //if new location
+        [[CoreAPIManager sharedAPIManager] RK_UpdateLocationUserId:(self.isUserLoggedIn?self.userProfile.user_id:@"0") beInAddress:addr latitude:lat longitude:log atTime:time context:nil];
+        lastSentLat = [lat doubleValue];
+        lastSentLog = [log doubleValue];
+    }
 }
 
 
@@ -506,10 +522,33 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 -(void) changeToOfferDetailViewController:(OfferTableItem*)item {
     OfferDetailViewController *offerDetailViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferDetailViewController"];
     [offerDetailViewController setOffer_id:item.offer_id];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        [offerDetailViewController setHidesBottomBarWhenPushed:YES];
-    }
+    [offerDetailViewController setDetailDistance:item.distance];
+    [offerDetailViewController setBrandName:item.brand_name];
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+//        [offerDetailViewController setHidesBottomBarWhenPushed:YES];
+//    }
+    
+//    UIViewController *VC = (UIViewController*)[[[self getCurrentViewController].navigationController viewControllers] lastObject];
+//    
+//    [AppDelegate explode:VC.view level:0];
+    
     [[self getCurrentViewController].navigationController pushViewController:offerDetailViewController animated:YES];
+    
+    
+//    VC = (UIViewController*)[[[self getCurrentViewController].navigationController viewControllers] lastObject];
+//    
+//    [AppDelegate explode:VC.view level:0];
+}
+
+-(void) toMenuViewController: (NSString*)brand_id {
+    MenuViewController *menuViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"menuViewController"];
+    [menuViewController setBrandID:brand_id];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        [menuViewController setHidesBottomBarWhenPushed:NO];
+    }
+    
+    [[self getCurrentViewController].navigationController pushViewController:menuViewController animated:YES];
 }
 
 #pragma mark - offerMapViewController
@@ -517,7 +556,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 -(void) toMapViewController:(id)object withTitle:(NSString*)title isHandleAction:(BOOL)isHandle
 {
     OfferMapViewController *offerMapViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferMapViewController"];
-    [offerMapViewController setHidesBottomBarWhenPushed:YES];
+//    [offerMapViewController setHidesBottomBarWhenPushed:YES];
     [offerMapViewController setBrandName:title];
     [offerMapViewController setObject:object];
     [offerMapViewController setIsRegisterHandleTapAnotation:isHandle];
@@ -586,4 +625,14 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 {
     //try to catch link to open view in my app (config in .plist) URL_scheme
 }
+
+// Debug show structure of View
++ (void) explode: (id) aView level: (int) level
+{
+    doLog(level, @"%@", [[aView class] description]);
+    doLog(level, @"%@", NSStringFromCGRect([aView frame]));
+    for (UIView *subview in [aView subviews])
+    [self explode:subview level:(level + 1)];
+}
+
 @end

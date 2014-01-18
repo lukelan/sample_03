@@ -29,7 +29,14 @@
         CGFloat latitude = [[data objectForKey:@"latitude"] floatValue];
         CGFloat longtitude = [[data objectForKey:@"longitude"] floatValue];
         self.location = CLLocationCoordinate2DMake(latitude, longtitude);
-        
+        // update new api
+        _size1 = data[@"size1"];
+        _size2 = data[@"size2"];
+        _offer_date_end = data[@"offer_date_end"];
+        _max_punch = data[@"max_punch"];
+        _user_punch = data[@"user_punch"];
+        _distanceNum = [data[@"distanceNum"] floatValue];
+      
     }
     return self;
 }

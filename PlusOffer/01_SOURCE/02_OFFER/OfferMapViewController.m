@@ -32,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tabBarDisplayType = TAB_BAR_DISPLAY_HIDE;
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.layer.opacity = 0.9f;
     [self setTitle:_brandName];
@@ -43,13 +45,23 @@
     NSArray *temp = [self.fetchedResultsController.fetchedObjects mutableCopy];
     for (OfferDetailModel *itemModel in temp)
     {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"url",  [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"offer_id",
-                             itemModel.offer_name, @"offer_name",
-                             [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id",
-                             itemModel.discount_type.stringValue, @"discount_type",
-                             itemModel.latitude.stringValue, @"latitude",
-                             itemModel.longitude.stringValue, @"longitude",
-                             itemModel.category_id.stringValue, @"category_id",nil];        item = [[OfferTableItem alloc] initWithData:dic];
+//        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: @"http://plusoffer-dev.123phim.vn/img/temp/offer1.jpg", @"url",  [NSString stringWithFormat:@"%d", itemModel.offer_id.intValue], @"offer_id",
+//                             itemModel.offer_name, @"offer_name",
+//                             [NSString stringWithFormat:@"%d", itemModel.branch_id.intValue], @"branch_id",
+//                             itemModel.discount_type.stringValue, @"discount_type",
+//                             itemModel.latitude.stringValue, @"latitude",
+//                             itemModel.longitude.stringValue, @"longitude",
+//                             itemModel.category_id.stringValue, @"category_id",nil];
+        NSMutableDictionary *dic = [ NSMutableDictionary new];
+        [dic setValue:[NSString stringWithFormat:@"%d", itemModel.offer_id.intValue] forKey:@"offer_id"];
+        [dic setValue:itemModel.offer_name forKey:@"offer_name"];
+        [dic setValue:[NSString stringWithFormat:@"%d", itemModel.branch_id.intValue] forKey:@"branch_id"];
+        [dic setValue:itemModel.discount_type.stringValue forKey:@"discount_type"];
+        [dic setValue:itemModel.latitude.stringValue forKey:@"latitude"];
+        [dic setValue:itemModel.longitude.stringValue forKey:@"longitude"];
+        [dic setValue:itemModel.category_id.stringValue forKey:@"category_id"];
+        [dic setValue:itemModel.size2 forKey:@"size2"];
+        item = [[OfferTableItem alloc] initWithData:dic];
     }
     if (![item isKindOfClass:[OfferTableItem class]]) {
         return;
@@ -63,7 +75,8 @@
     
     [self setImageCustomBarRight:[UIImage imageNamed:@"map-icon-list.png"]];
     if (!_mapView) {
-        if IS_IOS7{
+        if (IOS_VERSION >= 7.0)
+        {
             _mapView = [[PlusOfferMapView alloc] initWithFrame: CGRectMake(0, 0, 320, IS_IPHONE5 ? 568  : 480)];
         }
         else
@@ -73,7 +86,6 @@
         _mapView.delegate = self;
     }
     [_mapView setIsRegisteredHanleTap:_isRegisterHandleTapAnotation];
-    self.tabBarController.tabBar.hidden = YES;
     [self.view addSubview:_mapView];
     [_mapView reloadInterface:[NSMutableArray arrayWithObject:item]];
     [_mapView checkToDrawRoute];    

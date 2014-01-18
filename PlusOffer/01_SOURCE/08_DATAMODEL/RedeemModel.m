@@ -22,10 +22,11 @@
 @dynamic branch_name;
 @dynamic latitude;
 @dynamic longitude;
-@dynamic count_punch;
+@dynamic user_punch;
 @dynamic max_punch;
 @dynamic is_redeem;
 @dynamic is_redeemable;
+@dynamic order_id;
 @synthesize distance = _distance;
 @synthesize distanceStr = _distanceStr;
 @synthesize allowRedeem = _allowRedeem;

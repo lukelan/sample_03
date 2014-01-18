@@ -25,36 +25,57 @@
     [self setImageWithURL:url completed:nil];
 }
 
--(void)setImageWithURL:(NSURL *)url completed:(SDWebImageCompletedBlock)completedBlock
+- (void)setImageWithURL:(NSURL *)url needResize:(BOOL)isNeedResize
 {
+    [self setImageWithURL:url completed:nil needResized:YES];
+}
+
+-(void)setImageWithURL:(NSURL *)url completed:(SDWebImageCompletedBlock)completedBlock needResized:(BOOL)isResize
+{
+    _curURL = url;
     NSString *cacheKey = [SDWebImageManager sharedManager].cacheKeyFilter(url);
-    if (self.cahceKey && [cacheKey isEqualToString:self.cahceKey])
+    if (self.cacheKey && [cacheKey isEqualToString:self.cacheKey])
     {
         return;
     }
     [self cancelCurrentImageLoad];
-    if (self.cahceKey)
+    if (self.cacheKey)
     {
-        [[SDWebImageManager sharedManager].imageCache removeImageForKey:self.cahceKey fromDisk:NO];
+        [[SDWebImageManager sharedManager].imageCache removeImageForKey:self.cacheKey fromDisk:NO];
     }
-    [self setCahceKey:cacheKey];
+    [self setCacheKey:cacheKey];
     __block void (^returnBlock)() = ^void(UIImage *image, NSError *error, SDImageCacheType cacheType)
     {
-        [self setCahceKey:@""];
+        [self setCacheKey:@""];
         if (completedBlock)
         {
             completedBlock(image, error, cacheType);
+        }
+        if (self.isResized)
+        {
+            CGRect frame = self.frame;
+            if (image.size.width/2 > frame.size.width)
+            {
+                frame.size.width = image.size.width/2;
+                [self setFrame:frame];
+            }
+            self.isResized = YES;
         }
     };
     [super setImageWithURL:url completed:returnBlock];
 }
 
+-(void)setImageWithURL:(NSURL *)url completed:(SDWebImageCompletedBlock)completedBlock
+{
+    [self setImageWithURL:url completed:completedBlock needResized:NO];
+}
+
 -(void)dealloc
 {
     [self cancelCurrentImageLoad];
-    if (self.cahceKey)
+    if (self.cacheKey)
     {
-        [[SDWebImageManager sharedManager].imageCache removeImageForKey:self.cahceKey fromDisk:NO];
+        [[SDWebImageManager sharedManager].imageCache removeImageForKey:self.cacheKey fromDisk:NO];
     }
 }
 

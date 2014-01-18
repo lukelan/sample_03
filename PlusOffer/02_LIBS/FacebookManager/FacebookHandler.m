@@ -206,9 +206,9 @@ static FacebookHandler* _sharedMyFacebookHandler = nil;
         delegate.userProfile = [[UserProfile alloc] init];
     }
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    delegate.userProfile.name = [userInfo name];
-    delegate.userProfile.avatar = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", [userInfo id]];
-    delegate.userProfile.username = [userInfo username];
+    delegate.userProfile.name = [userInfo objectForKey:@"name"];
+    delegate.userProfile.avatar = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", [userInfo objectForKey:@"id"]];
+    delegate.userProfile.username = [userInfo objectForKey:@"username"];
     //set cho truong hop nhung email bao mat khong lay ve duoc
     NSString *emailData = [userInfo objectForKey:@"email"];
     if (!emailData || ![emailData isKindOfClass:[NSString class]] || emailData.length == 0) {
@@ -216,7 +216,7 @@ static FacebookHandler* _sharedMyFacebookHandler = nil;
     } else {
         delegate.userProfile.email = emailData;
     }
-    delegate.userProfile.facebook_id = [userInfo id];
+    delegate.userProfile.facebook_id = [userInfo objectForKey:@"id"];
     if (context && [context respondsToSelector:selector])
     {
         [context performSelector:selector withObject:userInfo withObject:delegate.userProfile];

@@ -12,9 +12,12 @@
 
 @interface SDImageView : UIImageView
 
-@property (nonatomic, copy) NSString *cahceKey;
+@property (nonatomic, assign) BOOL isResized;
+@property (nonatomic, copy) NSString *cacheKey;
+@property (nonatomic, copy) NSURL *curURL;
 
 - (void)setImageWithURL:(NSURL *)url;
+- (void)setImageWithURL:(NSURL *)url needResize:(BOOL)isNeedResize;
 - (void)setImageWithURL:(NSURL *)url completed:(SDWebImageCompletedBlock)completedBlock;
 
 @end
