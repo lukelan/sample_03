@@ -359,19 +359,22 @@ static bool isExpanded = NO;
 
 - (void)showFullOrShortDes
 {
-    if (!self.delegate || ![self.delegate respondsToSelector:@selector(punchCardCell:didUpdateLayoutWithHeight:curIndex:)])
-    {
-        return;
+    if ([self.delegate respondsToSelector:@selector(punchCardCell:didSelect:)]) {
+        [self.delegate punchCardCell:self didSelect:self.curBrand];
     }
-    isExpanded = !isExpanded;
-    [_lblLine setHidden:!_lblLine.hidden];
-    if (isExpanded)
-    {
-        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:([[UIScreen mainScreen] bounds].size.height - TAB_BAR_HEIGHT - MARGIN_CELLX_GROUP  - TITLE_BAR_HEIGHT )curIndex:_CurIndexSelected];
-    }
-    else
-    {
-        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:MIN_PUNCH_CELL_HEIGHT curIndex:_CurIndexSelected];
-    }
+//    if (!self.delegate || ![self.delegate respondsToSelector:@selector(punchCardCell:didUpdateLayoutWithHeight:curIndex:)])
+//    {
+//        return;
+//    }
+//    isExpanded = !isExpanded;
+//    [_lblLine setHidden:!_lblLine.hidden];
+//    if (isExpanded)
+//    {
+//        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:([[UIScreen mainScreen] bounds].size.height - TAB_BAR_HEIGHT - MARGIN_CELLX_GROUP  - TITLE_BAR_HEIGHT )curIndex:_CurIndexSelected];
+//    }
+//    else
+//    {
+//        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:MIN_PUNCH_CELL_HEIGHT curIndex:_CurIndexSelected];
+//    }
 }
 @end
