@@ -311,7 +311,7 @@
         int currentIndex = btnPunch.tag;
         
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        delegate.punch_item_count = currentIndex - [_curBrand.user_punch intValue];
+        delegate.punch_item_count = currentIndex - START_TAG_INDEX_PUNCH - [_curBrand.user_punch intValue] + 1;
         for (int i = [_curBrand.user_punch intValue]; i < [_curBrand.max_punch intValue]; i++)
         {
 

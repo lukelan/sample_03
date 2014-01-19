@@ -569,8 +569,12 @@
     [_topLogo setImageWithURL:[NSURL URLWithString:object.brand_card_logo]];
     [_topTextLbl setText:[NSString stringWithFormat:@"Trình mã này cho nhân viên %@ để nhận điểm tích luỹ cho đơn hàng", object.brand_name]];
     [_bottomLogo setImageWithURL:[NSURL URLWithString:object.brand_card_logo]];
-    [_bottomTextLbl setText:@"Khách hàng nhận được 3 điểm tích luỹ cho đơn hàng"];
-    [_bottomPointLbl setText:@"3"];
+    
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [_bottomTextLbl setText:[NSString stringWithFormat:@"Khách hàng nhận được %d điểm tích luỹ cho đơn hàng",delegate.punch_item_count]];
+    
+    [_bottomPointLbl setText:[NSString stringWithFormat:@"%d",delegate.punch_item_count]];
+    
     [_codeLbl setText:@"09451"];
     
     [self loadBarCodeReader];
