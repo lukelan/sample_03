@@ -37,6 +37,8 @@
         <attribute name="punch_image_select" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="CuisineOffer" representedClassName="CuisineOffer" parentEntity="OfferModel" syncable="YES"/>
+    <entity name="EntertainmentOffer" representedClassName="EntertainmentOffer" parentEntity="OfferModel" syncable="YES"/>
     <entity name="MenuModel" representedClassName="MenuModel" syncable="YES">
         <attribute name="brand_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="item_description" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,6 +48,7 @@
         <attribute name="item_price" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="order_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="NearByOffer" representedClassName="NearByOffer" parentEntity="OfferModel" syncable="YES"/>
     <entity name="OfferDetailModel" representedClassName="OfferDetailModel" syncable="YES">
         <attribute name="branch_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="branch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -115,11 +118,14 @@
         <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
+        <element name="BranchModel" positionX="178" positionY="335" width="128" height="313"/>
         <element name="BrandModel" positionX="-18" positionY="189" width="128" height="268"/>
         <element name="MenuModel" positionX="-27" positionY="0" width="128" height="150"/>
         <element name="OfferDetailModel" positionX="-207" positionY="0" width="128" height="450"/>
         <element name="OfferModel" positionX="385" positionY="0" width="128" height="330"/>
         <element name="RedeemModel" positionX="169" positionY="3" width="128" height="285"/>
-        <element name="BranchModel" positionX="178" positionY="335" width="128" height="313"/>
+        <element name="NearByOffer" positionX="430" positionY="371" width="128" height="43"/>
+        <element name="CuisineOffer" positionX="576" positionY="380" width="128" height="43"/>
+        <element name="EntertainmentOffer" positionX="340" positionY="443" width="128" height="43"/>
     </elements>
 </model>

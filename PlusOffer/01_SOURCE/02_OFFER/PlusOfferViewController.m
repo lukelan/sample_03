@@ -9,7 +9,9 @@
 #import "PlusOfferViewController.h"
 #import "VersionNotificationViewController.h"
 #import "OfferTableItem.h"
-#import "OfferModel.h"
+#import "NearByOffer.h"
+#import "CuisineOffer.h"
+#import "EntertainmentOffer.h"
 #import "BranchModel.h"
 
 @interface PlusOfferViewController () <NSFetchedResultsControllerDelegate, RKManagerDelegate>
@@ -17,6 +19,9 @@
 @property (nonatomic, retain) NSMutableArray *dataSource;
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController_NearByOffer;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController_CuisineOffer;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController_EntertainmentOffer;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController_Branches;
 @end
 
@@ -29,6 +34,7 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self name:NOTIFICATION_NAME_PLUSOFFER_GPS_USER_LOCATION_DID_RECEIVE object:nil];
+    [center removeObserver:self name:NOTIFICATION_NAME_APP_BECOME_ACTICE object:nil];
     
     [_listOffers removeAllObjects];
     [_dataSource removeAllObjects];
@@ -62,7 +68,9 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(receiveUserLocation:) name:NOTIFICATION_NAME_PLUSOFFER_GPS_USER_LOCATION_DID_RECEIVE object:nil];
     
-    [self fetchedResultsController];
+    [self fetchedResultsController_NearByOffer];
+    [self fetchedResultsController_CuisineOffer];
+    [self fetchedResultsController_EntertainmentOffer];
     [self fetchedResultsController_Branches];
     self.navigationController.navigationBar.translucent = NO;
     if (IOS_VERSION >= 7.0) {
@@ -81,6 +89,8 @@
     [self loadInterface:_vcType];
     [self reloadInterface:_vcType];
     [self setPropertiesForSegmentControl];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appBecomeActive) name:NOTIFICATION_NAME_APP_BECOME_ACTICE object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -246,7 +256,6 @@
     sender.selected = !sender.selected;
     if (_checkListOrMap) {
         _checkListOrMap = NO;
-        [self loadOffers];
         [self loadInterface:enumOfferInterfaceType_Map];
     }
     else {
@@ -271,29 +280,22 @@
 #pragma mark - API
 -(void)loadOffers
 {
-    if (!_checkListOrMap) {
-        // map: get branches of all brand
-        [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListBranch:self ofBrand:nil];
-    }
-    else {
-        // list
-        switch (checkOfferCategory) {
-            case ENUM_PLUS_OFFER_CATEGORY_GETLIST: {
-                [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOffer:self];
-                break;
-            }
-            case ENUM_PLUS_OFFER_CATEGORY_CUISINE: {
-                [(PlusAPIManager*)[PlusAPIManager sharedAPIManager]
-                 RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
-                break;
-            }
-            case ENUM_PLUS_OFFER_CATEGORY_ENTERTAINMENT: {
-                [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", checkOfferCategory]];
-            }
-            default:
-                break;
-        }
-    }
+    [self reloadInterface:_vcType];
+}
+
+-(void)appBecomeActive
+{
+    // banches
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListBranch:self ofBrand:nil];
+    
+    // nearest
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOffer:self];
+    
+    // cuisine
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", ENUM_PLUS_OFFER_CATEGORY_CUISINE]];
+    
+    // entertainment
+    [(PlusAPIManager*)[PlusAPIManager sharedAPIManager] RK_RequestApiGetListPlusOfferWithCategory:self forCategory:[NSString stringWithFormat:@"%u", ENUM_PLUS_OFFER_CATEGORY_ENTERTAINMENT]];
 }
 
 #pragma mark - Actions Segment change
@@ -305,23 +307,90 @@
 }
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (NSFetchedResultsController *)fetchedResultsController{
+-(NSFetchedResultsController *)fetchedResultsController
+{
+    if (!_checkListOrMap) {
+        // map: get branches of all brand
+        _fetchedResultsController = _fetchedResultsController_Branches;
+    }
+    else {
+        // list
+        switch (checkOfferCategory) {
+            case ENUM_PLUS_OFFER_CATEGORY_GETLIST: {
+                _fetchedResultsController = _fetchedResultsController_NearByOffer;
+                break;
+            }
+            case ENUM_PLUS_OFFER_CATEGORY_CUISINE: {
+                _fetchedResultsController = _fetchedResultsController_CuisineOffer;
+                break;
+            }
+            case ENUM_PLUS_OFFER_CATEGORY_ENTERTAINMENT: {
+                _fetchedResultsController = _fetchedResultsController_EntertainmentOffer;
+                break;
+            }
+            default:
+                break;
+        }
+    }
     
-    if (!_fetchedResultsController)
+    return _fetchedResultsController;
+}
+
+- (NSFetchedResultsController *)fetchedResultsController_NearByOffer{
+    
+    if (!_fetchedResultsController_NearByOffer)
     {
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([OfferModel class])];
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([NearByOffer class])];
+        [fetchRequest setIncludesSubentities:NO];
         fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"offer_id" ascending:YES]];
         
-        NSFetchedResultsController *myFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        [myFetchedResultsController setDelegate:self];
-        self.fetchedResultsController = myFetchedResultsController;
+        _fetchedResultsController_NearByOffer = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        [_fetchedResultsController_NearByOffer setDelegate:self];
         
         NSError *error = nil;
-        [self.fetchedResultsController performFetch:&error];
+        [_fetchedResultsController_NearByOffer performFetch:&error];
         
         NSAssert(!error, @"Error performing fetch request: %@", error);
     }
-    return _fetchedResultsController;
+    return _fetchedResultsController_NearByOffer;
+}
+
+- (NSFetchedResultsController *)fetchedResultsController_CuisineOffer{
+    
+    if (!_fetchedResultsController_CuisineOffer)
+    {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([CuisineOffer class])];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"offer_id" ascending:YES]];
+        [fetchRequest setIncludesSubentities:NO];
+        
+        _fetchedResultsController_CuisineOffer = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        [_fetchedResultsController_CuisineOffer setDelegate:self];
+        
+        NSError *error = nil;
+        [_fetchedResultsController_CuisineOffer performFetch:&error];
+        
+        NSAssert(!error, @"Error performing fetch request: %@", error);
+    }
+    return _fetchedResultsController_CuisineOffer;
+}
+
+- (NSFetchedResultsController *)fetchedResultsController_EntertainmentOffer{
+    
+    if (!_fetchedResultsController_EntertainmentOffer)
+    {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([EntertainmentOffer class])];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"offer_id" ascending:YES]];
+        [fetchRequest setIncludesSubentities:NO];
+        
+        _fetchedResultsController_EntertainmentOffer = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        [_fetchedResultsController_EntertainmentOffer setDelegate:self];
+        
+        NSError *error = nil;
+        [_fetchedResultsController_EntertainmentOffer performFetch:&error];
+        
+        NSAssert(!error, @"Error performing fetch request: %@", error);
+    }
+    return _fetchedResultsController_EntertainmentOffer;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController_Branches {
@@ -330,6 +399,7 @@
     {
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([BranchModel class])];
         fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"branch_id" ascending:YES]];
+        [fetchRequest setIncludesSubentities:NO];
         
         _fetchedResultsController_Branches = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
         [_fetchedResultsController_Branches setDelegate:self];

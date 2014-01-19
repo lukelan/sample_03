@@ -21,6 +21,12 @@
 		181942311875AEE1006E8870 /* map-icon-user-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 181942251875AEE1006E8870 /* map-icon-user-location@2x.png */; };
 		1819423A1875D029006E8870 /* OfferAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181942391875D029006E8870 /* OfferAnnotationView.m */; };
 		1819423B1875D029006E8870 /* OfferAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181942391875D029006E8870 /* OfferAnnotationView.m */; };
+		183877E0188B9CFC007BCC6E /* CuisineOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 183877DF188B9CFC007BCC6E /* CuisineOffer.m */; };
+		183877E1188B9CFC007BCC6E /* CuisineOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 183877DF188B9CFC007BCC6E /* CuisineOffer.m */; };
+		183877E4188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 183877E3188B9CFD007BCC6E /* EntertainmentOffer.m */; };
+		183877E5188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 183877E3188B9CFD007BCC6E /* EntertainmentOffer.m */; };
+		183877E8188B9CFD007BCC6E /* NearByOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 183877E7188B9CFD007BCC6E /* NearByOffer.m */; };
+		183877E9188B9CFD007BCC6E /* NearByOffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 183877E7188B9CFD007BCC6E /* NearByOffer.m */; };
 		1843A348186B339C002698D0 /* RedeemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1843A347186B339C002698D0 /* RedeemTableViewCell.m */; };
 		1843A34B186B3780002698D0 /* RedeemTableViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1843A34A186B3780002698D0 /* RedeemTableViewItem.m */; };
 		1843A356186B3F45002698D0 /* redeem_allowBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 1843A34C186B3F45002698D0 /* redeem_allowBtn.png */; };
@@ -577,6 +583,12 @@
 		181942251875AEE1006E8870 /* map-icon-user-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-icon-user-location@2x.png"; sourceTree = "<group>"; };
 		181942381875D029006E8870 /* OfferAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferAnnotationView.h; sourceTree = "<group>"; };
 		181942391875D029006E8870 /* OfferAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferAnnotationView.m; sourceTree = "<group>"; };
+		183877DE188B9CFC007BCC6E /* CuisineOffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CuisineOffer.h; sourceTree = "<group>"; };
+		183877DF188B9CFC007BCC6E /* CuisineOffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CuisineOffer.m; sourceTree = "<group>"; };
+		183877E2188B9CFD007BCC6E /* EntertainmentOffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntertainmentOffer.h; sourceTree = "<group>"; };
+		183877E3188B9CFD007BCC6E /* EntertainmentOffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntertainmentOffer.m; sourceTree = "<group>"; };
+		183877E6188B9CFD007BCC6E /* NearByOffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearByOffer.h; sourceTree = "<group>"; };
+		183877E7188B9CFD007BCC6E /* NearByOffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearByOffer.m; sourceTree = "<group>"; };
 		1843A346186B339C002698D0 /* RedeemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemTableViewCell.h; sourceTree = "<group>"; };
 		1843A347186B339C002698D0 /* RedeemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedeemTableViewCell.m; sourceTree = "<group>"; };
 		1843A349186B3780002698D0 /* RedeemTableViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemTableViewItem.h; sourceTree = "<group>"; };
@@ -1108,6 +1120,12 @@
 			isa = PBXGroup;
 			children = (
 				18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */,
+				183877E6188B9CFD007BCC6E /* NearByOffer.h */,
+				183877E7188B9CFD007BCC6E /* NearByOffer.m */,
+				183877E2188B9CFD007BCC6E /* EntertainmentOffer.h */,
+				183877E3188B9CFD007BCC6E /* EntertainmentOffer.m */,
+				183877DE188B9CFC007BCC6E /* CuisineOffer.h */,
+				183877DF188B9CFC007BCC6E /* CuisineOffer.m */,
 				1898C37B188A81DC00EF029E /* BranchModel.h */,
 				1898C37C188A81DC00EF029E /* BranchModel.m */,
 				4F7D45DA1887D4DB006CC520 /* BrandModel.h */,
@@ -2769,6 +2787,7 @@
 				AA5A728A186C29AB00BC8D91 /* JCGridMenuRow.m in Sources */,
 				4FEE9CD9187A9F6900BD39A8 /* SBJsonWriter.m in Sources */,
 				4F6848E7186D8CB90031893D /* Location.m in Sources */,
+				183877E0188B9CFC007BCC6E /* CuisineOffer.m in Sources */,
 				4F5B4E97186966AE00AAE584 /* RKXMLReaderSerialization.m in Sources */,
 				4FBBEB6318682E210040EA12 /* pngwtran.c in Sources */,
 				4FEE9CD1187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */,
@@ -2790,6 +2809,7 @@
 				4FBBEC00186849BF0040EA12 /* CustomGAITrackedViewController.m in Sources */,
 				4F0440561871248A004F93ED /* UserProfile.m in Sources */,
 				4FBBEB2018681F160040EA12 /* iCarousel.m in Sources */,
+				183877E8188B9CFD007BCC6E /* NearByOffer.m in Sources */,
 				E3A9A78118854B3E00993FA0 /* MenuModel.m in Sources */,
 				4FBBEB6218682E210040EA12 /* pngwrite.c in Sources */,
 				4FEE9CE0187AAA0F00BD39A8 /* TichDiemDetailViewController.m in Sources */,
@@ -2803,6 +2823,7 @@
 				AA5A7288186C29AB00BC8D91 /* UIView+JCUI.m in Sources */,
 				4FBBEB1A18681F160040EA12 /* NSString+SHA.m in Sources */,
 				4FBBEC1218684D2D0040EA12 /* NSString+trimSpecialCharacter.m in Sources */,
+				183877E4188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */,
 				18FBCEE218673C1900C9E399 /* main.m in Sources */,
 				4F754E1C18750CFD00540C9B /* OfferDetailItem.m in Sources */,
 				E31056C6187D8B8A0088818F /* VersionNotificationViewController.m in Sources */,
@@ -2863,6 +2884,7 @@
 				AAB01B5A18701805006E2552 /* AccountViewController.m in Sources */,
 				AAB01B5B18701805006E2552 /* NSString+MD5Addition.m in Sources */,
 				AAB01B5C18701805006E2552 /* pngpread.c in Sources */,
+				183877E5188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */,
 				AAB01B5D18701805006E2552 /* pngread.c in Sources */,
 				AAB01B5E18701805006E2552 /* RedeemTableViewCell.m in Sources */,
 				AAB01B5F18701805006E2552 /* AppDelegate.m in Sources */,
@@ -2874,6 +2896,7 @@
 				4FEE9CDA187A9F6900BD39A8 /* SBJsonWriter.m in Sources */,
 				AAB01B6318701805006E2552 /* PlusAPIManager.m in Sources */,
 				4FEE9CBC187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */,
+				183877E9188B9CFD007BCC6E /* NearByOffer.m in Sources */,
 				AAB01B6418701805006E2552 /* pngrtran.c in Sources */,
 				E31056C7187D8B8A0088818F /* VersionNotificationViewController.m in Sources */,
 				AAB01B6518701805006E2552 /* JCGridMenuRow.m in Sources */,
@@ -2899,6 +2922,7 @@
 				AAB01B7018701805006E2552 /* pngget.c in Sources */,
 				AAB01B7118701805006E2552 /* CustomGAITrackedViewController.m in Sources */,
 				AAB01B7218701805006E2552 /* iCarousel.m in Sources */,
+				183877E1188B9CFC007BCC6E /* CuisineOffer.m in Sources */,
 				4FEE9CD6187A9F6900BD39A8 /* SBJsonBase.m in Sources */,
 				AAB01B7318701805006E2552 /* pngwrite.c in Sources */,
 				AAB01B7418701805006E2552 /* JPSThumnail.m in Sources */,
@@ -3071,8 +3095,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kenneth Lipscomb (EGDHMM643Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kenneth Lipscomb (EGDHMM643Z)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
@@ -3091,7 +3115,7 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8B5373C0-02FF-48A1-8BAC-2E615F6190AB";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3104,7 +3128,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kenneth Lipscomb (EGDHMM643Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3124,7 +3148,7 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8B5373C0-02FF-48A1-8BAC-2E615F6190AB";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

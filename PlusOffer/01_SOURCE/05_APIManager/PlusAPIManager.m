@@ -9,6 +9,9 @@
 #import "PlusAPIManager.h"
 #import "RedeemModel.h"
 #import "OfferModel.h"
+#import "NearByOffer.h"
+#import "CuisineOffer.h"
+#import "EntertainmentOffer.h"
 #import "OfferDetailModel.h"
 #import "BrandModel.h"
 #import "Routes.h"
@@ -77,7 +80,7 @@
     NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER,ROOT_SERVER];
     
     
-    RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([NearByOffer class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
     offerMapping.identificationAttributes = @[@"offer_id"];
     [offerMapping addAttributeMappingsFromDictionary:@{
                                                         @"offer_id" : @"offer_id",
@@ -138,8 +141,8 @@
 -(void)RK_RequestApiGetListPlusOfferWithCategory:(id)context_id forCategory:(NSString*)categoryID;
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY,ROOT_SERVER,categoryID];
-    
-    RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
+    NSString *entityName = [categoryID integerValue] == 1 ? NSStringFromClass([CuisineOffer class]) : NSStringFromClass([EntertainmentOffer class]);
+    RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:entityName inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
     offerMapping.identificationAttributes = @[@"offer_id"];
     [offerMapping addAttributeMappingsFromDictionary:@{
                                                         @"offer_id" : @"offer_id",
