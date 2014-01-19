@@ -15,6 +15,7 @@
 
 @required
 -(BOOL)punchCardCell:(PunchCardCell*)punchCardCell didUpdateLayoutWithHeight:(CGFloat)newHeight curIndex:(int) curIndexSelected;
+-(void)processOpenBarcodeScannerForBrand:(BrandModel*)object;
 @end
 
 @interface PunchCardCell : UITableViewCell

@@ -10,6 +10,21 @@
 #import "PunchCardCell.h"
 
 @interface TichDiemViewController ()<NSFetchedResultsControllerDelegate, OpenBarcodeScannerDelegate, ZBarReaderDelegate, PunchCardCellDelegate, RKManagerDelegate>
+{
+    // Scanner: top view
+    UIView *_topView;
+    UIImageView *_topLogo;
+    UILabel *_topTextLbl;
+    
+    // Scanner: bottom view
+    UIView *_bottomView;
+    UIImageView *_bottomLogo;
+    UILabel *_bottomTextLbl;
+    UILabel *_bottomPointLbl;
+    // Scanner: center view
+    UILabel *_codeLbl;
+    UILabel *_timeLbl;
+}
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
@@ -253,6 +268,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#define RADIAN(angle) (angle / 180.0f * M_PI)
 #pragma mark -
 #pragma mark ZBarSDK method
 - (void)initBarcode
@@ -261,20 +277,120 @@
     _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
     _overlayView.backgroundColor = [UIColor clearColor];
     UIImageView *overlayImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frame.png"]];
+    CGFloat deltaY = 0.0f;
     if (CGRectGetHeight(self.view.bounds) == 568) { // 4 inches
         overlayImage.frame = CGRectMake(0, 0, CGRectGetWidth(overlayImage.frame), CGRectGetHeight(overlayImage.frame));
     }
     else { // 3.5 inches
+        deltaY = -65.0f;
         overlayImage.frame = CGRectMake(0, -65, CGRectGetWidth(overlayImage.frame), CGRectGetHeight(overlayImage.frame));
     }
     [_overlayView addSubview:overlayImage];
-    // cancel button
-    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 70, 25)];
     
-    [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+    // ----------------
+    // --- top view ---
+    _topView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 300, 64)];
+    [self setMaskTo:_topView byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
+    _topView.transform = CGAffineTransformMakeRotation(RADIAN(180.0f));
+    [_overlayView addSubview:_topView];
+    
+    // logo
+    _topLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 40, 40)];
+    [_topView addSubview:_topLogo];
+    
+    // text
+    _topTextLbl = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 230, 60)];
+    _topTextLbl.textAlignment = NSTextAlignmentCenter;
+    _topTextLbl.font = [UIFont systemFontOfSize:15.0f];
+    _topTextLbl.numberOfLines = 3;
+    _topTextLbl.textColor = [UIColor whiteColor];
+    [_topView addSubview:_topTextLbl];
+    
+    // cancel button
+    UIButton *topCancelBtn = [[UIButton alloc] initWithFrame:_topView.bounds];
+    [topCancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
+    [_topView addSubview:topCancelBtn];
+    
+    // ----------------
+    // --- bottom view ---
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(10, _overlayView.bounds.size.height - 64, 300, 64)];
+    [self setMaskTo:_bottomView byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
+    [_overlayView addSubview:_bottomView];
+    
+    // logo
+    _bottomLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 40, 40)];
+    [_bottomView addSubview:_bottomLogo];
+    
+    // text
+    _bottomTextLbl = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, 190, 40)];
+    _bottomTextLbl.textAlignment = NSTextAlignmentCenter;
+    _bottomTextLbl.font = [UIFont systemFontOfSize:15.0f];
+    _bottomTextLbl.numberOfLines = 2;
+    _bottomTextLbl.textColor = [UIColor whiteColor];
+    [_bottomView addSubview:_bottomTextLbl];
+    
+    // point number
+    _bottomPointLbl = [[UILabel alloc] initWithFrame:CGRectMake(260, 10, 40, 40)];
+    _bottomPointLbl.textColor = [UIColor yellowColor];
+    _bottomPointLbl.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:50];
+    [_bottomView addSubview:_bottomPointLbl];
+    
+    // cancel button
+    UIButton *cancelBtn = [[UIButton alloc] initWithFrame:_bottomView.bounds];
     [cancelBtn addTarget:self action:@selector(closeScanner) forControlEvents:UIControlEventTouchUpInside];
-    [_overlayView addSubview:cancelBtn];
+    [_bottomView addSubview:cancelBtn];
+    
+    // ----------------
+    // --- center view ---
+    // code label
+    _codeLbl = [[UILabel alloc] initWithFrame:CGRectMake(40, 250 + deltaY, 240, 70)];
+    _codeLbl.textAlignment = NSTextAlignmentCenter;
+    [_codeLbl setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:80]];
+    _codeLbl.textColor = [UIColor blackColor];
+    [_overlayView addSubview:_codeLbl];
+    
+    // time label
+    _timeLbl = [[UILabel alloc] initWithFrame:CGRectMake(40, 330 + deltaY, 240, 40)];
+    _timeLbl.textAlignment = NSTextAlignmentCenter;
+    [_timeLbl setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:50]];
+    _timeLbl.textColor = [UIColor lightGrayColor];
+    [_overlayView addSubview:_timeLbl];
+    
+    
+    
     zBarReader.cameraOverlayView = _overlayView;
+}
+
+-(void)updateScannerTime
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    _timeLbl.text = [formatter stringFromDate:[NSDate date]];
+}
+
+-(void) setMaskTo:(UIView*)view byRoundingCorners:(UIRectCorner)corners
+{
+    CGRect rect = view.bounds;
+    CGFloat radius = 7.0;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+	//Create Path For Callout Bubble
+	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + radius);
+	CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height);
+	CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);
+	CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + radius);
+    CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - radius, rect.origin.y + radius, radius, 0.0f, -M_PI_2, 1);
+    
+	CGPathAddLineToPoint(path, NULL, rect.origin.x + radius, rect.origin.y);
+	CGPathAddArc(path, NULL, rect.origin.x + radius, rect.origin.y + radius, radius, -M_PI_2, M_PI, 1);
+	CGPathCloseSubpath(path);
+    
+    //    UIBezierPath* rounded = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(7.0, 7.0)];
+    
+    CAShapeLayer* shape = [[CAShapeLayer alloc] init];
+    [shape setPath:path];
+    
+    view.layer.mask = shape;
 }
 
 - (void)loadBarCodeReader
@@ -296,11 +412,15 @@
     isScanScreen = YES;
     
     // start timer to check scan time out
-    timer = [NSTimer scheduledTimerWithTimeInterval:10
+    [self performSelector:@selector(scanTimeOut) withObject:nil afterDelay:10];
+    
+    // start timer to show time
+    timer = [NSTimer scheduledTimerWithTimeInterval:1
                                              target:self
-                                           selector: @selector(scanTimeOut)
+                                           selector: @selector(updateScannerTime)
                                            userInfo:nil
-                                            repeats:NO];
+                                            repeats:YES];
+    
     isScaning = YES;
 }
 
@@ -341,8 +461,17 @@
 
 #pragma mark -
 #pragma mark OpenBarcodeSannerDelegate
-- (void)processOpenBarcodeScanner
+- (void)processOpenBarcodeScannerForBrand:(BrandModel *)object
 {
+    // config scanner info
+    _topView.backgroundColor = _bottomView.backgroundColor = [UIColor colorWithHex:object.brand_card_color alpha:1.0f];
+    [_topLogo setImageWithURL:[NSURL URLWithString:object.brand_card_logo]];
+    [_topTextLbl setText:[NSString stringWithFormat:@"Trình mã này cho nhân viên %@ để nhận điểm tích luỹ cho đơn hàng", object.brand_name]];
+    [_bottomLogo setImageWithURL:[NSURL URLWithString:object.brand_card_logo]];
+    [_bottomTextLbl setText:@"Khách hàng nhận được 3 điểm tích luỹ cho đơn hàng"];
+    [_bottomPointLbl setText:@"3"];
+    [_codeLbl setText:@"09451"];
+    
     [self loadBarCodeReader];
 }
 

@@ -344,13 +344,13 @@ static bool isExpanded = NO;
 
 - (void)processEventAction
 {
-    if (!self.barCodeDelegate || ![self.barCodeDelegate respondsToSelector:@selector(processOpenBarcodeScanner)])
+    if (!self.delegate || ![self.delegate respondsToSelector:@selector(processOpenBarcodeScannerForBrand:)])
     {
         return;
     }
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (delegate.punch_item_count > 0) {
-        [self.barCodeDelegate processOpenBarcodeScanner];
+        [self.delegate processOpenBarcodeScannerForBrand:self.curBrand];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Plus Offer" message:@"Bạn phải chọn số lượng để punch trước." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
