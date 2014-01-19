@@ -133,11 +133,11 @@
     }
     
     //add scroll View
-    [self layoutPuchItem:temp];
+    [self layoutPunchItem:temp];
     [self layoutPunchInfo:temp withAlignRight:YES];
 }
 
-- (void) layoutPuchItem:(BrandModel *)temp
+- (void) layoutPunchItem:(BrandModel *)temp
 {
     int buttonWidth = MAX_WIDTH_BUTTON;
     int buttonHeight = MAX_WIDTH_BUTTON;
@@ -305,19 +305,29 @@
 - (void)processActionSelect:(id)sender
 {
     if ([sender isKindOfClass:[UIButton class]]) {
-        SDImageView *sdImageView = (SDImageView *)[sender viewWithTag:10];
-        if ([sdImageView isKindOfClass:[SDImageView class]])
+        
+        // Auto select range punch
+        UIButton *btnPunch = sender;
+        int currentIndex = btnPunch.tag;
+        
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        delegate.punch_item_count = currentIndex - [_curBrand.user_punch intValue];
+        for (int i = [_curBrand.user_punch intValue]; i < [_curBrand.max_punch intValue]; i++)
         {
-            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            NSURL *url = [NSURL URLWithString:_curBrand.punch_image_select];
-            if ([[sdImageView curURL] isEqual:url]) {
-                delegate.punch_item_count--;
-                url = [NSURL URLWithString:_curBrand.punch_image];
-            } else {
-                delegate.punch_item_count++;
+
+            btnPunch = (UIButton *)[_scrollView viewWithTag:START_TAG_INDEX_PUNCH + i];
+            
+            SDImageView *sdImageView = (SDImageView *)[btnPunch viewWithTag:10];
+            if ([sdImageView isKindOfClass:[SDImageView class]])
+            {
+                NSURL *url = [NSURL URLWithString:_curBrand.punch_image_select];
+                if (START_TAG_INDEX_PUNCH + i > currentIndex) {
+                    url = [NSURL URLWithString:_curBrand.punch_image];
+                }
+                [sdImageView setImageWithURL:url];
             }
-            [sdImageView setImageWithURL:url];
         }
+        
     }
     
 }
