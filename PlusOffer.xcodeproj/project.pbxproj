@@ -220,6 +220,8 @@
 		4FFCB7321876B96400D93006 /* segment_selected_hl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FFCB7171876B96400D93006 /* segment_selected_hl@2x.png */; };
 		4FFCB7331876B96400D93006 /* segment_selected_hl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FFCB7171876B96400D93006 /* segment_selected_hl@2x.png */; };
 		761C05067D034B0AAD4CD6E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1778E846BBC94BD8B62D0B7D /* libPods.a */; };
+		AA2FD34A188BD83800F2FB5D /* PunchCardDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2FD349188BD83800F2FB5D /* PunchCardDetail.m */; };
+		AA2FD34B188BD83800F2FB5D /* PunchCardDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2FD349188BD83800F2FB5D /* PunchCardDetail.m */; };
 		AA5A71F3186ABEFA00BC8D91 /* OfferTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A71F0186ABEFA00BC8D91 /* OfferTableCell.m */; };
 		AA5A71F4186ABEFA00BC8D91 /* OfferTableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A71F2186ABEFA00BC8D91 /* OfferTableItem.m */; };
 		AA5A71FD186ABF8500BC8D91 /* map_offer.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A71FA186ABF8500BC8D91 /* map_offer.png */; };
@@ -859,6 +861,8 @@
 		4FFCB7151876B96400D93006 /* segment_selected_deselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segment_selected_deselected@2x.png"; sourceTree = "<group>"; };
 		4FFCB7161876B96400D93006 /* segment_selected_hl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment_selected_hl.png; sourceTree = "<group>"; };
 		4FFCB7171876B96400D93006 /* segment_selected_hl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segment_selected_hl@2x.png"; sourceTree = "<group>"; };
+		AA2FD348188BD83800F2FB5D /* PunchCardDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchCardDetail.h; sourceTree = "<group>"; };
+		AA2FD349188BD83800F2FB5D /* PunchCardDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchCardDetail.m; sourceTree = "<group>"; };
 		AA5A71EF186ABEFA00BC8D91 /* OfferTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableCell.h; sourceTree = "<group>"; };
 		AA5A71F0186ABEFA00BC8D91 /* OfferTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferTableCell.m; sourceTree = "<group>"; };
 		AA5A71F1186ABEFA00BC8D91 /* OfferTableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferTableItem.h; sourceTree = "<group>"; };
@@ -2230,6 +2234,8 @@
 			children = (
 				E31056C2187D8B8A0088818F /* PunchCardCell.h */,
 				E31056C3187D8B8A0088818F /* PunchCardCell.m */,
+				AA2FD348188BD83800F2FB5D /* PunchCardDetail.h */,
+				AA2FD349188BD83800F2FB5D /* PunchCardDetail.m */,
 			);
 			path = OBJECTS;
 			sourceTree = "<group>";
@@ -2821,6 +2827,7 @@
 				1843A34B186B3780002698D0 /* RedeemTableViewItem.m in Sources */,
 				E30ECCB0186D8981003F1931 /* DiscountCell.m in Sources */,
 				AA5A7288186C29AB00BC8D91 /* UIView+JCUI.m in Sources */,
+				AA2FD34A188BD83800F2FB5D /* PunchCardDetail.m in Sources */,
 				4FBBEB1A18681F160040EA12 /* NSString+SHA.m in Sources */,
 				4FBBEC1218684D2D0040EA12 /* NSString+trimSpecialCharacter.m in Sources */,
 				183877E4188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */,
@@ -2872,6 +2879,7 @@
 				AAB01B5018701805006E2552 /* UIViewController+CustomNavigation.m in Sources */,
 				AAB01B5118701805006E2552 /* ArrayMapping.m in Sources */,
 				AAB01B5218701805006E2552 /* PlusOfferMapView.m in Sources */,
+				AA2FD34B188BD83800F2FB5D /* PunchCardDetail.m in Sources */,
 				AAB01B5318701805006E2552 /* CoreAPIManager.m in Sources */,
 				AAB01B5418701805006E2552 /* JPSThumbnailAnnotationView.m in Sources */,
 				E31056CB187D8B8A0088818F /* TichDiemViewController.m in Sources */,
@@ -3095,7 +3103,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kenneth Lipscomb (EGDHMM643Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kenneth Lipscomb (EGDHMM643Z)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3115,7 +3123,7 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8B5373C0-02FF-48A1-8BAC-2E615F6190AB";
+				PROVISIONING_PROFILE = "ED77683C-FF3E-40D7-8819-4748D1D87052";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3148,7 +3156,7 @@
 					"\"$(SRCROOT)/PlusOffer/02_LIBS/ZBarSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8B5373C0-02FF-48A1-8BAC-2E615F6190AB";
+				PROVISIONING_PROFILE = "ED77683C-FF3E-40D7-8819-4748D1D87052";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

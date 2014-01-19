@@ -15,7 +15,7 @@
 
 #import "PunchCardCell.h"
 #import "BrandModel.h"
-
+#import "PunchCardDetail.h"
 
 @implementation PunchCardCell
 static bool isExpanded = NO;
@@ -27,7 +27,6 @@ static bool isExpanded = NO;
     _bgBrandLogo = nil;
     _bgCardImage = nil;
     _btnTitle = nil;
-    _scrollView = nil;
     _containerView = nil;
 }
 
@@ -83,27 +82,6 @@ static bool isExpanded = NO;
         _bgCardImage.backgroundColor = [UIColor clearColor];
         [_bgCardImage.layer setCornerRadius:MARGIN_CELLX_GROUP/2];
         [_containerView addSubview:_bgCardImage];
-        
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(MARGIN_SCROLL_VIEW, _bgCardImage.frame.origin.y + _bgCardImage.frame.size.height, _containerView.frame.size.width - 2*MARGIN_SCROLL_VIEW, _containerView.frame.size.height - (_bgCardImage.frame.origin.y + _bgCardImage.frame.size.height) - MARGIN_SCROLL_VIEW)];
-        [self.scrollView setBackgroundColor:[UIColor whiteColor]];
-        [_containerView addSubview:self.scrollView];
-        //add line
-        
-        int margin_line = -MARGIN_CELLX_GROUP/2;
-        if (IOS_VERSION >= 7.0) {
-            margin_line = MARGIN_CELLX_GROUP/2;
-        }
-        _lblLine = [[UILabel alloc] initWithFrame:CGRectMake(margin_line, _btnTitle.frame.size.height - 1, self.contentView.frame.size.width - MARGIN_CELLX_GROUP, 1)];
-        [_lblLine setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.3]];
-        [_lblLine setHidden:YES];
-        [self.contentView addSubview:_lblLine];
-        
-        _btnPunch = [[UIButton alloc] initWithFrame:CGRectMake(margin, _containerView.frame.origin.y + _containerView.frame.size.height + MARGIN_CELLX_GROUP, _containerView.frame.size.width, WIDTH_LOGO)];
-        [_btnPunch.titleLabel setFont:[UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:20]];
-        [_btnPunch setTitle:@"Quét mã tích điểm" forState:UIControlStateNormal];
-        [_btnPunch.layer setCornerRadius:MARGIN_CELLX_GROUP/2];
-        [_btnPunch addTarget:self action:@selector(processEventAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:_btnPunch];
     }
     return self;
 }
@@ -139,120 +117,15 @@ static bool isExpanded = NO;
     if ([temp.brand_card_color isKindOfClass:[NSString class]])
     {
         [_containerView setBackgroundColor:[UIColor colorWithHex:temp.brand_card_color alpha:1.0]];
-        [_btnPunch setBackgroundColor:[UIColor colorWithHex:temp.brand_card_color alpha:1.0]];
+        //[_btnPunch setBackgroundColor:[UIColor colorWithHex:temp.brand_card_color alpha:1.0]];
     }
     [_lblLine setHidden:NO];
     if (isExpanded)
     {
         [_lblLine setHidden:YES];
     }
-    //add scroll View
-    [self layoutPuchItem:temp];
+    
     [self layoutPunchInfo:temp withAlignRight:YES];
-}
-
-- (void) layoutPuchItem:(BrandModel *)temp
-{
-    [_scrollView.subviews makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
-    int buttonWidth = MAX_WIDTH_BUTTON;
-    int buttonHeight = MAX_WIDTH_BUTTON;
-    int distance_Button = (300 - MAX_ITEM_IN_ROW*buttonWidth - 2*MARGIN_SCROLL_VIEW)/ (MAX_ITEM_IN_ROW + 1);
-    for(int i=0;i< temp.max_punch.intValue;i++)
-    {
-        UIButton *btnPunch = (UIButton *)[_scrollView viewWithTag:START_TAG_INDEX_PUNCH + i];
-        if (!btnPunch)
-        {
-            int xAdjust = distance_Button;
-            int yAdjust = distance_Button;
-            
-            if (i < MAX_ITEM_IN_ROW)
-            {
-                xAdjust = distance_Button + i*(buttonWidth + distance_Button);
-            }
-            else
-            {
-                if(i%MAX_ITEM_IN_ROW != 0)
-                {
-                    xAdjust = distance_Button + (i%MAX_ITEM_IN_ROW)*(buttonWidth + distance_Button);
-                }
-                yAdjust = distance_Button + (i/MAX_ITEM_IN_ROW)*(buttonHeight + distance_Button);
-            }
-            btnPunch = [[UIButton alloc] init];
-            [btnPunch setFrame:CGRectMake(xAdjust, yAdjust, buttonWidth, buttonHeight)];
-            btnPunch.tag = START_TAG_INDEX_PUNCH + i;
-            [btnPunch.layer setCornerRadius:MARGIN_CELLX_GROUP/2];
-//            [btnPunch.layer setBorderWidth:MARGIN_CELLX_GROUP/3];
-            btnPunch.titleLabel.font = [UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:20];
-            [btnPunch addTarget:self action:@selector(processActionSelect:) forControlEvents:UIControlEventTouchUpInside];
-            
-            //add image bg for punch button
-            SDImageView * sdImageView = [[SDImageView alloc] initWithFrame:CGRectMake(0, 0,btnPunch.frame.size.width, btnPunch.frame.size.height)];
-            sdImageView.tag = 10;
-            [sdImageView.layer setCornerRadius:btnPunch.layer.cornerRadius];
-            [sdImageView.layer setMasksToBounds:YES];
-            [btnPunch addSubview:sdImageView];
-            [_scrollView addSubview:btnPunch];
-        }
-        //Xanh lá: #8ed400
-        //Xám: #9f9f9f
-
-        [btnPunch setHidden:NO];
-        [btnPunch setEnabled:YES];
-//        [btnPunch setTitleColor:UIColorFromRGB(0x9f9f9f) forState:UIControlStateNormal];
-//        [btnPunch setTitle:[NSString stringWithFormat:@"%d", (i+1)] forState:UIControlStateNormal];
-        SDImageView *sdImageView = (SDImageView *)[btnPunch viewWithTag:10];
-        BOOL isValid = NO;
-        if ([sdImageView isKindOfClass:[SDImageView class]]) {
-            isValid = YES;
-        }
-        if(i < temp.user_punch.intValue)
-        {
-            [btnPunch setEnabled:NO];
-//            [btnPunch setTitleColor:UIColorFromRGB(0x8ed400) forState:UIControlStateNormal];
-            if (isValid) {
-                [sdImageView setImageWithURL:[NSURL URLWithString:temp.punch_image_active]];
-            }
-        }
-        else
-        {
-            if (isValid) {
-                [sdImageView setImageWithURL:[NSURL URLWithString:temp.punch_image]];
-            }
-        }
-//        [btnPunch.layer setBorderColor:btnPunch.titleLabel.textColor.CGColor];
-        if (![temp.list_prize isKindOfClass:[NSArray class]]) {
-            continue;
-        }
-        
-        for (int j = 0; j < [temp.list_prize count]; j++) {
-            NSDictionary *dic = [temp.list_prize objectAtIndex:j];
-            if ([dic isKindOfClass:[NSDictionary class]]) {
-                id indexValue = [dic objectForKey:@"prize_punch"];
-                id linkImage = [dic objectForKey:@"prize_image"];
-                if ([indexValue isKindOfClass:[NSString class]] && [linkImage isKindOfClass:[NSString class]])
-                {
-                    if ([indexValue intValue] == i)
-                    {
-                        SDImageView *sdImageView = (SDImageView *)[btnPunch viewWithTag:10];
-                        if (![sdImageView isKindOfClass:[SDImageView class]]) {
-                            if (sdImageView) {
-                                [sdImageView removeFromSuperview];
-                            }
-                            sdImageView = [[SDImageView alloc] initWithFrame:CGRectMake(0, 0,btnPunch.frame.size.width, btnPunch.frame.size.height)];
-                            sdImageView.tag = 10;
-                            [sdImageView.layer setCornerRadius:btnPunch.layer.cornerRadius];
-                            [sdImageView.layer setMasksToBounds:YES];
-                        }
-                        [sdImageView setImageWithURL:[NSURL URLWithString:linkImage]];
-                        [btnPunch addSubview:sdImageView];
-                    }
-                }
-            }
-        }
-    }
-    int nguyen = temp.max_punch.intValue%MAX_ITEM_IN_ROW;
-    int numOfRow = (temp.max_punch.intValue/MAX_ITEM_IN_ROW) + (nguyen > 0 ? 1:0);
-    [self.scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width, distance_Button + numOfRow *(buttonHeight + distance_Button))];
 }
 
 - (void)layoutPunchInfo:(BrandModel *)item withAlignRight:(BOOL)isRight
@@ -320,45 +193,13 @@ static bool isExpanded = NO;
     return isExpanded;
 }
 
-#pragma mark -
-#pragma mark process action
-- (void)processActionSelect:(id)sender
-{
-    if ([sender isKindOfClass:[UIButton class]]) {
-        SDImageView *sdImageView = (SDImageView *)[sender viewWithTag:10];
-        if ([sdImageView isKindOfClass:[SDImageView class]])
-        {
-            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            NSURL *url = [NSURL URLWithString:_curBrand.punch_image_select];
-            if ([[sdImageView curURL] isEqual:url]) {
-                delegate.punch_item_count--;
-                url = [NSURL URLWithString:_curBrand.punch_image];
-            } else {
-                delegate.punch_item_count++;
-            }
-            [sdImageView setImageWithURL:url];
-        }
-    }
-    
-}
-
-- (void)processEventAction
-{
-    if (!self.delegate || ![self.delegate respondsToSelector:@selector(processOpenBarcodeScannerForBrand:)])
-    {
-        return;
-    }
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (delegate.punch_item_count > 0) {
-        [self.delegate processOpenBarcodeScannerForBrand:self.curBrand];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Plus Offer" message:@"Bạn phải chọn số lượng để punch trước." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
 - (void)showFullOrShortDes
 {
+    PunchCardDetail *detailView = [[PunchCardDetail alloc] initWithFrame:self.contentView.frame];
+    //detailView.delegate = self.delegate;
+    [detailView setObject:_curBrand];
+    [self.contentView addSubview:detailView];
+    
     if (!self.delegate || ![self.delegate respondsToSelector:@selector(punchCardCell:didUpdateLayoutWithHeight:curIndex:)])
     {
         return;

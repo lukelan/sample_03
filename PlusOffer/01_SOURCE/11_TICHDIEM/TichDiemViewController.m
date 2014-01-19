@@ -412,7 +412,7 @@
     isScanScreen = YES;
     
     // start timer to check scan time out
-    [self performSelector:@selector(scanTimeOut) withObject:nil afterDelay:10];
+    [self performSelector:@selector(scanTimeOut) withObject:nil afterDelay:60];
     
     // start timer to show time
     timer = [NSTimer scheduledTimerWithTimeInterval:1
@@ -438,7 +438,7 @@
     if (isScaning) {
         [self closeScanner];
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Time out" message:@"Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thông báo" message:@"Không nhận dạng được mã, thử lại lần nữa." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
 }
