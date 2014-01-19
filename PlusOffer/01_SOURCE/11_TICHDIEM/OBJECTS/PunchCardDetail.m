@@ -18,7 +18,6 @@
 
 @implementation PunchCardDetail
 
-static bool isExpanded = YES;
 @synthesize barCodeDelegate = _barCodeDelegate;
 
 
@@ -48,7 +47,7 @@ static bool isExpanded = YES;
         //init button tile
         _btnTitle = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _containerView.frame.size.width, 60)];
         [_btnTitle setBackgroundColor:[UIColor clearColor]];
-        [_btnTitle addTarget:self action:@selector(showFullOrShortDes) forControlEvents:UIControlEventTouchUpInside];
+        [_btnTitle addTarget:self action:@selector(closePunchCardDetaiView) forControlEvents:UIControlEventTouchUpInside];
         [_containerView addSubview:_btnTitle];
         
         CGRect frame = _btnTitle.frame;
@@ -88,16 +87,6 @@ static bool isExpanded = YES;
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(MARGIN_SCROLL_VIEW, _bgCardImage.frame.origin.y + _bgCardImage.frame.size.height, _containerView.frame.size.width - 2*MARGIN_SCROLL_VIEW, _containerView.frame.size.height - (_bgCardImage.frame.origin.y + _bgCardImage.frame.size.height) - MARGIN_SCROLL_VIEW)];
         [self.scrollView setBackgroundColor:[UIColor whiteColor]];
         [_containerView addSubview:self.scrollView];
-        //add line
-        
-        int margin_line = -MARGIN_CELLX_GROUP/2;
-        if (IOS_VERSION >= 7.0) {
-            margin_line = MARGIN_CELLX_GROUP/2;
-        }
-        _lblLine = [[UILabel alloc] initWithFrame:CGRectMake(margin_line, _btnTitle.frame.size.height - 1, self.frame.size.width - MARGIN_CELLX_GROUP, 1)];
-        [_lblLine setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.3]];
-        [_lblLine setHidden:NO];
-        [self addSubview:_lblLine];
         
         _btnPunch = [[UIButton alloc] initWithFrame:CGRectMake(margin, _containerView.frame.origin.y + _containerView.frame.size.height + MARGIN_CELLX_GROUP, _containerView.frame.size.width, WIDTH_LOGO)];
         [_btnPunch.titleLabel setFont:[UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:20]];
@@ -142,11 +131,7 @@ static bool isExpanded = YES;
         [_containerView setBackgroundColor:[UIColor colorWithHex:temp.brand_card_color alpha:1.0]];
         [_btnPunch setBackgroundColor:[UIColor colorWithHex:temp.brand_card_color alpha:1.0]];
     }
-    [_lblLine setHidden:NO];
-    if (isExpanded)
-    {
-        [_lblLine setHidden:YES];
-    }
+    
     //add scroll View
     [self layoutPuchItem:temp];
     [self layoutPunchInfo:temp withAlignRight:YES];
@@ -154,7 +139,6 @@ static bool isExpanded = YES;
 
 - (void) layoutPuchItem:(BrandModel *)temp
 {
-//    [_scrollView.subviews makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
     int buttonWidth = MAX_WIDTH_BUTTON;
     int buttonHeight = MAX_WIDTH_BUTTON;
     int distance_Button = (300 - MAX_ITEM_IN_ROW*buttonWidth - 2*MARGIN_SCROLL_VIEW)/ (MAX_ITEM_IN_ROW + 1);
@@ -316,12 +300,6 @@ static bool isExpanded = YES;
     }
 }
 
-
-+ (BOOL)isExpanded
-{
-    return isExpanded;
-}
-
 #pragma mark -
 #pragma mark process action
 - (void)processActionSelect:(id)sender
@@ -354,10 +332,15 @@ static bool isExpanded = YES;
     if (delegate.punch_item_count > 0) {
         [self.delegate processOpenBarcodeScannerForBrand:self.curBrand];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Plus Offer" message:@"Bạn phải chọn số lượng để punch trước." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thông báo" message:@"Bạn phải chọn số lượng để punch trước." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
 
+-(void) closePunchCardDetaiView {
+    if ([self.delegate respondsToSelector:@selector(closePunchCardDetaiView:)]) {
+        [self.delegate closePunchCardDetaiView:self.curBrand];
+    }
+}
 
 @end

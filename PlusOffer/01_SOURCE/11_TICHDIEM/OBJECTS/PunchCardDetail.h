@@ -14,6 +14,8 @@
 
 @required
 -(void)processOpenBarcodeScannerForBrand:(BrandModel*)object;
+-(void)closePunchCardDetaiView:(BrandModel*)object;
+
 @end
 
 
@@ -35,7 +37,6 @@
 @property (nonatomic, retain) UILabel *lblDescription;
 @property (nonatomic, retain) UIView *viewPunchInfo;
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UILabel *lblLine;
 
 - (void)setObject:(id)object;
 

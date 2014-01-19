@@ -33,6 +33,7 @@
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) UIView *detailView;
+@property (nonatomic, retain) PunchCardDetail *puchCardDetailView;
 @end
 
 @implementation TichDiemViewController
@@ -234,12 +235,16 @@
     self.detailView.alpha = 0.5f;
     self.detailView.backgroundColor = [UIColor colorWithHex:object.brand_card_color alpha:1.0f];
     
-    if (self.detailView) {
-        PunchCardDetail *detailView = [[PunchCardDetail alloc] initWithFrame:CGRectMake(0,0,detailRect.size.width,MAX_DETAIL_VIEW_HEIGHT)];
-        detailView.delegate = self;
-        [detailView setObject:object];
-        [_detailView addSubview:detailView];
+    // Punch Kard detail
+    if (!_puchCardDetailView) {
+        _puchCardDetailView = [[PunchCardDetail alloc] initWithFrame:CGRectMake(-10,0,detailRect.size.width,MAX_DETAIL_VIEW_HEIGHT)];
+        _puchCardDetailView.delegate = self;
+        [_puchCardDetailView setObject:object];
+        [_detailView addSubview:_puchCardDetailView];
+    } else {
+        [_puchCardDetailView setObject:object];
     }
+    
     
     [self.view addSubview:self.detailView];
     
@@ -301,6 +306,11 @@
     _detailView.backgroundColor = [UIColor greenColor];
     
     return _detailView;
+}
+
+#pragma mark - PunchCardDetailDelegate
+-(void)closePunchCardDetaiView:(BrandModel*)object {
+    [self closeDetailView];
 }
 
 #pragma mark - UITableViewDelegate
