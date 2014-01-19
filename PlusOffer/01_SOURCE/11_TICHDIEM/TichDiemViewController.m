@@ -8,8 +8,11 @@
 #import "TichDiemViewController.h"
 #import "BrandModel.h"
 #import "PunchCardCell.h"
+#import "PunchCardDetail.h"
 
-@interface TichDiemViewController ()<NSFetchedResultsControllerDelegate, OpenBarcodeScannerDelegate, ZBarReaderDelegate, PunchCardCellDelegate, RKManagerDelegate>
+#define MAX_DETAIL_VIEW_HEIGHT 490.0f
+
+@interface TichDiemViewController ()<NSFetchedResultsControllerDelegate, OpenBarcodeScannerDelegate, ZBarReaderDelegate, PunchCardCellDelegate, RKManagerDelegate,PunchCardDetailDelegate>
 {
     // Scanner: top view
     UIView *_topView;
@@ -24,10 +27,12 @@
     // Scanner: center view
     UILabel *_codeLbl;
     UILabel *_timeLbl;
+    
+    NSInteger _selectedIndex;
 }
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
+@property (nonatomic, retain) UIView *detailView;
 @end
 
 @implementation TichDiemViewController
@@ -89,6 +94,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initBarcode];
     
     _tableView = [[UITableView alloc]  initWithFrame: CGRectMake(0, 0, 320, self.view.frame.size.height)  style:UITableViewStyleGrouped];
@@ -212,6 +218,91 @@
     }
     return MARGIN_CELLX_GROUP;
 }
+
+#pragma mark - PunchCardCellDelegate
+-(void)punchCardCell:(PunchCardCell *)punchCardCell didSelect:(BrandModel *)object
+{
+    NSInteger section = [self.dataSource indexOfObject:object];
+    _selectedIndex = section;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    CGRect rectCell = [self.tableView rectForRowAtIndexPath:indexPath];
+    CGRect r = [self.tableView convertRect:rectCell toView:self.view];
+    
+    CGRect detailRect = self.detailView.frame;
+    detailRect.origin.y = r.origin.y;
+    self.detailView.frame = detailRect;
+    self.detailView.alpha = 0.5f;
+    self.detailView.backgroundColor = [UIColor colorWithHex:object.brand_card_color alpha:1.0f];
+    
+    if (self.detailView) {
+        PunchCardDetail *detailView = [[PunchCardDetail alloc] initWithFrame:CGRectMake(0,0,detailRect.size.width,MAX_DETAIL_VIEW_HEIGHT)];
+        detailView.delegate = self;
+        [detailView setObject:object];
+        [_detailView addSubview:detailView];
+    }
+    
+    [self.view addSubview:self.detailView];
+    
+    // calculate expanded frame
+    detailRect = CGRectMake(detailRect.origin.x, 20, detailRect.size.width, MAX_DETAIL_VIEW_HEIGHT);
+    // hide table view
+    [UIView animateWithDuration:1.0f animations:^{
+        self.tableView.alpha = 0.0f;
+        self.detailView.alpha = 1.0f;
+        
+        self.detailView.frame = detailRect;
+    } completion:^(BOOL finished) {
+        self.tableView.hidden = YES;
+        
+        // add close gesture
+        UITapGestureRecognizer *dismissGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeDetailView)];
+        [_detailView addGestureRecognizer:dismissGesture];
+    }];
+}
+
+-(void)closeDetailView
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_selectedIndex];
+    CGRect rectCell = [self.tableView rectForRowAtIndexPath:indexPath];
+    CGRect r = [self.tableView convertRect:rectCell toView:self.view];
+    
+    CGRect detailRect = self.detailView.frame;
+
+    
+    self.tableView.alpha = 0.0f;
+    self.tableView.hidden = NO;
+    
+    // calculate expanded frame
+    detailRect = CGRectMake(detailRect.origin.x, r.origin.y, detailRect.size.width, MIN_PUNCH_CELL_HEIGHT);
+    // hide table view
+    [UIView animateWithDuration:1.0f animations:^{
+        self.tableView.alpha = 1.0f;
+        self.detailView.alpha = 0.3f;
+        
+        self.detailView.frame = detailRect;
+    } completion:^(BOOL finished) {
+        [self.detailView removeFromSuperview];
+        // reset selected index
+        _selectedIndex = -1;
+        // remove close gesture
+        [self.detailView removeGestureRecognizer:[self.detailView.gestureRecognizers objectAtIndex:0]];
+    }];
+}
+
+-(UIView *)detailView
+{
+    if (_detailView) {
+        return _detailView;
+    }
+    
+    _detailView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 300, MIN_PUNCH_CELL_HEIGHT)];
+    _detailView.layer.masksToBounds = YES;
+    _detailView.layer.cornerRadius = 5.0f;
+    _detailView.backgroundColor = [UIColor greenColor];
+    
+    return _detailView;
+}
+
 #pragma mark - UITableViewDelegate
 -(BOOL)punchCardCell:(PunchCardCell*)punchCardCell didUpdateLayoutWithHeight:(CGFloat)newHeight curIndex:(int)curIndexSelected
 {

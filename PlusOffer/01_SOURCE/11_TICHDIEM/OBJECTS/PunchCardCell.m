@@ -195,24 +195,25 @@ static bool isExpanded = NO;
 
 - (void)showFullOrShortDes
 {
-    PunchCardDetail *detailView = [[PunchCardDetail alloc] initWithFrame:self.contentView.frame];
-    //detailView.delegate = self.delegate;
-    [detailView setObject:_curBrand];
-    [self.contentView addSubview:detailView];
+    if ([self.delegate respondsToSelector:@selector(punchCardCell:didSelect:)]) {
+        [self.delegate punchCardCell:self didSelect:self.curBrand];
+    }
     
-    if (!self.delegate || ![self.delegate respondsToSelector:@selector(punchCardCell:didUpdateLayoutWithHeight:curIndex:)])
-    {
-        return;
-    }
-    isExpanded = !isExpanded;
-    [_lblLine setHidden:!_lblLine.hidden];
-    if (isExpanded)
-    {
-        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:([[UIScreen mainScreen] bounds].size.height - TAB_BAR_HEIGHT - MARGIN_CELLX_GROUP  - TITLE_BAR_HEIGHT )curIndex:_CurIndexSelected];
-    }
-    else
-    {
-        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:MIN_PUNCH_CELL_HEIGHT curIndex:_CurIndexSelected];
-    }
+//    if (!self.delegate || ![self.delegate respondsToSelector:@selector(punchCardCell:didUpdateLayoutWithHeight:curIndex:)])
+//    {
+//        return;
+//    }
+//    isExpanded = !isExpanded;
+//    [_lblLine setHidden:!_lblLine.hidden];
+//    if (isExpanded)
+//    {
+//        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:([[UIScreen mainScreen] bounds].size.height - TAB_BAR_HEIGHT - MARGIN_CELLX_GROUP  - TITLE_BAR_HEIGHT )curIndex:_CurIndexSelected];
+//    }
+//    else
+//    {
+//        [self.delegate punchCardCell:self didUpdateLayoutWithHeight:MIN_PUNCH_CELL_HEIGHT curIndex:_CurIndexSelected];
+//    }
 }
+    
+    
 @end
