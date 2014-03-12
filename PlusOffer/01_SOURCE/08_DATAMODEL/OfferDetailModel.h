@@ -39,6 +39,7 @@
 @property (nonatomic, retain) NSString *path;
 @property (nonatomic, retain) NSString *distance;
 @property (nonatomic, retain) NSString *brand_name;
+@property (nonatomic, retain) NSNumber *is_bookmark;
 @property (nonatomic, retain) id menu;
 
 

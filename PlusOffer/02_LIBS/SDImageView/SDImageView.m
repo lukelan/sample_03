@@ -30,7 +30,7 @@
     [self setImageWithURL:url completed:nil needResized:YES];
 }
 
--(void)setImageWithURL:(NSURL *)url completed:(SDWebImageCompletedBlock)completedBlock needResized:(BOOL)isResize
+-(void)setImageWithURL:(NSURL *)url completed:(SDWebImageCompletedBlock)completedBlock needResized:(BOOL)isNeedResize
 {
     _curURL = url;
     NSString *cacheKey = [SDWebImageManager sharedManager].cacheKeyFilter(url);
@@ -51,14 +51,12 @@
         {
             completedBlock(image, error, cacheType);
         }
-        if (self.isResized)
+        if (isNeedResize)
         {
             CGRect frame = self.frame;
-            if (image.size.width/2 > frame.size.width)
-            {
-                frame.size.width = image.size.width/2;
-                [self setFrame:frame];
-            }
+            frame.size.width = image.size.width/2;
+            frame.size.height = image.size.height/2;
+            [self setFrame:frame];
             self.isResized = YES;
         }
     };

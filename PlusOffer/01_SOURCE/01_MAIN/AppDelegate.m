@@ -9,11 +9,9 @@
 #import "AppDelegate.h"
 #import "GAI.h"
 #import "RKXMLReaderSerialization.h"
-#import "PlusOfferViewController.h"
 #import "FacebookManager.h"
 #import "SBJsonParser.h"
-#import "OfferMapViewController.h"
-#import "MenuViewController.h"
+#import "BackgroundViewController.h"
 
 void doLog(int level, id formatstring,...)
 {
@@ -43,6 +41,27 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    
+//    UIStoryboard * storyboard=[UIStoryboard storyboardWithName:[self storyboardName] bundle:nil];
+//    self.mainVC = [storyboard instantiateViewControllerWithIdentifier:@"root1_vc"];
+//    self.flipBoardNVC = [[FlipBoardNavigationController alloc]initWithRootViewController:self.mainVC];
+//    self.window.rootViewController = [BackgroundViewController new]; //self.flipBoardNVC;
+////    [self.window makeKeyAndVisible];
+//    
+//    self.foregroundWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.foregroundWindow.backgroundColor = [UIColor clearColor];
+//    self.foregroundWindow.rootViewController = self.flipBoardNVC; //[ForegroundViewController new];
+//    self.foregroundWindow.windowLevel = UIWindowLevelStatusBar;
+//    self.foregroundWindow.hidden = NO;
+   
+    UIStoryboard * storyboard=[UIStoryboard storyboardWithName:[self storyboardName] bundle:nil];
+    self.mainVC = [storyboard instantiateViewControllerWithIdentifier:@"root1_vc"];
+    self.flipBoardNVC = [[FlipBoardNavigationController alloc]initWithRootViewController:self.mainVC];
+    self.window.rootViewController = self.flipBoardNVC;
+    [self.window makeKeyAndVisible];
+    
+    
     // TrongV - 18/12/2013 - Check store DB schema compatible with current schema
     if(![self validateLocalDatabase]) {
         [self replaceDatabase];
@@ -60,89 +79,39 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
         return (NSString *)url;
     }];
     
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    UIImage *selectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer-active.png"];
-    UIImage *unselectedImage0 = [UIImage imageNamed:@"tab-bar-plus-offer.png"];
-    UIImage *selectedImage1 = [UIImage imageNamed:@"tab-bar-redeem-active.png"];
-    UIImage *unselectedImage1 = [UIImage imageNamed:@"tab-bar-redeem.png"];
-    UIImage *selectedImage2 = [UIImage imageNamed:@"tab-bar-account-active.png"];
-    UIImage *unselectedImage2 = [UIImage imageNamed:@"tab-bar-account.png"];
-    UITabBar *tabBar = tabBarController.tabBar;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-    {
-        [tabBar setTintColor:UIColorFromRGB(0x777777)];
-    }
-
-    UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
-    UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
-    UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
-    
-    if (IOS_VERSION >= 6.0) {
-        [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:11]} forState:UIControlStateNormal];
-    } else {
-        [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeFont : [UIFont fontWithName:FONT_ROBOTOCONDENSED_REGULAR size:11]} forState:UIControlStateNormal];
-    }
-    item0.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    item1.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
-    item2.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
-    [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
-    [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
-    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar-bg.png"]];
-//    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar-selected.png"]];
-    NSArray *arrNav = [tabBarController childViewControllers] ;
-    for (int i = 0; i < arrNav.count; i++) {
-        UINavigationController *temp = [arrNav objectAtIndex:i];
-        if ([temp isKindOfClass:[UINavigationController class]])
-        {
-            if (i == TAB_REDEEM) {
-                [temp.navigationBar setHidden:YES];
-            }
-            if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0)
-            {
-                [temp.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:18], UITextAttributeTextColor : [UIColor blackColor]}];
-                [temp setBackGroundImage:@"nav-bar-bg.png" forNavigationBar:temp.navigationBar];
-             
-            } else {
-                [temp.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:FONT_ROBOTOCONDENSED_LIGHT size:18], NSForegroundColorAttributeName : [UIColor blackColor]}];
-                [temp setBackGroundImage:@"nav-bar-bg-ios7.png" forNavigationBar:temp.navigationBar];
-            }
-        }
-    }
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x666666), UITextAttributeTextColor, nil] forState:UIControlStateHighlighted];
- #ifdef IS_GA_ENABLE
-        [GAI sharedInstance].trackUncaughtExceptions = YES;
-        [GAI sharedInstance].dispatchInterval = 20;
-        [GAI sharedInstance].debug = !YES;
-        id ga = [[GAI sharedInstance] trackerWithTrackingId:GA_TRACKING_ID];
-        [ga setAppVersion:[AppDelegate getVersionOfApplication]];
-        [GAI sharedInstance].defaultTracker = ga;
+#ifdef IS_GA_ENABLE
+//        [GAI sharedInstance].trackUncaughtExceptions = YES;
+//        [GAI sharedInstance].dispatchInterval = 20;
+//        [GAI sharedInstance].debug = !YES;
+//        id ga = [[GAI sharedInstance] trackerWithTrackingId:GA_TRACKING_ID];
+//        [ga setAppVersion:[AppDelegate getVersionOfApplication]];
+//        [GAI sharedInstance].defaultTracker = ga;
 #endif
  
 #ifdef DEBUG
-    [Crittercism enableWithAppID:@"52bd2b0c8b2e334653000001"]; //Dev
+//    [Crittercism enableWithAppID:@"52bd2b0c8b2e334653000001"]; //Dev
 #else
-    [Crittercism enableWithAppID:@"52bd2b5140020530ee000004"]; // Pro
+//    [Crittercism enableWithAppID:@"52bd2b5140020530ee000004"]; // Pro
 #endif
     
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     
     //Tranking Conversion only support ios 6.0 or later
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
-    {
-        [GoogleConversionPing pingWithConversionId:@"983463027" label:@"FaebCO3VswUQ8-j51AM" value:@"5000" isRepeatable:NO idfaOnly:YES];
-    }
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
+//    {
+//        [GoogleConversionPing pingWithConversionId:@"983463027" label:@"FaebCO3VswUQ8-j51AM" value:@"5000" isRepeatable:NO idfaOnly:YES];
+//    }
     
 #pragma GCC diagnostic warning "-Wdeprecated-declarations"
     
     // init location manager
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 100.0f;
-    userPosition = [[Position alloc] init];
-    [userPosition setCoordinateLongAndLat:CLLocationCoordinate2DMake(0, 0)];
-    [self updateUserLocationWithType:UpdateLocationTypeAuto];
+//    locationManager = [[CLLocationManager alloc] init];
+//    locationManager.delegate = self;
+//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//    locationManager.distanceFilter = 100.0f;
+//    userPosition = [[Position alloc] init];
+//    [userPosition setCoordinateLongAndLat:CLLocationCoordinate2DMake(0, 0)];
+//    [self updateUserLocationWithType:UpdateLocationTypeAuto];
 
     return YES;
 }
@@ -167,7 +136,6 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NAME_APP_BECOME_ACTICE object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -183,36 +151,6 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     }
     NSString* tmp = [versionNum substringWithRange:NSMakeRange([versionNum length]-3, 3)];
     return tmp;
-}
-
-#pragma mark -
-#pragma mark register Push notification
-- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
-{
-    // Send device token to the Provider
-    NSString *tokenStr=[deviceToken description];
-    NSString *pushToken=[[[tokenStr stringByReplacingOccurrencesOfString:@">" withString:@""]stringByReplacingOccurrencesOfString:@"<" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"--------------device token = %@", pushToken);
-    NSString *deviceLocal = [CoreAPIManager getStringInAppForKey:KEY_STORE_MY_DEVICE_TOKEN];//lay device luu local
-    if (![pushToken isEqualToString:deviceLocal]) {
-        [((PlusAPIManager*)[PlusAPIManager sharedAPIManager]) RK_RequestPostUIID:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier] andDeviceToken:pushToken context:nil];
-        [PlusAPIManager setStringInApp:pushToken ForKey:KEY_STORE_MY_DEVICE_TOKEN];
-    }
-    [self generateAccessTokenForData:pushToken];
-}
-
-- (void)generateAccessTokenForData:(NSString *)pushToken
-{
-    NSMutableString *pass = [[NSMutableString alloc] initWithString:pushToken];
-    [pass stringByAppendingString:[pushToken substringToIndex:GA_TRACKING_ID.length]];
-    [pass deleteCharactersInRange:NSMakeRange(KEY_STORE_MY_USER_ID.length, GA_TRACKING_ID.length)];
-    [pass stringByAppendingString:[[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier] substringToIndex:KEY_STORE_MY_USER_ID.length]];
-    [[CoreAPIManager sharedAPIManager] setAccessTokenKey:pass];
-}
-
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
-{
-	LOG_APP(@"Failed to get token, error: %@", error.localizedDescription);
 }
 
 #pragma mark -
@@ -419,14 +357,32 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
          return nil;
      }];
 }
+
 -(UIViewController *) getCurrentViewController
 {
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    if (![tabBarController isKindOfClass:[UITabBarController class]]) {
+        return nil;
+    }
     UINavigationController *currentNavi = (UINavigationController *)[tabBarController selectedViewController] ;
     UIViewController *currentViewController = [currentNavi topViewController];
     return currentViewController;
 }
 
+-(UIViewController *) getViewControllerAtIndex:(int)index
+{
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    if (![tabBarController isKindOfClass:[UITabBarController class]]) {
+        return nil;
+    }
+    NSArray *arrNav = [tabBarController childViewControllers];
+    if (arrNav.count <= index) {
+        return nil;
+    }
+    UINavigationController *currentNavi = (UINavigationController *)[arrNav objectAtIndex:index];
+    UIViewController *currentViewController = [currentNavi topViewController];
+    return currentViewController;
+}
 
 #pragma mark - Location
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -518,52 +474,6 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 }
 
 
-#pragma mark - OfferDetailViewController
-// OfferDetailViewController
--(void) changeToOfferDetailViewController:(OfferTableItem*)item {
-    OfferDetailViewController *offerDetailViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferDetailViewController"];
-    [offerDetailViewController setOffer_id:item.offer_id];
-    [offerDetailViewController setDetailDistance:item.distance];
-    [offerDetailViewController setBrandName:item.brand_name];
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-//        [offerDetailViewController setHidesBottomBarWhenPushed:YES];
-//    }
-    
-//    UIViewController *VC = (UIViewController*)[[[self getCurrentViewController].navigationController viewControllers] lastObject];
-//    
-//    [AppDelegate explode:VC.view level:0];
-    
-    [[self getCurrentViewController].navigationController pushViewController:offerDetailViewController animated:YES];
-    
-    
-//    VC = (UIViewController*)[[[self getCurrentViewController].navigationController viewControllers] lastObject];
-//    
-//    [AppDelegate explode:VC.view level:0];
-}
-
--(void) toMenuViewController: (NSString*)brand_id {
-    MenuViewController *menuViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"menuViewController"];
-    [menuViewController setBrandID:brand_id];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-    {
-        [menuViewController setHidesBottomBarWhenPushed:NO];
-    }
-    
-    [[self getCurrentViewController].navigationController pushViewController:menuViewController animated:YES];
-}
-
-#pragma mark - offerMapViewController
-// OfferDetailViewController
--(void) toMapViewController:(id)object withTitle:(NSString*)title isHandleAction:(BOOL)isHandle
-{
-    OfferMapViewController *offerMapViewController = [[self getCurrentViewController].storyboard instantiateViewControllerWithIdentifier:@"OfferMapViewController"];
-//    [offerMapViewController setHidesBottomBarWhenPushed:YES];
-    [offerMapViewController setBrandName:title];
-    [offerMapViewController setObject:object];
-    [offerMapViewController setIsRegisterHandleTapAnotation:isHandle];
-    [[self getCurrentViewController].navigationController pushViewController:offerMapViewController animated:YES];
-}
-
 #pragma mark - Facebook Handle
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -627,6 +537,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     //try to catch link to open view in my app (config in .plist) URL_scheme
 }
 
+#pragma mark ultility Function
 // Debug show structure of View
 + (void) explode: (id) aView level: (int) level
 {
@@ -634,6 +545,83 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     doLog(level, @"%@", NSStringFromCGRect([aView frame]));
     for (UIView *subview in [aView subviews])
     [self explode:subview level:(level + 1)];
+}
+
+- (BOOL)checkShowRequestLogin
+{
+    if (![self isUserLoggedIn]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"PlusOffer" message:@"Bạn phải đăng nhập để sử dụng tính năng này." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark
+#pragma mark RKManageDelegate method
+- (void)processResultResponseDictionaryMapping:(DictionaryMapping *)dictionary requestId:(int)request_id
+{
+    if (request_id == ID_POST_UDID_DEVICE_TOKEN) {
+        //process data return
+        id result = [dictionary.curDictionary objectForKey:@"result"];
+        if ([result isKindOfClass:[NSDictionary class]])
+        {
+            //punch result
+            if (self.userProfile == nil)
+            {
+                self.userProfile = [[UserProfile alloc] init];
+            }
+            [self.userProfile setUser_id:[result objectForKey:@"user_id"]];
+            [self.userProfile setUser_code:[result objectForKey:@"user_code"]];
+            NSLog(@"-----user_id = %@, user_code = %@", self.userProfile.user_id, self.userProfile.user_code);
+        } else {
+            NSLog(@"error = %@", [dictionary.curDictionary objectForKey:@"error"]);
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NAME_APP_BECOME_ACTICE object:nil];
+    }
+}
+
+#pragma mark get record in DB
+-(NSMutableArray *)fetchRecords:(NSString *)entityName sortWithKey:(NSString *)keyName ascending:(BOOL)isAscending withPredicate:(NSPredicate *)predicate
+{
+    NSManagedObjectContext *nsManagedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    
+    //Define out table/entity to use
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:nsManagedObjectContext];
+    
+    //setup the fetch request
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    //Create predicate (contraint dieu kien de lay du lieu)
+    if (predicate) {
+        [request setPredicate:predicate];
+    }
+    
+    //Define how we will sort the records
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:isAscending];
+    NSArray *sortArray = [NSArray arrayWithObject:sortDescriptor];
+    
+    [request setSortDescriptors:sortArray];
+    
+    //Fetch the records and handle an error
+    NSError *error;
+    NSMutableArray *mutableFetchResults = [[nsManagedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    
+    if (!mutableFetchResults) {
+        //Handle error here
+    }
+    
+    return  mutableFetchResults;
+}
+
+- (NSString *)storyboardName
+{
+	// fetch the appropriate storyboard name depending on platform
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+		return @"Main";
+	else
+		return @"MainStoryboard_iPad";
 }
 
 @end

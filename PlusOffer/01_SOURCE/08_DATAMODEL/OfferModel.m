@@ -24,7 +24,7 @@
 @dynamic discount_value;
 @dynamic date_add;
 @dynamic order_id;
-@dynamic is_like;
+@dynamic is_bookmark;
 // update new api
 @dynamic offer_date_end;
 @dynamic max_punch;
@@ -68,5 +68,54 @@
 {
     return self.distance <= MINIMUM_DISTANCE_ALLOW_USER_REDEEM;
 }
+
+
+// CRUD actions on database
+
++ (OfferModel*) getOfferWithID:(NSString*)offerID  {
+    NSManagedObjectContext *_managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    fetchRequest.includesSubentities = NO;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[[self class] description] inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"offer_id"  ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    // init predicate to search
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"offer_id == %@", offerID];
+    [fetchRequest setPredicate:pred];
+    
+    //    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:@"kardName" cacheName:nil];
+    
+    NSError *error;
+    
+    NSArray *items = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (items.count == 0) {
+        return nil;
+    }
+    
+    return [items objectAtIndex:0];
+}
+
++ (void) updateOfferID:(NSString*)offerID withBookMark:(BOOL)isBookMark  {
+    //NSManagedObjectContext *_managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    
+    OfferModel *kardModel = [self getOfferWithID:offerID];
+    kardModel.is_bookmark = [NSNumber numberWithBool:isBookMark];
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate saveContext];
+}
+
++ (void) removeKardID:(NSString*)kardID {
+    NSManagedObjectContext *_managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    OfferModel *kardModel = [self getOfferWithID:kardID];
+    [_managedObjectContext deleteObject:kardModel];
+}
+
 
 @end

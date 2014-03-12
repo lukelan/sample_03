@@ -2,7 +2,7 @@
 //  BranchModel.h
 //  PlusOffer
 //
-//  Created by Tai Truong on 1/18/14.
+//  Created by trongvm on 1/18/14.
 //  Copyright (c) 2014 Trongvm. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * branch_address;
 @property (nonatomic, retain) NSString * branch_tel;
 @property (nonatomic, retain) NSNumber * brand_id;
+@property (nonatomic, retain) NSNumber * category_id;
 @property (nonatomic, retain) NSNumber * location_id;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;

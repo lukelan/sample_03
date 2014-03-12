@@ -11,7 +11,7 @@
 #import "DefineConstant.h"
 #import "Position.h"
 #import "UserProfile.h"
-#import "OfferTableItem.h"
+#import "FlipBoardNavigationController.h"
 
 @protocol OpenBarcodeScannerDelegate <NSObject>
 
@@ -25,7 +25,7 @@
 
 @end
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate, RKManagerDelegate>
 {
     double lastSentLat;
     double lastSentLog;
@@ -45,23 +45,23 @@
 #pragma mark -
 @property (nonatomic, strong) NSString* currentView;
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) FlipBoardNavigationController * flipBoardNVC;
+@property (strong, nonatomic) UIViewController * mainVC;
+@property (strong, nonatomic) UIWindow *foregroundWindow;
+- (NSString *)storyboardName;
 
 +(void) explode: (id) aView level: (int) level;
 +(NSString *)getVersionOfApplication;
 -(UIViewController *) getCurrentViewController;
-
-
-#pragma mark - OfferDetailViewController
--(void) changeToOfferDetailViewController:(OfferTableItem*)item;
-
-#pragma mark - MenuViewController
--(void) toMenuViewController :(NSString*)brand_id;
-
-#pragma mark - OfferMapViewController
--(void) toMapViewController:(id)object withTitle:(NSString*)title isHandleAction:(BOOL)isHandle;
+-(UIViewController *) getViewControllerAtIndex:(int)index;
+- (void)saveContext;
 
 #pragma mark - facebook handle
 - (BOOL)isUserLoggedIn;
 - (void)handleLogout;
 - (void)handleUserAccount;
+- (BOOL)checkShowRequestLogin;
+
+#pragma mark get record in DB
+- (NSMutableArray *)fetchRecords:(NSString *)entityName sortWithKey:(NSString *)keyName ascending:(BOOL)isAscending withPredicate:(NSPredicate *)predicate;
 @end

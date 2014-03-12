@@ -24,12 +24,12 @@
     #import "GoogleConversionPing.h"
     #import "Crittercism.h"
     #import "CustomGAITrackedViewController.h"
-    #import "AppDelegate.h"
     #import "Location.h"
     #import "PlusAPIManager.h"
     #import "Location.h"
     #import "ZBarSDK.h"
     #import "UIColor+CreateMethods.h"
+    #import "AppDelegate.h"
 
 #pragma mark import class category ultility
 #import "UIDevice+IdentifierAddition.h"

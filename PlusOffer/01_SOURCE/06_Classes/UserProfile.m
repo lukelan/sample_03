@@ -10,6 +10,7 @@
 
 @implementation UserProfile
 @synthesize user_id;
+@synthesize user_code;
 @synthesize username;
 @synthesize name;
 @synthesize email;

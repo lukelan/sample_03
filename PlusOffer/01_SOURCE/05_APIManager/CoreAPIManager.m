@@ -46,6 +46,7 @@ static CoreAPIManager* _sharedCoreAPIManager = nil;
 -(id)init{
     self=[super init];
     if (self) {
+        self.accessTokenKey = @"LND";
     }
     return self;
 }
@@ -334,6 +335,9 @@ static CoreAPIManager* _sharedCoreAPIManager = nil;
 +(NSString *)getStringInAppForKey:(NSString *)key
 {
     NSData *cipher = [CoreAPIManager getValueForKey:[NSString sha1:key]];
+    if (!cipher) {
+        return nil;
+    }
     NSData *plain = [self decryptDataWithData:cipher];
     return [[NSString alloc] initWithData:plain encoding:NSUTF8StringEncoding];
 }

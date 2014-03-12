@@ -31,7 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     _tableView = [[UITableView alloc]  initWithFrame:CGRectMake(0 , 0 , 320 , self.view.frame.size.height - NAVIGATION_BAR_HEIGHT - CHECK_IOS)  style:UITableViewStylePlain];
+    self.tabBarDisplayType = TAB_BAR_DISPLAY_HIDE;
+    [self setCustomBarLeftWithImage:[UIImage imageNamed:@"nav-bar-icon-back.png"] selector:nil context_id:nil];
+    
+     _tableView = [[UITableView alloc]  initWithFrame:CGRectMake(0 , 0 , 320 , self.view.frame.size.height - NAVIGATION_BAR_HEIGHT - CHECK_IOS)  style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -39,7 +42,7 @@
     [self.tableView setBackgroundView:nil];
     _tableView.backgroundColor = UIColorFromRGB(0xeeeeee);
     [self.view addSubview:_tableView];
-    NSLog(@"%@",_brandID);
+//    NSLog(@"%@",_brandID);
     [self reloadInterface];
     [self loadOfferDetail];
 }

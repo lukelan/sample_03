@@ -40,4 +40,5 @@
 @dynamic path;
 @dynamic menu;
 @dynamic brand_name;
+@dynamic is_bookmark;
 @end

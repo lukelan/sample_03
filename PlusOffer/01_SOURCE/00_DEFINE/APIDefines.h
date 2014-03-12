@@ -21,15 +21,13 @@
 #define MSERVICE_API @"?"
 #ifdef DEBUG
     #define BASE_URL_SERVER @"http://plusoffer-api-dev.123phim.vn/"
-    #define MAPP_KEY @"MAPP_1@3Phim1@3"
-    #define ROOT_FBSERVICE @"http://mapp-dev.123phim.vn/fbservice/"
+    #define MAPP_KEY @"P1u50ff3R-dev"
 #else
-    #define BASE_URL_SERVER @"https://mapp.123phim.vn/"
-    #define MAPP_KEY @"MAPP_1@3Phim_IOS_920"
-    #define ROOT_FBSERVICE @"https://mapp.123phim.vn/fbservice/"
+    #define BASE_URL_SERVER @"https://plusoffer-api.123phim.vn/"
+    #define MAPP_KEY @"P1u50ff3R2014@0.0"
 #endif
 
-#define API_REQUEST_SET_DEVICETOKEN @"%@method=Device.setToken&device_type_id=1"
+#define API_REQUEST_SET_DEVICETOKEN @"%@method=Device.setToken"
 #pragma mark
 #pragma mark get city, check version
 #define API_REQUEST_CITY_GET_LIST @"%@method=Location.getList"
@@ -37,9 +35,10 @@
 
 #pragma mark
 #pragma mark function Offer
-#define API_REQUEST_GET_LIST_OFFER @"%@method=Offer.getList"
-#define API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY @"%@method=Offer.getList&category_id=%@"
-#define API_REQUEST_GET_LIST_OFFER_DETAIL @"%@method=Offer.getDetail&offer_id=%@"
+#define API_REQUEST_GET_LIST_OFFER @"%@method=Offer.getList&user_id=%@"
+//#define API_REQUEST_GET_LIST_OFFER @"%@method=Offer.getList"
+#define API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY @"%@method=Offer.getList&category_id=%@&user_id=%@"
+#define API_REQUEST_GET_LIST_OFFER_DETAIL @"%@method=Offer.getDetail&offer_id=%@&user_id=%@"
 
 #pragma mark menu item
 #define API_REQUEST_GET_LIST_MENU_WITH_BRAND @"%@method=Menu.getListItem&brand_id=%@"
@@ -60,6 +59,7 @@
 #define API_REQUEST_USER_GET_FB_FRIEND_LIST @"%@friends/?facebook_id=%@&access_token=%@"
 #define API_REQUEST_USER_POST_LOCATION_TRACKING @"%@method=User.addLocationHistory"
 #define API_REQUEST_USER_CHECKIN @"%@method=User.checkin&user_id=%@&branch_id=%@&latitude=%f&longitude=%f"
+#define API_REQUEST_RESET_PUNCH @"%@method=User.resetPunch&user_id=%@&brand_id=%@"
 
 #pragma mark
 #pragma mark text
@@ -72,8 +72,10 @@
 #define REQUEST_URL_GOOGLE_DIRECTION_API @"http://maps.googleapis.com/maps/api/directions/json"
 #pragma mark
 #pragma mark Favorite
-#define API_REQUEST_ADD_FAVORITE @"%@method=Offer.addFavorite"
-#define API_REQUEST_REMOVE_FAVORITE @"%@method=Offer.removeFavorite"
+#define API_REQUEST_GET_LIST_FAVORITE @"%@method=Offer.getListBookmark&user_id=%@"
+#define API_REQUEST_ADD_FAVORITE @"%@method=Offer.addBookmark"
+#define API_REQUEST_REMOVE_FAVORITE @"%@method=Offer.removeBookmark"
+
 typedef enum
 {
     ID_REQUEST_PLUS_OFFER = 0,
@@ -85,7 +87,9 @@ typedef enum
     ID_POST_UDID_DEVICE_TOKEN,
     ID_REQUEST_STORE_USER_LOCATION,
     ID_REQUEST_USER_PUNCH,
-    ID_REQUEST_FAVORITE,
+    ID_REQUEST_ADD_FAVORITE,
+    ID_REQUEST_REMOVE_FAVORITE,
+    ID_REQUEST_RESET_PUNCH,
     ID_REQUEST_OTHER
 }ENUM_ID_REQUEST_TYPE;
 

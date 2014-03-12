@@ -10,6 +10,7 @@
 
 @interface UserProfile : NSObject
 @property (nonatomic, strong) NSString *user_id;
+@property (nonatomic, strong) NSString *user_code;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *email;

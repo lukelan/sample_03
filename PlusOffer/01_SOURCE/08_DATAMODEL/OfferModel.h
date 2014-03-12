@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSString * branch_name;
 @property (nonatomic, retain) NSString * brand_name;
 @property (nonatomic, retain) NSNumber * user_punch;
-@property (nonatomic, retain) NSNumber * is_like;
+@property (nonatomic, retain) NSNumber * is_bookmark;
 @property (nonatomic, retain) NSNumber * category_id;
 @property (nonatomic, retain) NSNumber * discount_type;
 @property (nonatomic, retain) NSNumber * discount_value;
@@ -37,4 +37,10 @@
 @property (nonatomic, retain) NSString *offer_date_end;
 @property (nonatomic, retain) NSNumber *max_punch;
 @property (nonatomic, retain) NSNumber * order_id;
+
+
++ (OfferModel*) getOfferWithID:(NSString*)offerID;
++ (void) updateOfferID:(NSString*)offerID withBookMark:(BOOL)isBookMark;
++ (void) removeOfferID:(NSString*)offerID;
+
 @end

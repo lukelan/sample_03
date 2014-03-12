@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BranchModel" representedClassName="BranchModel" syncable="YES">
         <attribute name="branch_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="branch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -7,6 +7,7 @@
         <attribute name="branch_name_slug" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="branch_tel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="brand_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="category_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="date_add" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date_update" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hour_close" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,6 +40,7 @@
     </entity>
     <entity name="CuisineOffer" representedClassName="CuisineOffer" parentEntity="OfferModel" syncable="YES"/>
     <entity name="EntertainmentOffer" representedClassName="EntertainmentOffer" parentEntity="OfferModel" syncable="YES"/>
+    <entity name="FavoriteOffer" representedClassName="FavoriteOffer" parentEntity="OfferModel" syncable="YES"/>
     <entity name="MenuModel" representedClassName="MenuModel" syncable="YES">
         <attribute name="brand_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="item_description" optional="YES" attributeType="String" syncable="YES"/>
@@ -64,6 +66,7 @@
         <attribute name="distance" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hour_close" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hour_open" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_bookmark" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="max_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -87,7 +90,7 @@
         <attribute name="date_add" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="discount_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="discount_value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="is_like" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
+        <attribute name="is_bookmark" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="max_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -118,14 +121,15 @@
         <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BranchModel" positionX="178" positionY="335" width="128" height="313"/>
-        <element name="BrandModel" positionX="-18" positionY="189" width="128" height="268"/>
-        <element name="MenuModel" positionX="-27" positionY="0" width="128" height="150"/>
-        <element name="OfferDetailModel" positionX="-207" positionY="0" width="128" height="450"/>
-        <element name="OfferModel" positionX="385" positionY="0" width="128" height="330"/>
-        <element name="RedeemModel" positionX="169" positionY="3" width="128" height="285"/>
-        <element name="NearByOffer" positionX="430" positionY="371" width="128" height="43"/>
-        <element name="CuisineOffer" positionX="576" positionY="380" width="128" height="43"/>
-        <element name="EntertainmentOffer" positionX="340" positionY="443" width="128" height="43"/>
+        <element name="BranchModel" positionX="0" positionY="126" width="128" height="330"/>
+        <element name="BrandModel" positionX="-389" positionY="-288" width="128" height="270"/>
+        <element name="CuisineOffer" positionX="-119" positionY="-153" width="128" height="45"/>
+        <element name="EntertainmentOffer" positionX="16" positionY="-162" width="128" height="45"/>
+        <element name="MenuModel" positionX="-198" positionY="-468" width="128" height="150"/>
+        <element name="NearByOffer" positionX="43" positionY="-63" width="128" height="45"/>
+        <element name="OfferDetailModel" positionX="160" positionY="111" width="128" height="465"/>
+        <element name="OfferModel" positionX="-153" positionY="0" width="128" height="330"/>
+        <element name="RedeemModel" positionX="-351" positionY="3" width="128" height="285"/>
+        <element name="FavoriteOffer" positionX="-254" positionY="-151" width="128" height="43"/>
     </elements>
 </model>

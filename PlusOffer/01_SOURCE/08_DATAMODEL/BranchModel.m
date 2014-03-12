@@ -2,7 +2,7 @@
 //  BranchModel.m
 //  PlusOffer
 //
-//  Created by Tai Truong on 1/18/14.
+//  Created by trongvm on 1/18/14.
 //  Copyright (c) 2014 Trongvm. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @dynamic branch_tel;
 @dynamic brand_id;
 @dynamic location_id;
+@dynamic category_id;
 @dynamic latitude;
 @dynamic longitude;
 @dynamic hour_open;

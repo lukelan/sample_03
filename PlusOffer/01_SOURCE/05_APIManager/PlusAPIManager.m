@@ -17,6 +17,7 @@
 #import "Routes.h"
 #import "MenuModel.h"
 #import "BranchModel.h"
+//#import "FavoriteOffer.h"
 
 @implementation PlusAPIManager
 #pragma mark API request with restkit
@@ -75,11 +76,13 @@
     [redeemMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
     [self RK_RequestApi_EntityMapping:redeemMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
--(void)RK_RequestApiGetListPlusOffer:(id)context_id;
+-(void)RK_RequestApiGetListPlusOffer:(id)context_id forUserID:(NSString*)userID;
 {
-    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER,ROOT_SERVER];
-    
-    
+    if (userID == nil || userID == NULL)
+    {
+        userID = @"0";
+    }
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER,ROOT_SERVER, userID];
     RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([NearByOffer class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
     offerMapping.identificationAttributes = @[@"offer_id"];
     [offerMapping addAttributeMappingsFromDictionary:@{
@@ -95,13 +98,14 @@
                                                         @"discount_type" : @"discount_type",
                                                         @"discount_value" : @"discount_value",
                                                         @"date_add" : @"date_add",
-                                                         @"offer_date_end" : @"offer_date_end",
-                                                         @"max_punch" : @"max_punch",
+                                                        @"offer_date_end" : @"offer_date_end",
+                                                        @"max_punch" : @"max_punch",
+                                                        @"user_punch" : @"user_punch",
                                                         @"size1" : @"size1",
                                                         @"size2" : @"size2",
-                                                        @"is_like" : @"is_like"
+                                                        @"is_bookmark" : @"is_bookmark"
                                                         }];
-    [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+//    [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
     [self RK_RequestApi_EntityMapping:offerMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
@@ -122,6 +126,7 @@
                                                         @"branch_tel"      : @"branch_tel",
                                                         @"brand_id"        : @"brand_id",
                                                         @"location_id"     : @"location_id",
+                                                        @"category_id"     : @"category_id",
                                                         @"latitude"        : @"latitude",
                                                         @"longitude"       : @"longitude",
                                                         @"hour_open"       : @"hour_open",       
@@ -138,9 +143,13 @@
     [self RK_RequestApi_EntityMapping:objectMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
--(void)RK_RequestApiGetListPlusOfferWithCategory:(id)context_id forCategory:(NSString*)categoryID;
+-(void)RK_RequestApiGetListPlusOfferWithCategory:(id)context_id forCategory:(NSString*)categoryID forUserID:(NSString*)userID;
 {
-    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY,ROOT_SERVER,categoryID];
+    if (userID == nil || userID == NULL)
+    {
+        userID = @"0";
+    }
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_WITH_CATEGORY,ROOT_SERVER,categoryID , userID];
     NSString *entityName = [categoryID integerValue] == 1 ? NSStringFromClass([CuisineOffer class]) : NSStringFromClass([EntertainmentOffer class]);
     RKEntityMapping *offerMapping = [RKEntityMapping mappingForEntityForName:entityName inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
     offerMapping.identificationAttributes = @[@"offer_id"];
@@ -162,17 +171,19 @@
                                                         @"max_punch" : @"max_punch",
                                                         @"size1" : @"size1",
                                                         @"size2" : @"size2",
-                                                        @"is_like" : @"is_like"
+                                                        @"is_bookmark" : @"is_bookmark"
                                                         }];
-    [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
+//    [offerMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
     [self RK_RequestApi_EntityMapping:offerMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
 
--(void)RK_RequestApiGetListPlusOfferDetail:(id)context_id forOfferID:(NSString*)offerID;
+-(void)RK_RequestApiGetListPlusOfferDetail:(id)context_id forOfferID:(NSString*)offerID forUserID:(NSString*)userID;
 {
-    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_DETAIL,ROOT_SERVER,offerID];
-    
-    
+    if (userID == nil || userID == NULL)
+    {
+        userID = @"0";
+    }
+    NSString *url=[NSString stringWithFormat:API_REQUEST_GET_LIST_OFFER_DETAIL,ROOT_SERVER,offerID, userID];
     RKEntityMapping *offerDetailMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([OfferDetailModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
     offerDetailMapping.identificationAttributes = @[@"offer_id"];
     [offerDetailMapping addAttributeMappingsFromDictionary:@{
@@ -199,10 +210,10 @@
                                                         @"offer_date_end" : @"offer_date_end",
                                                         @"size1" : @"size1",
                                                         @"size2" : @"size2",
-                                                        @"user_punch" : @"user_punch",
                                                         @"path" : @"path",
                                                         @"menu" : @"menu",
-                                                        @"brand_name" : @"brand_name"
+                                                        @"brand_name" : @"brand_name",
+                                                        @"is_bookmark" : @"is_bookmark"
                                                         }];
     [self RK_RequestApi_EntityMapping:offerDetailMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
 }
@@ -235,7 +246,7 @@
 -(void)RK_RequestApiCheckAppVersion:(NSString *) currentVersion responseContext: (id)context_id
 {
     NSString *url=[NSString stringWithFormat:API_REQUEST_APP_GET_NEW_VERSION,BASE_URL_SERVER,currentVersion];
-    [self RK_RequestDictionaryMappingResponseWithURL:url postData:nil keyPath:nil withContext:context_id requestId:ID_REQUEST_CHECK_VERSION];
+    [self RK_RequestDictionaryMappingResponseWithURL:[self getFullLinkAPI:url] postData:nil keyPath:nil withContext:context_id requestId:ID_REQUEST_CHECK_VERSION];
 }
 
 -(NSDictionary*)parseToGetVersionInfo: (NSDictionary *) dicObject
@@ -262,7 +273,7 @@
     //-------------------------------//
     RKEntityMapping *brandMapping = [RKEntityMapping mappingForEntityForName:NSStringFromClass([BrandModel class]) inManagedObjectStore:[RKObjectManager sharedManager].managedObjectStore];
     brandMapping.identificationAttributes = @[ @"brand_id" ];
-    [brandMapping addAttributeMappingsFromArray:@[@"brand_id",@"brand_card_image",@"brand_card_logo", @"brand_card_color",@"list_prize", @"max_punch", @"user_punch", @"punch_color_active", @"punch_color", @"punch_image", @"punch_image_active", @"punch_image_select", @"date_end"]];
+    [brandMapping addAttributeMappingsFromArray:@[@"brand_id", @"brand_name",@"brand_card_image",@"brand_card_logo", @"brand_card_color",@"list_prize", @"max_punch", @"user_punch", @"punch_color_active", @"punch_color", @"punch_image", @"punch_image_active", @"punch_image_select", @"date_end"]];
     [brandMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"@metadata.mapping.collectionIndex" toKeyPath:@"order_id"]];
     //-------------------------------//
     [self RK_RequestApi_EntityMapping:brandMapping pathURL:[self getFullLinkAPI:url] postData:nil keyPath:@"result"];
@@ -271,29 +282,44 @@
 #pragma mark post udid and device token
 -(void)RK_RequestPostUIID:(NSString *)udid andDeviceToken:(NSString *)device_token context:context_id
 {
+    NSString *url = [NSString stringWithFormat:API_REQUEST_SET_DEVICETOKEN, ROOT_SERVER];
     NSDictionary *temp  = [NSDictionary dictionaryWithObjectsAndKeys:
                            udid, @"udid",
                            device_token, @"device_token",
+                           @"1", @"device_type_id",
                            nil];
-    RKObjectMapping *dicMapping = [RKObjectMapping mappingForClass:[DictionaryMapping class]];
-    [dicMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:nil toKeyPath:@"curDictionary"]];
-    RKResponseDescriptor *objDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:dicMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"result" statusCodes:nil];
-    
-    [self RK_SendRequestGetAPI_Descriptor:objDescriptor withURL:[self getFullLinkAPI:API_REQUEST_SET_DEVICETOKEN] parameters:temp withContext:nil requestId:ID_POST_UDID_DEVICE_TOKEN];
+    [self RK_RequestDictionaryMappingResponseWithURL:[self getFullLinkAPI:url] postData:temp keyPath:nil withContext:context_id requestId:ID_POST_UDID_DEVICE_TOKEN];
 }
-
+#pragma mark
+#pragma mark reset punch
+-(void)RK_RequestApiResetPunch:(id)context_id forUserID:(NSString*)userID atBanchID:(NSString *)branch_id
+{
+    NSString *url=[NSString stringWithFormat:API_REQUEST_RESET_PUNCH ,ROOT_SERVER, userID,branch_id];
+    [self RK_RequestDictionaryMappingResponseWithURL:[self getFullLinkAPI:url] postData:nil keyPath:nil withContext:context_id requestId:ID_REQUEST_RESET_PUNCH];
+}
 #pragma mark
 #pragma mark user request punch
 - (void)RK_RequestPunchUser:(NSString *)userId atBrand:(NSString *)brand_id withCode:(NSString *)punch_code numberOfPunch:(NSNumber *)punch_count context:(id)context;
 {
+    NSString *punch_key = [PlusAPIManager getValueForKey:KEY_STORE_PUNCH_KEY];
+    NSString *punch_ts = [PlusAPIManager getValueForKey:KEY_STORE_TIMESTAMP_PUNCH];
+    if (![punch_key isKindOfClass:[NSString class]] || punch_key.length == 0) {
+        punch_ts = [NSString stringWithFormat:@"%f",[NSDate timeIntervalSinceReferenceDate]];
+        punch_key = [[NSString stringWithFormat:@"%@%@%@",userId,punch_code,punch_ts] stringFromMD5];
+        [PlusAPIManager setValueForKey:punch_ts ForKey:KEY_STORE_TIMESTAMP_PUNCH];
+        [PlusAPIManager setValueForKey:punch_key ForKey:KEY_STORE_PUNCH_KEY];
+    }
+    
     NSString* urlString = [NSString stringWithFormat:API_REQUEST_USER_PUNCH, ROOT_SERVER];
     NSDictionary* temp = [NSDictionary dictionaryWithObjectsAndKeys:
                           userId, @"user_id",
                           brand_id, @"brand_id",
                           punch_code, @"punch_code",
                           punch_count, @"punch_count",
+                          punch_ts, @"punch_ts",
+                          punch_key, @"punch_key",
                           nil];
-    [self RK_RequestDictionaryMappingResponseWithURL:urlString postData:temp keyPath:nil withContext:context requestId:ID_REQUEST_USER_PUNCH];
+    [self RK_RequestDictionaryMappingResponseWithURL:[self getFullLinkAPI:urlString] postData:temp keyPath:nil withContext:context requestId:ID_REQUEST_USER_PUNCH];
     
 }
 #pragma mark offer favorite
@@ -304,7 +330,7 @@
                           userId, @"user_id",
                           offer_id, @"offer_id",
                           nil];
-    [self RK_RequestDictionaryMappingResponseWithURL:url postData:temp keyPath:nil withContext:context_id requestId:ID_REQUEST_FAVORITE];
+    [self RK_RequestDictionaryMappingResponseWithURL:[self getFullLinkAPI:url] postData:temp keyPath:nil withContext:context_id requestId:ID_REQUEST_ADD_FAVORITE];
 
 }
 -(void)RK_RequestApiRemoveFavorite:(id)context_id forUserID:(NSString*)userId forOfferID:(NSString*)offer_id
@@ -314,6 +340,6 @@
                           userId, @"user_id",
                           offer_id, @"offer_id",
                           nil];
-    [self RK_RequestDictionaryMappingResponseWithURL:url postData:temp keyPath:nil withContext:context_id requestId:ID_REQUEST_FAVORITE];
+    [self RK_RequestDictionaryMappingResponseWithURL:[self getFullLinkAPI:url] postData:temp keyPath:nil withContext:context_id requestId:ID_REQUEST_REMOVE_FAVORITE];
 }
 @end

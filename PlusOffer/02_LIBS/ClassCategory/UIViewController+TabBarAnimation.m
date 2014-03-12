@@ -12,6 +12,10 @@
 
 - (void)performShowTabBar
 {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        [self performShowTabBarIOS6:self.tabBarController];
+        return;
+    }
     CGRect frame = self.tabBarController.tabBar.frame;
     frame.origin.y --;
     if (frame.origin.y == self.tabBarController.tabBar.window.frame.size.height)
@@ -27,6 +31,10 @@
 
 - (void)performHideTabBar
 {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        [self performHideTabBarIOS6:self.tabBarController];
+        return;
+    }
     CGRect frame = self.tabBarController.tabBar.frame;
     frame.origin.y += frame.size.height;
     if (frame.origin.y == self.tabBarController.tabBar.window.frame.size.height)
@@ -48,8 +56,11 @@
         frame.origin.y -= (frame.size.height + 1 + TITLE_BAR_HEIGHT) ;
         [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.navigationController.navigationBar.frame = frame;
-            
+            [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - frame.size.height, self.view.frame.size.width, self.view.frame.size.height + frame.size.height)];
         } completion:^(BOOL finished) {
+            if (IOS_VERSION >= 7.0) {
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            }
         }];
     }
 }
@@ -62,7 +73,11 @@
     {
         [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.navigationController.navigationBar.frame = frame;
+            [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + frame.size.height, self.view.frame.size.width, self.view.frame.size.height - frame.size.height)];
         } completion:^(BOOL finished) {
+            if (IOS_VERSION >= 7.0) {
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+            }
         }];
     }
 }
