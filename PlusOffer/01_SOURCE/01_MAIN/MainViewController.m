@@ -9,6 +9,9 @@
 #import "MainViewController.h"
 #import "FlipBoardNavigationController.h"
 #import "PBExampleViewController.h"
+#import "RSViewController.h"
+#import "HACollectionViewSmallLayout.h"
+#import "HASmallCollectionViewController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) UIDynamicAnimator *animator;
@@ -51,7 +54,13 @@
     [self.flipboardNavigationController pushViewController:page];
 }
 - (IBAction)pushFeedly:(UIButton *)sender {
-    UIViewController * page =[[PBExampleViewController alloc] init];
+    //UIViewController * page =[[PBExampleViewController alloc] init];
+    UIViewController * page =[[RSViewController alloc] init];
+    [self.flipboardNavigationController pushViewController:page];
+}
+- (IBAction)pushPaper:(UIButton *)sender {
+    HACollectionViewSmallLayout *smallLayout = [[HACollectionViewSmallLayout alloc] init];
+    HASmallCollectionViewController *page = [[HASmallCollectionViewController alloc] initWithCollectionViewLayout:smallLayout];
     [self.flipboardNavigationController pushViewController:page];
 }
 

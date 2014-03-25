@@ -430,14 +430,8 @@ static id instance;
 
 - (int)getDiskCount
 {
-    int count = 0;
-    NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:self.diskCachePath];
-    for (NSString *fileName in fileEnumerator)
-    {
-        count += 1;
-    }
-    
-    return count;
+    NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:_diskCachePath error:nil];
+    return [files count];
 }
 
 @end

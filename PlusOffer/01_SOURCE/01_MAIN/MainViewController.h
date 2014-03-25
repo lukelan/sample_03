@@ -13,5 +13,5 @@
 - (IBAction)pushFlipBoard:(UIButton *)sender;
 - (IBAction)pushPinterest:(UIButton *)sender;
 - (IBAction)pushFeedly:(UIButton *)sender;
-
+- (IBAction)pushPaper:(UIButton *)sender;
 @end
