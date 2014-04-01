@@ -1,4 +1,4 @@
-//
+    //
 //  MainViewController.m
 //  PlusOffer
 //
@@ -12,6 +12,12 @@
 #import "RSViewController.h"
 #import "HACollectionViewSmallLayout.h"
 #import "HASmallCollectionViewController.h"
+#import <MailCore/MCOIMAPSession.h>
+#import <MailCore/MCOIndexSet.h>
+#import <MailCore/MCOIMAPFetchMessagesOperation.h>
+#import "Imap.h"
+#import "Settings.h"
+#import "EmailSetupController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) UIDynamicAnimator *animator;
@@ -37,6 +43,35 @@
     [self.view addGestureRecognizer:panGesture];
     
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view.superview];
+    
+    
+    // Test Email
+    
+    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
+    [session setHostname:@"imap.gmail.com"];
+    [session setPort:993];
+    [session setUsername:@"vuminh.trong@gmail.com"];
+    [session setPassword:@"lukelan"];
+    [session setConnectionType:MCOConnectionTypeTLS];
+    
+    MCOIMAPMessagesRequestKind requestKind = MCOIMAPMessagesRequestKindHeaders;
+    NSString *folder = @"Flipper";
+    MCOIndexSet *uids = [MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)];
+    
+    MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesByUIDOperationWithFolder:folder requestKind:requestKind uids:uids];
+    
+    [fetchOperation start:^(NSError * error, NSArray * fetchedMessages, MCOIndexSet * vanishedMessages) {
+        //We've finished downloading the messages!
+        
+        //Let's check if there was an error:
+        if(error) {
+            NSLog(@"Error downloading message headers:%@", error);
+        }
+        
+        //And, let's print out the messages...
+        NSLog(@"The post man delivereth:%@", fetchedMessages);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,12 +93,24 @@
     UIViewController * page =[[RSViewController alloc] init];
     [self.flipboardNavigationController pushViewController:page];
 }
+- (IBAction)pushEmail:(UIButton *)sender {
+    
+    // Init IMAP singleton
+	imap = [[Imap alloc] init];
+    
+	// Init test project singletons
+	settings = [[Settings alloc] init];
+    
+	EmailSetupController *ctr = [[EmailSetupController alloc] init];
+//	UINavigationController *navctr = [[UINavigationController alloc] initWithRootViewController:ctr];
+    [self.flipboardNavigationController pushViewController:ctr];
+}
+
 - (IBAction)pushPaper:(UIButton *)sender {
     HACollectionViewSmallLayout *smallLayout = [[HACollectionViewSmallLayout alloc] init];
     HASmallCollectionViewController *page = [[HASmallCollectionViewController alloc] initWithCollectionViewLayout:smallLayout];
     [self.flipboardNavigationController pushViewController:page];
 }
-
 - (void)didPan:(UIPanGestureRecognizer *)gesture
 {
     CGPoint location = [gesture locationInView:self.view.superview];

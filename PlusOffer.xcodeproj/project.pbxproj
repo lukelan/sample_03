@@ -241,6 +241,50 @@
 		AA69AE7218D059230046ABE7 /* BackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA69AE6F18D059230046ABE7 /* BackgroundViewController.m */; };
 		AA69AE7318D059230046ABE7 /* BackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA69AE7018D059230046ABE7 /* BackgroundViewController.xib */; };
 		AA69AE7418D059230046ABE7 /* BackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA69AE7018D059230046ABE7 /* BackgroundViewController.xib */; };
+		AA77102C18EACDF10007B0AD /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101918EACDF10007B0AD /* Base64.m */; };
+		AA77102D18EACDF10007B0AD /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101918EACDF10007B0AD /* Base64.m */; };
+		AA77102E18EACDF10007B0AD /* Imap.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101B18EACDF10007B0AD /* Imap.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77102F18EACDF10007B0AD /* Imap.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101B18EACDF10007B0AD /* Imap.m */; };
+		AA77103018EACDF10007B0AD /* ImapBodypart.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101D18EACDF10007B0AD /* ImapBodypart.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103118EACDF10007B0AD /* ImapBodypart.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101D18EACDF10007B0AD /* ImapBodypart.m */; };
+		AA77103218EACDF10007B0AD /* ImapConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101F18EACDF10007B0AD /* ImapConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103318EACDF10007B0AD /* ImapConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101F18EACDF10007B0AD /* ImapConnection.m */; };
+		AA77103418EACDF10007B0AD /* ImapEncoding.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA77102118EACDF10007B0AD /* ImapEncoding.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103518EACDF10007B0AD /* ImapEncoding.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA77102118EACDF10007B0AD /* ImapEncoding.mm */; };
+		AA77103618EACDF10007B0AD /* ImapFetchObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102318EACDF10007B0AD /* ImapFetchObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103718EACDF10007B0AD /* ImapFetchObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102318EACDF10007B0AD /* ImapFetchObject.m */; };
+		AA77103818EACDF10007B0AD /* ImapMailbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102518EACDF10007B0AD /* ImapMailbox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103918EACDF10007B0AD /* ImapMailbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102518EACDF10007B0AD /* ImapMailbox.m */; };
+		AA77103A18EACDF10007B0AD /* ImapMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102718EACDF10007B0AD /* ImapMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103B18EACDF10007B0AD /* ImapMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102718EACDF10007B0AD /* ImapMessage.m */; };
+		AA77103C18EACDF10007B0AD /* ImapReader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102918EACDF10007B0AD /* ImapReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103D18EACDF10007B0AD /* ImapReader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102918EACDF10007B0AD /* ImapReader.m */; };
+		AA77103E18EACDF10007B0AD /* NSStream+GetStreamsToHost.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102B18EACDF10007B0AD /* NSStream+GetStreamsToHost.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77103F18EACDF10007B0AD /* NSStream+GetStreamsToHost.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77102B18EACDF10007B0AD /* NSStream+GetStreamsToHost.m */; };
+		AA77104A18EACF850007B0AD /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77104718EACF850007B0AD /* Settings.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77104B18EACF850007B0AD /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77104718EACF850007B0AD /* Settings.m */; };
+		AA77104C18EACF850007B0AD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77104918EACF850007B0AD /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77104D18EACF850007B0AD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77104918EACF850007B0AD /* Utils.m */; };
+		AA77105C18EAD06E0007B0AD /* UIViewSizeShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105118EAD06E0007B0AD /* UIViewSizeShortcuts.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77105D18EAD06E0007B0AD /* UIViewSizeShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105118EAD06E0007B0AD /* UIViewSizeShortcuts.m */; };
+		AA77105E18EAD06E0007B0AD /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105318EAD06E0007B0AD /* MoreTableViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77105F18EAD06E0007B0AD /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105318EAD06E0007B0AD /* MoreTableViewController.m */; };
+		AA77106018EAD06E0007B0AD /* TableFooterDragRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105518EAD06E0007B0AD /* TableFooterDragRefreshView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77106118EAD06E0007B0AD /* TableFooterDragRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105518EAD06E0007B0AD /* TableFooterDragRefreshView.m */; };
+		AA77106218EAD06E0007B0AD /* TableHeaderDragRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105718EAD06E0007B0AD /* TableHeaderDragRefreshView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77106318EAD06E0007B0AD /* TableHeaderDragRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105718EAD06E0007B0AD /* TableHeaderDragRefreshView.m */; };
+		AA77106418EAD06E0007B0AD /* CheckboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105918EAD06E0007B0AD /* CheckboxCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77106518EAD06E0007B0AD /* CheckboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105918EAD06E0007B0AD /* CheckboxCell.m */; };
+		AA77106618EAD06E0007B0AD /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105B18EAD06E0007B0AD /* SettingsCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77106718EAD06E0007B0AD /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77105B18EAD06E0007B0AD /* SettingsCell.m */; };
+		AA77107018EAD07B0007B0AD /* EmailSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106918EAD07B0007B0AD /* EmailSetupController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77107118EAD07B0007B0AD /* EmailSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106918EAD07B0007B0AD /* EmailSetupController.m */; };
+		AA77107218EAD07B0007B0AD /* EmailListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106B18EAD07B0007B0AD /* EmailListController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77107318EAD07B0007B0AD /* EmailListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106B18EAD07B0007B0AD /* EmailListController.m */; };
+		AA77107418EAD07B0007B0AD /* EmailMailboxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106D18EAD07B0007B0AD /* EmailMailboxController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77107518EAD07B0007B0AD /* EmailMailboxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106D18EAD07B0007B0AD /* EmailMailboxController.m */; };
+		AA77107618EAD07B0007B0AD /* EmailMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106F18EAD07B0007B0AD /* EmailMessageController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA77107718EAD07B0007B0AD /* EmailMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106F18EAD07B0007B0AD /* EmailMessageController.m */; };
 		AAB01B5018701805006E2552 /* UIViewController+CustomNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBEC0F18684D2D0040EA12 /* UIViewController+CustomNavigation.m */; };
 		AAB01B5118701805006E2552 /* ArrayMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4EA11869690700AAE584 /* ArrayMapping.m */; };
 		AAB01B5318701805006E2552 /* CoreAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B4EA718696A4E00AAE584 /* CoreAPIManager.m */; };
@@ -823,6 +867,50 @@
 		AA69AE6E18D059230046ABE7 /* BackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundViewController.h; sourceTree = "<group>"; };
 		AA69AE6F18D059230046ABE7 /* BackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundViewController.m; sourceTree = "<group>"; };
 		AA69AE7018D059230046ABE7 /* BackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackgroundViewController.xib; sourceTree = "<group>"; };
+		AA77101818EACDF10007B0AD /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		AA77101918EACDF10007B0AD /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		AA77101A18EACDF10007B0AD /* Imap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Imap.h; sourceTree = "<group>"; };
+		AA77101B18EACDF10007B0AD /* Imap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Imap.m; sourceTree = "<group>"; };
+		AA77101C18EACDF10007B0AD /* ImapBodypart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapBodypart.h; sourceTree = "<group>"; };
+		AA77101D18EACDF10007B0AD /* ImapBodypart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImapBodypart.m; sourceTree = "<group>"; };
+		AA77101E18EACDF10007B0AD /* ImapConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapConnection.h; sourceTree = "<group>"; };
+		AA77101F18EACDF10007B0AD /* ImapConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImapConnection.m; sourceTree = "<group>"; };
+		AA77102018EACDF10007B0AD /* ImapEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapEncoding.h; sourceTree = "<group>"; };
+		AA77102118EACDF10007B0AD /* ImapEncoding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImapEncoding.mm; sourceTree = "<group>"; };
+		AA77102218EACDF10007B0AD /* ImapFetchObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapFetchObject.h; sourceTree = "<group>"; };
+		AA77102318EACDF10007B0AD /* ImapFetchObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImapFetchObject.m; sourceTree = "<group>"; };
+		AA77102418EACDF10007B0AD /* ImapMailbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapMailbox.h; sourceTree = "<group>"; };
+		AA77102518EACDF10007B0AD /* ImapMailbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImapMailbox.m; sourceTree = "<group>"; };
+		AA77102618EACDF10007B0AD /* ImapMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapMessage.h; sourceTree = "<group>"; };
+		AA77102718EACDF10007B0AD /* ImapMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImapMessage.m; sourceTree = "<group>"; };
+		AA77102818EACDF10007B0AD /* ImapReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImapReader.h; sourceTree = "<group>"; };
+		AA77102918EACDF10007B0AD /* ImapReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImapReader.m; sourceTree = "<group>"; };
+		AA77102A18EACDF10007B0AD /* NSStream+GetStreamsToHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+GetStreamsToHost.h"; sourceTree = "<group>"; };
+		AA77102B18EACDF10007B0AD /* NSStream+GetStreamsToHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+GetStreamsToHost.m"; sourceTree = "<group>"; };
+		AA77104618EACF850007B0AD /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		AA77104718EACF850007B0AD /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		AA77104818EACF850007B0AD /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		AA77104918EACF850007B0AD /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		AA77105018EAD06E0007B0AD /* UIViewSizeShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewSizeShortcuts.h; sourceTree = "<group>"; };
+		AA77105118EAD06E0007B0AD /* UIViewSizeShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewSizeShortcuts.m; sourceTree = "<group>"; };
+		AA77105218EAD06E0007B0AD /* MoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
+		AA77105318EAD06E0007B0AD /* MoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
+		AA77105418EAD06E0007B0AD /* TableFooterDragRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableFooterDragRefreshView.h; sourceTree = "<group>"; };
+		AA77105518EAD06E0007B0AD /* TableFooterDragRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableFooterDragRefreshView.m; sourceTree = "<group>"; };
+		AA77105618EAD06E0007B0AD /* TableHeaderDragRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderDragRefreshView.h; sourceTree = "<group>"; };
+		AA77105718EAD06E0007B0AD /* TableHeaderDragRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderDragRefreshView.m; sourceTree = "<group>"; };
+		AA77105818EAD06E0007B0AD /* CheckboxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckboxCell.h; sourceTree = "<group>"; };
+		AA77105918EAD06E0007B0AD /* CheckboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckboxCell.m; sourceTree = "<group>"; };
+		AA77105A18EAD06E0007B0AD /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCell.h; sourceTree = "<group>"; };
+		AA77105B18EAD06E0007B0AD /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCell.m; sourceTree = "<group>"; };
+		AA77106818EAD07B0007B0AD /* EmailSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSetupController.h; sourceTree = "<group>"; };
+		AA77106918EAD07B0007B0AD /* EmailSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSetupController.m; sourceTree = "<group>"; };
+		AA77106A18EAD07B0007B0AD /* EmailListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailListController.h; sourceTree = "<group>"; };
+		AA77106B18EAD07B0007B0AD /* EmailListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailListController.m; sourceTree = "<group>"; };
+		AA77106C18EAD07B0007B0AD /* EmailMailboxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailMailboxController.h; sourceTree = "<group>"; };
+		AA77106D18EAD07B0007B0AD /* EmailMailboxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailMailboxController.m; sourceTree = "<group>"; };
+		AA77106E18EAD07B0007B0AD /* EmailMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailMessageController.h; sourceTree = "<group>"; };
+		AA77106F18EAD07B0007B0AD /* EmailMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailMessageController.m; sourceTree = "<group>"; };
 		AAB01BED18701805006E2552 /* PlusOffer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlusOffer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB01BEF187018D0006E2552 /* PlusOffer-Pro-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlusOffer-Pro-Info.plist"; sourceTree = "<group>"; };
 		AABB9BDF18725FAA0018C0D5 /* RedeemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemModel.h; sourceTree = "<group>"; };
@@ -1120,6 +1208,7 @@
 		18FBCF0D1867443200C9E399 /* 02_LIBS */ = {
 			isa = PBXGroup;
 			children = (
+				AA77101718EACDF10007B0AD /* IMAP */,
 				AA67DE7018E13BCB0095D12B /* mailcore2.xcodeproj */,
 				AAE3152718D9B4870069A6DE /* Paper */,
 				AAE3150418D9A8CB0069A6DE /* CircaPageControl */,
@@ -1156,6 +1245,7 @@
 		18FBCF0E1867443200C9E399 /* 01_SOURCE */ = {
 			isa = PBXGroup;
 			children = (
+				AA77104E18EAD0420007B0AD /* MAIL */,
 				AA69AE6918D0430D0046ABE7 /* PAGE */,
 				AA69AE4F18D01EDA0046ABE7 /* FEEDLY */,
 				AA69AE3E18D0131B0046ABE7 /* PINTEREST */,
@@ -1945,6 +2035,72 @@
 			path = PAGE;
 			sourceTree = "<group>";
 		};
+		AA77101718EACDF10007B0AD /* IMAP */ = {
+			isa = PBXGroup;
+			children = (
+				AA77104618EACF850007B0AD /* Settings.h */,
+				AA77104718EACF850007B0AD /* Settings.m */,
+				AA77104818EACF850007B0AD /* Utils.h */,
+				AA77104918EACF850007B0AD /* Utils.m */,
+				AA77101818EACDF10007B0AD /* Base64.h */,
+				AA77101918EACDF10007B0AD /* Base64.m */,
+				AA77101A18EACDF10007B0AD /* Imap.h */,
+				AA77101B18EACDF10007B0AD /* Imap.m */,
+				AA77101C18EACDF10007B0AD /* ImapBodypart.h */,
+				AA77101D18EACDF10007B0AD /* ImapBodypart.m */,
+				AA77101E18EACDF10007B0AD /* ImapConnection.h */,
+				AA77101F18EACDF10007B0AD /* ImapConnection.m */,
+				AA77102018EACDF10007B0AD /* ImapEncoding.h */,
+				AA77102118EACDF10007B0AD /* ImapEncoding.mm */,
+				AA77102218EACDF10007B0AD /* ImapFetchObject.h */,
+				AA77102318EACDF10007B0AD /* ImapFetchObject.m */,
+				AA77102418EACDF10007B0AD /* ImapMailbox.h */,
+				AA77102518EACDF10007B0AD /* ImapMailbox.m */,
+				AA77102618EACDF10007B0AD /* ImapMessage.h */,
+				AA77102718EACDF10007B0AD /* ImapMessage.m */,
+				AA77102818EACDF10007B0AD /* ImapReader.h */,
+				AA77102918EACDF10007B0AD /* ImapReader.m */,
+				AA77102A18EACDF10007B0AD /* NSStream+GetStreamsToHost.h */,
+				AA77102B18EACDF10007B0AD /* NSStream+GetStreamsToHost.m */,
+			);
+			path = IMAP;
+			sourceTree = "<group>";
+		};
+		AA77104E18EAD0420007B0AD /* MAIL */ = {
+			isa = PBXGroup;
+			children = (
+				AA77106818EAD07B0007B0AD /* EmailSetupController.h */,
+				AA77106918EAD07B0007B0AD /* EmailSetupController.m */,
+				AA77106A18EAD07B0007B0AD /* EmailListController.h */,
+				AA77106B18EAD07B0007B0AD /* EmailListController.m */,
+				AA77106C18EAD07B0007B0AD /* EmailMailboxController.h */,
+				AA77106D18EAD07B0007B0AD /* EmailMailboxController.m */,
+				AA77106E18EAD07B0007B0AD /* EmailMessageController.h */,
+				AA77106F18EAD07B0007B0AD /* EmailMessageController.m */,
+				AA77104F18EAD05F0007B0AD /* UI */,
+			);
+			path = MAIL;
+			sourceTree = "<group>";
+		};
+		AA77104F18EAD05F0007B0AD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AA77105018EAD06E0007B0AD /* UIViewSizeShortcuts.h */,
+				AA77105118EAD06E0007B0AD /* UIViewSizeShortcuts.m */,
+				AA77105218EAD06E0007B0AD /* MoreTableViewController.h */,
+				AA77105318EAD06E0007B0AD /* MoreTableViewController.m */,
+				AA77105418EAD06E0007B0AD /* TableFooterDragRefreshView.h */,
+				AA77105518EAD06E0007B0AD /* TableFooterDragRefreshView.m */,
+				AA77105618EAD06E0007B0AD /* TableHeaderDragRefreshView.h */,
+				AA77105718EAD06E0007B0AD /* TableHeaderDragRefreshView.m */,
+				AA77105818EAD06E0007B0AD /* CheckboxCell.h */,
+				AA77105918EAD06E0007B0AD /* CheckboxCell.m */,
+				AA77105A18EAD06E0007B0AD /* SettingsCell.h */,
+				AA77105B18EAD06E0007B0AD /* SettingsCell.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		AAE3150418D9A8CB0069A6DE /* CircaPageControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2453,12 +2609,17 @@
 				4FBBEB5A18682E210040EA12 /* pngpread.c in Sources */,
 				4FBBEB5B18682E210040EA12 /* pngread.c in Sources */,
 				4FEE9CB0187A588D00BD39A8 /* FacebookManager.m in Sources */,
+				AA77103818EACDF10007B0AD /* ImapMailbox.m in Sources */,
 				4FEE9CAE187A588D00BD39A8 /* FacebookHandler.m in Sources */,
 				AA69AE6518D01EE40046ABE7 /* PBGSCollectionViewController.m in Sources */,
 				AAE3154E18D9B4870069A6DE /* HATransitionController.m in Sources */,
+				AA77106218EAD06E0007B0AD /* TableHeaderDragRefreshView.m in Sources */,
+				AA77107618EAD07B0007B0AD /* EmailMessageController.m in Sources */,
 				18FBCF131867443200C9E399 /* AppDelegate.m in Sources */,
 				4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */,
+				AA77103618EACDF10007B0AD /* ImapFetchObject.m in Sources */,
 				AA69AE6718D01EE40046ABE7 /* PBGSViewController.m in Sources */,
+				AA77106618EAD06E0007B0AD /* SettingsCell.m in Sources */,
 				AA69AE5618D01EDA0046ABE7 /* PBExampleCell.m in Sources */,
 				4FBBEB5E18682E210040EA12 /* pngrutil.c in Sources */,
 				4FBBEB6418682E210040EA12 /* pngwutil.c in Sources */,
@@ -2467,6 +2628,7 @@
 				AAE3154418D9B4870069A6DE /* HAAppDelegate.m in Sources */,
 				AA69AE7118D059230046ABE7 /* BackgroundViewController.m in Sources */,
 				4F5B4EB518698D9800AAE584 /* PlusAPIManager.m in Sources */,
+				AA77107418EAD07B0007B0AD /* EmailMailboxController.m in Sources */,
 				4FBBEB5D18682E210040EA12 /* pngrtran.c in Sources */,
 				AA69AE6C18D0430D0046ABE7 /* ForegroundViewController.m in Sources */,
 				AA5A728A186C29AB00BC8D91 /* JCGridMenuRow.m in Sources */,
@@ -2478,6 +2640,7 @@
 				4F5B4E97186966AE00AAE584 /* RKXMLReaderSerialization.m in Sources */,
 				4FBBEB6318682E210040EA12 /* pngwtran.c in Sources */,
 				4FEE9CD1187A9F6900BD39A8 /* NSObject+SBJSON.m in Sources */,
+				AA77103A18EACDF10007B0AD /* ImapMessage.m in Sources */,
 				AAE3154818D9B4870069A6DE /* HACollectionViewSmallLayout.m in Sources */,
 				E319C128187E44E000C9CADB /* MenuViewController.m in Sources */,
 				E319C126187E44E000C9CADB /* MenuCell.m in Sources */,
@@ -2497,34 +2660,45 @@
 				4FBBEB5818682E210040EA12 /* pngget.c in Sources */,
 				4FEE9CB9187A6BE900BD39A8 /* FriendInfoCell.m in Sources */,
 				AA69AE2118D0106C0046ABE7 /* MainViewController.m in Sources */,
+				AA77104A18EACF850007B0AD /* Settings.m in Sources */,
 				4FBBEC00186849BF0040EA12 /* CustomGAITrackedViewController.m in Sources */,
 				4F0440561871248A004F93ED /* UserProfile.m in Sources */,
 				4FBBEB2018681F160040EA12 /* iCarousel.m in Sources */,
+				AA77103218EACDF10007B0AD /* ImapConnection.m in Sources */,
 				AAE3155018D9B4870069A6DE /* HATransitionLayout.m in Sources */,
 				183877E8188B9CFD007BCC6E /* NearByOffer.m in Sources */,
+				AA77106418EAD06E0007B0AD /* CheckboxCell.m in Sources */,
 				E3A9A78118854B3E00993FA0 /* MenuModel.m in Sources */,
 				4FBBEB6218682E210040EA12 /* pngwrite.c in Sources */,
 				AA5A729E186D63F500BC8D91 /* JPSThumnail.m in Sources */,
 				4FEE9CD3187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */,
 				AAE3154C18D9B4870069A6DE /* HASmallCollectionViewController.m in Sources */,
 				AA69AE4D18D0135D0046ABE7 /* PInterestViewController.m in Sources */,
+				AA77107018EAD07B0007B0AD /* EmailSetupController.m in Sources */,
 				AABB9BE118725FAA0018C0D5 /* RedeemModel.m in Sources */,
 				AABB9BE918727B5F0018C0D5 /* OfferDetailModel.m in Sources */,
 				AA5A7288186C29AB00BC8D91 /* UIView+JCUI.m in Sources */,
+				AA77106018EAD06E0007B0AD /* TableFooterDragRefreshView.m in Sources */,
 				4FBBEB1A18681F160040EA12 /* NSString+SHA.m in Sources */,
+				AA77105C18EAD06E0007B0AD /* UIViewSizeShortcuts.m in Sources */,
 				4FBBEC1218684D2D0040EA12 /* NSString+trimSpecialCharacter.m in Sources */,
 				AA69AE1118CFFB010046ABE7 /* AnotherViewController.m in Sources */,
+				AA77102C18EACDF10007B0AD /* Base64.m in Sources */,
 				183877E4188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */,
+				AA77102E18EACDF10007B0AD /* Imap.m in Sources */,
 				18FBCEE218673C1900C9E399 /* main.m in Sources */,
 				E31056C6187D8B8A0088818F /* VersionNotificationViewController.m in Sources */,
 				4F5B4EA51869690700AAE584 /* DictionaryMapping.m in Sources */,
+				AA77103E18EACDF10007B0AD /* NSStream+GetStreamsToHost.m in Sources */,
 				AAE3152518D9A8F70069A6DE /* RSViewController.m in Sources */,
 				4F754E101872ABB900540C9B /* MBSliderView.m in Sources */,
 				4FBBEC08186849BF0040EA12 /* PullRefreshTableViewController.m in Sources */,
+				AA77103018EACDF10007B0AD /* ImapBodypart.m in Sources */,
 				4FEE9CD5187A9F6900BD39A8 /* SBJsonBase.m in Sources */,
 				4FBBEB5918682E210040EA12 /* pngmem.c in Sources */,
 				4FBBEC07186849BF0040EA12 /* LoadingView.m in Sources */,
 				4F6848E8186D8CB90031893D /* ChooseCityViewController.m in Sources */,
+				AA77105E18EAD06E0007B0AD /* MoreTableViewController.m in Sources */,
 				AA5A729C186D63F500BC8D91 /* JPSThumbnailAnnotation.m in Sources */,
 				4FBBEC1818684E3F0040EA12 /* GifImageView.m in Sources */,
 				4F754E2C187546F000540C9B /* UIColor+CreateMethods.m in Sources */,
@@ -2533,11 +2707,15 @@
 				4FBBEC01186849BF0040EA12 /* CustomUIImagePickerController.m in Sources */,
 				4FBBEB6018682E210040EA12 /* pngtrans.c in Sources */,
 				4FBBEB5718682E210040EA12 /* pngerror.c in Sources */,
+				AA77103418EACDF10007B0AD /* ImapEncoding.mm in Sources */,
 				AA5A7259186C29AB00BC8D91 /* JCGridMenuController.m in Sources */,
 				AA5A728B186C29AB00BC8D91 /* JCGridMenuView.m in Sources */,
 				4FBBEB1418681F160040EA12 /* qr_draw_png.mm in Sources */,
 				4FBBEB1518681F160040EA12 /* QR_Encode.mm in Sources */,
+				AA77103C18EACDF10007B0AD /* ImapReader.m in Sources */,
 				AA5A7287186C29AB00BC8D91 /* UILabel+JCUI.m in Sources */,
+				AA77104C18EACF850007B0AD /* Utils.m in Sources */,
+				AA77107218EAD07B0007B0AD /* EmailListController.m in Sources */,
 				4FEE9CD7187A9F6900BD39A8 /* SBJsonParser.m in Sources */,
 				AAE3150F18D9A8CB0069A6DE /* RSCircaPageControl.m in Sources */,
 				4FBBEB6118682E210040EA12 /* pngwio.c in Sources */,
@@ -2563,12 +2741,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAB01B5018701805006E2552 /* UIViewController+CustomNavigation.m in Sources */,
+				AA77106518EAD06E0007B0AD /* CheckboxCell.m in Sources */,
 				AAB01B5118701805006E2552 /* ArrayMapping.m in Sources */,
 				AAB01B5318701805006E2552 /* CoreAPIManager.m in Sources */,
 				AAB01B5418701805006E2552 /* JPSThumbnailAnnotationView.m in Sources */,
 				AA69AE1218CFFB010046ABE7 /* AnotherViewController.m in Sources */,
 				AAB01B5718701805006E2552 /* CustomViewController.m in Sources */,
 				4FEE9CC3187A977D00BD39A8 /* Position.m in Sources */,
+				AA77103518EACDF10007B0AD /* ImapEncoding.mm in Sources */,
 				AAB01B5B18701805006E2552 /* NSString+MD5Addition.m in Sources */,
 				AAB01B5C18701805006E2552 /* pngpread.c in Sources */,
 				183877E5188B9CFD007BCC6E /* EntertainmentOffer.m in Sources */,
@@ -2578,16 +2758,22 @@
 				AA69AE5B18D01EDA0046ABE7 /* PBNews.m in Sources */,
 				AAB01B6118701805006E2552 /* pngrutil.c in Sources */,
 				AAB01B6218701805006E2552 /* pngwutil.c in Sources */,
+				AA77103918EACDF10007B0AD /* ImapMailbox.m in Sources */,
 				E3203B3718864B1E00389FAE /* MenuItem.m in Sources */,
 				AAE3152618D9A8F70069A6DE /* RSViewController.m in Sources */,
+				AA77103D18EACDF10007B0AD /* ImapReader.m in Sources */,
+				AA77103B18EACDF10007B0AD /* ImapMessage.m in Sources */,
 				4FEE9CBA187A6BE900BD39A8 /* FriendInfoCell.m in Sources */,
 				4FEE9CDA187A9F6900BD39A8 /* SBJsonWriter.m in Sources */,
+				AA77106318EAD06E0007B0AD /* TableHeaderDragRefreshView.m in Sources */,
 				AAE3154518D9B4870069A6DE /* HAAppDelegate.m in Sources */,
 				AAB01B6318701805006E2552 /* PlusAPIManager.m in Sources */,
 				4FEE9CBC187A6BE900BD39A8 /* ProfileTableViewCell.m in Sources */,
 				183877E9188B9CFD007BCC6E /* NearByOffer.m in Sources */,
 				AAB01B6418701805006E2552 /* pngrtran.c in Sources */,
 				E31056C7187D8B8A0088818F /* VersionNotificationViewController.m in Sources */,
+				AA77106718EAD06E0007B0AD /* SettingsCell.m in Sources */,
+				AA77103318EACDF10007B0AD /* ImapConnection.m in Sources */,
 				AAB01B6518701805006E2552 /* JCGridMenuRow.m in Sources */,
 				AAB01B6618701805006E2552 /* Location.m in Sources */,
 				AA69AE2218D0106C0046ABE7 /* MainViewController.m in Sources */,
@@ -2600,23 +2786,30 @@
 				AABB9BE218725FAA0018C0D5 /* RedeemModel.m in Sources */,
 				AAB01B6B18701805006E2552 /* UIDevice+IdentifierAddition.m in Sources */,
 				AA69AE6D18D0430D0046ABE7 /* ForegroundViewController.m in Sources */,
+				AA77104D18EACF850007B0AD /* Utils.m in Sources */,
 				AA69AE5918D01EDA0046ABE7 /* PBExampleViewController.m in Sources */,
 				E319C129187E44E000C9CADB /* MenuViewController.m in Sources */,
+				AA77105F18EAD06E0007B0AD /* MoreTableViewController.m in Sources */,
 				AA69AE1B18CFFC130046ABE7 /* FlipBoardNavigationController.m in Sources */,
 				18814D2E18702CF100765498 /* PlusOfferModel.xcdatamodeld in Sources */,
+				AA77105D18EAD06E0007B0AD /* UIViewSizeShortcuts.m in Sources */,
 				AAB01B6C18701805006E2552 /* UIButton+JCUI.m in Sources */,
 				AAB01B6D18701805006E2552 /* pngset.c in Sources */,
 				AAB01B6E18701805006E2552 /* JCGridMenuColumn.m in Sources */,
+				AA77107718EAD07B0007B0AD /* EmailMessageController.m in Sources */,
 				AAB01B6F18701805006E2552 /* UIImage+Ultility.m in Sources */,
 				AAB01B7018701805006E2552 /* pngget.c in Sources */,
 				AAE3154F18D9B4870069A6DE /* HATransitionController.m in Sources */,
 				AA69AE4E18D0135D0046ABE7 /* PInterestViewController.m in Sources */,
 				AA69AE1418CFFB010046ABE7 /* ChildViewController.m in Sources */,
+				AA77106118EAD06E0007B0AD /* TableFooterDragRefreshView.m in Sources */,
+				AA77102F18EACDF10007B0AD /* Imap.m in Sources */,
 				AA69AE5718D01EDA0046ABE7 /* PBExampleCell.m in Sources */,
 				AAB01B7118701805006E2552 /* CustomGAITrackedViewController.m in Sources */,
 				AAB01B7218701805006E2552 /* iCarousel.m in Sources */,
 				183877E1188B9CFC007BCC6E /* CuisineOffer.m in Sources */,
 				4FEE9CD6187A9F6900BD39A8 /* SBJsonBase.m in Sources */,
+				AA77103118EACDF10007B0AD /* ImapBodypart.m in Sources */,
 				AAB01B7318701805006E2552 /* pngwrite.c in Sources */,
 				AAB01B7418701805006E2552 /* JPSThumnail.m in Sources */,
 				AAB01B7618701805006E2552 /* UIView+JCUI.m in Sources */,
@@ -2635,6 +2828,7 @@
 				AA69AE4A18D0131B0046ABE7 /* GHViewController.m in Sources */,
 				4FEE9CD4187A9F6900BD39A8 /* NSString+SBJSON.m in Sources */,
 				AAB01B7C18701805006E2552 /* pngmem.c in Sources */,
+				AA77107118EAD07B0007B0AD /* EmailSetupController.m in Sources */,
 				AAE3154918D9B4870069A6DE /* HACollectionViewSmallLayout.m in Sources */,
 				AAB01B7D18701805006E2552 /* LoadingView.m in Sources */,
 				AAB01B7E18701805006E2552 /* ChooseCityViewController.m in Sources */,
@@ -2648,22 +2842,28 @@
 				AAE3154B18D9B4870069A6DE /* HAPaperCollectionViewController.m in Sources */,
 				AAE3154718D9B4870069A6DE /* HACollectionViewLargeLayout.m in Sources */,
 				AAB01B8418701805006E2552 /* pngtrans.c in Sources */,
+				AA77103718EACDF10007B0AD /* ImapFetchObject.m in Sources */,
 				AAE3155118D9B4870069A6DE /* HATransitionLayout.m in Sources */,
 				AAB01B8518701805006E2552 /* pngerror.c in Sources */,
+				AA77107318EAD07B0007B0AD /* EmailListController.m in Sources */,
 				AAB01B8618701805006E2552 /* JCGridMenuController.m in Sources */,
 				E319C127187E44E000C9CADB /* MenuCell.m in Sources */,
 				AAB01B8718701805006E2552 /* JCGridMenuView.m in Sources */,
+				AA77102D18EACDF10007B0AD /* Base64.m in Sources */,
 				AABB9BEA18727B5F0018C0D5 /* OfferDetailModel.m in Sources */,
 				AA69AE6618D01EE40046ABE7 /* PBGSCollectionViewController.m in Sources */,
+				AA77103F18EACDF10007B0AD /* NSStream+GetStreamsToHost.m in Sources */,
 				AAB01B8818701805006E2552 /* qr_draw_png.mm in Sources */,
 				AAB01B8918701805006E2552 /* QR_Encode.mm in Sources */,
 				AA69AE1618CFFB010046ABE7 /* ViewController.m in Sources */,
 				AAE3151018D9A8CB0069A6DE /* RSCircaPageControl.m in Sources */,
 				AAB01B8A18701805006E2552 /* UILabel+JCUI.m in Sources */,
 				AA69AE4818D0131B0046ABE7 /* GHContextMenuView.m in Sources */,
+				AA77107518EAD07B0007B0AD /* EmailMailboxController.m in Sources */,
 				AAB01B8B18701805006E2552 /* pngwio.c in Sources */,
 				AAB01B8D18701805006E2552 /* CustomUIResponder.m in Sources */,
 				AAB01B8E18701805006E2552 /* pngrio.c in Sources */,
+				AA77104B18EACF850007B0AD /* Settings.m in Sources */,
 				AA69AE4618D0131B0046ABE7 /* GHCollectionViewController.m in Sources */,
 				AAB01B8F18701805006E2552 /* png.c in Sources */,
 			);

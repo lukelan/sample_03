@@ -14,4 +14,5 @@
 - (IBAction)pushPinterest:(UIButton *)sender;
 - (IBAction)pushFeedly:(UIButton *)sender;
 - (IBAction)pushPaper:(UIButton *)sender;
+- (IBAction)pushEmail:(UIButton *)sender;
 @end
