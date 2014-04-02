@@ -2187,9 +2187,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18FBCED118673C1800C9E399 /* PlusOffer Dev */ = {
+		18FBCED118673C1800C9E399 /* FlipMail */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18FBCF0418673C1900C9E399 /* Build configuration list for PBXNativeTarget "PlusOffer Dev" */;
+			buildConfigurationList = 18FBCF0418673C1900C9E399 /* Build configuration list for PBXNativeTarget "FlipMail" */;
 			buildPhases = (
 				50BA01729A3E4963B252B56D /* Check Pods Manifest.lock */,
 				18FBCECE18673C1800C9E399 /* Sources */,
@@ -2203,7 +2203,7 @@
 				AA67DE8518E13C1B0095D12B /* PBXTargetDependency */,
 				4FBBEBD918683B0E0040EA12 /* PBXTargetDependency */,
 			);
-			name = "PlusOffer Dev";
+			name = FlipMail;
 			productName = PlusOffer;
 			productReference = 18FBCED218673C1800C9E399 /* PlusOffer Dev.app */;
 			productType = "com.apple.product-type.application";
@@ -2286,7 +2286,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				18FBCED118673C1800C9E399 /* PlusOffer Dev */,
+				18FBCED118673C1800C9E399 /* FlipMail */,
 				AAB01B4B18701805006E2552 /* PlusOffer Pro */,
 				18FBCEF218673C1900C9E399 /* PlusOfferTests */,
 			);
@@ -2874,7 +2874,7 @@
 /* Begin PBXTargetDependency section */
 		18FBCEF918673C1900C9E399 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18FBCED118673C1800C9E399 /* PlusOffer Dev */;
+			target = 18FBCED118673C1800C9E399 /* FlipMail */;
 			targetProxy = 18FBCEF818673C1900C9E399 /* PBXContainerItemProxy */;
 		};
 		4FBBEBD918683B0E0040EA12 /* PBXTargetDependency */ = {
@@ -3044,7 +3044,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4DAEEBF4-0305-4CA8-9549-6663AECB751F";
+				PROVISIONING_PROFILE = "008B61BC-E50C-4735-A486-0E9B8FBD760C";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3108,7 +3108,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4DAEEBF4-0305-4CA8-9549-6663AECB751F";
+				PROVISIONING_PROFILE = "008B61BC-E50C-4735-A486-0E9B8FBD760C";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3234,7 +3234,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18FBCF0418673C1900C9E399 /* Build configuration list for PBXNativeTarget "PlusOffer Dev" */ = {
+		18FBCF0418673C1900C9E399 /* Build configuration list for PBXNativeTarget "FlipMail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18FBCF0518673C1900C9E399 /* Debug */,

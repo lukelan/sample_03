@@ -5,7 +5,7 @@
 #include "Settings.h"
 
 //#define LOG(format, ...) NSLog(format, ## __VA_ARGS__)
-#define LOG(format, ...) 
+#define LOG(format, ...)
 
 #define CONNECT_TIMEOUT  5.0
 
@@ -59,9 +59,9 @@ Imap *imap = NULL;
 		messages = [[NSMutableArray alloc] init];
 		writeQueue = [[NSMutableArray alloc] init];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self 
-			selector:@selector(application_WillResignActive:) 
-			name:UIApplicationWillResignActiveNotification object:NULL];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(application_WillResignActive:)
+                                                     name:UIApplicationWillResignActiveNotification object:NULL];
 	}
 	return self;
 }
@@ -69,11 +69,11 @@ Imap *imap = NULL;
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
+    
 	[connection release];
 	[requests release];
-  [mailboxes release];
-  [selectedMailbox release];
+    [mailboxes release];
+    [selectedMailbox release];
 	[buffer release];
 	[messages release];
 	[writeQueue release];
@@ -115,7 +115,7 @@ Imap *imap = NULL;
 		[self reportError:error toClient:request.client];
 		[requests removeObject:request];
 	}
-
+    
 	[self resetConnectionData];
 }
 
@@ -125,29 +125,29 @@ Imap *imap = NULL;
 	{
 		// Reconnect
 		[connection connectToHost:settings.imapHost port:settings.imapPort useSSL:settings.imapSsl];
-
+        
 		[self login:NULL];
-
+        
 		// Select mailbox
 		if (self.selectedMailbox != NULL)
 			[self select:NULL mailboxName:self.selectedMailbox.name];
-
+        
 		// Get message sequence numbers
 		if (messages.count > 0)
 		{
 			ImapMessage *firstMessage = [messages objectAtIndex:0];
 			[self uidFetch:NULL uid:firstMessage.uid filter:@""];
 		}
-
+        
 		if (messages.count > 1)
 		{
 			ImapMessage *lastMessage = [messages lastObject];
 			[self uidFetch:NULL uid:lastMessage.uid filter:@""];
 		}
-
+        
 		// Timeout check
-		[self performSelector:@selector(connection_Timeout:) 
-			withObject:[NSNumber numberWithInt:connectId] afterDelay:CONNECT_TIMEOUT];
+		[self performSelector:@selector(connection_Timeout:)
+                   withObject:[NSNumber numberWithInt:connectId] afterDelay:CONNECT_TIMEOUT];
 	}
 }
 
@@ -155,7 +155,7 @@ Imap *imap = NULL;
 {
 	if (passedConnectId.intValue != connectId)
 		return;
-
+    
 	[connection close];
 	[self closeRequestsWithError:@"Connection timeout"];
 }
@@ -182,17 +182,17 @@ Imap *imap = NULL;
 - (void) startRequest:(id)client command:(NSString *)command action:(SEL)action tag:(id)tag
 {
 	bool loginRequest = [command hasPrefix:@"LOGIN"];
-
+    
 	if (!loginRequest)
 		[self maintainConnection];
-
+    
 	requestId++;
 	
 	ImapRequest *request = [[ImapRequest alloc] init];
 	request.code = [NSString stringWithFormat:@"A%0.03i", requestId];
 	request.client = client;
 	request.action = action;
-  request.tag = tag;
+    request.tag = tag;
 	request.login = loginRequest;
 	[requests addObject:request];
 	[request release];
@@ -207,39 +207,39 @@ Imap *imap = NULL;
 
 - (ImapMailbox *) mailboxWithName:(NSString *)name
 {
-  int i = mailboxes.count-1;
-  while (i >= 0 && ![[[mailboxes objectAtIndex:i] name] isEqual:name])
-    i--;
-  if (i >= 0)
-    return [mailboxes objectAtIndex:i];
-  return NULL;
+    int i = mailboxes.count-1;
+    while (i >= 0 && ![[[mailboxes objectAtIndex:i] name] isEqual:name])
+        i--;
+    if (i >= 0)
+        return [mailboxes objectAtIndex:i];
+    return NULL;
 }
 
 - (void) receivedList:(ImapReader *)reader
 {
 	ImapMailbox *mailbox = [[ImapMailbox alloc] init];
-
+    
 	[reader readStringUntil:'('];
-
+    
 	NSString *flags = [reader readStringUntil:')'];
 	[reader skipSpaces];
-
+    
 	mailbox.noinferiors = ([flags rangeOfString:@"\\Noinferiors"].location != NSNotFound);
 	mailbox.noselect = ([flags rangeOfString:@"\\Noselect"].location != NSNotFound);
 	mailbox.marked = ([flags rangeOfString:@"\\Marked"].location != NSNotFound);
 	mailbox.unmarked = ([flags rangeOfString:@"\\Unmarked"].location != NSNotFound);
-
+    
 	if ([reader currentChar] == '"')
 		mailbox.delimiter = [reader readQuotedString];
 	else
 		mailbox.delimiter = [reader readStringUntilSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	[reader skipSpaces];
-		
+    
 	if ([reader currentChar] == '"')
 		mailbox.name = [reader readQuotedString];
 	else
 		mailbox.name = [reader readStringUntilSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
+    
 	ImapMailbox *existing = [self mailboxWithName:mailbox.name];
 	if (existing != NULL)
 		[mailboxes replaceObjectAtIndex:[mailboxes indexOfObject:existing] withObject:mailbox];
@@ -279,7 +279,7 @@ Imap *imap = NULL;
 - (ImapFetchObject *) readFetchData:(ImapReader *)reader
 {
 	ImapFetchObject *obj = [[ImapFetchObject alloc] init];
-
+    
 	if ([reader currentChar] == '(')
 	{
 		obj.type = IMAPFETCHOBJECT_LIST;
@@ -316,7 +316,7 @@ Imap *imap = NULL;
 		obj.intValue = [n intValue];
 		return obj;
 	}
-
+    
 	if ([reader skipChar:'N'] && [reader skipChar:'I'] && [reader skipChar:'L'])
 	{
 		obj.type = IMAPFETCHOBJECT_NIL;
@@ -350,7 +350,7 @@ Imap *imap = NULL;
 			[partName appendFormat:@"%@]", args];
 		}
 		[reader skipSpaces];
-	
+        
 		// {size}\r\n data\r\n ?
 		if ([reader currentChar] == '{')
 		{
@@ -376,7 +376,7 @@ Imap *imap = NULL;
 		
 		[reader skipSpaces];
 	}
-
+    
 	// Read UID
 	ImapFetchObject *uidObj = [parts objectForKey:@"UID"];
 	if (uidObj == NULL || uidObj.type != IMAPFETCHOBJECT_NUMBER)
@@ -385,11 +385,11 @@ Imap *imap = NULL;
 		return READFETCH_ERROR;
 	}
 	int uid = uidObj.intValue;
-
+    
 	// Create message
 	ImapMessage *message;
-
-	int i = 0; 
+    
+	int i = 0;
 	while (i < messages.count && [[messages objectAtIndex:i] uid] < uid)
 		i++;
 	if (i < messages.count)
@@ -408,7 +408,7 @@ Imap *imap = NULL;
 		message = [[ImapMessage alloc] init];
 		[messages addObject:message];
 	}
-
+    
 	message.sequenceNumber = sequenceNumber;
 	[message addImapContent:parts];
 	
@@ -451,12 +451,12 @@ Imap *imap = NULL;
 - (void) imapConnection_GotData:(NSData *)receivedData
 {
 	[buffer appendData:receivedData];
-
+    
 	NSMutableString *s = [NSMutableString string];
 	for (int i = 0; i < receivedData.length; i++)
 		[s appendFormat:@"%c", ((char *)receivedData.bytes)[i]];
 	LOG(@"%@", s);
-
+    
 	ImapReader *reader = [[ImapReader alloc] initWithData:buffer];
 	
 	while (![reader eof])
@@ -466,7 +466,7 @@ Imap *imap = NULL;
 		{
 			[reader skipSpaces];
 			NSString *word1 = [reader readStringUntilSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
+            
 			if ([word1 isEqual:@"LIST"])
 				[self receivedList:reader]; // TODO
 			
@@ -479,16 +479,16 @@ Imap *imap = NULL;
 				
 				if ([word2 isEqual:@"EXISTS"])
 					[self receivedExists:[word1 intValue]];
-					
+                
 				else if ([word2 isEqual:@"RECENT"])
 					[self receivedRecent:[word1 intValue]];
-					
+                
 				else if ([word2 isEqual:@"[UIDVALIDITY"])
 					[self receivedUidValidity:[[reader readStringUntil:']'] intValue]];
-
+                
 				else if ([word2 isEqual:@"EXPUNGE"])
 					[self receivedExpunge:[word1 intValue]];
-					
+                
 				else if ([word2 isEqual:@"FETCH"])
 				{
 					int rsp = [self readFetch:reader sequenceNumber:[word1 intValue]];
@@ -502,14 +502,14 @@ Imap *imap = NULL;
 				}
 			}
 		}
-	
+        
 		// Command response
 		else if ([reader currentChar] == 'A')
 		{
 			NSString *code = [reader readStringUntil:' '];
 			NSString *status = [reader readStringUntil:' '];
 			NSString *message = [reader readString];
-		
+            
 			int j = requests.count-1;
 			while (j >= 0 && ![code isEqual:((ImapRequest *)[requests objectAtIndex:j]).code])
 				j--;
@@ -517,14 +517,14 @@ Imap *imap = NULL;
 			{
 				// Found request, check response status
 				ImapRequest *request = [requests objectAtIndex:j];
-
+                
 				if ([status isEqual:@"OK"])
 					[self performSelector:request.action withObject:request];
 				else
 					[self reportError:message toClient:request.client];
-
+                
 				[requests removeObjectAtIndex:j];
-
+                
 				if (![status isEqual:@"OK"] && request.login)
 				{
 					[connection close];
@@ -533,7 +533,7 @@ Imap *imap = NULL;
 				}
 			}
 		}
-
+        
 		// Next line
 		[reader readStringUntil:'\n'];
 		
@@ -576,14 +576,15 @@ Imap *imap = NULL;
 - (bool) canLogin
 {
 	return (settings.imapHost != NULL && settings.imapPort > 0 && settings.imapUsername != NULL
-		&& settings.imapPassword != NULL);
+            && settings.imapPassword != NULL);
 }
 
-- (void) login:(id)client 
+- (void) login:(id)client
 {
-	[self startRequest:client 
-		command:[NSString stringWithFormat:@"LOGIN %@ %@", settings.imapUsername, settings.imapPassword]
-		action:@selector(endLogin:) tag:NULL];
+	[self startRequest:client
+               command:[NSString stringWithFormat:@"LOGIN %@ %@", settings.imapUsername, settings.imapPassword]
+                action:@selector(endLogin:) tag:NULL];
+    
 }
 
 - (void) endLogin:(ImapRequest *)request
@@ -596,13 +597,15 @@ Imap *imap = NULL;
 	
 	if (request.client != NULL)
 		[request.client performSelector:@selector(imap_LoginFinished)];
+    
+//    [self create:NULL mailboxName:@"Flipper_testing1"];
 }
 
 - (void) list:(id)client refName:(NSString *)refName mailboxName:(NSString *)mailboxName;
 {
-	[self startRequest:client 
-		command:[NSString stringWithFormat:@"LIST \"%@\" \"%@\"", refName, mailboxName]
-		action:@selector(endList:) tag:NULL];
+	[self startRequest:client
+               command:[NSString stringWithFormat:@"LIST \"%@\" \"%@\"", refName, mailboxName]
+                action:@selector(endList:) tag:NULL];
 }
 
 - (void) endList:(ImapRequest *)request
@@ -613,11 +616,10 @@ Imap *imap = NULL;
 
 - (void) select:(id)client mailboxName:(NSString *)mailboxName
 {
-	[self startRequest:client 
-		command:[NSString stringWithFormat:@"SELECT \"%@\"", mailboxName]
-		action:@selector(endSelect:) tag:mailboxName];
+	[self startRequest:client
+               command:[NSString stringWithFormat:@"SELECT \"%@\"", mailboxName]
+                action:@selector(endSelect:) tag:mailboxName];
 }
-
 - (void) endSelect:(ImapRequest *)request
 {
 	self.selectedMailbox = [self mailboxWithName:request.tag];
@@ -626,12 +628,25 @@ Imap *imap = NULL;
 	if (request.client != NULL)
 		[request.client performSelector:@selector(imap_SelectFinished)];
 }
-
+- (void) create:(id)client mailboxName:(NSString *)mailboxName
+{
+	[self startRequest:client
+               command:[NSString stringWithFormat:@"CREATE \"%@\"", mailboxName]
+                action:@selector(endCreate:) tag:mailboxName];
+}
+- (void) endCreate:(ImapRequest *)request
+{
+    //	self.selectedMailbox = [self mailboxWithName:request.tag];
+    //	LOG(@"selected %@", self.selectedMailbox.name);
+    //
+    //	if (request.client != NULL)
+    //		[request.client performSelector:@selector(imap_SelectFinished)];
+}
 - (void) examine:(id)client mailboxName:(NSString *)mailboxName
 {
-	[self startRequest:client 
-		command:[NSString stringWithFormat:@"EXAMINE \"%@\"", mailboxName]
-		action:@selector(endExamine:) tag:mailboxName];
+	[self startRequest:client
+               command:[NSString stringWithFormat:@"EXAMINE \"%@\"", mailboxName]
+                action:@selector(endExamine:) tag:mailboxName];
 }
 
 - (void) endExamine:(ImapRequest *)request
@@ -647,10 +662,10 @@ Imap *imap = NULL;
 		set = [NSString stringWithFormat:@"%i", firstMessage];
 	else
 		set = [NSString stringWithFormat:@"%i:%i", firstMessage, lastMessage];
-
+    
 	[self startRequest:client
-		command:[NSString stringWithFormat:@"FETCH %@ (UID %@)", set, filter]
-		action:@selector(endFetch:) tag:NULL];
+               command:[NSString stringWithFormat:@"FETCH %@ (UID %@)", set, filter]
+                action:@selector(endFetch:) tag:NULL];
 }
 
 - (void) endFetch:(ImapRequest *)request
@@ -662,9 +677,9 @@ Imap *imap = NULL;
 - (void) uidFetch:(id)client uid:(int)uid filter:(NSString *)filter
 {
 	[self startRequest:client
-		command:[NSString stringWithFormat:@"UID FETCH %i (UID%@%@)", uid, 
-			(filter.length > 0 ? @" " : @""), filter]
-		action:@selector(endUidFetch:) tag:NULL];
+               command:[NSString stringWithFormat:@"UID FETCH %i (UID%@%@)", uid,
+                        (filter.length > 0 ? @" " : @""), filter]
+                action:@selector(endUidFetch:) tag:NULL];
 }
 
 - (void) endUidFetch:(ImapRequest *)request
@@ -677,12 +692,12 @@ Imap *imap = NULL;
 {
 	if (!loggedIn)
 		return;
-		
+    
 	[self reset];
-		
+    
 	[self startRequest:client
-		command:@"LOGOUT"
-		action:@selector(endLogout:) tag:NULL];
+               command:@"LOGOUT"
+                action:@selector(endLogout:) tag:NULL];
 }
 
 - (void) endLogout:(ImapRequest *)request 

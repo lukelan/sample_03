@@ -54,6 +54,7 @@
 - (void) login:(id)client;
 - (void) list:(id)client refName:(NSString *)refName mailboxName:(NSString *)mailboxName;
 - (void) select:(id)client mailboxName:(NSString *)mailboxName;
+- (void) create:(id)client mailboxName:(NSString *)mailboxName;
 - (void) examine:(id)client mailboxName:(NSString *)mailboxName;
 - (void) fetch:(id)client firstMessage:(int)firstMessage lastMessage:(int)lastMessage filter:(NSString *)filter;
 - (void) uidFetch:(id)client uid:(int)uid filter:(NSString *)filter;
