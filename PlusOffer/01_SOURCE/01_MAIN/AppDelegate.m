@@ -12,6 +12,7 @@
 #import "FacebookManager.h"
 #import "SBJsonParser.h"
 #import "BackgroundViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 void doLog(int level, id formatstring,...)
 {
@@ -68,7 +69,7 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     }
     
     //setup restkit
-    [self setupReskit123Phim];
+//    [self setupReskit123Phim];
     
     // init cache and clear mem
     [[SDWebImageManager sharedManagerWithCachePath:CACHE_IMAGE_PATH] setCacheKeyFilter:^NSString *(NSURL *url) {
@@ -89,8 +90,10 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 #endif
  
 #ifdef DEBUG
+    [Crashlytics startWithAPIKey:@"b9e0220e81817857b90bd02dba69cdbe42f37c5a"];
 //    [Crittercism enableWithAppID:@"52bd2b0c8b2e334653000001"]; //Dev
 #else
+    [Crashlytics startWithAPIKey:@"b9e0220e81817857b90bd02dba69cdbe42f37c5a"];
 //    [Crittercism enableWithAppID:@"52bd2b5140020530ee000004"]; // Pro
 #endif
     

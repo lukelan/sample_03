@@ -241,6 +241,8 @@
 		AA69AE7218D059230046ABE7 /* BackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA69AE6F18D059230046ABE7 /* BackgroundViewController.m */; };
 		AA69AE7318D059230046ABE7 /* BackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA69AE7018D059230046ABE7 /* BackgroundViewController.xib */; };
 		AA69AE7418D059230046ABE7 /* BackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA69AE7018D059230046ABE7 /* BackgroundViewController.xib */; };
+		AA74E88318ED6731006C2511 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA74E88218ED6731006C2511 /* Crashlytics.framework */; };
+		AA74E88418ED6731006C2511 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA74E88218ED6731006C2511 /* Crashlytics.framework */; };
 		AA77102C18EACDF10007B0AD /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101918EACDF10007B0AD /* Base64.m */; };
 		AA77102D18EACDF10007B0AD /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101918EACDF10007B0AD /* Base64.m */; };
 		AA77102E18EACDF10007B0AD /* Imap.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77101B18EACDF10007B0AD /* Imap.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -589,7 +591,7 @@
 		18D7919C18771AF800D962A9 /* Routes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Routes.h; path = PlusOffer/01_SOURCE/06_Classes/Routes.h; sourceTree = SOURCE_ROOT; };
 		18D7919D18771AF800D962A9 /* Routes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Routes.m; path = PlusOffer/01_SOURCE/06_Classes/Routes.m; sourceTree = SOURCE_ROOT; };
 		18DDE8071870052400399747 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		18FBCED218673C1800C9E399 /* PlusOffer Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlusOffer Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18FBCED218673C1800C9E399 /* FlipMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FBCED518673C1800C9E399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18FBCED718673C1800C9E399 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		18FBCED918673C1800C9E399 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -867,6 +869,7 @@
 		AA69AE6E18D059230046ABE7 /* BackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundViewController.h; sourceTree = "<group>"; };
 		AA69AE6F18D059230046ABE7 /* BackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundViewController.m; sourceTree = "<group>"; };
 		AA69AE7018D059230046ABE7 /* BackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackgroundViewController.xib; sourceTree = "<group>"; };
+		AA74E88218ED6731006C2511 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		AA77101818EACDF10007B0AD /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		AA77101918EACDF10007B0AD /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		AA77101A18EACDF10007B0AD /* Imap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Imap.h; sourceTree = "<group>"; };
@@ -988,6 +991,7 @@
 				18FBCF3518674D0300C9E399 /* CoreLocation.framework in Frameworks */,
 				18FBCF3318674CFD00C9E399 /* MapKit.framework in Frameworks */,
 				18FBCED818673C1800C9E399 /* CoreGraphics.framework in Frameworks */,
+				AA74E88318ED6731006C2511 /* Crashlytics.framework in Frameworks */,
 				18FBCEDA18673C1800C9E399 /* UIKit.framework in Frameworks */,
 				18FBCED618673C1800C9E399 /* Foundation.framework in Frameworks */,
 				4FBBEB1B18681F160040EA12 /* FacebookSDK.framework in Frameworks */,
@@ -1018,6 +1022,7 @@
 				AAB01B9818701805006E2552 /* libCrittercism_v4_3_0.a in Frameworks */,
 				AAB01B9918701805006E2552 /* libGoogleConversionTracking.a in Frameworks */,
 				AAB01B9A18701805006E2552 /* libGoogleAnalytics.a in Frameworks */,
+				AA74E88418ED6731006C2511 /* Crashlytics.framework in Frameworks */,
 				AAB01B9B18701805006E2552 /* CFNetwork.framework in Frameworks */,
 				AAB01B9C18701805006E2552 /* Security.framework in Frameworks */,
 				AAB01B9D18701805006E2552 /* SystemConfiguration.framework in Frameworks */,
@@ -1129,7 +1134,7 @@
 		18FBCED318673C1800C9E399 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18FBCED218673C1800C9E399 /* PlusOffer Dev.app */,
+				18FBCED218673C1800C9E399 /* FlipMail.app */,
 				18FBCEF318673C1900C9E399 /* PlusOfferTests.xctest */,
 				AAB01BED18701805006E2552 /* PlusOffer.app */,
 			);
@@ -1208,6 +1213,7 @@
 		18FBCF0D1867443200C9E399 /* 02_LIBS */ = {
 			isa = PBXGroup;
 			children = (
+				AA74E88218ED6731006C2511 /* Crashlytics.framework */,
 				AA77101718EACDF10007B0AD /* IMAP */,
 				AA67DE7018E13BCB0095D12B /* mailcore2.xcodeproj */,
 				AAE3152718D9B4870069A6DE /* Paper */,
@@ -2196,6 +2202,7 @@
 				18FBCECF18673C1800C9E399 /* Frameworks */,
 				18FBCED018673C1800C9E399 /* Resources */,
 				025BAE2ED573477785C3FE19 /* Copy Pods Resources */,
+				AA74E88118ED6663006C2511 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2205,7 +2212,7 @@
 			);
 			name = FlipMail;
 			productName = PlusOffer;
-			productReference = 18FBCED218673C1800C9E399 /* PlusOffer Dev.app */;
+			productReference = 18FBCED218673C1800C9E399 /* FlipMail.app */;
 			productType = "com.apple.product-type.application";
 		};
 		18FBCEF218673C1900C9E399 /* PlusOfferTests */ = {
@@ -2556,6 +2563,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		AA74E88118ED6663006C2511 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run b9e0220e81817857b90bd02dba69cdbe42f37c5a e084d7483312540264713040569a9a2fac4442d3eecc61318163858c33c1929e";
 		};
 		AAB01B4E18701805006E2552 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3001,6 +3021,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
 					"$(SRCROOT)/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"$(PROJECT_DIR)/PlusOffer/02_LIBS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -3065,6 +3086,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
 					"$(SRCROOT)/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"$(PROJECT_DIR)/PlusOffer/02_LIBS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -3167,6 +3189,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
 					"$(SRCROOT)/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"$(PROJECT_DIR)/PlusOffer/02_LIBS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";
@@ -3200,6 +3223,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/PlusOffer/02_LIBS/FacebookSDK/3.8",
 					"$(SRCROOT)/PlusOffer/02_LIBS/SDWebImage-3.3/Vendors",
+					"$(PROJECT_DIR)/PlusOffer/02_LIBS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlusOffer/PlusOffer-Prefix.pch";

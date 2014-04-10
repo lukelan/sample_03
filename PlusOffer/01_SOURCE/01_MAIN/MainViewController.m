@@ -18,6 +18,7 @@
 #import "Imap.h"
 #import "Settings.h"
 #import "EmailSetupController.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface MainViewController ()
 @property (strong, nonatomic) UIDynamicAnimator *animator;
@@ -47,30 +48,30 @@
     
     // Test Email
     
-    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
-    [session setHostname:@"imap.gmail.com"];
-    [session setPort:993];
-    [session setUsername:@"vuminh.trong@gmail.com"];
-    [session setPassword:@"lukelan"];
-    [session setConnectionType:MCOConnectionTypeTLS];
-    
-    MCOIMAPMessagesRequestKind requestKind = MCOIMAPMessagesRequestKindHeaders;
-    NSString *folder = @"Flipper";
-    MCOIndexSet *uids = [MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)];
-    
-    MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesByUIDOperationWithFolder:folder requestKind:requestKind uids:uids];
-    
-    [fetchOperation start:^(NSError * error, NSArray * fetchedMessages, MCOIndexSet * vanishedMessages) {
-        //We've finished downloading the messages!
-        
-        //Let's check if there was an error:
-        if(error) {
-            NSLog(@"Error downloading message headers:%@", error);
-        }
-        
-        //And, let's print out the messages...
-        NSLog(@"The post man delivereth:%@", fetchedMessages);
-    }];
+//    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
+//    [session setHostname:@"imap.gmail.com"];
+//    [session setPort:993];
+//    [session setUsername:@"vuminh.trong@gmail.com"];
+//    [session setPassword:@"lukelan"];
+//    [session setConnectionType:MCOConnectionTypeTLS];
+//    
+//    MCOIMAPMessagesRequestKind requestKind = MCOIMAPMessagesRequestKindHeaders;
+//    NSString *folder = @"Flipper";
+//    MCOIndexSet *uids = [MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)];
+//    
+//    MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesByUIDOperationWithFolder:folder requestKind:requestKind uids:uids];
+//    
+//    [fetchOperation start:^(NSError * error, NSArray * fetchedMessages, MCOIndexSet * vanishedMessages) {
+//        //We've finished downloading the messages!
+//        
+//        //Let's check if there was an error:
+//        if(error) {
+//            NSLog(@"Error downloading message headers:%@", error);
+//        }
+//        
+//        //And, let's print out the messages...
+//        NSLog(@"The post man delivereth:%@", fetchedMessages);
+//    }];
     
 }
 
@@ -86,6 +87,7 @@
 }
 - (IBAction)pushPinterest:(UIButton *)sender {
     UIViewController * page = [self.storyboard instantiateViewControllerWithIdentifier:@"pinterest_vc"];
+//    [[Crashlytics sharedInstance] crash];
     [self.flipboardNavigationController pushViewController:page];
 }
 - (IBAction)pushFeedly:(UIButton *)sender {
