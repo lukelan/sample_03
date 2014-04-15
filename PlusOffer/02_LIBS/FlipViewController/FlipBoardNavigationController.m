@@ -361,6 +361,8 @@ typedef enum {
     else if([self.parentViewController isKindOfClass:[UINavigationController class]] &&
             [self.parentViewController.parentViewController isKindOfClass:[FlipBoardNavigationController class]]){
         return (FlipBoardNavigationController*)[self.parentViewController parentViewController];
+    } else if( [self.parentViewController.parentViewController isKindOfClass:[FlipBoardNavigationController class]]){
+        return (FlipBoardNavigationController*)[self.parentViewController parentViewController];
     }
     else{
         return nil;

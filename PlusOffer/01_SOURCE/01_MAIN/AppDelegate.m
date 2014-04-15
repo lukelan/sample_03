@@ -13,6 +13,7 @@
 #import "SBJsonParser.h"
 #import "BackgroundViewController.h"
 #import <Crashlytics/Crashlytics.h>
+#import "SettingsViewController.h"
 
 void doLog(int level, id formatstring,...)
 {
@@ -56,10 +57,30 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
 //    self.foregroundWindow.windowLevel = UIWindowLevelStatusBar;
 //    self.foregroundWindow.hidden = NO;
    
+    //create a UITabBarController object
+    UITabBarController *tabBarController=[[UITabBarController alloc]init];
+    
     UIStoryboard * storyboard=[UIStoryboard storyboardWithName:[self storyboardName] bundle:nil];
     self.mainVC = [storyboard instantiateViewControllerWithIdentifier:@"root1_vc"];
-    self.flipBoardNVC = [[FlipBoardNavigationController alloc]initWithRootViewController:self.mainVC];
+    
+    SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:nil bundle:nil];
+    
+    //adding view controllers to your tabBarController bundling them in an array
+    tabBarController.viewControllers=[NSArray arrayWithObjects:self.mainVC,settingsViewController, nil];
+    
+    //laypout items of TabBar
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"Inbox" image:nil tag:0];
+    self.mainVC.tabBarItem = item1;
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"Setting" image:nil tag:0];
+    settingsViewController.tabBarItem = item2;
+    //[[self.tabBarController.tabBar.items objectAtIndex:0] setTitle:@"inbox"];
+    //[[self.tabBarController.tabBar.items objectAtIndex:1] setTitle:@"shopping"];
+    
+    //navigating to the UITabBarController that you created
+    self.flipBoardNVC = [[FlipBoardNavigationController alloc]initWithRootViewController:tabBarController];
     self.window.rootViewController = self.flipBoardNVC;
+    
+    
     [self.window makeKeyAndVisible];
     
     

@@ -48,6 +48,7 @@
 @property (strong, nonatomic) FlipBoardNavigationController * flipBoardNVC;
 @property (strong, nonatomic) UIViewController * mainVC;
 @property (strong, nonatomic) UIWindow *foregroundWindow;
+@property (nonatomic, retain) UITabBarController *tabBarController;
 - (NSString *)storyboardName;
 
 +(void) explode: (id) aView level: (int) level;
