@@ -15,4 +15,6 @@
 - (IBAction)pushFeedly:(UIButton *)sender;
 - (IBAction)pushPaper:(UIButton *)sender;
 - (IBAction)pushEmail:(UIButton *)sender;
+
+- (IBAction)pushInbox:(UIButton *)sender;
 @end

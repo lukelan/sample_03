@@ -69,9 +69,9 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     tabBarController.viewControllers=[NSArray arrayWithObjects:self.mainVC,settingsViewController, nil];
     
     //laypout items of TabBar
-    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"Inbox" image:nil tag:0];
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"Mails" image:nil tag:0];
     self.mainVC.tabBarItem = item1;
-    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"Setting" image:nil tag:0];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"Settings" image:nil tag:0];
     settingsViewController.tabBarItem = item2;
     //[[self.tabBarController.tabBar.items objectAtIndex:0] setTitle:@"inbox"];
     //[[self.tabBarController.tabBar.items objectAtIndex:1] setTitle:@"shopping"];

@@ -19,6 +19,7 @@
 #import "Settings.h"
 #import "EmailSetupController.h"
 #import <Crashlytics/Crashlytics.h>
+#import "MasterViewController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) UIDynamicAnimator *animator;
@@ -34,7 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     
     CALayer *layer = self.view.layer;
     layer.cornerRadius = 5.0f;
@@ -105,6 +106,11 @@
     
 	EmailSetupController *ctr = [[EmailSetupController alloc] init];
 //	UINavigationController *navctr = [[UINavigationController alloc] initWithRootViewController:ctr];
+    [self.flipboardNavigationController pushViewController:ctr];
+}
+
+- (IBAction)pushInbox:(UIButton *)sender {
+	MasterViewController *ctr = [[MasterViewController alloc] init];
     [self.flipboardNavigationController pushViewController:ctr];
 }
 
