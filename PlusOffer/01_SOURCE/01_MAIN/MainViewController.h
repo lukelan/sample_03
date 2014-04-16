@@ -17,4 +17,7 @@
 - (IBAction)pushEmail:(UIButton *)sender;
 
 - (IBAction)pushInbox:(UIButton *)sender;
+- (IBAction)pushUD1:(UIButton *)sender;
+- (IBAction)pushUD2:(UIButton *)sender;
+- (IBAction)pushUD3:(UIButton *)sender;
 @end

@@ -12,5 +12,6 @@
 @interface MasterViewController : UITableViewController <SettingsViewControllerDelegate>
 
 - (IBAction)showSettingsViewController:(id)sender;
+@property (nonatomic,strong) NSString *folderName;
 
 @end

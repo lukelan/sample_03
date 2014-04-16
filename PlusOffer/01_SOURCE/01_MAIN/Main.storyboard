@@ -38,28 +38,37 @@
                                 <rect key="frame" x="162" y="202" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="ud1">
+                                <state key="normal" title="Sent Messages">
                                     <color key="titleColor" red="0.46029760460000002" green="0.722490246" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushUD1:" destination="b2V-me-aDg" eventType="touchUpInside" id="SGn-Xy-R6U"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aZ8-ag-zEn">
                                 <rect key="frame" x="5" y="318" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="ud2">
+                                <state key="normal" title="Flipper">
                                     <color key="titleColor" red="0.46029760460000002" green="0.722490246" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushUD2:" destination="b2V-me-aDg" eventType="touchUpInside" id="KY7-Bv-Htl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mgt-KE-8ZY">
                                 <rect key="frame" x="162" y="318" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="ud3">
+                                <state key="normal" title="Notes">
                                     <color key="titleColor" red="0.46029760460000002" green="0.722490246" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushUD3:" destination="b2V-me-aDg" eventType="touchUpInside" id="pMR-eV-hFc"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" id="iAh-5X-TbE">
                                 <rect key="frame" x="22" y="24" width="273" height="46"/>

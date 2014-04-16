@@ -110,8 +110,27 @@
 }
 
 - (IBAction)pushInbox:(UIButton *)sender {
-	MasterViewController *ctr = [[MasterViewController alloc] init];
-    [self.flipboardNavigationController pushViewController:ctr];
+	MasterViewController *inbox = [[MasterViewController alloc] init];
+    inbox.folderName = @"INBOX";
+    [self.flipboardNavigationController pushViewController:inbox];
+}
+
+- (IBAction)pushUD1:(UIButton *)sender {
+	MasterViewController *send = [[MasterViewController alloc] init];
+    send.folderName = @"Sent Messages";
+    [self.flipboardNavigationController pushViewController:send];
+}
+
+- (IBAction)pushUD2:(UIButton *)sender {
+	MasterViewController *send = [[MasterViewController alloc] init];
+    send.folderName = @"Flipper";
+    [self.flipboardNavigationController pushViewController:send];
+}
+
+- (IBAction)pushUD3:(UIButton *)sender {
+	MasterViewController *send = [[MasterViewController alloc] init];
+    send.folderName = @"Notes";
+    [self.flipboardNavigationController pushViewController:send];
 }
 
 - (IBAction)pushPaper:(UIButton *)sender {

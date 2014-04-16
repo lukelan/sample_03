@@ -162,10 +162,13 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     // check incomming message background
     
     NSString *folder = @"INBOX";
+    if (self.folderName) {
+        folder = self.folderName;
+    }
     MCOIMAPIdleOperation *idleOperation = [self.imapSession idleOperationWithFolder:folder lastKnownUID:self.totalNumberOfInboxMessages];
     self.idleOperation = idleOperation;
     
-    [idleOperation start:[self idleHandler]];
+//    [idleOperation start:[self idleHandler]];
     
     // delete email
 //    [self updateMessageFlag:MCOMessageFlagDeleted withMessageID:11173];
@@ -173,7 +176,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (void (^)(NSError * error))idleHandler {
-    NSString *folder = @"INBOX";
+    NSString *folder = self.folderName;
     void(^idleHandler)(NSError *error) = ^(NSError *error) {
         if (!error) {
             long start = self.totalNumberOfInboxMessages + 1;
@@ -210,7 +213,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
     BOOL deleted = NEW_FLAGS & MCOMessageFlagDeleted;
     
-    MCOIMAPOperation *op = [self.imapSession storeFlagsOperationWithFolder:@"INBOX"
+    MCOIMAPOperation *op = [self.imapSession storeFlagsOperationWithFolder:self.folderName
                                                              uids:[MCOIndexSet indexSetWithIndex:MESSAGE_UID]
                                                              kind:MCOIMAPStoreFlagsRequestKindSet
                                                             flags:NEW_FLAGS];
@@ -222,7 +225,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         }
         
         if(deleted) {
-            MCOIMAPOperation *deleteOp = [self.imapSession expungeOperation:@"INBOX"];
+            MCOIMAPOperation *deleteOp = [self.imapSession expungeOperation:self.folderName];
             [deleteOp start:^(NSError *error) {
                 if(error) {
                     NSLog(@"Error expunging folder:%@", error);
@@ -243,7 +246,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	 MCOIMAPMessagesRequestKindInternalDate | MCOIMAPMessagesRequestKindHeaderSubject |
 	 MCOIMAPMessagesRequestKindFlags);
 	
-	NSString *inboxFolder = @"INBOX";
+	NSString *inboxFolder = self.folderName;
 	MCOIMAPFolderInfoOperation *inboxFolderInfo = [self.imapSession folderInfoOperation:inboxFolder];
 	
 	[inboxFolderInfo start:^(NSError *error, MCOIMAPFolderInfo *info)
@@ -364,7 +367,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			else
 			{
 				cell.messageRenderingOperation = [self.imapSession plainTextBodyRenderingOperationWithMessage:message
-																									   folder:@"INBOX"];
+																									   folder:self.folderName];
 				
 				[cell.messageRenderingOperation start:^(NSString * plainTextBodyString, NSError * error) {
 					cell.detailTextLabel.text = plainTextBodyString;
@@ -484,10 +487,10 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 		{
 			MCOIMAPMessage *msg = self.messages[indexPath.row];
 			MCTMsgViewController *vc = [[MCTMsgViewController alloc] init];
-			vc.folder = @"INBOX";
+			vc.folder = self.folderName;
 			vc.message = msg;
 			vc.session = self.imapSession;
-			[self.navigationController pushViewController:vc animated:YES];
+			[self.flipboardNavigationController pushViewController:vc];
 			
 			break;
 		}
