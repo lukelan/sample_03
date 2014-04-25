@@ -39,7 +39,20 @@
 }
 
 - (void)viewDidLoad {
-    _messageView = [[MCOMessageView alloc] initWithFrame:self.view.bounds];
+    
+   
+    
+    CGFloat offset = 0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        UIView *CoverView = [[UIView alloc]init];
+        CoverView.frame = CGRectMake(0,0,self.view.bounds.size.width,20);
+        CoverView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:CoverView];
+        offset = CoverView.bounds.size.height;
+    }
+    
+    _messageView = [[MCOMessageView alloc] initWithFrame:CGRectMake(0,offset,self.view.bounds.size.width,self.view.bounds.size.height)];
+    
     _messageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_messageView];
     
