@@ -45,6 +45,10 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 	[self.tableView registerClass:[MCTTableViewCell class]
 		   forCellReuseIdentifier:mailCellIdentifier];
 
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    }
+    
 	self.loadMoreActivityView =
 	[[UIActivityIndicatorView alloc]
 	 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -149,6 +153,14 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			[strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
 		} else {
 			NSLog(@"error loading account: %@", error);
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error loading account"
+                                                            message:[error localizedDescription]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
 		}
 		
 		strongSelf.imapCheckOp = nil;
@@ -173,6 +185,16 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     // delete email
 //    [self updateMessageFlag:MCOMessageFlagDeleted withMessageID:11173];
     
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        [self performSelector:@selector(showSettingsViewController:) withObject:nil afterDelay:0.5];
+    }
+    if(buttonIndex == 1) {
+        
+    }
+    // and so on for the last button
 }
 
 - (void (^)(NSError * error))idleHandler {

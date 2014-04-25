@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SettingsViewController.h"
 
-@interface MasterViewController : UITableViewController <SettingsViewControllerDelegate>
+@interface MasterViewController : UITableViewController <SettingsViewControllerDelegate,UIAlertViewDelegate>
 
 - (IBAction)showSettingsViewController:(id)sender;
 @property (nonatomic,strong) NSString *folderName;

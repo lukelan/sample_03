@@ -16,7 +16,7 @@ extern NSString * const OAuthEnabledKey;
 
 @protocol SettingsViewControllerDelegate;
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
