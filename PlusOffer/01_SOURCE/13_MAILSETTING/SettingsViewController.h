@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const UsernameKey;
-extern NSString * const PasswordKey;
-extern NSString * const HostnameKey;
-extern NSString * const FetchFullMessageKey;
-extern NSString * const OAuthEnabledKey;
+//extern NSString * const UsernameKey;
+//extern NSString * const PasswordKey;
+//extern NSString * const HostnameKey;
+//extern NSString * const FetchFullMessageKey;
+//extern NSString * const OAuthEnabledKey;
 
 @protocol SettingsViewControllerDelegate;
 

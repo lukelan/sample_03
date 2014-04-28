@@ -9,11 +9,11 @@
 #import "SettingsViewController.h"
 #import "FXKeychain.h"
 
-NSString * const UsernameKey = @"username";
-NSString * const PasswordKey = @"password";
-NSString * const HostnameKey = @"hostname";
-NSString * const FetchFullMessageKey = @"FetchFullMessageEnabled";
-NSString * const OAuthEnabledKey = @"OAuth2Enabled";
+//NSString * const UsernameKey = @"username";
+//NSString * const PasswordKey = @"password";
+//NSString * const HostnameKey = @"hostname";
+//NSString * const FetchFullMessageKey = @"FetchFullMessageEnabled";
+//NSString * const OAuthEnabledKey = @"OAuth2Enabled";
 
 @implementation SettingsViewController
 

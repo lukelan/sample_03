@@ -12,6 +12,7 @@
 #import "MCTMsgViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "MCTTableViewCell.h"
+#import "ContactManager.h"
 
 #define CLIENT_ID @"the-client-id"
 #define CLIENT_SECRET @"the-client-secret"
@@ -151,6 +152,11 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 		NSLog(@"finished checking account.");
 		if (error == nil) {
 			[strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
+            
+            // load contact list
+            
+            [[ContactManager sharedContactManager] fetchAllContacts];
+            
 		} else {
 			NSLog(@"error loading account: %@", error);
             
@@ -172,7 +178,6 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
     
     // check incomming message background
-    
     NSString *folder = @"INBOX";
     if (self.folderName) {
         folder = self.folderName;

@@ -25,6 +25,13 @@
 
 #define PINGREMARKETING {[GoogleConversionPing pingRemarketingWithConversionId:@"983463027" label:@"jLppCIXKgAgQ8-j51AM" screenName:viewName customParamete rs:nil];}
 
+#pragma mark - Email key
+#define UsernameKey  @"username"
+#define PasswordKey  @"password"
+#define HostnameKey  @"hostname"
+#define FetchFullMessageKey  @"FetchFullMessageEnabled"
+#define OAuthEnabledKey  @"OAuth2Enabled"
+
 #pragma mark - FONT
 
 #define FONT_NAME @"Helvetica"

@@ -216,6 +216,7 @@
 		AA77107418EAD07B0007B0AD /* EmailMailboxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106D18EAD07B0007B0AD /* EmailMailboxController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AA77107618EAD07B0007B0AD /* EmailMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77106F18EAD07B0007B0AD /* EmailMessageController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAAB9FC5190E00CE00BEC17C /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAB9FAA190DF83100BEC17C /* libGDataTouchStaticLib.a */; };
+		AAAB9FCA190E05BC00BEC17C /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAB9FC9190E05BC00BEC17C /* ContactManager.m */; };
 		AAB01BF0187018D0006E2552 /* PlusOffer-Pro-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAB01BEF187018D0006E2552 /* PlusOffer-Pro-Info.plist */; };
 		AABB9BE118725FAA0018C0D5 /* RedeemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB9BE018725FAA0018C0D5 /* RedeemModel.m */; };
 		AABB9BE518725FAB0018C0D5 /* OfferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB9BE418725FAB0018C0D5 /* OfferModel.m */; };
@@ -725,6 +726,8 @@
 		AA77106E18EAD07B0007B0AD /* EmailMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailMessageController.h; sourceTree = "<group>"; };
 		AA77106F18EAD07B0007B0AD /* EmailMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailMessageController.m; sourceTree = "<group>"; };
 		AAAB9F9F190DF83100BEC17C /* GData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GData.xcodeproj; path = GData/GData.xcodeproj; sourceTree = "<group>"; };
+		AAAB9FC8190E05BC00BEC17C /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
+		AAAB9FC9190E05BC00BEC17C /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
 		AAB01BEF187018D0006E2552 /* PlusOffer-Pro-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlusOffer-Pro-Info.plist"; sourceTree = "<group>"; };
 		AABB9BDF18725FAA0018C0D5 /* RedeemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemModel.h; sourceTree = "<group>"; };
 		AABB9BE018725FAA0018C0D5 /* RedeemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedeemModel.m; sourceTree = "<group>"; };
@@ -1918,9 +1921,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AAAB9FC7190E055F00BEC17C /* MODELS */ = {
+			isa = PBXGroup;
+			children = (
+				AAAB9FC8190E05BC00BEC17C /* ContactManager.h */,
+				AAAB9FC9190E05BC00BEC17C /* ContactManager.m */,
+			);
+			name = MODELS;
+			sourceTree = "<group>";
+		};
 		AAD47BAB18FE2D01008D9589 /* 12_MAIL */ = {
 			isa = PBXGroup;
 			children = (
+				AAAB9FC7190E055F00BEC17C /* MODELS */,
 				AAD47BBC18FE2D55008D9589 /* VIEWS */,
 				AAD47BB818FE2D4B008D9589 /* MasterViewController.h */,
 				AAD47BB918FE2D4B008D9589 /* MasterViewController.m */,
@@ -2451,6 +2464,7 @@
 				AAE3154C18D9B4870069A6DE /* HASmallCollectionViewController.m in Sources */,
 				AA69AE4D18D0135D0046ABE7 /* PInterestViewController.m in Sources */,
 				AA77107018EAD07B0007B0AD /* EmailSetupController.m in Sources */,
+				AAAB9FCA190E05BC00BEC17C /* ContactManager.m in Sources */,
 				AABB9BE118725FAA0018C0D5 /* RedeemModel.m in Sources */,
 				AABB9BE918727B5F0018C0D5 /* OfferDetailModel.m in Sources */,
 				AA5A7288186C29AB00BC8D91 /* UIView+JCUI.m in Sources */,
