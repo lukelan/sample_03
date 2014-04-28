@@ -8,6 +8,7 @@
 
 #import "ContactManager.h"
 #import "FXKeychain.h"
+#import "ContactModel.h"
 
 @implementation ContactManager
 
@@ -123,6 +124,7 @@ static ContactManager* _sharedContactManager = nil;
     [self setContactFetchError:error];
     [self setContactFetchTicket:nil];
     
+    [ContactModel insertContactDataFromServer:feed];
     //[self updateUI];
 }
 

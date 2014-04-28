@@ -1,135 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="BranchModel" representedClassName="BranchModel" syncable="YES">
-        <attribute name="branch_address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="branch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="branch_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="branch_name_slug" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="branch_tel" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="category_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="date_add" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="date_update" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hour_close" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hour_open" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_active" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="location_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="size1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="size2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="size3" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="BrandModel" representedClassName="BrandModel" syncable="YES">
-        <attribute name="brand_card_color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_card_image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_card_logo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="brand_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="date_end" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="list_prize" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="max_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="order_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="punch_color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="punch_color_active" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="punch_image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="punch_image_active" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="punch_image_select" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="CuisineOffer" representedClassName="CuisineOffer" parentEntity="OfferModel" syncable="YES"/>
-    <entity name="EntertainmentOffer" representedClassName="EntertainmentOffer" parentEntity="OfferModel" syncable="YES"/>
-    <entity name="FavoriteOffer" representedClassName="FavoriteOffer" parentEntity="OfferModel" syncable="YES"/>
-    <entity name="MenuModel" representedClassName="MenuModel" syncable="YES">
-        <attribute name="brand_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="item_description" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="item_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="item_image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="item_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="item_price" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="order_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="NearByOffer" representedClassName="NearByOffer" parentEntity="OfferModel" syncable="YES"/>
-    <entity name="OfferDetailModel" representedClassName="OfferDetailModel" syncable="YES">
-        <attribute name="branch_address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="branch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="branch_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="branch_tel" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="brand_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="category_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="date_add" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="discount_type" optional="YES" attributeType="Integer 16" syncable="YES"/>
-        <attribute name="discount_type_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="discount_value" optional="YES" attributeType="Integer 16" syncable="YES"/>
-        <attribute name="distance" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hour_close" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hour_open" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_bookmark" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="max_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="menu" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="offer_content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_date_end" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_description" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="offer_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="size1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="size2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="OfferModel" representedClassName="OfferModel" syncable="YES">
-        <attribute name="branch_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="branch_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="brand_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="category_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="date_add" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="discount_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="discount_value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="is_bookmark" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="max_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="offer_date_end" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="offer_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="order_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="size1" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="size2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="RedeemModel" representedClassName="RedeemModel" syncable="YES">
-        <attribute name="branch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="branch_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="brand_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="brand_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_redeem" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="is_redeemable" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="max_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="offer_content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_description" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="offer_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="order_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="redeem_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="user_punch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ContactModel" representedClassName="ContactModel" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="im" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="organization" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postal" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BranchModel" positionX="0" positionY="126" width="128" height="330"/>
-        <element name="BrandModel" positionX="-389" positionY="-288" width="128" height="270"/>
-        <element name="CuisineOffer" positionX="-119" positionY="-153" width="128" height="45"/>
-        <element name="EntertainmentOffer" positionX="16" positionY="-162" width="128" height="45"/>
-        <element name="MenuModel" positionX="-198" positionY="-468" width="128" height="150"/>
-        <element name="NearByOffer" positionX="43" positionY="-63" width="128" height="45"/>
-        <element name="OfferDetailModel" positionX="160" positionY="111" width="128" height="465"/>
-        <element name="OfferModel" positionX="-153" positionY="0" width="128" height="330"/>
-        <element name="RedeemModel" positionX="-351" positionY="3" width="128" height="285"/>
-        <element name="FavoriteOffer" positionX="-254" positionY="-151" width="128" height="43"/>
+        <element name="ContactModel" positionX="-5969" positionY="45" width="128" height="148"/>
     </elements>
 </model>

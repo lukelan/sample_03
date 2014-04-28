@@ -25,6 +25,12 @@
 
 #define PINGREMARKETING {[GoogleConversionPing pingRemarketingWithConversionId:@"983463027" label:@"jLppCIXKgAgQ8-j51AM" screenName:viewName customParamete rs:nil];}
 
+#if VKDEBUG
+#define VKLog(fmt, ...) VKLoga((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define VKLog(fmt, ...) VKLoga(fmt, ##__VA_ARGS__);
+#endif
+
 #pragma mark - Email key
 #define UsernameKey  @"username"
 #define PasswordKey  @"password"

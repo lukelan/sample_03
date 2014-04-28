@@ -63,6 +63,12 @@
 - (void)handleUserAccount;
 - (BOOL)checkShowRequestLogin;
 
-#pragma mark get record in DB
+#pragma mark - Model
+- (void)saveContext;
+- (BOOL)validateLocalDatabase;
+- (NSURL *)applicationDocumentsDirectory;
+- (NSURL *)applicationCacheDirectory;
+
+#pragma mark - get record in DB
 - (NSMutableArray *)fetchRecords:(NSString *)entityName sortWithKey:(NSString *)keyName ascending:(BOOL)isAscending withPredicate:(NSPredicate *)predicate;
 @end
