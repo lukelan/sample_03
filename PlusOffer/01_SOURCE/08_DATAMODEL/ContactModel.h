@@ -12,9 +12,10 @@
 
 @interface ContactModel : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSString * organization;
 @property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * im;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * postal;

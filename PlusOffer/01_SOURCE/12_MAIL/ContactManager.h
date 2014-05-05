@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GDataContacts.h"
 
-@interface ContactManager : NSObject {
+@interface ContactManager : NSObject <NSFetchedResultsControllerDelegate> {
     GDataFeedContact *mContactFeed;
     GDataServiceTicket *mContactFetchTicket;
     NSError *mContactFetchError;
@@ -18,7 +18,11 @@
 
 }
 
+@property (retain, nonatomic) NSFetchedResultsController    *fetchedResultsController;
+@property (retain, nonatomic) NSString    *searchStr;
+
 -(void)fetchAllContacts;
+- (void)performSearchEmailForKey:(NSString*)key;
 
 +(ContactManager*)sharedContactManager;
 

@@ -3,13 +3,20 @@
     <entity name="ContactModel" representedClassName="ContactModel" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="im" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="organization" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postal" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="EmailModel" representedClassName="EmailModel" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="ContactModel" positionX="-5969" positionY="45" width="128" height="148"/>
+        <element name="ContactModel" positionX="-5969" positionY="45" width="128" height="165"/>
+        <element name="EmailModel" positionX="-5967" positionY="99" width="128" height="90"/>
     </elements>
 </model>

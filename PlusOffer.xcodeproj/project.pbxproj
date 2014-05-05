@@ -112,6 +112,7 @@
 		AA0DF88B190E60D500ACB4A3 /* OfferDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0DF87F190E60D500ACB4A3 /* OfferDetailModel.m */; };
 		AA0DF88C190E60D500ACB4A3 /* OfferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0DF881190E60D500ACB4A3 /* OfferModel.m */; };
 		AA0DF88D190E60D500ACB4A3 /* RedeemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0DF883190E60D500ACB4A3 /* RedeemModel.m */; };
+		AA0DF8901917361A00ACB4A3 /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0DF88F1917361A00ACB4A3 /* EmailModel.m */; };
 		AA2E71E218FD30F500751192 /* libMailCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2E71DB18FD30EA00751192 /* libMailCore-ios.a */; };
 		AA5A7259186C29AB00BC8D91 /* JCGridMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A7206186C29AB00BC8D91 /* JCGridMenuController.m */; };
 		AA5A725A186C29AB00BC8D91 /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A7209186C29AB00BC8D91 /* Close.png */; };
@@ -581,6 +582,8 @@
 		AA0DF881190E60D500ACB4A3 /* OfferModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferModel.m; sourceTree = "<group>"; };
 		AA0DF882190E60D500ACB4A3 /* RedeemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemModel.h; sourceTree = "<group>"; };
 		AA0DF883190E60D500ACB4A3 /* RedeemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedeemModel.m; sourceTree = "<group>"; };
+		AA0DF88E1917361A00ACB4A3 /* EmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailModel.h; sourceTree = "<group>"; };
+		AA0DF88F1917361A00ACB4A3 /* EmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailModel.m; sourceTree = "<group>"; };
 		AA2E71D018FD30EA00751192 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "mailcore2/build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
 		AA5A7205186C29AB00BC8D91 /* JCGridMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCGridMenuController.h; sourceTree = "<group>"; };
 		AA5A7206186C29AB00BC8D91 /* JCGridMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCGridMenuController.m; sourceTree = "<group>"; };
@@ -870,6 +873,8 @@
 				AA0DF882190E60D500ACB4A3 /* RedeemModel.h */,
 				AA0DF883190E60D500ACB4A3 /* RedeemModel.m */,
 				18814D2B18702CF100765498 /* PlusOfferModel.xcdatamodeld */,
+				AA0DF88E1917361A00ACB4A3 /* EmailModel.h */,
+				AA0DF88F1917361A00ACB4A3 /* EmailModel.m */,
 				AA0DF86D190E445A00ACB4A3 /* ContactModel.h */,
 				AA0DF86E190E445A00ACB4A3 /* ContactModel.m */,
 			);
@@ -2416,6 +2421,7 @@
 				4FBBEB1318681F160040EA12 /* BarCodeGenerator.mm in Sources */,
 				AA77103618EACDF10007B0AD /* ImapFetchObject.m in Sources */,
 				AA69AE6718D01EE40046ABE7 /* PBGSViewController.m in Sources */,
+				AA0DF8901917361A00ACB4A3 /* EmailModel.m in Sources */,
 				AA77106618EAD06E0007B0AD /* SettingsCell.m in Sources */,
 				AA69AE5618D01EDA0046ABE7 /* PBExampleCell.m in Sources */,
 				4FBBEB5E18682E210040EA12 /* pngrutil.c in Sources */,

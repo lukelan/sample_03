@@ -9,6 +9,7 @@
 #import "ContactManager.h"
 #import "FXKeychain.h"
 #import "ContactModel.h"
+#import "EmailModel.h"
 
 @implementation ContactManager
 
@@ -125,7 +126,53 @@ static ContactManager* _sharedContactManager = nil;
     [self setContactFetchTicket:nil];
     
     [ContactModel insertContactDataFromServer:feed];
+    [EmailModel insertEmailDataFromServer:feed];
     //[self updateUI];
+}
+
+#pragma mark - NSFetchResultControllerDelegate
+-(NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController) {
+        return _fetchedResultsController;
+    }
+    
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *_managedObjectContext = delegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    fetchRequest.includesSubentities = NO;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[EmailModel description] inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"email"  ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    if (![_searchStr isEqualToString:@""])
+    {
+        // init predicate to search
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"email CONTAINS[c] %@", _searchStr];
+        [fetchRequest setPredicate:pred];
+    }
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
+
+- (void)performSearchEmailForKey:(NSString*)key
+{
+    _searchStr = key;
+    _fetchedResultsController = nil;
+    
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);
+    }
+    NSLog(@"--coun===--%i",[self.fetchedResultsController.fetchedObjects count]);
 }
 
 

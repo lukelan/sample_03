@@ -153,10 +153,18 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 		if (error == nil) {
 			[strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
             
-            // load contact list
-            
+            // TrongV - Check the folder status
+//            MCOIMAPFolderStatusOperation * op = [self.imapSession folderStatusOperation:@"aaaaa"];
+//            [op start:^(NSError *error, MCOIMAPFolderStatus * info) {
+//                NSLog(@"UIDNEXT: %lu", (unsigned long) [info uidNext]);
+//                NSLog(@"UIDVALIDITY: %lu", (unsigned long) [info uidValidity]);
+//                NSLog(@"messages count: %lu", (unsigned long) [info messageCount]);
+//            }];
+    
+    
+            // TrongV - load contact list
             [[ContactManager sharedContactManager] fetchAllContacts];
-            
+            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
 		} else {
 			NSLog(@"error loading account: %@", error);
             
