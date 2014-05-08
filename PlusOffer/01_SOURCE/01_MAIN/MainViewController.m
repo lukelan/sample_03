@@ -117,7 +117,7 @@
 
 - (IBAction)pushUD1:(UIButton *)sender {
 	MasterViewController *send = [[MasterViewController alloc] init];
-    send.folderName = @"Sent Messages";
+    send.folderName = @"[Gmail]/Sent Mail";
     [self.flipboardNavigationController pushViewController:send];
 }
 

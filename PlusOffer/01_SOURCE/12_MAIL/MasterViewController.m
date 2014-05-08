@@ -37,6 +37,7 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 
 @property (nonatomic) NSInteger totalNumberOfInboxMessages;
 @property (nonatomic) BOOL isLoading;
+@property (nonatomic) BOOL isMenuShowing;
 @property (nonatomic, strong) UIActivityIndicatorView *loadMoreActivityView;
 @property (nonatomic, strong) NSMutableDictionary *messagePreviews;
 @end
@@ -46,6 +47,8 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+    _isMenuShowing = NO;
+    
 	[self.tableView registerClass:[MCTTableViewCell class]
 		   forCellReuseIdentifier:mailCellIdentifier];
 
@@ -153,7 +156,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
             // TrongV - load contact list
             [[ContactManager sharedContactManager] fetchAllContacts];
-            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
+//            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
 		} else {
 			NSLog(@"error loading account: %@", error);
             
@@ -552,7 +555,10 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)longPress
 {
-    [self showList];
+    if (!_isMenuShowing) {
+        [self showList];
+        _isMenuShowing = YES;
+    }
 }
 
 
@@ -581,14 +587,29 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			[self presentViewController:nav animated:YES completion:nil];
             break;
         }
+        
+        case 1: {
+            ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+			[self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+
+        case 2: {
+            ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+			[self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+
             
         default:
             break;
     }
-    
+    _isMenuShowing = NO;
 }
 - (void)gridMenuWillDismiss:(RNGridMenu *)gridMenu {
-    
+    _isMenuShowing = NO;
 }
 
 @end
