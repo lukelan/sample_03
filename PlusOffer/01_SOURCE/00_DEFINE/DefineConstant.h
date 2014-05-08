@@ -35,6 +35,7 @@
 #define UsernameKey  @"username"
 #define PasswordKey  @"password"
 #define HostnameKey  @"hostname"
+#define SmtpHostnameKey @"smtphostname"
 #define FetchFullMessageKey  @"FetchFullMessageEnabled"
 #define OAuthEnabledKey  @"OAuth2Enabled"
 

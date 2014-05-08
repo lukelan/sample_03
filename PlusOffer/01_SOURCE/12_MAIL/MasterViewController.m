@@ -13,6 +13,9 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "MCTTableViewCell.h"
 #import "ContactManager.h"
+#import "AuthManager.h"
+#import "RNGridMenu.h"
+#import "ComposerViewController.h"
 
 #define CLIENT_ID @"the-client-id"
 #define CLIENT_SECRET @"the-client-secret"
@@ -23,7 +26,7 @@
 static NSString *mailCellIdentifier = @"MailCell";
 static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 
-@interface MasterViewController ()
+@interface MasterViewController () <RNGridMenuDelegate>
 @property (nonatomic, strong) NSMutableArray *messages;
 
 @property (nonatomic, strong) MCOIMAPOperation *imapCheckOp;
@@ -119,24 +122,10 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
                        hostname:(NSString *)hostname
                     oauth2Token:(NSString *)oauth2Token
 {
-	self.imapSession = [[MCOIMAPSession alloc] init];
-	self.imapSession.hostname = hostname;
-	self.imapSession.port = 993;
-	self.imapSession.username = username;
-	self.imapSession.password = password;
-    if (oauth2Token != nil) {
-        self.imapSession.OAuth2Token = oauth2Token;
-        self.imapSession.authType = MCOAuthTypeXOAuth2;
-    }
-	self.imapSession.connectionType = MCOConnectionTypeTLS;
-    MasterViewController * __weak weakSelf = self;
-	self.imapSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
-        @synchronized(weakSelf) {
-            if (type != MCOConnectionLogTypeSentPrivate) {
-//                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            }
-        }
-    };
+	MasterViewController * __weak weakSelf = self;
+	
+    [[AuthManager sharedManager] setOauth2Token:oauth2Token];
+    self.imapSession = [[AuthManager sharedManager] getImapSession];
 	
 	// Reset the inbox
 	self.messages = nil;
@@ -411,6 +400,13 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 				}];
 			}
 			
+            UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                                  initWithTarget:self action:@selector(handleLongPress:)];
+            lpgr.minimumPressDuration = 1.0; //seconds
+            [cell addGestureRecognizer:lpgr];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
 			return cell;
 			break;
 		}
@@ -550,6 +546,49 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			break;
 	}
 
+}
+
+#pragma mark - long press
+
+-(void)handleLongPress:(UILongPressGestureRecognizer *)longPress
+{
+    [self showList];
+}
+
+
+#pragma mark - Grid Menu
+- (void)showList {
+    NSInteger numberOfOptions = 4;
+    NSArray *options = @[
+                         @"Compose",
+                         @"Reply",
+                         @"Reply All",
+                         @"Cancel"
+                         ];
+    RNGridMenu *av = [[RNGridMenu alloc] initWithTitles:[options subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
+    av.delegate = self;
+    //    av.itemTextAlignment = NSTextAlignmentLeft;
+    av.itemFont = [UIFont boldSystemFontOfSize:18];
+    av.itemSize = CGSizeMake(150, 55);
+    [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
+}
+
+- (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
+    switch (itemIndex) {
+        case 0: {
+            ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+			[self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+}
+- (void)gridMenuWillDismiss:(RNGridMenu *)gridMenu {
+    
 }
 
 @end
