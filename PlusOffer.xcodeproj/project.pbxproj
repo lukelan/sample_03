@@ -354,6 +354,7 @@
 		AA8DA54A191B7756001304ED /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = AA8DA53F191B7755001304ED /* file.png */; };
 		AA8DA54B191B7756001304ED /* github.png in Resources */ = {isa = PBXBuildFile; fileRef = AA8DA540191B7755001304ED /* github.png */; };
 		AA8DA54C191B7756001304ED /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8DA542191B7755001304ED /* RNGridMenu.m */; };
+		AA8DA553191C7D9D001304ED /* MONActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8DA551191C7D9D001304ED /* MONActivityIndicatorView.m */; };
 		AAAB9FC5190E00CE00BEC17C /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAB9FAA190DF83100BEC17C /* libGDataTouchStaticLib.a */; };
 		AAAB9FCA190E05BC00BEC17C /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAB9FC9190E05BC00BEC17C /* ContactManager.m */; };
 		AAB01BF0187018D0006E2552 /* PlusOffer-Pro-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAB01BEF187018D0006E2552 /* PlusOffer-Pro-Info.plist */; };
@@ -1043,6 +1044,8 @@
 		AA8DA540191B7755001304ED /* github.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github.png; sourceTree = "<group>"; };
 		AA8DA541191B7755001304ED /* RNGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGridMenu.h; sourceTree = "<group>"; };
 		AA8DA542191B7755001304ED /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
+		AA8DA550191C7D9D001304ED /* MONActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONActivityIndicatorView.h; sourceTree = "<group>"; };
+		AA8DA551191C7D9D001304ED /* MONActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONActivityIndicatorView.m; sourceTree = "<group>"; };
 		AAAB9F9F190DF83100BEC17C /* GData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GData.xcodeproj; path = GData/GData.xcodeproj; sourceTree = "<group>"; };
 		AAAB9FC8190E05BC00BEC17C /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
 		AAAB9FC9190E05BC00BEC17C /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
@@ -1332,6 +1335,7 @@
 		18FBCF0D1867443200C9E399 /* 02_LIBS */ = {
 			isa = PBXGroup;
 			children = (
+				AA8DA54E191C7D9D001304ED /* MONActivityIndicatorView */,
 				AA8DA536191B7755001304ED /* RNGridMenu */,
 				AA8DA497191B5A89001304ED /* FPMimetype */,
 				AA8DA48E191B58E0001304ED /* FilePicker */,
@@ -2499,6 +2503,15 @@
 			path = icons;
 			sourceTree = "<group>";
 		};
+		AA8DA54E191C7D9D001304ED /* MONActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				AA8DA550191C7D9D001304ED /* MONActivityIndicatorView.h */,
+				AA8DA551191C7D9D001304ED /* MONActivityIndicatorView.m */,
+			);
+			path = MONActivityIndicatorView;
+			sourceTree = "<group>";
+		};
 		AAAB9FA0190DF83100BEC17C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -3192,6 +3205,7 @@
 				4FBBEC08186849BF0040EA12 /* PullRefreshTableViewController.m in Sources */,
 				AA8DA45D191B58A6001304ED /* FUIAlertView.m in Sources */,
 				AA77103018EACDF10007B0AD /* ImapBodypart.m in Sources */,
+				AA8DA553191C7D9D001304ED /* MONActivityIndicatorView.m in Sources */,
 				AA0DF887190E60D500ACB4A3 /* EntertainmentOffer.m in Sources */,
 				4FEE9CD5187A9F6900BD39A8 /* SBJsonBase.m in Sources */,
 				AA8DA468191B58A6001304ED /* UINavigationBar+FlatUI.m in Sources */,

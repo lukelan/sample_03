@@ -208,7 +208,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     //TODO: Loading screen should show
 
     self.isAccountChecked = YES;
-    MCOIMAPOperation *operation = [self.imapSession checkAccountOperation];
+    MCOIMAPOperation *operation = [[self getImapSession] checkAccountOperation];
     
     [operation start:^(NSError *error) {
         NSLog(@"finished checking account.");

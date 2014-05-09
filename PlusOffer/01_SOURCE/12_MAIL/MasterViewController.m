@@ -16,6 +16,8 @@
 #import "AuthManager.h"
 #import "RNGridMenu.h"
 #import "ComposerViewController.h"
+#import "MONActivityIndicatorView.h"
+
 
 #define CLIENT_ID @"the-client-id"
 #define CLIENT_SECRET @"the-client-secret"
@@ -26,7 +28,7 @@
 static NSString *mailCellIdentifier = @"MailCell";
 static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 
-@interface MasterViewController () <RNGridMenuDelegate>
+@interface MasterViewController () <RNGridMenuDelegate,MONActivityIndicatorViewDelegate>
 @property (nonatomic, strong) NSMutableArray *messages;
 
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
@@ -42,7 +44,9 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 @property (nonatomic, strong) NSMutableDictionary *messagePreviews;
 @end
 
-@implementation MasterViewController
+@implementation MasterViewController {
+    MONActivityIndicatorView *indicatorView;
+}
 
 - (void)dealloc {
 }
@@ -57,6 +61,16 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     }
+    
+    indicatorView = [[MONActivityIndicatorView alloc] init];
+    indicatorView.delegate = self;
+    //    indicatorView.numberOfCircles = 5;
+    //    indicatorView.radius = 20;
+    //    indicatorView.internalSpacing = 3;
+    //    indicatorView.duration = 0.5;
+    //    indicatorView.delay = 0.5;
+    indicatorView.center = self.view.center;
+    [self.view addSubview:indicatorView];
     
 	self.loadMoreActivityView =
 	[[UIActivityIndicatorView alloc]
@@ -149,8 +163,12 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
 	NSLog(@"checking account");
     
+    self.view.userInteractionEnabled = NO;
+    [indicatorView startAnimating];
     
     [[AuthManager sharedManager] checkAccountOperation:^(NSError *error) {
+        [indicatorView stopAnimating];
+        self.view.userInteractionEnabled = YES;
          if (error==nil)
          {
              MasterViewController *strongSelf = weakSelf;
@@ -218,6 +236,17 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         
     }
     // and so on for the last button
+}
+
+
+- (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
+      circleBackgroundColorAtIndex:(NSUInteger)index {
+    // For a random background color for a particular circle
+    CGFloat red   = (arc4random() % 256)/255.0;
+    CGFloat green = (arc4random() % 256)/255.0;
+    CGFloat blue  = (arc4random() % 256)/255.0;
+    CGFloat alpha = 1.0f;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
 - (void (^)(NSError * error))idleHandler {

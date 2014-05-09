@@ -20,8 +20,10 @@
 #import "EmailSetupController.h"
 #import <Crashlytics/Crashlytics.h>
 #import "MasterViewController.h"
+#import "MONActivityIndicatorView.h"
+#import "AuthManager.h"
 
-@interface MainViewController ()
+@interface MainViewController () <MONActivityIndicatorViewDelegate>
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) UIAttachmentBehavior *panAttachment;
 
@@ -47,34 +49,37 @@
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view.superview];
     
     
-    // Test Email
+    // Check account if already login
     
-//    MCOIMAPSession *session = [[MCOIMAPSession alloc] init];
-//    [session setHostname:@"imap.gmail.com"];
-//    [session setPort:993];
-//    [session setUsername:@"vuminh.trong@gmail.com"];
-//    [session setPassword:@"lukelan"];
-//    [session setConnectionType:MCOConnectionTypeTLS];
-//    
-//    MCOIMAPMessagesRequestKind requestKind = MCOIMAPMessagesRequestKindHeaders;
-//    NSString *folder = @"Flipper";
-//    MCOIndexSet *uids = [MCOIndexSet indexSetWithRange:MCORangeMake(1, UINT64_MAX)];
-//    
-//    MCOIMAPFetchMessagesOperation *fetchOperation = [session fetchMessagesByUIDOperationWithFolder:folder requestKind:requestKind uids:uids];
-//    
-//    [fetchOperation start:^(NSError * error, NSArray * fetchedMessages, MCOIndexSet * vanishedMessages) {
-//        //We've finished downloading the messages!
-//        
-//        //Let's check if there was an error:
-//        if(error) {
-//            NSLog(@"Error downloading message headers:%@", error);
-//        }
-//        
-//        //And, let's print out the messages...
-//        NSLog(@"The post man delivereth:%@", fetchedMessages);
-//    }];
     
+    
+    MONActivityIndicatorView *indicatorView = [[MONActivityIndicatorView alloc] init];
+    indicatorView.delegate = self;
+//    indicatorView.numberOfCircles = 5;
+//    indicatorView.radius = 20;
+//    indicatorView.internalSpacing = 3;
+//    indicatorView.duration = 0.5;
+//    indicatorView.delay = 0.5;
+    indicatorView.center = self.view.center;
+    [self.view addSubview:indicatorView];
+    self.view.userInteractionEnabled = NO;
+    [indicatorView startAnimating];
+    [[AuthManager sharedManager] checkAccountOperation:^(NSError *error) {
+        [indicatorView stopAnimating];
+        self.view.userInteractionEnabled = YES;
+    }];    
 }
+
+- (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
+      circleBackgroundColorAtIndex:(NSUInteger)index {
+    // For a random background color for a particular circle
+    CGFloat red   = (arc4random() % 256)/255.0;
+    CGFloat green = (arc4random() % 256)/255.0;
+    CGFloat blue  = (arc4random() % 256)/255.0;
+    CGFloat alpha = 1.0f;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
