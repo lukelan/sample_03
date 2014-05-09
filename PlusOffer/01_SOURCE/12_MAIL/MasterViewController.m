@@ -163,12 +163,12 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
 	NSLog(@"checking account");
     
-    self.view.userInteractionEnabled = NO;
+//    self.view.userInteractionEnabled = NO;
     [indicatorView startAnimating];
     
     [[AuthManager sharedManager] checkAccountOperation:^(NSError *error) {
         [indicatorView stopAnimating];
-        self.view.userInteractionEnabled = YES;
+//        self.view.userInteractionEnabled = YES;
          if (error==nil)
          {
              MasterViewController *strongSelf = weakSelf;
@@ -323,6 +323,9 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	NSString *inboxFolder = self.folderName;
 	MCOIMAPFolderInfoOperation *inboxFolderInfo = [self.imapSession folderInfoOperation:inboxFolder];
 	
+//    self.view.userInteractionEnabled = NO;
+    [indicatorView startAnimating];
+    
 	[inboxFolderInfo start:^(NSError *error, MCOIMAPFolderInfo *info)
 	{
 		BOOL totalNumberOfMessagesDidChange =
@@ -378,6 +381,9 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 		[self.imapMessagesFetchOp start:
 		 ^(NSError *error, NSArray *messages, MCOIndexSet *vanishedMessages)
 		{
+//            self.view.userInteractionEnabled = YES;
+            [indicatorView stopAnimating];
+
 			MasterViewController *strongSelf = weakSelf;
 			NSLog(@"fetched all messages.");
 			
