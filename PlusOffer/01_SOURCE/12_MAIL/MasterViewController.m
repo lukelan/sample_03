@@ -29,7 +29,6 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 @interface MasterViewController () <RNGridMenuDelegate>
 @property (nonatomic, strong) NSMutableArray *messages;
 
-@property (nonatomic, strong) MCOIMAPOperation *imapCheckOp;
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
 @property (nonatomic, strong) MCOIMAPIdleOperation *idleOperation;
 @property (nonatomic, strong) MCOIMAPMessage *selectedMessage;
@@ -149,59 +148,49 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	[self.tableView reloadData];
     
 	NSLog(@"checking account");
-	self.imapCheckOp = [self.imapSession checkAccountOperation];
     
-    if ([[AuthManager sharedManager] isAccountChecked]) {
-        MasterViewController *strongSelf = weakSelf;
-        [strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
-    } else {
-        [self.imapCheckOp start:^(NSError *error) {
-            MasterViewController *strongSelf = weakSelf;
-            NSLog(@"finished checking account.");
-            if (error == nil) {
-                [[AuthManager sharedManager] setIsAccountChecked:YES];
-                [strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
-                
-                // TrongV - Check the folder status
-                
-                // TrongV - load contact list
-                [[ContactManager sharedContactManager] fetchAllContacts];
-    //            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
-            } else {
-                NSLog(@"error loading account: %@", error);
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error loading account"
-                                                                message:[error localizedDescription]
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-                
-            }
-            
-            strongSelf.imapCheckOp = nil;
-        }];
-    }
     
-    if ([self.folderName isEqualToString:@"mebox"]) {
-        MCOIMAPFolderStatusOperation * op = [self.imapSession folderStatusOperation:@"[Flipper]"];
-        [op start:^(NSError *error, MCOIMAPFolderStatus * info) {
-            if (info == nil) {
-                // The requested folder does not exist.  Folder selection failed
-                // Create Flipper
-                MCOIMAPOperation * op1 = [self.imapSession createFolderOperation:@"[Flipper]"];
-                [op1 start:^(NSError *error) {
-                    // Create sub folder
-                    MCOIMAPOperation *op1 = [self.imapSession createFolderOperation:@"[Flipper]/mebox"];
-                    [op1 start:^(NSError *error) {
-                    }];
-                }];
-            }
-            //                    NSLog(@"UIDNEXT: %lu", (unsigned long) [info uidNext]);
-            //                    NSLog(@"UIDVALIDITY: %lu", (unsigned long) [info uidValidity]);
-            //                    NSLog(@"messages count: %lu", (unsigned long) [info messageCount]);
-        }];
-    }
+    [[AuthManager sharedManager] checkAccountOperation:^(NSError *error) {
+         if (error==nil)
+         {
+             MasterViewController *strongSelf = weakSelf;
+             [strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
+             
+             // Check exist to create [Flipper]/mebox folder
+             if ([self.folderName isEqualToString:@"mebox"]) {
+                 MCOIMAPFolderStatusOperation * op = [self.imapSession folderStatusOperation:@"[Flipper]"];
+                 [op start:^(NSError *error, MCOIMAPFolderStatus * info) {
+                     if (info == nil) {
+                         // The requested folder does not exist.  Folder selection failed
+                         // Create Flipper
+                         MCOIMAPOperation * op1 = [self.imapSession createFolderOperation:@"[Flipper]"];
+                         [op1 start:^(NSError *error) {
+                             // Create sub folder
+                             MCOIMAPOperation *op1 = [self.imapSession createFolderOperation:@"[Flipper]/mebox"];
+                             [op1 start:^(NSError *error) {
+                             }];
+                         }];
+                     }
+                     //                    NSLog(@"UIDNEXT: %lu", (unsigned long) [info uidNext]);
+                     //                    NSLog(@"UIDVALIDITY: %lu", (unsigned long) [info uidValidity]);
+                     //                    NSLog(@"messages count: %lu", (unsigned long) [info messageCount]);
+                 }];
+             }
+             
+             // TrongV - load contact list
+             [[ContactManager sharedContactManager] fetchAllContacts];
+//            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
+         } else {
+             NSLog(@"error loading account: %@", error);
+             
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error loading account"
+                                                             message:[error localizedDescription]
+                                                            delegate:self
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+             [alert show];
+         }
+    }];
 
     
 //    [self.imapSession setConnectionLogger:^(void * connectionID, MCOConnectionLogType type, NSData * data) {
@@ -587,6 +576,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 {
     UIView *view = longPress.view;
     NSLog(@"%d",view.tag);
+    self.selectedMessage = self.messages[view.tag];
     if (!_isMenuShowing) {
         [self showList];
         _isMenuShowing = YES;
@@ -606,7 +596,6 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
                          ];
     RNGridMenu *av = [[RNGridMenu alloc] initWithTitles:[options subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
     av.delegate = self;
-    //    av.itemTextAlignment = NSTextAlignmentLeft;
     av.itemFont = [UIFont boldSystemFontOfSize:18];
     av.itemSize = CGSizeMake(150, 55);
     [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
@@ -622,19 +611,25 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         }
         
         case 1: {
-//            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:_message ofType:@"Reply" content:[self.delegate msgContent] attachments:@[attachment] delayedAttachments:@[]];
-//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//			[self presentViewController:nav animated:YES completion:nil];
-            break;
-        }
-
-        case 2: {
-            ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
+            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply" content:@"" attachments:@[] delayedAttachments:@[]];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
 			[self presentViewController:nav animated:YES completion:nil];
             break;
         }
 
+        case 2: {
+            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply All" content:@"" attachments:@[] delayedAttachments:@[]];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+			[self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
+
+        case 3: {
+            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Forward" content:@"" attachments:@[] delayedAttachments:@[]];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+			[self presentViewController:nav animated:YES completion:nil];
+            break;
+        }
             
         default:
             break;

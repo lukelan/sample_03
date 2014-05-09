@@ -45,7 +45,7 @@
 #define CLIENT_SECRET @"Fhrx20S3n8GFY3mRMg2R4yUV"
 #define KEYCHAIN_ITEM_NAME @"Mailer OAuth 2.0 Token"
 
-@interface AuthManager ()
+@interface AuthManager () <AuthViewControllerDelegate>
 
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
 @property (nonatomic, strong) MCOSMTPSession *smtpSession;
@@ -194,6 +194,38 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         self.imapSession = imapSession;
     }
     return self.imapSession;
+}
+
+- (void) checkAccountOperation:(void (^)(NSError *error))handler {
+    
+    if (self.isAccountChecked) {
+        if (handler) {
+            handler(nil);
+            return;
+        }
+    }
+   
+    //TODO: Loading screen should show
+
+    self.isAccountChecked = YES;
+    MCOIMAPOperation *operation = [self.imapSession checkAccountOperation];
+    
+    [operation start:^(NSError *error) {
+        NSLog(@"finished checking account.");
+        if (handler) {
+            handler(error);
+        }
+        
+        if (error) {
+            // reset sessions
+            self.imapSession = nil;
+            self.smtpSession = nil;
+            self.isAccountChecked = NO;
+        }
+    }];
+    
+
+    
 }
 
 #pragma mark - Contacts Services

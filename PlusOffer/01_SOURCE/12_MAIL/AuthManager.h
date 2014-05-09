@@ -28,6 +28,8 @@
 - (void) setOauth2Token:(NSString*)token;
 - (void) setOauth2:(GTMOAuth2Authentication*)auth;
 
+- (void) checkAccountOperation:(void (^)(NSError *error))handler;
+
 - (void) requestGoogleContacts:(void (^)(GDataFeedContact *feed, NSError *error))handler;
 
 @end
