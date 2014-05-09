@@ -67,7 +67,7 @@
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{ HostnameKey: @"imap.gmail.com" }];
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{ SmtpHostnameKey: @"smtp.gmail.com" }];
         
-        [_sharedObject refresh];
+        //[_sharedObject refresh];
     });
     return _sharedObject;
 }
@@ -145,6 +145,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
             return nil;
         }
         
+        self.isAccountChecked = NO;
         NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:UsernameKey];
         NSString *password = [[FXKeychain defaultKeychain] objectForKey:PasswordKey];
         NSString *smtphostname = [[NSUserDefaults standardUserDefaults] objectForKey:SmtpHostnameKey];
@@ -189,11 +190,6 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
             self.imapSession.authType = MCOAuthTypeXOAuth2;
         }
         imapSession.connectionType = MCOConnectionTypeTLS;
-        imapSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
-            if (type != MCOConnectionLogTypeSentPrivate) {
-                //                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            }
-        };
         imapSession.connectionType = MCOConnectionTypeTLS;
         self.imapSession = imapSession;
     }

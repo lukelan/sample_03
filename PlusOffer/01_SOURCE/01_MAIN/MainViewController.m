@@ -115,6 +115,12 @@
     [self.flipboardNavigationController pushViewController:inbox];
 }
 
+- (IBAction)pushMebox:(UIButton *)sender {
+	MasterViewController *send = [[MasterViewController alloc] init];
+    send.folderName = @"mebox";
+    [self.flipboardNavigationController pushViewController:send];
+}
+
 - (IBAction)pushUD1:(UIButton *)sender {
 	MasterViewController *send = [[MasterViewController alloc] init];
     send.folderName = @"[Gmail]/Sent Mail";

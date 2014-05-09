@@ -32,6 +32,7 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 @property (nonatomic, strong) MCOIMAPOperation *imapCheckOp;
 @property (nonatomic, strong) MCOIMAPSession *imapSession;
 @property (nonatomic, strong) MCOIMAPIdleOperation *idleOperation;
+@property (nonatomic, strong) MCOIMAPMessage *selectedMessage;
 @property (nonatomic, strong) MCOIMAPFetchMessagesOperation *imapMessagesFetchOp;
 
 
@@ -44,6 +45,8 @@ static NSString *inboxInfoIdentifier = @"InboxStatusCell";
 
 @implementation MasterViewController
 
+- (void)dealloc {
+}
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -130,6 +133,14 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     [[AuthManager sharedManager] setOauth2Token:oauth2Token];
     self.imapSession = [[AuthManager sharedManager] getImapSession];
 	
+//    self.imapSession.connectionLogger = ^(void * connectionID, MCOConnectionLogType type, NSData * data) {
+//        @synchronized(weakSelf) {
+//            if (type != MCOConnectionLogTypeSentPrivate) {
+//                //                NSLog(@"event logged:%p %i withData: %@", connectionID, type, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//            }
+//        }
+//    };
+    
 	// Reset the inbox
 	self.messages = nil;
 	self.totalNumberOfInboxMessages = -1;
@@ -139,56 +150,74 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
     
 	NSLog(@"checking account");
 	self.imapCheckOp = [self.imapSession checkAccountOperation];
-	[self.imapCheckOp start:^(NSError *error) {
-		MasterViewController *strongSelf = weakSelf;
-		NSLog(@"finished checking account.");
-		if (error == nil) {
-			[strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
-            
-            // TrongV - Check the folder status
-//            MCOIMAPFolderStatusOperation * op = [self.imapSession folderStatusOperation:@"aaaaa"];
-//            [op start:^(NSError *error, MCOIMAPFolderStatus * info) {
-//                NSLog(@"UIDNEXT: %lu", (unsigned long) [info uidNext]);
-//                NSLog(@"UIDVALIDITY: %lu", (unsigned long) [info uidValidity]);
-//                NSLog(@"messages count: %lu", (unsigned long) [info messageCount]);
-//            }];
     
-    
-            // TrongV - load contact list
-            [[ContactManager sharedContactManager] fetchAllContacts];
-//            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
-		} else {
-			NSLog(@"error loading account: %@", error);
+    if ([[AuthManager sharedManager] isAccountChecked]) {
+        MasterViewController *strongSelf = weakSelf;
+        [strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
+    } else {
+        [self.imapCheckOp start:^(NSError *error) {
+            MasterViewController *strongSelf = weakSelf;
+            NSLog(@"finished checking account.");
+            if (error == nil) {
+                [[AuthManager sharedManager] setIsAccountChecked:YES];
+                [strongSelf loadLastNMessages:NUMBER_OF_MESSAGES_TO_LOAD];
+                
+                // TrongV - Check the folder status
+                
+                // TrongV - load contact list
+                [[ContactManager sharedContactManager] fetchAllContacts];
+    //            [[ContactManager sharedContactManager] performSearchEmailForKey:@"v"];
+            } else {
+                NSLog(@"error loading account: %@", error);
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error loading account"
+                                                                message:[error localizedDescription]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                
+            }
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error loading account"
-                                                            message:[error localizedDescription]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-		}
-		
-		strongSelf.imapCheckOp = nil;
-	}];
+            strongSelf.imapCheckOp = nil;
+        }];
+    }
     
-    [self.imapSession setConnectionLogger:^(void * connectionID, MCOConnectionLogType type, NSData * data) {
-        NSLog(@"event logged: %i withData: %@", type, data);
-    }];
+    if ([self.folderName isEqualToString:@"mebox"]) {
+        MCOIMAPFolderStatusOperation * op = [self.imapSession folderStatusOperation:@"[Flipper]"];
+        [op start:^(NSError *error, MCOIMAPFolderStatus * info) {
+            if (info == nil) {
+                // The requested folder does not exist.  Folder selection failed
+                // Create Flipper
+                MCOIMAPOperation * op1 = [self.imapSession createFolderOperation:@"[Flipper]"];
+                [op1 start:^(NSError *error) {
+                    // Create sub folder
+                    MCOIMAPOperation *op1 = [self.imapSession createFolderOperation:@"[Flipper]/mebox"];
+                    [op1 start:^(NSError *error) {
+                    }];
+                }];
+            }
+            //                    NSLog(@"UIDNEXT: %lu", (unsigned long) [info uidNext]);
+            //                    NSLog(@"UIDVALIDITY: %lu", (unsigned long) [info uidValidity]);
+            //                    NSLog(@"messages count: %lu", (unsigned long) [info messageCount]);
+        }];
+    }
+
+    
+//    [self.imapSession setConnectionLogger:^(void * connectionID, MCOConnectionLogType type, NSData * data) {
+//        NSLog(@"event logged: %i withData: %@", type, data);
+//    }];
     
     
     // check incomming message background
-    NSString *folder = @"INBOX";
-    if (self.folderName) {
-        folder = self.folderName;
-    }
-    MCOIMAPIdleOperation *idleOperation = [self.imapSession idleOperationWithFolder:folder lastKnownUID:self.totalNumberOfInboxMessages];
-    self.idleOperation = idleOperation;
-    
+//    NSString *folder = @"INBOX";
+//    if (self.folderName) {
+//        folder = self.folderName;
+//    }
+//    MCOIMAPIdleOperation *idleOperation = [self.imapSession idleOperationWithFolder:folder lastKnownUID:self.totalNumberOfInboxMessages];
+//    self.idleOperation = idleOperation;
+//    
 //    [idleOperation start:[self idleHandler]];
-    
-    // delete email
-//    [self updateMessageFlag:MCOMessageFlagDeleted withMessageID:11173];
     
 }
 
@@ -410,6 +439,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
+            cell.tag = indexPath.row;
 			return cell;
 			break;
 		}
@@ -483,7 +513,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 	if (![username isEqualToString:self.imapSession.username] ||
 		![password isEqualToString:self.imapSession.password] ||
 		![hostname isEqualToString:self.imapSession.hostname]) {
-		self.imapSession = nil;
+		//self.imapSession = nil;
 		[self loadAccountWithUsername:username password:password hostname:hostname oauth2Token:nil];
 	}
 }
@@ -555,6 +585,8 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)longPress
 {
+    UIView *view = longPress.view;
+    NSLog(@"%d",view.tag);
     if (!_isMenuShowing) {
         [self showList];
         _isMenuShowing = YES;
@@ -564,11 +596,12 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
 #pragma mark - Grid Menu
 - (void)showList {
-    NSInteger numberOfOptions = 4;
+    NSInteger numberOfOptions = 5;
     NSArray *options = @[
                          @"Compose",
                          @"Reply",
                          @"Reply All",
+                         @"Forward",
                          @"Cancel"
                          ];
     RNGridMenu *av = [[RNGridMenu alloc] initWithTitles:[options subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
@@ -589,9 +622,9 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         }
         
         case 1: {
-            ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-			[self presentViewController:nav animated:YES completion:nil];
+//            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:_message ofType:@"Reply" content:[self.delegate msgContent] attachments:@[attachment] delayedAttachments:@[]];
+//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//			[self presentViewController:nav animated:YES completion:nil];
             break;
         }
 

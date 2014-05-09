@@ -18,6 +18,8 @@
 
 + (id)sharedManager;
 
+@property (nonatomic, assign) BOOL isAccountChecked;
+
 - (void)refresh;
 - (void)logout;
 
