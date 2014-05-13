@@ -458,7 +458,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			
             UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
                                                   initWithTarget:self action:@selector(handleLongPress:)];
-            lpgr.minimumPressDuration = 1.0; //seconds
+            lpgr.minimumPressDuration = 0.8; //seconds
             [cell addGestureRecognizer:lpgr];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -637,39 +637,55 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
-    switch (itemIndex) {
-        case 0: {
-            ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-			[self presentViewController:nav animated:YES completion:nil];
-            break;
+    
+    // Load message
+    [indicatorView startAnimating];
+    MCOIMAPFetchContentOperation * op = [self.imapSession fetchMessageByUIDOperationWithFolder:self.folderName uid:[self.selectedMessage uid]];
+    [op start:^(NSError * error, NSData * data) {
+        if ([error code] != MCOErrorNone) {
+            return;
         }
         
-        case 1: {
-            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply" content:@"" attachments:@[] delayedAttachments:@[]];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-			[self presentViewController:nav animated:YES completion:nil];
-            break;
-        }
-
-        case 2: {
-            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply All" content:@"" attachments:@[] delayedAttachments:@[]];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-			[self presentViewController:nav animated:YES completion:nil];
-            break;
-        }
-
-        case 3: {
-            ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Forward" content:@"" attachments:@[] delayedAttachments:@[]];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-			[self presentViewController:nav animated:YES completion:nil];
-            break;
-        }
+        [indicatorView stopAnimating];
+        NSAssert(data != nil, @"data != nil");
+        
+        MCOMessageParser * msg = [MCOMessageParser messageParserWithData:data];
+        
+        switch (itemIndex) {
+            case 0: {
+                ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                [self presentViewController:nav animated:YES completion:nil];
+                break;
+            }
             
-        default:
-            break;
-    }
-    _isMenuShowing = NO;
+            case 1: {
+                ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply" content:[msg plainTextRendering] attachments:@[] delayedAttachments:@[]];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                [self presentViewController:nav animated:YES completion:nil];
+                break;
+            }
+
+            case 2: {
+                ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply All" content:[msg plainTextRendering] attachments:@[] delayedAttachments:@[]];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                [self presentViewController:nav animated:YES completion:nil];
+                break;
+            }
+
+            case 3: {
+                ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Forward" content:[msg plainTextRendering] attachments:@[] delayedAttachments:@[]];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                [self presentViewController:nav animated:YES completion:nil];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        _isMenuShowing = NO;
+    }];
+        
 }
 - (void)gridMenuWillDismiss:(RNGridMenu *)gridMenu {
     _isMenuShowing = NO;

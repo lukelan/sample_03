@@ -55,11 +55,6 @@
     
     MONActivityIndicatorView *indicatorView = [[MONActivityIndicatorView alloc] init];
     indicatorView.delegate = self;
-//    indicatorView.numberOfCircles = 5;
-//    indicatorView.radius = 20;
-//    indicatorView.internalSpacing = 3;
-//    indicatorView.duration = 0.5;
-//    indicatorView.delay = 0.5;
     indicatorView.center = self.view.center;
     [self.view addSubview:indicatorView];
     self.view.userInteractionEnabled = NO;

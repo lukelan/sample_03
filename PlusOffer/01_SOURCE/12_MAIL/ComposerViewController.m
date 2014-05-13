@@ -18,6 +18,7 @@
 #import "UIPopoverController+FlatUI.h"
 #import "FUIButton.h"
 #import "UTIFunctions.h"
+#import "MCOMessageView.h"
 
 #import "MCOMessageView.h"
 
@@ -51,6 +52,7 @@ typedef enum
     TRAutocompleteView *_autocompleteViewCC;
     
     UIPopoverController *pop;
+    MCOMessageView *_messageView;
     
     BOOL keyboardState;
 }
