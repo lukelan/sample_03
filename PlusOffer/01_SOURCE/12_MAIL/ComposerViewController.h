@@ -18,6 +18,8 @@
 
 @property(nonatomic, weak) IBOutlet UITextView *messageBox;
 
+@property(nonatomic, strong)  MCOMessageParser *messageObject;
+
 
 - (id)initWithMessage:(MCOIMAPMessage *)msg
                ofType:(NSString*)type

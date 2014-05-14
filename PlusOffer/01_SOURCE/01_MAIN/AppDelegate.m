@@ -77,9 +77,17 @@ UpdateLocationType updateLocationFrom = UpdateLocationTypeAuto;
     //[[self.tabBarController.tabBar.items objectAtIndex:1] setTitle:@"shopping"];
     
     //navigating to the UITabBarController that you created
-    self.flipBoardNVC = [[FlipBoardNavigationController alloc]initWithRootViewController:tabBarController];
-    self.window.rootViewController = self.flipBoardNVC;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    nav.navigationBar.translucent = NO;
+    self.window.rootViewController = nav;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     
+//    self.flipBoardNVC = [[FlipBoardNavigationController alloc]initWithRootViewController:tabBarController];
+//    self.window.rootViewController = self.flipBoardNVC;
+//    
     
     [self.window makeKeyAndVisible];
     

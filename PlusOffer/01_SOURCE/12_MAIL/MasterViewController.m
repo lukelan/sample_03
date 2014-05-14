@@ -18,7 +18,6 @@
 #import "ComposerViewController.h"
 #import "MONActivityIndicatorView.h"
 
-
 #define CLIENT_ID @"the-client-id"
 #define CLIENT_SECRET @"the-client-secret"
 #define KEYCHAIN_ITEM_NAME @"MailCore OAuth 2.0 Token"
@@ -458,7 +457,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			
             UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
                                                   initWithTarget:self action:@selector(handleLongPress:)];
-            lpgr.minimumPressDuration = 0.8; //seconds
+            lpgr.minimumPressDuration = 0.6; //seconds
             [cell addGestureRecognizer:lpgr];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -578,7 +577,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 			vc.folder = self.folderName;
 			vc.message = msg;
 			vc.session = self.imapSession;
-			[self.flipboardNavigationController pushViewController:vc];
+			[self.navigationController pushViewController:vc animated:YES];
 			
 			break;
 		}
@@ -654,29 +653,37 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
         switch (itemIndex) {
             case 0: {
                 ComposerViewController *vc = [[ComposerViewController alloc] initWithTo:@[] CC:@[] BCC:@[] subject:@"" message:@"" attachments:@[] delayedAttachments:@[]];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//                [self presentViewController:nav animated:YES completion:nil];
+                vc.messageObject = nil;
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             
             case 1: {
                 ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply" content:[msg plainTextRendering] attachments:@[] delayedAttachments:@[]];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//                [self presentViewController:nav animated:YES completion:nil];
+                vc.messageObject = msg;
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
 
             case 2: {
                 ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Reply All" content:[msg plainTextRendering] attachments:@[] delayedAttachments:@[]];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//                [self presentViewController:nav animated:YES completion:nil];
+                vc.messageObject = msg;
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
 
             case 3: {
                 ComposerViewController *vc = [[ComposerViewController alloc] initWithMessage:self.selectedMessage ofType:@"Forward" content:[msg plainTextRendering] attachments:@[] delayedAttachments:@[]];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//                [self presentViewController:nav animated:YES completion:nil];
+                vc.messageObject = msg;
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
                 

@@ -25,6 +25,7 @@
 #import <FPPicker/FPPicker.h>
 #import "DelayedAttachment.h"
 #import "FPMimetype.h"
+#import "ZSSDemoViewController.h"
 
 typedef enum
 {
@@ -195,6 +196,13 @@ delayedAttachments:(NSArray *)delayedAttachments
                                                object:nil];
     keyboardState = NO;
  
+    // Add touch to messageBox
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self.messageBox addGestureRecognizer:singleFingerTap];
+    
+    
     [toField becomeFirstResponder];
 }
 
@@ -392,7 +400,8 @@ delayedAttachments:(NSArray *)delayedAttachments
 }
 
 - (void) closeWindow:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController  popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-2] animated:YES];
 }
 
 - (void) sendEmail:(id)sender {
@@ -429,7 +438,8 @@ delayedAttachments:(NSArray *)delayedAttachments
           withSubject:subjectField.text
              withBody:[messageBox.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"]
       withAttachments:_attachmentsArray];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController  popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-2] animated:YES];
 }
 
 - (IBAction)attachButtonPressed:(FUIButton *)sender
@@ -657,6 +667,19 @@ delayedAttachments:(NSArray *)delayedAttachments
 {
     NSLog(@"FP Cancelled Open");
     [self.filepickerPopover dismissPopoverAnimated:YES];
+}
+
+#pragma mark - handle press
+
+-(void)handleSingleTap:(UITapGestureRecognizer *)press
+{
+    ZSSDemoViewController *vc = [[ZSSDemoViewController alloc] init];
+    if (self.messageObject) {
+        vc.htmlContent = [self.messageObject htmlBodyRendering];
+    } else {
+        vc.htmlContent = @"";
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

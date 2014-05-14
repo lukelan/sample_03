@@ -11,4 +11,6 @@
 
 @interface ZSSDemoViewController : ZSSRichTextEditor
 
+@property(nonatomic, strong)  NSString *htmlContent;
+
 @end

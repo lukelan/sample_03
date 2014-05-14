@@ -8,6 +8,9 @@
 
 #import "ZSSDemoViewController.h"
 #import "ZSSDemoPickerViewController.h"
+#import "FUIButton.h"
+#import "FlatUIKit.h"
+
 
 @interface ZSSDemoViewController ()
 
@@ -22,11 +25,30 @@
     self.title = @"ZSSRichTextEditor";
     
     // Export HTML
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportHTML)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportHTML)];
 	
-    // HTML Content to set in the editor
-    NSString *html = @"<!-- This is an HTML comment -->"
-    "<p>This is a test of the <strong>ZSSRichTextEditor</strong> by <a title=\"Zed Said\" href=\"http://www.zedsaid.com\">Zed Said Studio</a></p>";
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                   style:UIBarButtonItemStyleDone target:self action:@selector(closeWindow)];
+    
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleDone target:self action:@selector(closeWindow)];
+    
+    for (UIBarButtonItem *bb in @[backButton, sendButton]){
+        [bb setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"HelveticaNeue" size:14.0], UITextAttributeFont, [UIColor peterRiverColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, nil] forState:UIControlStateNormal];
+        [bb setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"HelveticaNeue" size:14.0], UITextAttributeFont, [UIColor belizeHoleColor], UITextAttributeTextColor, nil] forState:UIControlStateHighlighted];
+        [bb setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"HelveticaNeue" size:14.0], UITextAttributeFont, [UIColor lightGrayColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, nil] forState:UIControlStateDisabled];
+        
+    }
+
+    
+    self.navigationItem.leftBarButtonItem = backButton;
+    self.navigationItem.rightBarButtonItem = sendButton;
+    self.navigationItem.title = @"Composing";
+
+    
+//    // HTML Content to set in the editor
+//    NSString *html = @"<!-- This is an HTML comment -->"
+//    "<p>This is a test of the <strong>ZSSRichTextEditor</strong> by <a title=\"Zed Said\" href=\"http://www.zedsaid.com\">Zed Said Studio</a></p>";
     
     // Set the base URL if you would like to use relative links, such as to images.
     self.baseURL = [NSURL URLWithString:@"http://www.zedsaid.com"];
@@ -44,7 +66,7 @@
     //self.enabledToolbarItems = ZSSRichTextEditorToolbarSuperscript | ZSSRichTextEditorToolbarUnderline | ZSSRichTextEditorToolbarH1 | ZSSRichTextEditorToolbarH3;
     
     // Set the HTML contents of the editor
-    [self setHtml:html];
+    [self setHtml:self.htmlContent];
     
 }
 
@@ -76,10 +98,9 @@
 }
 
 
-- (void)exportHTML {
-    
+- (void)closeWindow {
     NSLog(@"%@", [self getHTML]);
-    
+    [self.navigationController  popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-2] animated:YES];
 }
 
 
