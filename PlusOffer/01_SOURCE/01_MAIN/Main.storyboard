@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gMR-zv-G8f">
-                                <rect key="frame" x="7" y="85" width="304" height="111"/>
+                                <rect key="frame" x="7" y="25" width="304" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Inbox">
@@ -26,7 +26,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nN7-Ok-snY">
-                                <rect key="frame" x="5" y="202" width="150" height="111"/>
+                                <rect key="frame" x="5" y="142" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="mebox">
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xYo-7M-YCZ">
-                                <rect key="frame" x="162" y="202" width="150" height="111"/>
+                                <rect key="frame" x="162" y="142" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sent Messages">
@@ -50,7 +50,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aZ8-ag-zEn">
-                                <rect key="frame" x="5" y="318" width="150" height="111"/>
+                                <rect key="frame" x="5" y="258" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Flipper">
@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mgt-KE-8ZY">
-                                <rect key="frame" x="162" y="318" width="150" height="111"/>
+                                <rect key="frame" x="162" y="258" width="150" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Notes">
@@ -73,7 +73,7 @@
                                     <action selector="pushUD3:" destination="b2V-me-aDg" eventType="touchUpInside" id="pMR-eV-hFc"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="iAh-5X-TbE">
+                            <view hidden="YES" contentMode="scaleToFill" id="iAh-5X-TbE">
                                 <rect key="frame" x="22" y="24" width="273" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvg-cI-KGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407" y="-83"/>
+            <point key="canvasLocation" x="384" y="-141"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="38r-6q-vOC">
